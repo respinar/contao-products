@@ -1,9 +1,9 @@
 {
-    "name": "respinar/catalog",
+    "name": "respinar/products",
     "description":"Products catalog for Contao",
     "keywords":["contao", "product","catalog"],
     "type": "contao-module",
-    "homepage":"https://github.com/respinar/airquality",
+    "homepage":"https://github.com/respinar/products",
     "license":"LGPL-3.0+",
     "authors":[
         {
@@ -14,7 +14,7 @@
         }
     ],
     "support":{
-        "issues":"https://github.com/respinar/kitchenware/issues"
+        "issues":"https://github.com/respinar/products/issues"
     },
     "require": {
         "contao/core": ">=3.2,<4-dev",
@@ -26,7 +26,7 @@
     "extra": {
         "contao": {
             "sources": {
-                "": "system/modules/kitchenware"
+                "": "system/modules/products"
             }
         }
     }
