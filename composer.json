@@ -1,0 +1,34 @@
+{
+    "name": "respinar/catalog",
+    "description":"Products catalog for Contao",
+    "keywords":["contao", "product","catalog"],
+    "type": "contao-module",
+    "homepage":"https://github.com/respinar/airquality",
+    "license":"LGPL-3.0+",
+    "authors":[
+        {
+            "name":"Hamid Abbaszadeh",
+            "email":"info@respinar.com",
+            "homepage":"http://respinar",
+            "role":"Developer"
+        }
+    ],
+    "support":{
+        "issues":"https://github.com/respinar/kitchenware/issues"
+    },
+    "require": {
+        "contao/core": ">=3.2,<4-dev",
+        "contao-community-alliance/composer-installer": "*"
+    },
+    "autoload": {
+        "classmap": [""]
+    },
+    "extra": {
+        "contao": {
+            "sources": {
+                "": "system/modules/kitchenware"
+            }
+        }
+    }
+}
+
