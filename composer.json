@@ -1,5 +1,5 @@
 {
-    "name": "respinar/"log,
+    "name": "respinar/catalog",
     "description":"Products catalog for Contao",
     "keywords":["contao", "product","catalog"],
     "type": "contao-module",
