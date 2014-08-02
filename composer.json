@@ -1,20 +1,20 @@
 {
-    "name": "respinar/products",
+    "name": "respinar/"log,
     "description":"Products catalog for Contao",
     "keywords":["contao", "product","catalog"],
     "type": "contao-module",
-    "homepage":"https://github.com/respinar/products",
+    "homepage":"https://github.com/respinar/catalog",
     "license":"LGPL-3.0+",
     "authors":[
         {
             "name":"Hamid Abbaszadeh",
             "email":"info@respinar.com",
-            "homepage":"http://respinar",
+            "homepage":"http://respinar.org/",
             "role":"Developer"
         }
     ],
     "support":{
-        "issues":"https://github.com/respinar/products/issues"
+        "issues":"https://github.com/respinar/catalog/issues"
     },
     "require": {
         "contao/core": ">=3.2,<4-dev",
@@ -26,7 +26,7 @@
     "extra": {
         "contao": {
             "sources": {
-                "": "system/modules/products"
+                "": "system/modules/catalog"
             }
         }
     }
