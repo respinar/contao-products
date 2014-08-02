@@ -27,8 +27,8 @@ $GLOBALS['TL_DCA']['tl_catalog_type'] = array
 		(
 			'keys' => array
 			(
-				'id'  => 'primary',
-				'pid' => 'index'
+				'id'    => 'primary',
+				'pid'   => 'index'
 			)
 		)
 	),

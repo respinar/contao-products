@@ -23,13 +23,14 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 	(
 		'dataContainer'               => 'Table',
 		'ptable'                      => 'tl_catalog_category',
-		//'ctable'                      => array('tl_catalog_type'),
+		'ctable'                      => array('tl_catalog_type'),
 		'sql' => array
 		(
 			'keys' => array
 			(
-				'id'  => 'primary',
-				'pid' => 'index'
+				'id'    => 'primary',
+				'pid'   => 'index',
+				'alias' => 'index'
 			)
 		)
 	),
@@ -57,17 +58,17 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 		),
 		'operations' => array
 		(
-			//'edit' => array
-			//(
-			//	'label'               => &$GLOBALS['TL_LANG']['tl_catalog_product']['edit'],
-			//	'href'                => 'table=tl_catalog_type',
-			//	'icon'                => 'edit.gif'
-			//),
 			'edit' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_product']['edit'],
-				'href'                => 'act=edit',
+				'href'                => 'table=tl_catalog_type',
 				'icon'                => 'edit.gif'
+			),
+			'editheader' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_category']['edit'],
+				'href'                => 'act=edit',
+				'icon'                => 'header.gif'
 			),
 			'copy' => array
 			(
@@ -114,18 +115,20 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{title_legend},title,code,price;
-		                                  {image_legend},image;
+		'__selector__'                => array('addImage'),
+		'default'                     => '{title_legend},title,alias,price,date;
+		                                  {image_legend},addImage;
 		                                  {table_legend},tableitems,summary,thead,tfoot,tleft;
 		                                  {spec_legend},spec;
 		                                  {description_legend:hide},description;
 		                                  {protected_legend:hide},protected;
-		                                  {publish_legend},published'
+		                                  {publish_legend},published,featured,start,stop'
 	),
 
 	// Subpalettes
 	'subpalettes' => array
 	(
+		'addImage'                    => 'singleSRC',
 		'protected'                   => 'groups',
 	),
 
@@ -159,15 +162,27 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
-		'code' => array
+		'alias' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['code'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['alias'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'sorting'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'rgxp'=>'alias','unique'=>true,'maxlength'=>6, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(6) NOT NULL default ''"
+		),
+		'date' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['date'],
+			'default'                 => time(),
+			'exclude'                 => true,
+			'filter'                  => true,
+			'sorting'                 => true,
+			'flag'                    => 8,
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'date', 'doNotCopy'=>true, 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'tableitems' => array
 		(
@@ -247,9 +262,17 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 			),
 			'sql'                     => "blob NULL",
 		),
-		'image' => array
+		'addImage' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['image'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['addImage'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'singleSRC' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['singleSRC'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('mandatory'=>true,'fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes']),
@@ -272,6 +295,31 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 			'inputType'               => 'checkbox',
 			'eval'                    => array('doNotCopy'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'featured' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['featured'],
+			'exclude'                 => true,
+			'filter'                  => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'start' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['start'],
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
+			'sql'                     => "varchar(10) NOT NULL default ''"
+		),
+		'stop' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['stop'],
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
+			'sql'                     => "varchar(10) NOT NULL default ''"
 		)
 	)
 );
@@ -289,7 +337,7 @@ class tl_catalog_product extends Backend
 	 */
 	public function generateProductsRow($arrRow)
 	{
-		$objImage = \FilesModel::findByPk($arrRow['image']);
+		$objImage = \FilesModel::findByPk($arrRow['singleSRC']);
 
 		if ($objImage !== null)
 		{

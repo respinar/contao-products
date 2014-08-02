@@ -5,7 +5,7 @@
  *
  * Copyright (c) 2005-2014 Leo Feyer
  *
- * @package Catalog
+ * @package Products
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
@@ -26,16 +26,16 @@ ClassLoader::addNamespaces(array
 ClassLoader::addClasses(array
 (
 	// Models
-	'catalog\CatalogTypeModel'     => 'system/modules/catalog/models/CatalogTypeModel.php',
-	'catalog\CatalogModel'         => 'system/modules/catalog/models/CatalogModel.php',
-	'catalog\CatalogProductModel'  => 'system/modules/catalog/models/CatalogProductModel.php',
-	'catalog\CatalogCategoryModel' => 'system/modules/catalog/models/CatalogCategoryModel.php',
+	'catalog\CatalogTypeModel'     => 'system/modules/products/models/CatalogTypeModel.php',
+	'catalog\CatalogProductModel'  => 'system/modules/products/models/CatalogProductModel.php',
+	'catalog\CatalogCategoryModel' => 'system/modules/products/models/CatalogCategoryModel.php',
+	'catalog\CatalogModel'         => 'system/modules/products/models/CatalogModel.php',
 
 	// Modules
-	'catalog\ModuleCatalogList'    => 'system/modules/catalog/modules/ModuleCatalogList.php',
-	'catalog\ModuleCatalogRelated' => 'system/modules/catalog/modules/ModuleCatalogRelated.php',
-	'catalog\ModuleCatalogProduct' => 'system/modules/catalog/modules/ModuleCatalogProduct.php',
-	'catalog\ModuleCatalogMenu'    => 'system/modules/catalog/modules/ModuleCatalogMenu.php',
+	'catalog\ModuleCatalogProduct' => 'system/modules/products/modules/ModuleCatalogProduct.php',
+	'catalog\ModuleCatalogList'    => 'system/modules/products/modules/ModuleCatalogList.php',
+	'catalog\ModuleCatalogRelated' => 'system/modules/products/modules/ModuleCatalogRelated.php',
+	'catalog\ModuleCatalogMenu'    => 'system/modules/products/modules/ModuleCatalogMenu.php',
 ));
 
 
@@ -44,9 +44,9 @@ ClassLoader::addClasses(array
  */
 TemplateLoader::addFiles(array
 (
-	'mod_catalog_product' => 'system/modules/catalog/templates/modules',
-	'mod_catalog_related' => 'system/modules/catalog/templates/modules',
-	'mod_catalog_menu'    => 'system/modules/catalog/templates/modules',
-	'mod_catalog_list'    => 'system/modules/catalog/templates/modules',
-	'mod_catalog_empty'   => 'system/modules/catalog/templates/modules',
+	'mod_catalog_related' => 'system/modules/products/templates/modules',
+	'mod_catalog_product' => 'system/modules/products/templates/modules',
+	'mod_catalog_list'    => 'system/modules/products/templates/modules',
+	'mod_catalog_menu'    => 'system/modules/products/templates/modules',
+	'mod_catalog_empty'   => 'system/modules/products/templates/modules',
 ));

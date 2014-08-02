@@ -24,13 +24,15 @@ $GLOBALS['TL_DCA']['tl_catalog_category'] = array
 		'dataContainer'               => 'Table',
 		'ptable'                      => 'tl_catalog',
 		'ctable'                      => array('tl_catalog_product'),
+		'switchToEdit'                => true,
 		'enableVersioning'            => true,
 		'sql' => array
 		(
 			'keys' => array
 			(
-				'id'  => 'primary',
-				'pid' => 'index'
+				'id'    => 'primary',
+				'pid'   => 'index',
+				'alias' => 'index'
 			)
 		),
 		'backlink'                    => 'do=catalog'
@@ -110,7 +112,7 @@ $GLOBALS['TL_DCA']['tl_catalog_category'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('addImage'),
-		'default'                     => '{title_legend},title,alias;{image_legend},addImage;{publish_legend},published'
+		'default'                     => '{title_legend},title,alias;{image_legend},addImage;{publish_legend},published,start,stop'
 	),
 
 	// Subpalettes
@@ -157,16 +159,6 @@ $GLOBALS['TL_DCA']['tl_catalog_category'] = array
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'rgxp'=>'alias','unique'=>true,'maxlength'=>128, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
-		),
-		'jumpTo' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_category']['jumpTo'],
-			'exclude'                 => true,
-			'inputType'               => 'pageTree',
-			'foreignKey'              => 'tl_page.title',
-			'eval'                    => array('mandatory'=>true, 'fieldType'=>'radio'),
-			'sql'                     => "int(10) unsigned NOT NULL default '0'",
-			'relation'                => array('type'=>'hasOne', 'load'=>'eager')
 		),
 		'addImage' => array
 		(
