@@ -18,12 +18,16 @@
 $GLOBALS['TL_DCA']['tl_module']['palettes']['catalog_list']    = '{title_legend},name,headline,type;
                                                                   {catalog_legend},catalog_categories;
                                                                   {config_legend},catalog_featured,catalog_detailModule;
-                                                                  {template_legend},numberOfItems,perPage,catalog_template,catalog_price,productClass,imgSize;
+                                                                  {template_legend},numberOfItems,perPage,skipFirst,catalog_template;
+                                                                  {product_legend},productClass,imgSize;
+                                                                  {meta_legend},catalog_price,catalog_date;
                                                                   {protected_legend:hide},protected;
                                                                   {expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['catalog_detail']  = '{title_legend},name,headline,type;
                                                                   {catalog_legend},catalog_categories;
-                                                                  {template_legend:hide},catalog_template,imgSize;
+                                                                  {template_legend},catalog_template,imgSize;
+                                                                  {type_legend},typeClass,typeImageSize;
+                                                                  {meta_legend},catalog_price,catalog_date;
                                                                   {protected_legend:hide},protected;
                                                                   {expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['catalog_related'] = '{title_legend},name,headline,type;
@@ -69,6 +73,15 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['catalog_featured'] = array
 $GLOBALS['TL_DCA']['tl_module']['fields']['catalog_price'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['catalog_price'],
+	'exclude'                 => true,
+	'flag'                    => 1,
+	'inputType'               => 'checkbox',
+	'eval'                    => array('doNotCopy'=>true, 'tl_class'=>'w50 m12'),
+	'sql'                     => "char(1) NOT NULL default ''"
+);
+$GLOBALS['TL_DCA']['tl_module']['fields']['catalog_date'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['catalog_date'],
 	'exclude'                 => true,
 	'flag'                    => 1,
 	'inputType'               => 'checkbox',

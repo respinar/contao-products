@@ -159,8 +159,8 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 			'search'                  => true,
 			'sorting'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'alias','unique'=>true,'maxlength'=>6, 'tl_class'=>'w50'),
-			'sql'                     => "varchar(6) NOT NULL default ''"
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'alias','unique'=>true,'maxlength'=>10, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(10) NOT NULL default ''"
 		),
 		'date' => array
 		(
