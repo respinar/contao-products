@@ -22,7 +22,7 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 	'config' => array
 	(
 		'dataContainer'               => 'Table',
-		'ptable'                      => 'tl_catalog_category',
+		'ptable'                      => 'tl_catalog',
 		'ctable'                      => array('tl_catalog_type'),
 		'sql' => array
 		(
@@ -42,7 +42,7 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 		(
 			'mode'                    => 4,
 			'fields'                  => array('sorting'),
-			'headerFields'            => array('title'),
+			'headerFields'            => array('title','jumpTo','protected'),
 			'panelLayout'             => 'filter;sort,search,limit',
 			'child_record_callback'   => array('tl_catalog_product', 'generateProductsRow')
 		),
@@ -61,14 +61,14 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 			'edit' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_product']['edit'],
-				'href'                => 'table=tl_catalog_type',
+				'href'                => 'act=edit',
 				'icon'                => 'edit.gif'
 			),
-			'editheader' => array
+			'type' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_category']['edit'],
-				'href'                => 'act=edit',
-				'icon'                => 'header.gif'
+				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_product']['type'],
+				'href'                => 'table=tl_catalog_type',
+				'icon'                => 'system/modules/catalog/assets/type.png'
 			),
 			'copy' => array
 			(
@@ -115,23 +115,13 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('addImage'),
 		'default'                     => '{title_legend},title,alias,price,date;
-		                                  {image_legend},addImage;
-		                                  {table_legend},tableitems,summary,thead,tfoot,tleft;
-		                                  {spec_legend},spec;
+		                                  {meta_legend},keywords;
+		                                  {image_legend},singleSRC;
+		                                  {spec_legend},features,spec;
 		                                  {description_legend:hide},description;
-		                                  {protected_legend:hide},protected;
 		                                  {publish_legend},published,featured,start,stop'
 	),
-
-	// Subpalettes
-	'subpalettes' => array
-	(
-		'addImage'                    => 'singleSRC',
-		'protected'                   => 'groups',
-	),
-
 	// Fields
 	'fields' => array
 	(
@@ -141,7 +131,7 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 		),
 		'pid' => array
 		(
-			'foreignKey'              => 'tl_catalog_category.title',
+			'foreignKey'              => 'tl_catalog.title',
 			'sql'                     => "int(10) unsigned NOT NULL default '0'",
 			'relation'                => array('type'=>'belongsTo', 'load'=>'eager')
 		),
@@ -184,46 +174,14 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 			'eval'                    => array('rgxp'=>'date', 'doNotCopy'=>true, 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
-		'tableitems' => array
+		'keywords' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['tableitems'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['keywords'],
 			'exclude'                 => true,
-			'inputType'               => 'tableWizard',
-			'eval'                    => array('allowHtml'=>true, 'doNotSaveEmpty'=>true, 'style'=>'width:142px;height:66px'),
-			'sql'                     => "mediumblob NULL"
-		),
-		'summary' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['summary'],
-			'exclude'                 => true,
+			'inputType'               => 'textarea',
 			'search'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50'),
-			'sql'                     => "varchar(255) NOT NULL default ''"
-		),
-		'thead' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['thead'],
-			'exclude'                 => true,
-			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50 m12'),
-			'sql'                     => "char(1) NOT NULL default ''"
-		),
-		'tfoot' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['tfoot'],
-			'exclude'                 => true,
-			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50'),
-			'sql'                     => "char(1) NOT NULL default ''"
-		),
-		'tleft' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['tleft'],
-			'exclude'                 => true,
-			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50'),
-			'sql'                     => "char(1) NOT NULL default ''"
+			'eval'                    => array('style'=>'height:60px', 'decodeEntities'=>true),
+			'sql'                     => "text NULL"
 		),
 		'price' => array
 		(
@@ -233,6 +191,15 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true,'rgxp'=>'digit', 'maxlength'=>12, 'tl_class'=>'w50'),
 			'sql'                     => "int(12) NOT NULL default '0'"
+		),
+		'features' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['features'],
+			'exclude'                 => true,
+			'sorting'                 => true,
+			'inputType'               => 'listWizard',
+			'eval'                    => array(),
+			'sql'                     => "blob NULL",
 		),
 		'spec' => array
 		(
@@ -261,14 +228,6 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 				)
 			),
 			'sql'                     => "blob NULL",
-		),
-		'addImage' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['addImage'],
-			'exclude'                 => true,
-			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true),
-			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'singleSRC' => array
 		(

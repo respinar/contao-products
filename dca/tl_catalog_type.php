@@ -40,7 +40,7 @@ $GLOBALS['TL_DCA']['tl_catalog_type'] = array
 		(
 			'mode'                    => 4,
 			'fields'                  => array('sorting'),
-			'headerFields'            => array('title'),
+			'headerFields'            => array('title','alias'),
 			'panelLayout'             => 'filter;sort,search,limit',
 			'child_record_callback'   => array('tl_catalog_type', 'generateProductsRow')
 		),
@@ -107,9 +107,9 @@ $GLOBALS['TL_DCA']['tl_catalog_type'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{title_legend},title,code,price;
-		                                  {spec_legend},spec;
-		                                  {image_legend},image;
+		'default'                     => '{title_legend},title,code,price,date;
+		                                  {spec_legend},feature,spec;
+		                                  {image_legend},singleSRC;
 		                                  {description_legend:hide},description;
 		                                  {publish_legend},published'
 	),
@@ -123,7 +123,7 @@ $GLOBALS['TL_DCA']['tl_catalog_type'] = array
 		),
 		'pid' => array
 		(
-			'foreignKey'              => 'tl_catalog_category.title',
+			'foreignKey'              => 'tl_catalog_product.title',
 			'sql'                     => "int(10) unsigned NOT NULL default '0'",
 			'relation'                => array('type'=>'belongsTo', 'load'=>'eager')
 		),
@@ -163,6 +163,18 @@ $GLOBALS['TL_DCA']['tl_catalog_type'] = array
 			'eval'                    => array('mandatory'=>true,'rgxp'=>'digit', 'maxlength'=>12, 'tl_class'=>'w50'),
 			'sql'                     => "int(12) NOT NULL default '0'"
 		),
+		'date' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_type']['date'],
+			'default'                 => time(),
+			'exclude'                 => true,
+			'filter'                  => true,
+			'sorting'                 => true,
+			'flag'                    => 8,
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'date', 'doNotCopy'=>true, 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
 		'spec' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_type']['spec'],
@@ -191,9 +203,18 @@ $GLOBALS['TL_DCA']['tl_catalog_type'] = array
 			),
 			'sql'                     => "blob NULL",
 		),
-		'image' => array
+		'features' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_type']['image'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_type']['features'],
+			'exclude'                 => true,
+			'sorting'                 => true,
+			'inputType'               => 'listWizard',
+			'eval'                    => array(),
+			'sql'                     => "blob NULL",
+		),
+		'singleSRC' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_type']['singleSRC'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('mandatory'=>true,'fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes']),
@@ -233,7 +254,7 @@ class tl_catalog_type extends Backend
 	 */
 	public function generateProductsRow($arrRow)
 	{
-		$objImage = \FilesModel::findByPk($arrRow['image']);
+		$objImage = \FilesModel::findByPk($arrRow['singleSRC']);
 
 		if ($objImage !== null)
 		{

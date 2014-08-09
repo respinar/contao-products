@@ -19,20 +19,20 @@ namespace catalog;
 
 
 /**
- * Class ModuleCatalogRelated
+ * Class ModuleCatalogDetail
  *
  * @copyright  2014
  * @author     Hamid Abbaszadeh
  * @package    Devtools
  */
-class ModuleCatalogRelated extends \ModuleCatalog
+class ModuleCatalogDetail extends \ModuleCatalog
 {
 
 	/**
 	 * Template
 	 * @var string
 	 */
-	protected $strTemplate = 'mod_catalog_related';
+	protected $strTemplate = 'mod_catalog_detail';
 
 	/**
 	 * Display a wildcard in the back end
@@ -44,7 +44,7 @@ class ModuleCatalogRelated extends \ModuleCatalog
 		{
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
-			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['carpet_related'][0]) . ' ###';
+			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['catalog_reader'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;
@@ -59,6 +59,9 @@ class ModuleCatalogRelated extends \ModuleCatalog
 			\Input::setGet('items', \Input::get('auto_item'));
         }
 
+        $this->catalog_categories = $this->sortOutProtected(deserialize($this->catalog_categories));
+
+
 		return parent::generate();
 	}
 
@@ -68,6 +71,17 @@ class ModuleCatalogRelated extends \ModuleCatalog
 	 */
 	protected function compile()
 	{
+
+		global $objPage;
+
+		$this->Template->products = '';
+		$this->Template->referer = 'javascript:history.go(-1)';
+		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
+
+		$objProduct = \CatalogProductModel::findPublishedByParentAndIdOrAlias(\Input::get('items'),$this->catalog_categories);
+
+		$arrProduct = $this->parseProduct($objProduct);
+		$this->Template->products = $arrProduct;
 
 	}
 }

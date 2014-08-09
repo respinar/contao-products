@@ -22,7 +22,7 @@ $GLOBALS['TL_DCA']['tl_catalog'] = array
 	'config' => array
 	(
 		'dataContainer'               => 'Table',
-		'ctable'                      => array('tl_catalog_category'),
+		'ctable'                      => array('tl_catalog_product'),
 		'enableVersioning'            => true,
 		'sql' => array
 		(
@@ -60,7 +60,7 @@ $GLOBALS['TL_DCA']['tl_catalog'] = array
 			'categories' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_catalog']['categories'],
-				'href'                => 'table=tl_catalog_category',
+				'href'                => 'table=tl_catalog_product',
 				'class'               => 'header_categories',
 				'attributes'          => 'onclick="Backend.getScrollOffset()" accesskey="c"'
 			)
@@ -70,7 +70,7 @@ $GLOBALS['TL_DCA']['tl_catalog'] = array
 			'edit' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_catalog']['edit'],
-				'href'                => 'table=tl_catalog_category',
+				'href'                => 'table=tl_catalog_product',
 				'icon'                => 'edit.gif'
 			),
 			'editheader' => array

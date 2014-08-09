@@ -1,0 +1,63 @@
+
+<div class="layout_full block<?php echo $this->class; ?>">
+
+  <h2><?php echo $this->title; ?></h2>
+  <h3><?php echo $this->alias; ?></h3>
+
+  <div class="description"><?php echo $this->description; ?></div>
+
+
+  <?php if ($this->addImage): ?>
+    <figure class="image_container<?php echo $this->floatClass; ?>"<?php if ($this->margin): ?> style="<?php echo $this->margin; ?>"<?php endif; ?>>
+
+      <?php if ($this->href): ?>
+        <a href="<?php echo $this->href; ?>"<?php echo $this->attributes; ?> title="<?php echo $this->alt; ?>">
+      <?php endif; ?>
+
+      <img src="<?php echo $this->src; ?>"<?php echo $this->imgSize; ?> alt="<?php echo $this->alt; ?>">
+
+      <?php if ($this->href): ?>
+        </a>
+      <?php endif; ?>
+
+      <?php if ($this->caption): ?>
+        <figcaption class="caption" style="width:<?php echo $this->arrSize[0]; ?>px"><?php echo $this->caption; ?></figcaption>
+      <?php endif; ?>
+
+    </figure>
+  <?php endif; ?>
+
+
+
+  <div class="spec">
+    <h3>خصوصیات</h3>
+    <ul>
+      <?php foreach($this->specs as $spec) { ?>
+        <li><?php echo $spec; ?></li>
+      <?php } ?>
+    </ul>
+  </div>
+
+  <?php if($this->features) { ?>
+  <div class="features">
+    <h3>ویژگی‌ها</h3>
+    <ul>
+      <?php foreach($this->features as $feature) { ?>
+        <li><?php echo $feature; ?></li>
+      <?php } ?>
+    </ul>
+  </div>
+  <?php } ?>
+
+  <?php if ($this->types) {?>
+  <div class="types">
+	<h3>محتوی</h3>
+		<?php foreach($this->types as $type) { ?>
+			<div class="type <?php echo $this->typeClass; ?>">
+				<figure><?php echo $type[image]; ?></figure>
+			</div>
+		<?php } ?>
+	</div>
+  <?php } ?>
+
+</div>

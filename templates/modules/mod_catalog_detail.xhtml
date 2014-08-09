@@ -1,0 +1,12 @@
+<?php $this->extend('block_unsearchable'); ?>
+
+<?php $this->block('content'); ?>
+
+
+  <?php echo $this->products; ?>
+
+  <!-- indexer::stop -->
+  <p class="back"><a href="<?php echo $this->referer; ?>" title="<?php echo $this->back; ?>"><?php echo $this->back; ?></a></p>
+  <!-- indexer::continue -->
+
+<?php $this->endblock(); ?>
