@@ -118,7 +118,8 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 		'default'                     => '{title_legend},title,alias,price,date;
 		                                  {meta_legend},keywords;
 		                                  {image_legend},singleSRC;
-		                                  {spec_legend},features,spec;
+		                                  {feature_legend},features;
+		                                  {spec_legend},spec;
 		                                  {description_legend:hide},description;
 		                                  {publish_legend},published,featured,start,stop'
 	),
