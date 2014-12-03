@@ -98,12 +98,17 @@ abstract class ModuleCatalog extends \Module
 
 		$objTemplate->title       = $objProduct->title;
 		$objTemplate->alias       = $objProduct->alias;
+
 		$objTemplate->features    = deserialize($objProduct->features);
 		$objTemplate->specs       = deserialize($objProduct->spec);
+
 		$objTemplate->description = $objProduct->description;
+		$objTemplate->keywords    = $objProduct->keywords;
 
 		$objTemplate->link        = $this->generateSetUrl($objProduct, $blnAddCategory);
 		$objTemplate->more        = $this->generateLink($GLOBALS['TL_LANG']['MSC']['moredetail'], $objProduct, $blnAddCategory, true);
+
+		$arrMeta = $this->getMetaFields($objProduct);
 
 		$objTemplate->types       = $this->parseType($objProduct);
 
@@ -112,7 +117,12 @@ abstract class ModuleCatalog extends \Module
 		$objTemplate->count = $intCount; // see #5708
 		$objTemplate->text = '';
 
-		$objTemplate->date = \Date::parse($objPage->datimFormat, $objProduct->date);
+		$arrMeta = $this->getMetaFields($objProduct);
+
+		// Add the meta information
+		$objTemplate->date = $arrMeta['date'];
+		$objTemplate->hasMetaFields = !empty($arrMeta);
+		$objTemplate->timestamp = $objProduct->date;
 		$objTemplate->datetime = date('Y-m-d\TH:i:sP', $objProduct->date);
 
 		$objTemplate->addImage = false;
@@ -147,6 +157,16 @@ abstract class ModuleCatalog extends \Module
 
 				$arrProduct['singleSRC'] = $objModel->path;
 				$this->addImageToTemplate($objTemplate, $arrProduct);
+			}
+		}
+
+		$objElement = \ContentModel::findPublishedByPidAndTable($objProduct->id, 'tl_catalog_product');
+
+		if ($objElement !== null)
+		{
+			while ($objElement->next())
+			{
+				$objTemplate->text .= $this->getContentElement($objElement->current());
 			}
 		}
 
@@ -283,6 +303,36 @@ abstract class ModuleCatalog extends \Module
 
 		return $arrType;
 
+	}
+
+	/**
+	 * Return the meta fields of a news article as array
+	 * @param object
+	 * @return array
+	 */
+	protected function getMetaFields($objProduct)
+	{
+		$meta = deserialize($this->catalog_metaFields);
+
+		if (!is_array($meta))
+		{
+			return array();
+		}
+
+		global $objPage;
+		$return = array();
+
+		foreach ($meta as $field)
+		{
+			switch ($field)
+			{
+				case 'date':
+					$return['date'] = \Date::parse($objPage->datimFormat, $objProduct->date);
+					break;
+			}
+		}
+
+		return $return;
 	}
 
 }

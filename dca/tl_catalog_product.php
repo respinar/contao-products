@@ -124,7 +124,7 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('addEnclosure', 'published'),
+		'__selector__'                => array('addEnclosure','published'),
 		'default'                     => '{title_legend},title,alias,price,date,featured;
 		                                  {meta_legend},description,keywords;
 		                                  {feature_legend},features;
@@ -288,7 +288,7 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 			'filter'                  => true,
 			'flag'                    => 1,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('doNotCopy'=>true),
+			'eval'                    => array('doNotCopy'=>true,'submitOnChange'=>true),
 			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'featured' => array

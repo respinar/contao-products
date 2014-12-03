@@ -4,7 +4,9 @@
   <h2><?php echo $this->title; ?></h2>
   <h3><?php echo $this->alias; ?></h3>
 
-  <div class="description"><?php echo $this->description; ?></div>
+  <?php if ($this->hasMetaFields): ?>
+    <p class="info"><time datetime="<?php echo $this->datetime; ?>"><?php echo $this->date; ?></time></p>
+  <?php endif; ?>
 
 
   <?php if ($this->addImage): ?>
@@ -28,16 +30,6 @@
   <?php endif; ?>
 
 
-
-  <div class="spec">
-    <h3>خصوصیات</h3>
-    <ul>
-      <?php foreach($this->specs as $spec) { ?>
-        <li><?php echo $spec; ?></li>
-      <?php } ?>
-    </ul>
-  </div>
-
   <?php if($this->features) { ?>
   <div class="features">
     <h3>ویژگی‌ها</h3>
@@ -49,9 +41,26 @@
   </div>
   <?php } ?>
 
+  <?php if($this->specs) { ?>
+  <div class="specs">
+    <h3>خصوصیات</h3>
+    <ul>
+      <?php foreach($this->specs as $spec) { ?>
+        <li><?php echo $spec[spectitle]; ?>:<?php echo $spec[specvalue]; ?></li>
+      <?php } ?>
+    </ul>
+  </div>
+  <?php } ?>
+
+
+
+  <?php if ($this->text): ?>
+    <?php echo $this->text; ?>
+  <?php endif; ?>
+
   <?php if ($this->types) {?>
   <div class="types">
-	<h3>محتوی</h3>
+	<h3>تیپ‌ها</h3>
 		<?php foreach($this->types as $type) { ?>
 			<div class="type <?php echo $this->typeClass; ?>">
 				<figure><?php echo $type[image]; ?></figure>
