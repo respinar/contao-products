@@ -115,14 +115,23 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{title_legend},title,alias,price,date;
-		                                  {meta_legend},keywords;
-		                                  {image_legend},singleSRC;
+		'__selector__'                => array('addEnclosure', 'published'),
+		'default'                     => '{title_legend},title,alias,price,date,featured;
+		                                  {meta_legend},description,keywords;
 		                                  {feature_legend},features;
 		                                  {spec_legend},spec;
-		                                  {description_legend:hide},description;
-		                                  {publish_legend},published,featured,start,stop'
+		                                  {image_legend},singleSRC;
+		                                  {enclosure_legend:hide},addEnclosure;
+		                                  {publish_legend},published'
 	),
+
+	// Subpalettes
+	'subpalettes' => array
+	(
+		'addEnclosure'                => 'enclosure',
+		'published'                   => 'start,stop'
+	),
+
 	// Fields
 	'fields' => array
 	(
@@ -184,6 +193,15 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 			'eval'                    => array('style'=>'height:60px', 'decodeEntities'=>true),
 			'sql'                     => "text NULL"
 		),
+		'description' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['description'],
+			'exclude'                 => true,
+			'inputType'               => 'textarea',
+			'search'                  => true,
+			'eval'                    => array('style'=>'height:60px', 'decodeEntities'=>true, 'tl_class'=>'clr'),
+			'sql'                     => "text NULL"
+		),
 		'price' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['price'],
@@ -238,13 +256,21 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 			'eval'                    => array('mandatory'=>true,'fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes']),
 			'sql'                     => "binary(16) NULL"
 		),
-		'description' => array
+		'addEnclosure' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['description'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['addEnclosure'],
 			'exclude'                 => true,
-			'inputType'               => 'textarea',
-			'eval'                    => array('rte'=>'tinyMCE'),
-			'sql'                     => "text NULL"
+			'inputType'               => 'checkbox',
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'enclosure' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['enclosure'],
+			'exclude'                 => true,
+			'inputType'               => 'fileTree',
+			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'filesOnly'=>true, 'isDownloads'=>true, 'extensions'=>Config::get('allowedDownload'), 'mandatory'=>true),
+			'sql'                     => "blob NULL"
 		),
 		'published' => array
 		(
@@ -253,7 +279,7 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 			'filter'                  => true,
 			'flag'                    => 1,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('doNotCopy'=>true, 'tl_class'=>'w50'),
+			'eval'                    => array('doNotCopy'=>true),
 			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'featured' => array

@@ -17,24 +17,24 @@
 
 $GLOBALS['TL_DCA']['tl_module']['palettes']['catalog_list']    = '{title_legend},name,headline,type;
                                                                   {catalog_legend},catalog_categories;
-                                                                  {config_legend},catalog_featured,catalog_detailModule;
-                                                                  {template_legend},numberOfItems,perPage,skipFirst,catalog_template;
+                                                                  {config_legend},catalog_featured,catalog_detailModule,numberOfItems,perPage,skipFirst;
+                                                                  {template_legend},catalog_metaFields,catalog_template,customTpl;
                                                                   {product_legend},productClass,imgSize;
-                                                                  {meta_legend},catalog_price,catalog_date;
                                                                   {protected_legend:hide},protected;
                                                                   {expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['catalog_detail']  = '{title_legend},name,headline,type;
                                                                   {catalog_legend},catalog_categories;
-                                                                  {template_legend},catalog_template,imgSize;
+                                                                  {template_legend},catalog_metaFields,catalog_template,customTpl;
+                                                                  {image_legend},imgSize;
                                                                   {type_legend},typeClass,typeImageSize;
-                                                                  {meta_legend},catalog_price,catalog_date;
                                                                   {protected_legend:hide},protected;
                                                                   {expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['catalog_related'] = '{title_legend},name,headline,type;
                                                                   {catalog_legend},catalog_categories;
                                                                   {config_legend},numberOfItems;
                                                                   {redirect_legend},jumpTo;
-                                                                  {template_legend:hide},catalog_template,imgSize;
+                                                                  {template_legend:hide},catalog_metaFields,catalog_template,customTpl;
+                                                                  {image_legend},imgSize;
                                                                   {protected_legend:hide},protected;
                                                                   {expert_legend:hide},guests,cssID,space';
 
@@ -70,23 +70,16 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['catalog_featured'] = array
 	'eval'                    => array('tl_class'=>'w50'),
 	'sql'                     => "varchar(20) NOT NULL default ''"
 );
-$GLOBALS['TL_DCA']['tl_module']['fields']['catalog_price'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['catalog_metaFields'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['catalog_price'],
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['catalog_metaFields'],
+	'default'                 => array('date'),
 	'exclude'                 => true,
-	'flag'                    => 1,
 	'inputType'               => 'checkbox',
-	'eval'                    => array('doNotCopy'=>true, 'tl_class'=>'w50 m12'),
-	'sql'                     => "char(1) NOT NULL default ''"
-);
-$GLOBALS['TL_DCA']['tl_module']['fields']['catalog_date'] = array
-(
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['catalog_date'],
-	'exclude'                 => true,
-	'flag'                    => 1,
-	'inputType'               => 'checkbox',
-	'eval'                    => array('doNotCopy'=>true, 'tl_class'=>'w50 m12'),
-	'sql'                     => "char(1) NOT NULL default ''"
+	'options'                 => array('date', 'price'),
+	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
+	'eval'                    => array('multiple'=>true),
+	'sql'                     => "varchar(255) NOT NULL default ''"
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['catalog_detailModule'] = array
 (
@@ -119,7 +112,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['typeImageSize'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['typeImageSize'],
 	'exclude'                 => true,
 	'inputType'               => 'imageSize',
-	'options'                 => $GLOBALS['TL_CROP'],
+	'options'                 => System::getImageSizes(),
 	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
 	'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
 	'sql'                     => "varchar(64) NOT NULL default ''"
