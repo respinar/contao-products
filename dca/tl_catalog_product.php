@@ -23,7 +23,9 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 	(
 		'dataContainer'               => 'Table',
 		'ptable'                      => 'tl_catalog',
-		'ctable'                      => array('tl_catalog_type'),
+		'ctable'                      => array('tl_catalog_type','tl_content'),
+		'switchToEdit'                => true,
+		'enableVersioning'            => true,
 		'sql' => array
 		(
 			'keys' => array
@@ -61,9 +63,16 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 			'edit' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_product']['edit'],
-				'href'                => 'act=edit',
+				'href'                => 'table=tl_content',
 				'icon'                => 'edit.gif'
 			),
+			'editheader' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_product']['editmeta'],
+				'href'                => 'act=edit',
+				'icon'                => 'header.gif'
+			),
+
 			'type' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_product']['type'],
