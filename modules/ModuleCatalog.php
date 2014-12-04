@@ -14,7 +14,7 @@
 /**
  * Run in a custom namespace, so the class can be replaced
  */
-namespace Catalog;
+namespace catalog;
 
 
 /**
@@ -48,7 +48,7 @@ abstract class ModuleCatalog extends \Module
 		}
 
 		$this->import('FrontendUser', 'User');
-		$objCategory = \CatalogModel::findMultipleByIds($arrCategories);
+		$objCategory = \CatalogCategoryModel::findMultipleByIds($arrCategories);
 		$arrCategories = array();
 
 		if ($objCategory !== null)

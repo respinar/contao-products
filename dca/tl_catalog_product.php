@@ -22,7 +22,7 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 	'config' => array
 	(
 		'dataContainer'               => 'Table',
-		'ptable'                      => 'tl_catalog',
+		'ptable'                      => 'tl_catalog_category',
 		'ctable'                      => array('tl_catalog_type','tl_content'),
 		'switchToEdit'                => true,
 		'enableVersioning'            => true,
@@ -150,7 +150,7 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 		),
 		'pid' => array
 		(
-			'foreignKey'              => 'tl_catalog.title',
+			'foreignKey'              => 'tl_catalog_category.title',
 			'sql'                     => "int(10) unsigned NOT NULL default '0'",
 			'relation'                => array('type'=>'belongsTo', 'load'=>'eager')
 		),

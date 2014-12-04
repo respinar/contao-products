@@ -15,7 +15,7 @@
 /**
  * Table tl_catalog
  */
-$GLOBALS['TL_DCA']['tl_catalog'] = array
+$GLOBALS['TL_DCA']['tl_catalog_category'] = array
 (
 
 	// Config
@@ -59,7 +59,7 @@ $GLOBALS['TL_DCA']['tl_catalog'] = array
 			),
 			'categories' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_catalog']['categories'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_category']['categories'],
 				'href'                => 'table=tl_catalog_product',
 				'class'               => 'header_categories',
 				'attributes'          => 'onclick="Backend.getScrollOffset()" accesskey="c"'
@@ -69,25 +69,25 @@ $GLOBALS['TL_DCA']['tl_catalog'] = array
 		(
 			'edit' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_catalog']['edit'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_category']['edit'],
 				'href'                => 'table=tl_catalog_product',
 				'icon'                => 'edit.gif'
 			),
 			'editheader' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_catalog']['editheader'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_category']['editheader'],
 				'href'                => 'act=edit',
 				'icon'                => 'header.gif'
 			),
 			'copy' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_catalog']['copy'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_category']['copy'],
 				'href'                => 'act=copy',
 				'icon'                => 'copy.gif'
 			),
 			'delete' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_catalog']['delete'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_category']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
 				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"'
@@ -127,7 +127,7 @@ $GLOBALS['TL_DCA']['tl_catalog'] = array
 		),
 		'title' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog']['title'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_category']['title'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
@@ -136,7 +136,7 @@ $GLOBALS['TL_DCA']['tl_catalog'] = array
 		),
 		'jumpTo' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog']['jumpTo'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_category']['jumpTo'],
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
 			'foreignKey'              => 'tl_page.title',
@@ -146,7 +146,7 @@ $GLOBALS['TL_DCA']['tl_catalog'] = array
 		),
 		'protected' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog']['protected'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_category']['protected'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('submitOnChange'=>true),
@@ -154,7 +154,7 @@ $GLOBALS['TL_DCA']['tl_catalog'] = array
 		),
 		'groups' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog']['groups'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_category']['groups'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'foreignKey'              => 'tl_member_group.name',

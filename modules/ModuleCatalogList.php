@@ -157,12 +157,16 @@ class ModuleCatalogList extends \ModuleCatalog
 		// Get the items
 		if (isset($limit))
 		{
+			echo "HAMID";
 			$objProducts = \CatalogProductModel::findPublishedByPids($this->catalog_categories, $blnFeatured, $limit, $offset);
+						echo "HAMID";
+
 		}
 		else
 		{
 			$objProducts = \CatalogProductModel::findPublishedByPids($this->catalog_categories, $blnFeatured, 0, $offset);
 		}
+
 
 		// Add the Products
 		if ($objProducts !== null)

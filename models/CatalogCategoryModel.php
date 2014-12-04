@@ -24,13 +24,13 @@ namespace catalog;
  * @author     Hamid Abbaszadeh
  * @package    Devtools
  */
-class CatalogModel extends \Model
+class CatalogCategoryModel extends \Model
 {
 
 	/**
 	 * Name of the table
 	 * @var string
 	 */
-	protected static $strTable = 'tl_catalog';
+	protected static $strTable = 'tl_catalog_category';
 
 }

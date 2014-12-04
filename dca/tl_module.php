@@ -46,7 +46,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['catalog_categories'] = array
 	'label'                => &$GLOBALS['TL_LANG']['tl_module']['catalog_categories'],
 	'exclude'              => true,
 	'inputType'            => 'checkbox',
-	'options_callback'     => array('tl_module_catalog', 'getCatalogs'),
+	'options_callback'     => array('tl_module_catalog', 'getCategories'),
 	'eval'                 => array('multiple'=>true, 'mandatory'=>true),
     'sql'                  => "blob NULL"
 );
@@ -134,25 +134,25 @@ class tl_module_catalog extends Backend
 	 * Get all news archives and return them as array
 	 * @return array
 	 */
-	public function getCatalogs()
+	public function getCategories()
 	{
 		//if (!$this->User->isAdmin && !is_array($this->User->news))
 		//{
 		//	return array();
 		//}
 
-		$arrArchives = array();
-		$objArchives = $this->Database->execute("SELECT id, title FROM tl_catalog ORDER BY title");
+		$arrCategories = array();
+		$objCategories = $this->Database->execute("SELECT id, title FROM tl_catalog_category ORDER BY title");
 
-		while ($objArchives->next())
+		while ($objCategories->next())
 		{
 			//if ($this->User->hasAccess($objArchives->id, 'news'))
 			//{
-				$arrArchives[$objArchives->id] = $objArchives->title;
+				$arrCategories[$objCategories->id] = $objCategories->title;
 			//}
 		}
 
-		return $arrArchives;
+		return $arrCategories;
 	}
 
 	/**
@@ -162,7 +162,7 @@ class tl_module_catalog extends Backend
 	 */
 	public function getCatalogTemplates(DataContainer $dc)
 	{
-		return $this->getTemplateGroup('catalog_', $dc->activeRecord->pid);
+		return $this->getTemplateGroup('product_', $dc->activeRecord->pid);
 	}
 
 	/**
