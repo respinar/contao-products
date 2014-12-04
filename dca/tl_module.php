@@ -18,13 +18,13 @@
 $GLOBALS['TL_DCA']['tl_module']['palettes']['catalog_list']    = '{title_legend},name,headline,type;
                                                                   {catalog_legend},catalog_categories;
                                                                   {config_legend},catalog_featured,catalog_detailModule,numberOfItems,perPage,skipFirst;
-                                                                  {template_legend},catalog_metaFields,catalog_template,customTpl;
+                                                                  {template_legend},catalog_metaFields,product_template,customTpl;
                                                                   {product_legend},product_Class,imgSize;
                                                                   {protected_legend:hide},protected;
                                                                   {expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['catalog_detail']  = '{title_legend},name,headline,type;
                                                                   {catalog_legend},catalog_categories;
-                                                                  {template_legend},catalog_metaFields,catalog_template,customTpl;
+                                                                  {template_legend},catalog_metaFields,product_template,customTpl;
                                                                   {image_legend},imgSize;
                                                                   {type_legend},type_Class,type_ImageSize;
                                                                   {protected_legend:hide},protected;
@@ -55,7 +55,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_template'] = array
 	'label'                => &$GLOBALS['TL_LANG']['tl_module']['product_template'],
 	'exclude'              => true,
 	'inputType'            => 'select',
-	'options_callback'     => array('tl_module_catalog', 'getProducTemplates'),
+	'options_callback'     => array('tl_module_catalog', 'getProductTemplates'),
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );
@@ -160,7 +160,7 @@ class tl_module_catalog extends Backend
 	 * @param object
 	 * @return array
 	 */
-	public function getProducTemplates(DataContainer $dc)
+	public function getProductTemplates(DataContainer $dc)
 	{
 		return $this->getTemplateGroup('product_', $dc->activeRecord->pid);
 	}
