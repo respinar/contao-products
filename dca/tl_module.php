@@ -33,7 +33,7 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['catalog_related'] = '{title_legend}
                                                                   {catalog_legend},catalog_categories;
                                                                   {config_legend},numberOfItems;
                                                                   {redirect_legend},jumpTo;
-                                                                  {template_legend:hide},catalog_metaFields,catalog_template,customTpl;
+                                                                  {template_legend:hide},catalog_metaFields,product_template,customTpl;
                                                                   {image_legend},imgSize;
                                                                   {protected_legend:hide},protected;
                                                                   {expert_legend:hide},guests,cssID,space';
@@ -50,12 +50,12 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['catalog_categories'] = array
 	'eval'                 => array('multiple'=>true, 'mandatory'=>true),
     'sql'                  => "blob NULL"
 );
-$GLOBALS['TL_DCA']['tl_module']['fields']['catalog_template'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_template'] = array
 (
-	'label'                => &$GLOBALS['TL_LANG']['tl_module']['catalog_template'],
+	'label'                => &$GLOBALS['TL_LANG']['tl_module']['product_template'],
 	'exclude'              => true,
 	'inputType'            => 'select',
-	'options_callback'     => array('tl_module_catalog', 'getCatalogTemplates'),
+	'options_callback'     => array('tl_module_catalog', 'getProducTemplates'),
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );
@@ -160,7 +160,7 @@ class tl_module_catalog extends Backend
 	 * @param object
 	 * @return array
 	 */
-	public function getCatalogTemplates(DataContainer $dc)
+	public function getProducTemplates(DataContainer $dc)
 	{
 		return $this->getTemplateGroup('product_', $dc->activeRecord->pid);
 	}

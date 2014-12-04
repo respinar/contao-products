@@ -90,7 +90,7 @@ abstract class ModuleCatalog extends \Module
 	{
 		global $objPage;
 
-		$objTemplate = new \FrontendTemplate($this->catalog_template);
+		$objTemplate = new \FrontendTemplate($this->product_template);
 		$objTemplate->setData($objProduct->row());
 
 		$objTemplate->class = (($this->product_Class != '') ? ' ' . $this->product_Class : '') . $strClass;
