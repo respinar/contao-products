@@ -15,5 +15,4 @@
 /**
  * Miscellaneous
  */
-$GLOBALS['TL_LANG']['MSC'][''] = '';
-$GLOBALS['TL_LANG']['MSC']['emptyCatalog']='Not found!';
+$GLOBALS['TL_LANG']['MSC']['emptyCatalog']='There is no product items!';

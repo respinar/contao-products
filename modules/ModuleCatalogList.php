@@ -101,7 +101,7 @@ class ModuleCatalogList extends \ModuleCatalog
 		}
 
 		$this->Template->products = array();
-		$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['emptyList'];
+		$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['emptyCatalog'];
 
 		$intTotal = \CatalogProductModel::countPublishedByPids($this->catalog_categories);
 

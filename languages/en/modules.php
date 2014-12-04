@@ -15,14 +15,13 @@
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['catalog'] = array('Catalog', '');
+$GLOBALS['TL_LANG']['MOD']['catalog'] = array('Catalog', 'Catalog and products management');
 
 
 /**
  * Front end modules
  */
 $GLOBALS['TL_LANG']['FMD']['catalog']         = 'Catalog';
-$GLOBALS['TL_LANG']['FMD']['catalog_menu']    = array('Catalog menu', '');
-$GLOBALS['TL_LANG']['FMD']['catalog_list']    = array('Catalog product list', '');
-$GLOBALS['TL_LANG']['FMD']['catalog_reader']  = array('Catalog product', '');
-$GLOBALS['TL_LANG']['FMD']['catalog_related'] = array('Catalog related product', '');
+$GLOBALS['TL_LANG']['FMD']['catalog_list']    = array('Product list', '');
+$GLOBALS['TL_LANG']['FMD']['catalog_detail']  = array('Product detail', '');
+$GLOBALS['TL_LANG']['FMD']['catalog_related'] = array('Related product', '');

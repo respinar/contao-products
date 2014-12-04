@@ -339,7 +339,7 @@ class tl_catalog_product extends Backend
 			$strImage = \Image::getHtml(\Image::get($objImage->path, '80', '60', 'center_center'));
 		}
 
-		return '<div><div style="float:left; margin-right:10px;">'.$strImage.'</div>'. $arrRow['title'] . '<br /><span style="padding-left:3px;color:#b3b3b3;">کد: ' . $arrRow['code'] . '<br>قیمت: '. number_format($arrRow[price]) .' ریال</span></div>';
+		return '<div><div style="float:left; margin-right:10px;">'.$strImage.'</div>'. $arrRow['title'] . '</div>';
 	}
 
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)

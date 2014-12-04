@@ -93,8 +93,8 @@ abstract class ModuleCatalog extends \Module
 		$objTemplate = new \FrontendTemplate($this->catalog_template);
 		$objTemplate->setData($objProduct->row());
 
-		$objTemplate->class = (($this->productClass != '') ? ' ' . $this->productClass : '') . $strClass;
-		$objTemplate->typeClass = $this->typeClass;
+		$objTemplate->class = (($this->product_Class != '') ? ' ' . $this->product_Class : '') . $strClass;
+		$objTemplate->type_Class = $this->type_Class;
 
 		$objTemplate->title       = $objProduct->title;
 		$objTemplate->alias       = $objProduct->alias;
@@ -277,7 +277,7 @@ abstract class ModuleCatalog extends \Module
 
 		$arrType = array();
 
-		$size = deserialize($this->typeImageSize);
+		$size = deserialize($this->type_ImageSize);
 
 		while($objType->next())
 		{

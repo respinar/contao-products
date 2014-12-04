@@ -19,14 +19,14 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['catalog_list']    = '{title_legend}
                                                                   {catalog_legend},catalog_categories;
                                                                   {config_legend},catalog_featured,catalog_detailModule,numberOfItems,perPage,skipFirst;
                                                                   {template_legend},catalog_metaFields,catalog_template,customTpl;
-                                                                  {product_legend},productClass,imgSize;
+                                                                  {product_legend},product_Class,imgSize;
                                                                   {protected_legend:hide},protected;
                                                                   {expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['catalog_detail']  = '{title_legend},name,headline,type;
                                                                   {catalog_legend},catalog_categories;
                                                                   {template_legend},catalog_metaFields,catalog_template,customTpl;
                                                                   {image_legend},imgSize;
-                                                                  {type_legend},typeClass,typeImageSize;
+                                                                  {type_legend},type_Class,type_ImageSize;
                                                                   {protected_legend:hide},protected;
                                                                   {expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['catalog_related'] = '{title_legend},name,headline,type;
@@ -91,25 +91,25 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['catalog_detailModule'] = array
 	'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
 	'sql'                     => "int(10) unsigned NOT NULL default '0'"
 );
-$GLOBALS['TL_DCA']['tl_module']['fields']['productClass'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_Class'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['productClass'],
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['product_Class'],
 	'exclude'                 => true,
 	'inputType'               => 'text',
 	'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
 	'sql'                     => "varchar(255) NOT NULL default ''"
 );
-$GLOBALS['TL_DCA']['tl_module']['fields']['typeClass'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['type_Class'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['typeClass'],
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['type_Class'],
 	'exclude'                 => true,
 	'inputType'               => 'text',
 	'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
 	'sql'                     => "varchar(255) NOT NULL default ''"
 );
-$GLOBALS['TL_DCA']['tl_module']['fields']['typeImageSize'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['type_ImageSize'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['typeImageSize'],
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['type_ImageSize'],
 	'exclude'                 => true,
 	'inputType'               => 'imageSize',
 	'options'                 => System::getImageSizes(),
@@ -120,12 +120,12 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['typeImageSize'] = array
 
 
 /**
- * Class tl_module_cds
+ * Class tl_module_catalog
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Hamid Abbaszadeh 2010
+ * @copyright  Hamid Abbaszadeh 2014
  * @author     Hamid Abbaszadeh <http://respinar.com>
- * @package    Carpets Collection
+ * @package    Catalog
  */
 class tl_module_catalog extends Backend
 {
