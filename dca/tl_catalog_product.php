@@ -125,7 +125,7 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('addEnclosure','published'),
-		'default'                     => '{title_legend},title,alias,date,featured;
+		'default'                     => '{title_legend},title,alias,featured,date;
 		                                  {meta_legend},description,keywords;
 		                                  {feature_legend},features;
 		                                  {spec_legend},spec;
@@ -178,8 +178,12 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 			'search'                  => true,
 			'sorting'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'alias','unique'=>true,'maxlength'=>10, 'tl_class'=>'w50'),
-			'sql'                     => "varchar(10) NOT NULL default ''"
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'alias','unique'=>true,'maxlength'=>128, 'tl_class'=>'w50'),
+			'save_callback' => array
+			(
+				array('tl_catalog_product', 'generateAlias')
+			),
+			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
 		'date' => array
 		(
@@ -288,7 +292,7 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50'),
+			'eval'                    => array('tl_class'=>'w50 m12'),
 			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'start' => array
@@ -315,6 +319,42 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
  */
 class tl_catalog_product extends Backend
 {
+
+	/**
+	 * Auto-generate the product alias if it has not been set yet
+	 * @param mixed
+	 * @param \DataContainer
+	 * @return string
+	 * @throws \Exception
+	 */
+	public function generateAlias($varValue, DataContainer $dc)
+	{
+		$autoAlias = false;
+
+		// Generate alias if there is none
+		if ($varValue == '')
+		{
+			$autoAlias = true;
+			$varValue = standardize(String::restoreBasicEntities($dc->activeRecord->title));
+		}
+
+		$objAlias = $this->Database->prepare("SELECT id FROM tl_catalog_product WHERE alias=?")
+								   ->execute($varValue);
+
+		// Check whether the news alias exists
+		if ($objAlias->numRows > 1 && !$autoAlias)
+		{
+			throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
+		}
+
+		// Add ID to alias
+		if ($objAlias->numRows && $autoAlias)
+		{
+			$varValue .= '-' . $dc->id;
+		}
+
+		return $varValue;
+	}
 
 	/**
 	 * Generate a song row and return it as HTML string
