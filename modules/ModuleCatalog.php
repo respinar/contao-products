@@ -294,7 +294,6 @@ abstract class ModuleCatalog extends \Module
 			(
 				'title'       => $objType->title,
 				'code'        => $objType->code,
-				'price'       => $objType->price,
 				'spec'        => $objType->spec,
 				'description' => $objElement->description,
 				'image'       => $strImage,

@@ -125,7 +125,7 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('addEnclosure','published'),
-		'default'                     => '{title_legend},title,alias,price,date,featured;
+		'default'                     => '{title_legend},title,alias,date,featured;
 		                                  {meta_legend},description,keywords;
 		                                  {feature_legend},features;
 		                                  {spec_legend},spec;
@@ -210,15 +210,6 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 			'search'                  => true,
 			'eval'                    => array('style'=>'height:60px', 'decodeEntities'=>true, 'tl_class'=>'clr'),
 			'sql'                     => "text NULL"
-		),
-		'price' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['price'],
-			'exclude'                 => true,
-			'sorting'                 => true,
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true,'rgxp'=>'digit', 'maxlength'=>12, 'tl_class'=>'w50'),
-			'sql'                     => "int(12) NOT NULL default '0'"
 		),
 		'features' => array
 		(

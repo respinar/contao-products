@@ -107,7 +107,7 @@ $GLOBALS['TL_DCA']['tl_catalog_type'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{title_legend},title,code,price,date;
+		'default'                     => '{title_legend},title,code,date;
 		                                  {spec_legend},feature,spec;
 		                                  {image_legend},singleSRC;
 		                                  {description_legend:hide},description;
@@ -153,15 +153,6 @@ $GLOBALS['TL_DCA']['tl_catalog_type'] = array
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'rgxp'=>'alias','unique'=>true,'maxlength'=>10, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(10) NOT NULL default ''"
-		),
-		'price' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_type']['price'],
-			'exclude'                 => true,
-			'sorting'                 => true,
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true,'rgxp'=>'digit', 'maxlength'=>12, 'tl_class'=>'w50'),
-			'sql'                     => "int(12) NOT NULL default '0'"
 		),
 		'date' => array
 		(

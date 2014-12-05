@@ -17,7 +17,6 @@
  */
 $GLOBALS['TL_LANG']['tl_catalog_type']['title']     = array('Type title', 'Please enter the type title.');
 $GLOBALS['TL_LANG']['tl_catalog_type']['code']      = array('Type code', 'Please enter the type code.');
-$GLOBALS['TL_LANG']['tl_catalog_type']['price']     = array('Price', 'Please enter the price in Iraniain Rials.');
 
 $GLOBALS['TL_LANG']['tl_catalog_type']['spec']      = array('Specifications','Please eneter the type specifications.');
 $GLOBALS['TL_LANG']['tl_catalog_type']['spectitle'] = array('Title','Specifications title');
