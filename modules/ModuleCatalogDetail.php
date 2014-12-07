@@ -80,7 +80,25 @@ class ModuleCatalogDetail extends \ModuleCatalog
 
 		$objProduct = \CatalogProductModel::findPublishedByParentAndIdOrAlias(\Input::get('items'),$this->catalog_categories);
 
+		// Overwrite the page title
+		if ($objProduct->title != '')
+		{
+			$objPage->pageTitle = strip_tags(strip_insert_tags($objProduct->title));
+		}
+
+		// Overwrite the page description
+		if ($objProduct->description != '')
+		{
+			$objPage->description = $this->prepareMetaDescription($objProduct->description);
+		}
+
+		if ($objProduct->keywords != '')
+		{
+			$GLOBALS['TL_KEYWORDS'] .= (($GLOBALS['TL_KEYWORDS'] != '') ? ', ' : '') . $objProduct->keywords;
+		}
+
 		$arrProduct = $this->parseProduct($objProduct);
+
 		$this->Template->products = $arrProduct;
 
 	}
