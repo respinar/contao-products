@@ -160,7 +160,7 @@ class CatalogProductModel extends \Model
 	public static function findPublishedDefaultByPid($intPid, array $arrOptions=array())
 	{
 		$t = static::$strTable;
-		$arrColumns = array("$t.pid=? AND $t.source='default'");
+		$arrColumns = array("$t.pid=?");
 
 		if (!BE_USER_LOGGED_IN)
 		{

@@ -25,16 +25,19 @@ ClassLoader::addNamespaces(array
  */
 ClassLoader::addClasses(array
 (
+	// Modules
+	'catalog\ModuleCatalogDetail'  => 'system/modules/catalog/modules/ModuleCatalogDetail.php',
+	'catalog\ModuleCatalogRelated' => 'system/modules/catalog/modules/ModuleCatalogRelated.php',
+	'catalog\ModuleCatalog'        => 'system/modules/catalog/modules/ModuleCatalog.php',
+	'catalog\ModuleCatalogList'    => 'system/modules/catalog/modules/ModuleCatalogList.php',
+
 	// Models
-	'catalog\CatalogTypeModel'     => 'system/modules/catalog/models/CatalogTypeModel.php',
 	'catalog\CatalogProductModel'  => 'system/modules/catalog/models/CatalogProductModel.php',
 	'catalog\CatalogCategoryModel' => 'system/modules/catalog/models/CatalogCategoryModel.php',
+	'catalog\CatalogTypeModel'     => 'system/modules/catalog/models/CatalogTypeModel.php',
 
-	// Modules
-	'catalog\ModuleCatalogList'    => 'system/modules/catalog/modules/ModuleCatalogList.php',
-	'catalog\ModuleCatalogRelated' => 'system/modules/catalog/modules/ModuleCatalogRelated.php',
-	'catalog\ModuleCatalogDetail'  => 'system/modules/catalog/modules/ModuleCatalogDetail.php',
-	'catalog\ModuleCatalog'        => 'system/modules/catalog/modules/ModuleCatalog.php',
+	// Classes
+	'catalog\Catalog'              => 'system/modules/catalog/classes/Catalog.php',
 ));
 
 
@@ -43,10 +46,10 @@ ClassLoader::addClasses(array
  */
 TemplateLoader::addFiles(array
 (
-	'mod_catalog_related' => 'system/modules/catalog/templates/modules',
 	'mod_catalog_list'    => 'system/modules/catalog/templates/modules',
 	'mod_catalog_detail'  => 'system/modules/catalog/templates/modules',
+	'mod_catalog_related' => 'system/modules/catalog/templates/modules',
+	'product_list'        => 'system/modules/catalog/templates/product',
 	'product_full'        => 'system/modules/catalog/templates/product',
 	'product_short'       => 'system/modules/catalog/templates/product',
-	'product_list'        => 'system/modules/catalog/templates/product',
 ));

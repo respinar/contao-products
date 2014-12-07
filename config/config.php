@@ -37,3 +37,6 @@ array_insert($GLOBALS['FE_MOD'], 2, array
 		'catalog_related' => 'ModuleCatalogRelated',
 	)
 ));
+
+$GLOBALS['TL_HOOKS']['getSearchablePages'][] = array('Catalog', 'getSearchablePages');
+
