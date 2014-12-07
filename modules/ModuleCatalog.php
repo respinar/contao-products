@@ -98,8 +98,13 @@ abstract class ModuleCatalog extends \Module
 
 		$objTemplate->title       = $objProduct->title;
 		$objTemplate->alias       = $objProduct->alias;
+		$objTemplate->model       = $objProduct->model;
 
-		$objTemplate->features    = deserialize($objProduct->features);
+		print_r($objProduct->features);
+		if (!empty($objProduct->features))
+		{
+			$objTemplate->features    = deserialize($objProduct->features);
+		}
 		$objTemplate->specs       = deserialize($objProduct->spec);
 
 		$objTemplate->description = $objProduct->description;

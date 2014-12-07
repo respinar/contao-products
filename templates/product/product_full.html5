@@ -2,7 +2,7 @@
 <div class="layout_full block<?php echo $this->class; ?>">
 
   <h2><?php echo $this->title; ?></h2>
-  <h3><?php echo $this->alias; ?></h3>
+  <p class="model"><?php echo $this->model; ?></p>
 
   <?php if ($this->hasMetaFields): ?>
     <p class="info"><time datetime="<?php echo $this->datetime; ?>"><?php echo $this->date; ?></time></p>
@@ -29,8 +29,9 @@
     </figure>
   <?php endif; ?>
 
+	<?php print_r($this->features); ?>
 
-  <?php if($this->features) { ?>
+  <?php if($this->features !== null) { ?>
   <div class="features">
     <h3>ویژگی‌ها</h3>
     <ul>
@@ -41,7 +42,7 @@
   </div>
   <?php } ?>
 
-  <?php if($this->specs) { ?>
+  <?php if($this->specs !== null) { ?>
   <div class="specs">
     <h3>خصوصیات</h3>
     <ul>

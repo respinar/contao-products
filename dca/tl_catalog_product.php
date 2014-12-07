@@ -72,7 +72,6 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 				'href'                => 'act=edit',
 				'icon'                => 'header.gif'
 			),
-
 			'type' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_product']['type'],
@@ -125,7 +124,8 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('addEnclosure','published'),
-		'default'                     => '{title_legend},title,alias,featured,date;
+		'default'                     => '{title_legend},title,alias,model,date;
+		                                  {config_legend},featured;
 		                                  {meta_legend},description,keywords;
 		                                  {feature_legend},features;
 		                                  {spec_legend},spec;
@@ -183,6 +183,15 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 			(
 				array('tl_catalog_product', 'generateAlias')
 			),
+			'sql'                     => "varchar(128) NOT NULL default ''"
+		),
+		'model' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['model'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
 		'date' => array

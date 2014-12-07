@@ -16,7 +16,8 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_catalog_product']['title']       = array('Product title', 'Please enter the product title.');
-$GLOBALS['TL_LANG']['tl_catalog_product']['alias']       = array('Product code or alias', 'Please enter the product code.');
+$GLOBALS['TL_LANG']['tl_catalog_product']['alias']       = array('Product alias', 'Please enter the product alias.');
+$GLOBALS['TL_LANG']['tl_catalog_product']['model']       = array('Product model', 'Please enter the product model.');
 $GLOBALS['TL_LANG']['tl_catalog_product']['date']        = array('Date', 'Please enter date.');
 $GLOBALS['TL_LANG']['tl_catalog_product']['description'] = array('Description','Please enter description.');
 $GLOBALS['TL_LANG']['tl_catalog_product']['keywords']    = array('Meta keywords','Here you can enter a list of comma separated keywords. Keywords, however, are no longer relevant to most search engines (including Google).');
