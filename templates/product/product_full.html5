@@ -29,8 +29,6 @@
     </figure>
   <?php endif; ?>
 
-	<?php print_r($this->features); ?>
-
   <?php if($this->features !== null) { ?>
   <div class="features">
     <h3>ویژگی‌ها</h3>
