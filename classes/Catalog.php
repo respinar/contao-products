@@ -99,8 +99,6 @@ class Catalog extends \Frontend
 
 				$strUrl = $arrProcessed[$objCategory->jumpTo];
 
-				echo "HELLO!";
-
 				// Get the items
 				$objProduct = \CatalogProductModel::findPublishedByPid($objCategory->id);
 
