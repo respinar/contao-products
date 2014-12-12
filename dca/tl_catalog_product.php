@@ -104,12 +104,12 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
 				'button_callback'     => array('tl_catalog_product', 'toggleIcon')
 			),
-			'stock' => array
+			'feature' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_product']['stock'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_product']['feature'],
 				'icon'                => 'featured.gif',
-				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleStock(this,%s)"',
-				'button_callback'     => array('tl_catalog_product', 'iconStock')
+				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleFeatured(this,%s)"',
+				'button_callback'     => array('tl_catalog_product', 'iconFeatured')
 			),
 			'show' => array
 			(
@@ -442,64 +442,88 @@ class tl_catalog_product extends Backend
 
 	}
 
-	public function iconStock($row, $href, $label, $title, $icon, $attributes)
+	/**
+	 * Return the "feature/unfeature element" button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function iconFeatured($row, $href, $label, $title, $icon, $attributes)
 	{
-		if (strlen($this->Input->get('sid')))
+		if (strlen(Input::get('fid')))
 		{
-			$this->toggleStock($this->Input->get('sid'), ($this->Input->get('state') == 1));
+			$this->toggleFeatured(Input::get('fid'), (Input::get('state') == 1));
 			$this->redirect($this->getReferer());
 		}
 
-		// Check permissions AFTER checking the tid, so hacking attempts are logged
-		//if (!$this->User->isAdmin && !$this->User->hasAccess('tl_prices::published', 'alexf'))
+		// Check permissions AFTER checking the fid, so hacking attempts are logged
+		//if (!$this->User->hasAccess('tl_catalog_product::featured', 'alexf'))
 		//{
-		//	return '';
+			//return '';
 		//}
 
-		$href .= '&amp;sid='.$row['id'].'&amp;state='.($row['stock'] ? '' : 1);
+		$href .= '&amp;fid='.$row['id'].'&amp;state='.($row['featured'] ? '' : 1);
 
-		if (!$row['stock'])
+		if (!$row['featured'])
 		{
 			$icon = 'featured_.gif';
 		}
 
-		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
+		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ';
 	}
 
 
-
-	public function toggleStock($intId, $blnStock)
+	/**
+	 * Feature/unfeature a news item
+	 * @param integer
+	 * @param boolean
+	 * @return string
+	 */
+	public function toggleFeatured($intId, $blnVisible)
 	{
 		// Check permissions to edit
-		$this->Input->setGet('id', $intId);
-		$this->Input->setGet('act', 'stock');
-		//$this->checkPermission();
+		Input::setGet('id', $intId);
+		Input::setGet('act', 'feature');
+		$this->checkPermission();
 
-		// Check permissions to publish
-		//if (!$this->User->isAdmin && !$this->User->hasAccess('tl_news::published', 'alexf'))
+		// Check permissions to feature
+		//if (!$this->User->hasAccess('tl_catalog_product::featured', 'alexf'))
 		//{
-		//	$this->log('Not enough permissions to publish/unpublish news item ID "'.$intId.'"', 'tl_news toggleVisibility', TL_ERROR);
-		//	$this->redirect('contao/main.php?act=error');
+			//$this->log('Not enough permissions to feature/unfeature news item ID "'.$intId.'"', __METHOD__, TL_ERROR);
+			//$this->redirect('contao/main.php?act=error');
 		//}
 
-		$this->createInitialVersion('tl_catalog_product', $intId);
+		$objVersions = new Versions('tl_news', $intId);
+		$objVersions->initialize();
 
 		// Trigger the save_callback
-		if (is_array($GLOBALS['TL_DCA']['tl_catalog_product']['fields']['stock']['save_callback']))
+		if (is_array($GLOBALS['TL_DCA']['tl_catalog_product']['fields']['featured']['save_callback']))
 		{
-			foreach ($GLOBALS['TL_DCA']['tl_catalog_product']['fields']['stock']['save_callback'] as $callback)
+			foreach ($GLOBALS['TL_DCA']['tl_catalog_product']['fields']['featured']['save_callback'] as $callback)
 			{
-				$this->import($callback[0]);
-				$blnStock = $this->$callback[0]->$callback[1]($blnStock, $this);
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				}
+				elseif (is_callable($callback))
+				{
+					$blnVisible = $callback($blnVisible, $this);
+				}
 			}
 		}
 
 		// Update the database
-		$this->Database->prepare("UPDATE tl_catalog_product SET tstamp=". time() .", stock='" . ($blnStock ? 1 : '') . "' WHERE id=?")
+		$this->Database->prepare("UPDATE tl_catalog_product SET tstamp=". time() .", featured='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
 					   ->execute($intId);
 
-		$this->createNewVersion('tl_catalog_product', $intId);
-
+		$objVersions->create();
+		$this->log('A new version of record "tl_catalog_product.id='.$intId.'" has been created'.$this->getParentEntries('tl_news', $intId), __METHOD__, TL_GENERAL);
 	}
+
 
 }
