@@ -153,14 +153,17 @@ abstract class ModuleCatalog extends \Module
 				{
 					$size = deserialize($this->imgSize);
 
-					if ($size[0] > 0 || $size[1] > 0)
+					if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
 					{
 						$arrProduct['size'] = $this->imgSize;
 					}
 				}
 
 				$arrProduct['singleSRC'] = $objModel->path;
-				$this->addImageToTemplate($objTemplate, $arrProduct);
+				$intMaxWidth = (TL_MODE == 'BE') ? floor((640)) : floor((\Config::get('maxImageWidth')));
+				$strLightboxId = 'lightbox[lb' . $this->id . ']';
+				$arrProduct['fullsize'] = $this->fullsize;
+				$this->addImageToTemplate($objTemplate, $arrProduct,null, $strLightboxId);
 			}
 		}
 
