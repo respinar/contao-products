@@ -177,6 +177,14 @@ abstract class ModuleCatalog extends \Module
 			}
 		}
 
+		$objTemplate->enclosure = array();
+
+		// Add enclosures
+		if ($objProduct->addEnclosure)
+		{
+			$this->addEnclosuresToTemplate($objTemplate, $objProduct->row());
+		}
+
 		return $objTemplate->parse();
 	}
 
