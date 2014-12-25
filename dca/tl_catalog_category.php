@@ -45,8 +45,8 @@ $GLOBALS['TL_DCA']['tl_catalog_category'] = array
 		),
 		'label' => array
 		(
-			'fields'                  => array('title'),
-			'format'                  => '%s'
+			'fields'                  => array('language','title'),
+			'format'                  => '[%s] %s'
 		),
 		'global_operations' => array
 		(
