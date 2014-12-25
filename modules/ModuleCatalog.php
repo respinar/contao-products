@@ -160,7 +160,6 @@ abstract class ModuleCatalog extends \Module
 				}
 
 				$arrProduct['singleSRC'] = $objModel->path;
-				$intMaxWidth = (TL_MODE == 'BE') ? floor((640)) : floor((\Config::get('maxImageWidth')));
 				$strLightboxId = 'lightbox[lb' . $this->id . ']';
 				$arrProduct['fullsize'] = $this->fullsize;
 				$this->addImageToTemplate($objTemplate, $arrProduct,null, $strLightboxId);

@@ -105,7 +105,7 @@ $GLOBALS['TL_DCA']['tl_catalog_category'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('protected'),
-		'default'                     => '{title_legend},title;{redirect_legend},jumpTo;{protected_legend:hide},protected;'
+		'default'                     => '{title_legend},title,language,master;{redirect_legend},jumpTo;{protected_legend:hide},protected;'
 	),
 
 	// Subpalettes
@@ -131,8 +131,27 @@ $GLOBALS['TL_DCA']['tl_catalog_category'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>128),
 			'sql'                     => "varchar(255) NOT NULL default ''"
+		),
+		'language' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_category']['language'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'filter'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>32, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
+		),
+		'master' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_category']['master'],
+			'exclude'                 => true,
+			'inputType'               => 'select',
+			'options_callback'        => array('tl_catalog_category', 'getCategories'),
+			'eval'                    => array('includeBlankOption'=>true, 'blankOptionLabel'=>&$GLOBALS['TL_LANG']['tl_catalog_category']['isMaster']),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'jumpTo' => array
 		(
@@ -164,3 +183,29 @@ $GLOBALS['TL_DCA']['tl_catalog_category'] = array
 		)
 	)
 );
+
+
+class tl_catalog_category extends Backend
+{
+
+	/**
+	 * Get an array of possible catalog categories
+	 *
+	 * @param	DataContainer
+	 * @return	array
+	 * @link	http://www.contao.org/callbacks.html#options_callback
+	 */
+	public function getCategories(DataContainer $dc)
+	{
+		$arrCategories = array();
+		$objCategories = $this->Database->prepare("SELECT * FROM tl_catalog_category WHERE language!=? AND id!=? AND master=0 ORDER BY title")->execute($dc->activeRecord->language, $dc->id);
+
+		while( $objCategories->next() )
+		{
+			$arrCategories[$objCategories->id] = sprintf($GLOBALS['TL_LANG']['tl_catalog_category']['isSlave'], $objCategories->title);
+		}
+
+		return $arrCategories;
+	}
+}
+

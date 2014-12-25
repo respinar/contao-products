@@ -38,5 +38,9 @@ array_insert($GLOBALS['FE_MOD'], 2, array
 	)
 ));
 
-$GLOBALS['TL_HOOKS']['getSearchablePages'][] = array('Catalog', 'getSearchablePages');
+/**
+ * Hooks
+ */
+$GLOBALS['TL_HOOKS']['getSearchablePages'][]     = array('Catalog', 'getSearchablePages');
+$GLOBALS['TL_HOOKS']['translateUrlParameters'][] = array('Catalog', 'translateUrlParameters');
 

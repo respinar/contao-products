@@ -40,6 +40,7 @@ $GLOBALS['TL_LANG']['tl_catalog_product']['published']   = array('Publish produc
 $GLOBALS['TL_LANG']['tl_catalog_product']['featured']    = array('Feature product','Show the product item in a featured list.');
 $GLOBALS['TL_LANG']['tl_catalog_product']['start']       = array('Show from','Do not show the product item on the website before this day.');
 $GLOBALS['TL_LANG']['tl_catalog_product']['stop']        = array('Show until','Do not show the news product on the website on and after this day.');
+$GLOBALS['TL_LANG']['tl_catalog_product']['languageMain']= array('Master product', 'Choose the product in the master category equaling this product.');
 
 /**
  * Legends
@@ -65,3 +66,9 @@ $GLOBALS['TL_LANG']['tl_catalog_product']['edit']   = array('Edit product', 'Edi
 $GLOBALS['TL_LANG']['tl_catalog_product']['cut']    = array('Move product', 'Move product ID %s');
 $GLOBALS['TL_LANG']['tl_catalog_product']['copy']   = array('Duplicate product', 'Duplicate product ID %s');
 $GLOBALS['TL_LANG']['tl_catalog_product']['delete'] = array('Delete product', 'Delete product ID %s');
+
+/**
+ * References
+ */
+$GLOBALS['TL_LANG']['tl_catalog_product']['sameDay']	= 'Same day';
+$GLOBALS['TL_LANG']['tl_catalog_product']['otherDay']	= 'Other days';
