@@ -25,3 +25,7 @@ $GLOBALS['TL_LANG']['FMD']['catalog']         = 'Catalog';
 $GLOBALS['TL_LANG']['FMD']['catalog_list']    = array('Product list', '');
 $GLOBALS['TL_LANG']['FMD']['catalog_detail']  = array('Product detail', '');
 $GLOBALS['TL_LANG']['FMD']['catalog_related'] = array('Related product', '');
+
+$GLOBALS['TL_LANG']['tl_module']['all_product']         = 'All products';
+$GLOBALS['TL_LANG']['tl_module']['featured_product']    = 'Featured products';
+$GLOBALS['TL_LANG']['tl_module']['unfeatured_product'] = 'Unfeatured products';

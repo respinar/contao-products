@@ -96,18 +96,11 @@ abstract class ModuleCatalog extends \Module
 		$objTemplate->class = (($this->product_Class != '') ? ' ' . $this->product_Class : '') . $strClass;
 		$objTemplate->type_Class = $this->type_Class;
 
-		$objTemplate->title       = $objProduct->title;
-		$objTemplate->alias       = $objProduct->alias;
-		$objTemplate->model       = $objProduct->model;
-
 		if (!empty($objProduct->features))
 		{
 			$objTemplate->features    = deserialize($objProduct->features);
 		}
 		$objTemplate->specs       = deserialize($objProduct->spec);
-
-		$objTemplate->description = $objProduct->description;
-		$objTemplate->keywords    = $objProduct->keywords;
 
 		$objTemplate->link        = $this->generateSetUrl($objProduct, $blnAddCategory);
 		$objTemplate->more        = $this->generateLink($GLOBALS['TL_LANG']['MSC']['moredetail'], $objProduct, $blnAddCategory, true);
@@ -119,7 +112,6 @@ abstract class ModuleCatalog extends \Module
 		$objTemplate->category    = $objProduct->getRelated('pid');
 
 		$objTemplate->count = $intCount; // see #5708
-		$objTemplate->text = '';
 
 		$arrMeta = $this->getMetaFields($objProduct);
 

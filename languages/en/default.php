@@ -16,3 +16,6 @@
  * Miscellaneous
  */
 $GLOBALS['TL_LANG']['MSC']['emptyCatalog']='There is no product items!';
+
+$GLOBALS['TL_LANG']['MSC']['price']       = 'Price';
+$GLOBALS['TL_LANG']['MSC']['rating']      = 'Rating';

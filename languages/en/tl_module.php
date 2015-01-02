@@ -19,10 +19,11 @@ $GLOBALS['TL_LANG']['tl_module']['catalog_categories']   = array('Catelog catego
 $GLOBALS['TL_LANG']['tl_module']['catalog_featured']     = array('Featured product', 'Here you can choose how featured items are handled.');
 $GLOBALS['TL_LANG']['tl_module']['catalog_detailModule'] = array('Product detail module', 'Automatically switch to the product module if an item has been selected.');
 $GLOBALS['TL_LANG']['tl_module']['catalog_metaFields']   = array('Meta fields', 'Here you can select the meta fields.');
+$GLOBALS['TL_LANG']['tl_module']['catalog_sortBy']       = array('Sort by', 'Here you can select the sorting fields.');
 $GLOBALS['TL_LANG']['tl_module']['product_template']     = array('Catalog template', 'Here you can select the catalog template.');
-$GLOBALS['TL_LANG']['tl_module']['product_Class']         = array('Product CSS class', 'Here you can set one or more classes for products.');
-$GLOBALS['TL_LANG']['tl_module']['type_Class']            = array('Type CSS class', 'Here you can set one or more classes for types.');
-$GLOBALS['TL_LANG']['tl_module']['type_ImageSize']        = array('Type image width and height', 'Here you can set the image dimensions and the resize mode.');
+$GLOBALS['TL_LANG']['tl_module']['product_Class']        = array('Product CSS class', 'Here you can set one or more classes for products.');
+$GLOBALS['TL_LANG']['tl_module']['type_Class']           = array('Type CSS class', 'Here you can set one or more classes for types.');
+$GLOBALS['TL_LANG']['tl_module']['type_ImageSize']       = array('Type image width and height', 'Here you can set the image dimensions and the resize mode.');
 
 
 /**
@@ -41,3 +42,9 @@ $GLOBALS['TL_LANG']['tl_module']['type_legend']      = 'Type settings';
 $GLOBALS['TL_LANG']['tl_module']['all_customers']       = 'All customers';
 $GLOBALS['TL_LANG']['tl_module']['feature_customers']   = 'Only feature customers';
 $GLOBALS['TL_LANG']['tl_module']['unfeature_customers'] = 'Unfeature customers';
+
+$GLOBALS['TL_LANG']['tl_module']['custom'] = 'Custom order';
+$GLOBALS['TL_LANG']['tl_module']['title_asc'] = 'Title (A-Z)';
+$GLOBALS['TL_LANG']['tl_module']['title_desc'] = 'Title (Z-A)';
+$GLOBALS['TL_LANG']['tl_module']['date_asc'] = 'Date (Newer)';
+$GLOBALS['TL_LANG']['tl_module']['date_desc'] = 'Date (Older)';

@@ -87,11 +87,11 @@ class ModuleCatalogList extends \ModuleCatalog
 		}
 
 		// Handle featured news
-		if ($this->catalog_featured == 'featured')
+		if ($this->catalog_featured == 'featured_product')
 		{
 			$blnFeatured = true;
 		}
-		elseif ($this->catalog_featured == 'unfeatured')
+		elseif ($this->catalog_featured == 'unfeatured_product')
 		{
 			$blnFeatured = false;
 		}
@@ -103,7 +103,7 @@ class ModuleCatalogList extends \ModuleCatalog
 		$this->Template->products = array();
 		$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['emptyCatalog'];
 
-		$intTotal = \CatalogProductModel::countPublishedByPids($this->catalog_categories);
+		$intTotal = \CatalogProductModel::countPublishedByPids($this->catalog_categories,$blnFeatured);
 
 		if ($intTotal < 1)
 		{
@@ -154,14 +154,37 @@ class ModuleCatalogList extends \ModuleCatalog
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 
+		$arrOptions = array();
+		if ($this->catalog_sortBy)
+		{
+			switch ($this->catalog_sortBy)
+			{
+				case 'title_asc':
+					$arrOptions['order'] = "title ASC";
+					break;
+				case 'title_desc':
+					$arrOptions['order'] = "title DESC";
+					break;
+				case 'date_asc':
+					$arrOptions['order'] = "date ASC";
+					break;
+				case 'date_desc':
+					$arrOptions['order'] = "date DESC";
+					break;
+				case 'custom':
+					$arrOptions['order'] = "sorting ASC";
+					break;
+			}
+		}
+
 		// Get the items
 		if (isset($limit))
 		{
-			$objProducts = \CatalogProductModel::findPublishedByPids($this->catalog_categories, $blnFeatured, $limit, $offset);
+			$objProducts = \CatalogProductModel::findPublishedByPids($this->catalog_categories, $blnFeatured, $limit, $offset, $arrOptions);
 		}
 		else
 		{
-			$objProducts = \CatalogProductModel::findPublishedByPids($this->catalog_categories, $blnFeatured, 0, $offset);
+			$objProducts = \CatalogProductModel::findPublishedByPids($this->catalog_categories, $blnFeatured, 0, $offset, $arrOptions);
 		}
 
 
@@ -171,7 +194,7 @@ class ModuleCatalogList extends \ModuleCatalog
 			$this->Template->products = $this->parseProducts($objProducts);
 		}
 
-		$this->Template->gategories = $this->catalog_categories;
+		$this->Template->categories = $this->catalog_categories;
 
 	}
 }

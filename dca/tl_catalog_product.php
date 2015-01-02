@@ -128,12 +128,12 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('addEnclosure','published'),
-		'default'                     => '{title_legend},title,alias,model;
-		                                  {config_legend},date,featured;
-		                                  {meta_legend},description,keywords;
+		'default'                     => '{title_legend},title,alias,model,date,featured;
+		                                  {image_legend},singleSRC;
+		                                  {meta_legend},keywords,description;
 		                                  {feature_legend},features;
 		                                  {spec_legend},spec;
-		                                  {image_legend},singleSRC;
+
 		                                  {enclosure_legend:hide},addEnclosure;
 		                                  {publish_legend},published'
 	),
@@ -224,7 +224,7 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
 			'search'                  => true,
-			'eval'                    => array('style'=>'height:60px', 'decodeEntities'=>true),
+			'eval'                    => array('decodeEntities'=>true),
 			'sql'                     => "text NULL"
 		),
 		'description' => array
@@ -233,7 +233,7 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
 			'search'                  => true,
-			'eval'                    => array('style'=>'height:60px', 'decodeEntities'=>true, 'tl_class'=>'clr'),
+			'eval'                    => array('rte'=>'tinyMCE','tl_class'=>'clr'),
 			'sql'                     => "text NULL"
 		),
 		'features' => array
@@ -242,7 +242,7 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 			'exclude'                 => true,
 			'sorting'                 => true,
 			'inputType'               => 'listWizard',
-			'eval'                    => array('tl_class'=>'w50 m12'),
+			'eval'                    => array(),
 			'sql'                     => "blob NULL",
 		),
 		'spec' => array

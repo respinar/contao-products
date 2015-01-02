@@ -16,8 +16,7 @@
  */
 
 $GLOBALS['TL_DCA']['tl_module']['palettes']['catalog_list']    = '{title_legend},name,headline,type;
-                                                                  {catalog_legend},catalog_categories;
-                                                                  {config_legend},catalog_featured,catalog_detailModule,numberOfItems,perPage,skipFirst;
+                                                                  {catalog_legend},catalog_categories,catalog_featured,catalog_detailModule,catalog_sortBy,numberOfItems,perPage,skipFirst;
                                                                   {template_legend},catalog_metaFields,product_template,customTpl;
                                                                   {product_legend},product_Class,imgSize;
                                                                   {protected_legend:hide},protected;
@@ -50,25 +49,27 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['catalog_categories'] = array
 	'eval'                 => array('multiple'=>true, 'mandatory'=>true),
     'sql'                  => "blob NULL"
 );
-$GLOBALS['TL_DCA']['tl_module']['fields']['product_template'] = array
-(
-	'label'                => &$GLOBALS['TL_LANG']['tl_module']['product_template'],
-	'exclude'              => true,
-	'inputType'            => 'select',
-	'options_callback'     => array('tl_module_catalog', 'getProductTemplates'),
-	'eval'                 => array('tl_class'=>'w50'),
-    'sql'                  => "varchar(64) NOT NULL default ''"
-);
 $GLOBALS['TL_DCA']['tl_module']['fields']['catalog_featured'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['catalog_featured'],
-	'default'                 => 'all',
+	'default'                 => 'all_product',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options'                 => array('all', 'featured', 'unfeatured'),
+	'options'                 => array('all_product', 'featured_product', 'unfeatured_product'),
 	'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
 	'eval'                    => array('tl_class'=>'w50'),
 	'sql'                     => "varchar(20) NOT NULL default ''"
+);
+$GLOBALS['TL_DCA']['tl_module']['fields']['catalog_sortBy'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['catalog_sortBy'],
+	'default'                 => 'custom',
+	'exclude'                 => true,
+	'inputType'               => 'select',
+	'options'                 => array('custom','title_asc', 'title_desc', 'date_asc', 'date_desc'),
+	'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
+	'eval'                    => array('tl_class'=>'w50'),
+	'sql'                     => "varchar(16) NOT NULL default ''"
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['catalog_metaFields'] = array
 (
@@ -76,7 +77,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['catalog_metaFields'] = array
 	'default'                 => array('date'),
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'options'                 => array('date'),
+	'options'                 => array('date','price','rating'),
 	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
 	'eval'                    => array('multiple'=>true),
 	'sql'                     => "varchar(255) NOT NULL default ''"
@@ -90,6 +91,15 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['catalog_detailModule'] = array
 	'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
 	'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
 	'sql'                     => "int(10) unsigned NOT NULL default '0'"
+);
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_template'] = array
+(
+	'label'                => &$GLOBALS['TL_LANG']['tl_module']['product_template'],
+	'exclude'              => true,
+	'inputType'            => 'select',
+	'options_callback'     => array('tl_module_catalog', 'getProductTemplates'),
+	'eval'                 => array('tl_class'=>'w50'),
+    'sql'                  => "varchar(64) NOT NULL default ''"
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['product_Class'] = array
 (
