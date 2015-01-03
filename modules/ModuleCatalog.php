@@ -299,7 +299,7 @@ abstract class ModuleCatalog extends \Module
 			$arrType[] = array
 			(
 				'title'       => $objType->title,
-				'code'        => $objType->code,
+				'model'       => $objType->model,
 				'spec'        => $objType->spec,
 				'description' => $objElement->description,
 				'image'       => $strImage,

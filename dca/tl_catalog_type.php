@@ -88,13 +88,6 @@ $GLOBALS['TL_DCA']['tl_catalog_type'] = array
 				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
 				'button_callback'     => array('tl_catalog_type', 'toggleIcon')
 			),
-			'stock' => array
-			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_type']['stock'],
-				'icon'                => 'featured.gif',
-				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleStock(this,%s)"',
-				'button_callback'     => array('tl_catalog_type', 'iconStock')
-			),
 			'show' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_type']['show'],
@@ -107,8 +100,8 @@ $GLOBALS['TL_DCA']['tl_catalog_type'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{title_legend},title,code,date;
-		                                  {spec_legend},feature,spec;
+		'default'                     => '{title_legend},title,model,date;
+		                                  {spec_legend},spec;
 		                                  {image_legend},singleSRC;
 		                                  {description_legend:hide},description;
 		                                  {publish_legend},published'
@@ -141,18 +134,18 @@ $GLOBALS['TL_DCA']['tl_catalog_type'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
+			'eval'                    => array('maxlength'=>128),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
-		'code' => array
+		'model' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_type']['code'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_type']['model'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'sorting'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'alias','unique'=>true,'maxlength'=>10, 'tl_class'=>'w50'),
-			'sql'                     => "varchar(10) NOT NULL default ''"
+			'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
 		'date' => array
 		(
@@ -192,15 +185,6 @@ $GLOBALS['TL_DCA']['tl_catalog_type'] = array
 					)
 				)
 			),
-			'sql'                     => "blob NULL",
-		),
-		'features' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_type']['features'],
-			'exclude'                 => true,
-			'sorting'                 => true,
-			'inputType'               => 'listWizard',
-			'eval'                    => array(),
 			'sql'                     => "blob NULL",
 		),
 		'singleSRC' => array
