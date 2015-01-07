@@ -18,7 +18,7 @@
 $GLOBALS['TL_DCA']['tl_module']['palettes']['catalog_list']    = '{title_legend},name,headline,type;
                                                                   {catalog_legend},catalog_categories,catalog_featured,catalog_detailModule,catalog_sortBy,numberOfItems,perPage,skipFirst;
                                                                   {template_legend},catalog_metaFields,product_template,customTpl;
-                                                                  {product_legend},product_Class,imgSize;
+                                                                  {product_legend},product_Class,perRow,imgSize;
                                                                   {protected_legend:hide},protected;
                                                                   {expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['catalog_detail']  = '{title_legend},name,headline,type;
@@ -98,6 +98,16 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_template'] = array
 	'exclude'              => true,
 	'inputType'            => 'select',
 	'options_callback'     => array('tl_module_catalog', 'getProductTemplates'),
+	'eval'                 => array('tl_class'=>'w50'),
+    'sql'                  => "varchar(64) NOT NULL default ''"
+);
+$GLOBALS['TL_DCA']['tl_module']['fields']['perRow'] = array
+(
+	'label'                => &$GLOBALS['TL_LANG']['tl_module']['perRow'],
+	'default'              => '4',
+	'exclude'              => true,
+	'inputType'            => 'select',
+	'options'              => array('1','2','3','4','6','12'),
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );

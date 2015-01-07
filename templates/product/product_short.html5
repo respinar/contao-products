@@ -1,15 +1,15 @@
 
-<div class="layout_short block<?php echo $this->class; ?>">
+<div class="product_short<?php echo $this->class; ?>">
 
   <figure class="image_container<?php echo $this->floatClass; ?>"<?php if ($this->margin): ?> style="<?php echo $this->margin; ?>"<?php endif; ?>>
 
-      <?php if ($this->href): ?>
-        <a href="<?php echo $this->href; ?>"<?php echo $this->attributes; ?> title="<?php echo $this->alt; ?>">
+      <?php if ($this->link): ?>
+        <a href="<?php echo $this->link; ?>"<?php echo $this->attributes; ?> title="<?php echo $this->alt; ?>">
       <?php endif; ?>
 
       <?php $this->insert('picture_default', $this->picture); ?>
 
-      <?php if ($this->href): ?>
+      <?php if ($this->link): ?>
         </a>
       <?php endif; ?>
 
@@ -17,9 +17,13 @@
         <figcaption class="caption" style="width:<?php echo $this->arrSize[0]; ?>px"><?php echo $this->caption; ?></figcaption>
       <?php endif; ?>
 
+      <?php if ($this->featured): ?><div class="featured"></div><?php endif; ?>
+      <?php if ($this->new_product): ?><div class="new"></div><?php endif; ?>
+
   </figure>
 
 
   <div class="title"><a href="<?php echo $this->link; ?>"><?php echo $this->title; ?> (<?php echo $this->model; ?>)</a></div>
+
 
 </div>

@@ -96,13 +96,17 @@ abstract class ModuleCatalog extends \Module
 		$objTemplate->class = (($this->product_Class != '') ? ' ' . $this->product_Class : '') . $strClass;
 		$objTemplate->type_Class = $this->type_Class;
 
+		if (time() - $objProduct->date < 2592000) {
+			$objTemplate->new_product = true;
+		}
+
 		if (!empty($objProduct->features))
 		{
 			$objTemplate->features    = deserialize($objProduct->features);
 		}
 		$objTemplate->specs       = deserialize($objProduct->spec);
 
-		$objTemplate->link        = $this->generateSetUrl($objProduct, $blnAddCategory);
+		$objTemplate->link        = $this->generateProductUrl($objProduct, $blnAddCategory);
 		$objTemplate->more        = $this->generateLink($GLOBALS['TL_LANG']['MSC']['moredetail'], $objProduct, $blnAddCategory, true);
 
 		$arrMeta = $this->getMetaFields($objProduct);
@@ -176,6 +180,10 @@ abstract class ModuleCatalog extends \Module
 			$this->addEnclosuresToTemplate($objTemplate, $objProduct->row());
 		}
 
+		$objTemplate->features_text = $GLOBALS['TL_LANG']['MSC']['features'];
+		$objTemplate->specs_text = $GLOBALS['TL_LANG']['MSC']['specs'];
+
+
 		return $objTemplate->parse();
 	}
 
@@ -200,7 +208,7 @@ abstract class ModuleCatalog extends \Module
 
 		while ($objProducts->next())
 		{
-			$arrProducts[] = $this->parseProduct($objProducts, $blnAddCategory, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % 2) == 0) ? ' odd' : ' even'), $count);
+			$arrProducts[] = $this->parseProduct($objProducts, $blnAddCategory, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % $this->perRow) == 0) ? ' last_col' : '') . ((($count % $this->perRow) == 1) ? ' first_col' : ''), $count);
 		}
 
 		return $arrProducts;
@@ -212,7 +220,7 @@ abstract class ModuleCatalog extends \Module
 	 * @param boolean
 	 * @return string
 	 */
-	protected function generateSetUrl($objItem, $blnAddCategory=false)
+	protected function generateProductUrl($objItem, $blnAddCategory=false)
 	{
 		$strCacheKey = 'id_' . $objItem->id;
 
@@ -257,7 +265,7 @@ abstract class ModuleCatalog extends \Module
 	{
 
 		return sprintf('<a href="%s" title="%s">%s%s</a>',
-						$this->generateSetUrl($objProduct, $blnAddCategory),
+						$this->generateProductUrl($objProduct, $blnAddCategory),
 						specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $objProduct->title), true),
 						$strLink,
 						($blnIsReadMore ? ' <span class="invisible">'.$objProduct->title.'</span>' : ''));

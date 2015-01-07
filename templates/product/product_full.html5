@@ -1,5 +1,5 @@
 
-<div class="layout_full block<?php echo $this->class; ?>">
+<div class="product_full<?php echo $this->class; ?>">
 
   <h2><?php echo $this->title; ?></h2>
   <p class="model"><?php echo $this->model; ?></p>
@@ -25,11 +25,14 @@
         <figcaption class="caption" style="width:<?php echo $this->arrSize[0]; ?>px"><?php echo $this->caption; ?></figcaption>
       <?php endif; ?>
 
+      <?php if ($this->featured): ?><div class="featured"></div><?php endif; ?>
+      <?php if ($this->new_product): ?><div class="new"></div><?php endif; ?>
+
   </figure>
 
   <?php if($this->features !== null) { ?>
   <div class="features">
-    <h3>ویژگی‌ها</h3>
+    <h3><?php echo $this->features_text; ?></h3>
     <ul>
       <?php foreach($this->features as $feature) { ?>
         <li><?php echo $feature; ?></li>
@@ -40,7 +43,7 @@
 
   <?php if($this->specs !== null) { ?>
   <div class="specs">
-    <h3>خصوصیات</h3>
+    <h3><?php echo $this->specs_text; ?></h3>
     <ul>
       <?php foreach($this->specs as $spec) { ?>
         <li><?php echo $spec[spectitle]; ?>:<?php echo $spec[specvalue]; ?></li>
@@ -49,15 +52,13 @@
   </div>
   <?php } ?>
 
-
-
   <?php if ($this->text): ?>
     <?php echo $this->text; ?>
   <?php endif; ?>
 
   <?php if ($this->types) {?>
   <div class="types">
-	<h3>تیپ‌ها</h3>
+	<h3>مدل‌ها</h3>
 		<?php foreach($this->types as $type) { ?>
 			<div class="type <?php echo $this->typeClass; ?>">
 				<figure><?php echo $type[image]; ?></figure>
