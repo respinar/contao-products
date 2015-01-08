@@ -33,18 +33,20 @@ $GLOBALS['TL_LANG']['tl_catalog_product']['featured']    = array('Feature produc
 $GLOBALS['TL_LANG']['tl_catalog_product']['start']       = array('Show from','Do not show the product item on the website before this day.');
 $GLOBALS['TL_LANG']['tl_catalog_product']['stop']        = array('Show until','Do not show the news product on the website on and after this day.');
 $GLOBALS['TL_LANG']['tl_catalog_product']['languageMain']= array('Master product', 'Choose the product in the master category equaling this product.');
+$GLOBALS['TL_LANG']['tl_catalog_product']['related']     = array('Related products', 'Choose related products in this category to this product.');
 
 /**
  * Legends
  */
 $GLOBALS['TL_LANG']['tl_catalog_product']['title_legend']       = 'Product title';
 $GLOBALS['TL_LANG']['tl_catalog_product']['meta_legend']        = 'Meta information for SEO';
-$GLOBALS['TL_LANG']['tl_catalog_product']['spec_legend']       = 'Other specifications';
+$GLOBALS['TL_LANG']['tl_catalog_product']['spec_legend']        = 'Other specifications';
 $GLOBALS['TL_LANG']['tl_catalog_product']['feature_legend']     = 'Feature specifications';
 $GLOBALS['TL_LANG']['tl_catalog_product']['enclosure_legend']   = 'Enclosures';
 $GLOBALS['TL_LANG']['tl_catalog_product']['image_legend']       = 'Image settings';
 $GLOBALS['TL_LANG']['tl_catalog_product']['table_legend']       = 'Specifications table';
 $GLOBALS['TL_LANG']['tl_catalog_product']['description_legend'] = 'Description';
+$GLOBALS['TL_LANG']['tl_catalog_product']['related_legend']     = 'Related products';
 $GLOBALS['TL_LANG']['tl_catalog_product']['protected_legend']   = 'Access protection';
 $GLOBALS['TL_LANG']['tl_catalog_product']['publish_legend']     = 'Publish setting';
 

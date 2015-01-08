@@ -133,7 +133,7 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 		                                  {meta_legend},keywords,description;
 		                                  {feature_legend},features;
 		                                  {spec_legend},spec;
-
+		                                  {related_legend},related;
 		                                  {enclosure_legend:hide},addEnclosure;
 		                                  {publish_legend},published'
 	),
@@ -295,6 +295,14 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'filesOnly'=>true, 'isDownloads'=>true, 'extensions'=>Config::get('allowedDownload'), 'mandatory'=>true),
+			'sql'                     => "blob NULL"
+		),
+		'related' => array(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['related'],
+			'exclude'                 => false,
+			'inputType'               => 'checkbox',
+			'options_callback'        => array('tl_catalog_product', 'getProducts'),
+			'eval'                    => array('includeBlankOption'=>true,'multiple'=>true),
 			'sql'                     => "blob NULL"
 		),
 		'published' => array
@@ -564,6 +572,26 @@ class tl_catalog_product extends Backend
 			{
 				$arrItems[$otherDay][$objItems->id] = $objItems->title . ' (' . $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objItems->time) . ')';
 			}
+		}
+
+		return $arrItems;
+	}
+
+	/**
+	 * Get records from the master category
+	 *
+	 * @param	DataContainer
+	 * @return	array
+	 * @link	http://www.contao.org/callbacks.html#options_callback
+	 */
+	public function getProducts(DataContainer $dc)
+	{
+
+		$objItems = $this->Database->prepare("SELECT * FROM tl_catalog_product WHERE pid=? ORDER BY date DESC")->execute($dc->activeRecord->pid);
+
+		while( $objItems->next() )
+		{
+				$arrItems[$objItems->id] = $objItems->title;
 		}
 
 		return $arrItems;
