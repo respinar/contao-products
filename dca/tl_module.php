@@ -25,8 +25,8 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['catalog_detail']  = '{title_legend}
                                                                   {catalog_legend},catalog_categories;
                                                                   {template_legend},catalog_metaFields,customTpl;
                                                                   {product_legend},product_template,imgSize,fullsize;
-                                                                  {type_legend},type_show,type_template,type_Class,type_imgSize;
-                                                                  {related_legend},related_show,related_template,related_Class,related_imgSize;
+                                                                  {type_legend},type_show,type_template,type_perRow,type_Class,type_imgSize;
+                                                                  {related_legend},related_show,related_template,related_perRow,related_Class,related_imgSize;
                                                                   {protected_legend:hide},protected;
                                                                   {expert_legend:hide},guests,cssID,space';
 
@@ -95,9 +95,9 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_template'] = array
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );
-$GLOBALS['TL_DCA']['tl_module']['fields']['perRow'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_perRow'] = array
 (
-	'label'                => &$GLOBALS['TL_LANG']['tl_module']['perRow'],
+	'label'                => &$GLOBALS['TL_LANG']['tl_module']['product_perRow'],
 	'default'              => '4',
 	'exclude'              => true,
 	'inputType'            => 'select',
@@ -118,7 +118,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['type_show'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['type_show'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'eval'                    => array('tl_class'=>'w50 m12'),
+	'eval'                    => array(),
 	'sql'                     => "char(1) NOT NULL default ''"
 );
 
@@ -151,12 +151,23 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['type_imgSize'] = array
 	'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
 	'sql'                     => "varchar(64) NOT NULL default ''"
 );
+$GLOBALS['TL_DCA']['tl_module']['fields']['type_perRow'] = array
+(
+	'label'                => &$GLOBALS['TL_LANG']['tl_module']['type_perRow'],
+	'default'              => '4',
+	'exclude'              => true,
+	'inputType'            => 'select',
+	'options'              => array('1','2','3','4','6','12'),
+	'eval'                 => array('tl_class'=>'w50'),
+    'sql'                  => "varchar(64) NOT NULL default ''"
+);
+
 $GLOBALS['TL_DCA']['tl_module']['fields']['related_show'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['related_show'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'eval'                    => array('tl_class'=>'w50 m12'),
+	'eval'                    => array(),
 	'sql'                     => "char(1) NOT NULL default ''"
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['related_template'] = array
@@ -177,6 +188,16 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['related_Class'] = array
 	'inputType'               => 'text',
 	'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
 	'sql'                     => "varchar(255) NOT NULL default ''"
+);
+$GLOBALS['TL_DCA']['tl_module']['fields']['related_perRow'] = array
+(
+	'label'                => &$GLOBALS['TL_LANG']['tl_module']['related_perRow'],
+	'default'              => '4',
+	'exclude'              => true,
+	'inputType'            => 'select',
+	'options'              => array('1','2','3','4','6','12'),
+	'eval'                 => array('tl_class'=>'w50'),
+    'sql'                  => "varchar(64) NOT NULL default ''"
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['related_imgSize'] = array
 (

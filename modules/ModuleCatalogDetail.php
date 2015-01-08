@@ -107,11 +107,10 @@ class ModuleCatalogDetail extends \ModuleCatalog
 		$objProduct->related = deserialize($objProduct->related);
 
 		if (!empty($objProduct->related)) {
-			foreach ($objProduct->related as $related_id) {
-				$objRelated = \CatalogProductModel::findPublishedByParentAndIdOrAlias($related_id,$this->catalog_categories);
-				$arrRelateds[] = $this->parseRelated($objRelated);
-			}
-			$this->Template->relateds = $arrRelateds;
+
+			$objProducts = \CatalogProductModel::findPublishedByIds($objProduct->related);
+
+			$this->Template->relateds = $this->parseRelateds($objProducts);
 		}
 
 

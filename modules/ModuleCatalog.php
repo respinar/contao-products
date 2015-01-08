@@ -185,6 +185,7 @@ abstract class ModuleCatalog extends \Module
 
 		$objTemplate->features_text = $GLOBALS['TL_LANG']['MSC']['features'];
 		$objTemplate->specs_text = $GLOBALS['TL_LANG']['MSC']['specs'];
+		$objTemplate->model_text = $GLOBALS['TL_LANG']['MSC']['model_text'];
 
 
 		return $objTemplate->parse();
@@ -211,7 +212,7 @@ abstract class ModuleCatalog extends \Module
 
 		while ($objProducts->next())
 		{
-			$arrProducts[] = $this->parseProduct($objProducts, $blnAddCategory, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % $this->perRow) == 0) ? ' last_col' : '') . ((($count % $this->perRow) == 1) ? ' first_col' : ''), $count);
+			$arrProducts[] = $this->parseProduct($objProducts, $blnAddCategory, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % $this->product_perRow) == 0) ? ' last_col' : '') . ((($count % $this->product_perRow) == 1) ? ' first_col' : ''), $count);
 		}
 
 		return $arrProducts;
@@ -424,6 +425,32 @@ abstract class ModuleCatalog extends \Module
 		}
 
 		return $objTemplate->parse();
+	}
+
+	/**
+	 * Parse one or more items and return them as array
+	 * @param object
+	 * @param boolean
+	 * @return array
+	 */
+	protected function parseRelateds($objProducts, $blnAddCategory=false)
+	{
+		$limit = $objProducts->count();
+
+		if ($limit < 1)
+		{
+			return array();
+		}
+
+		$count = 0;
+		$arrProducts = array();
+
+		while ($objProducts->next())
+		{
+			$arrProducts[] = $this->parseRelated($objProducts, $blnAddCategory, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % $this->related_perRow) == 0) ? ' last_col' : '') . ((($count % $this->related_perRow) == 1) ? ' first_col' : ''), $count);
+		}
+
+		return $arrProducts;
 	}
 
 }
