@@ -16,7 +16,13 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_catalog_type']['title']     = array('Type title', 'Please enter the type title.');
-$GLOBALS['TL_LANG']['tl_catalog_type']['code']      = array('Type code', 'Please enter the type code.');
+$GLOBALS['TL_LANG']['tl_catalog_type']['model']     = array('Type model', 'Please enter the type model.');
+$GLOBALS['TL_LANG']['tl_catalog_type']['date']      = array('Release date', 'Please enter the type code.');
+$GLOBALS['TL_LANG']['tl_catalog_type']['singleSRC'] = array('Image', 'Please enter the type code.');
+$GLOBALS['TL_LANG']['tl_catalog_type']['published'] = array('Publish type', 'Make the type item publicly visible on the website.');
+$GLOBALS['TL_LANG']['tl_catalog_type']['start']     = array('Show from','Do not show the type item on the website before this day.');
+$GLOBALS['TL_LANG']['tl_catalog_type']['stop']      = array('Show until','Do not show the type item on the website on and after this day.');
+
 
 $GLOBALS['TL_LANG']['tl_catalog_type']['spec']      = array('Specifications','Please eneter the type specifications.');
 $GLOBALS['TL_LANG']['tl_catalog_type']['spectitle'] = array('Title','Specifications title');

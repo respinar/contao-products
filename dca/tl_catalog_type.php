@@ -40,7 +40,7 @@ $GLOBALS['TL_DCA']['tl_catalog_type'] = array
 		(
 			'mode'                    => 4,
 			'fields'                  => array('sorting'),
-			'headerFields'            => array('title','alias'),
+			'headerFields'            => array('title','model','date'),
 			'panelLayout'             => 'filter;sort,search,limit',
 			'child_record_callback'   => array('tl_catalog_type', 'generateProductsRow')
 		),
@@ -100,11 +100,14 @@ $GLOBALS['TL_DCA']['tl_catalog_type'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{title_legend},title,model,date;
-		                                  {spec_legend},spec;
-		                                  {image_legend},singleSRC;
-		                                  {description_legend:hide},description;
-		                                  {publish_legend},published'
+		'__selector__'                => array('published'),
+		'default'                     => '{title_legend},title,model,date;{image_legend},singleSRC;{spec_legend},spec;{description_legend:hide},description;{publish_legend},published'
+	),
+
+	// Subpalettes
+	'subpalettes' => array
+	(
+		'published'                   => 'start,stop'
 	),
 
 	// Fields
@@ -210,8 +213,24 @@ $GLOBALS['TL_DCA']['tl_catalog_type'] = array
 			'filter'                  => true,
 			'flag'                    => 1,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('doNotCopy'=>true, 'tl_class'=>'w50'),
+			'eval'                    => array('doNotCopy'=>true,'submitOnChange'=>true),
 			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'start' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_type']['start'],
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
+			'sql'                     => "varchar(10) NOT NULL default ''"
+		),
+		'stop' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_type']['stop'],
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
+			'sql'                     => "varchar(10) NOT NULL default ''"
 		)
 	)
 );

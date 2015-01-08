@@ -48,7 +48,7 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 		(
 			'mode'                    => 4,
 			'fields'                  => array('sorting'),
-			'headerFields'            => array('title','jumpTo','protected'),
+			'headerFields'            => array('title','jumpTo','language','protected'),
 			'panelLayout'             => 'filter;sort,search,limit',
 			'child_record_callback'   => array('tl_catalog_product', 'generateProductsRow')
 		),

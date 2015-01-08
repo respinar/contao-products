@@ -159,7 +159,7 @@ abstract class ModuleCatalog extends \Module
 				}
 
 				$arrProduct['singleSRC'] = $objModel->path;
-				$strLightboxId = 'lightbox[lb' . $this->id . ']';
+				$strLightboxId = 'lightbox[lb' . $objProduct->id . ']';
 				$arrProduct['fullsize'] = $this->fullsize;
 				$this->addImageToTemplate($objTemplate, $arrProduct,null, $strLightboxId);
 			}
@@ -284,41 +284,69 @@ abstract class ModuleCatalog extends \Module
 	 * @param boolean
 	 * @return string
 	 */
-	protected function parseType($objProduct)
+	protected function parseType($objType)
 	{
-		$objType = \CatalogTypeModel::findPublishedByPid($objProduct->id);
+		$objTemplate = new \FrontendTemplate($this->type_template);
+		$objTemplate->setData($objType->row());
 
-		if ($objType == null)
-		{
-			return;
+		$objTemplate->class = (($this->type_Class != '') ? ' ' . $this->type_Class : '') . $strClass;
+
+		if (time() - $objType->date < 2592000) {
+			$objTemplate->new_type = true;
 		}
 
-		$arrType = array();
+		$arrMeta = $this->getMetaFields($objType);
 
-		$size = deserialize($this->type_ImageSize);
+		$objTemplate->product    = $objType->getRelated('pid');
 
-		while($objType->next())
+		$objTemplate->count = $intCount; // see #5708
+
+		$arrMeta = $this->getMetaFields($objType);
+
+		// Add the meta information
+		$objTemplate->date = $arrMeta['date'];
+		$objTemplate->hasMetaFields = !empty($arrMeta);
+		$objTemplate->timestamp = $objType->date;
+		$objTemplate->datetime = date('Y-m-d\TH:i:sP', $objType->date);
+
+		$objTemplate->addImage = false;
+
+		// Add an image
+		if ($objType->singleSRC != '')
 		{
-			$strImage = '';
-			$objImage = \FilesModel::findByPk($objType->singleSRC);
+			$objModel = \FilesModel::findByUuid($objType->singleSRC);
 
-			// Add photo image
-			if ($objImage !== null)
+			if ($objModel === null)
 			{
-			$strImage = \Image::getHtml(\Image::get($objImage->path, $size[0], $size[1], $size[2]),$objType->title);
+				if (!\Validator::isUuid($objType->singleSRC))
+				{
+					$objTemplate->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+				}
 			}
+			elseif (is_file(TL_ROOT . '/' . $objModel->path))
+			{
+				// Do not override the field now that we have a model registry (see #6303)
+				$arrType = $objType->row();
 
-			$arrType[] = array
-			(
-				'title'       => $objType->title,
-				'model'       => $objType->model,
-				'spec'        => $objType->spec,
-				'description' => $objElement->description,
-				'image'       => $strImage,
-			);
+				// Override the default image size
+				if ($this->type_imgSize != '')
+				{
+					$size = deserialize($this->type_imgSize);
+
+					if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
+					{
+						$arrType['size'] = $this->type_imgSize;
+					}
+				}
+
+				$arrType['singleSRC'] = $objModel->path;
+				$strLightboxId = 'lightbox[lb' . $objType->id . ']';
+				$arrType['fullsize'] = true;
+				$this->addImageToTemplate($objTemplate, $arrType,null, $strLightboxId);
+			}
 		}
 
-		return $arrType;
+		return $objTemplate->parse();
 
 	}
 
@@ -407,7 +435,7 @@ abstract class ModuleCatalog extends \Module
 				$arrProduct = $objProduct->row();
 
 				// Override the default image size
-				if ($this->imgSize != '')
+				if ($this->related_imgSize != '')
 				{
 					$size = deserialize($this->related_imgSize);
 
@@ -418,7 +446,7 @@ abstract class ModuleCatalog extends \Module
 				}
 
 				$arrProduct['singleSRC'] = $objModel->path;
-				$strLightboxId = 'lightbox[lb' . $this->id . ']';
+				$strLightboxId = 'lightbox[lb' . $objProduct->id . ']';
 				$arrProduct['fullsize'] = false;
 				$this->addImageToTemplate($objTemplate, $arrProduct,null, $strLightboxId);
 			}
@@ -451,6 +479,33 @@ abstract class ModuleCatalog extends \Module
 		}
 
 		return $arrProducts;
+	}
+
+
+	/**
+	 * Parse one or more items and return them as array
+	 * @param object
+	 * @param boolean
+	 * @return array
+	 */
+	protected function parseTypes($objTypes, $blnAddCategory=false)
+	{
+		$limit = $objTypes->count();
+
+		if ($limit < 1)
+		{
+			return array();
+		}
+
+		$count = 0;
+		$arrTypes = array();
+
+		while ($objTypes->next())
+		{
+			$arrTypes[] = $this->parseType($objTypes, $blnAddCategory, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % $this->type_perRow) == 0) ? ' last_col' : '') . ((($count % $this->type_perRow) == 1) ? ' first_col' : ''), $count);
+		}
+
+		return $arrTypes;
 	}
 
 }

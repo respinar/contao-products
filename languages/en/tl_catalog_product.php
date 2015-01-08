@@ -31,7 +31,7 @@ $GLOBALS['TL_LANG']['tl_catalog_product']['enclosure']   = array('Enclosures', '
 $GLOBALS['TL_LANG']['tl_catalog_product']['published']   = array('Publish product','Make the product item publicly visible on the website.');
 $GLOBALS['TL_LANG']['tl_catalog_product']['featured']    = array('Feature product','Show the product item in a featured list.');
 $GLOBALS['TL_LANG']['tl_catalog_product']['start']       = array('Show from','Do not show the product item on the website before this day.');
-$GLOBALS['TL_LANG']['tl_catalog_product']['stop']        = array('Show until','Do not show the news product on the website on and after this day.');
+$GLOBALS['TL_LANG']['tl_catalog_product']['stop']        = array('Show until','Do not show the product item on the website on and after this day.');
 $GLOBALS['TL_LANG']['tl_catalog_product']['languageMain']= array('Master product', 'Choose the product in the master category equaling this product.');
 $GLOBALS['TL_LANG']['tl_catalog_product']['related']     = array('Related products', 'Choose related products in this category to this product.');
 
