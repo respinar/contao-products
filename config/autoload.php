@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
  * @package Catalog
  * @link    https://contao.org
@@ -46,10 +46,11 @@ ClassLoader::addClasses(array
  */
 TemplateLoader::addFiles(array
 (
-	'mod_catalog_list'    => 'system/modules/catalog/templates/modules',
-	'mod_catalog_detail'  => 'system/modules/catalog/templates/modules',
-	'mod_catalog_related' => 'system/modules/catalog/templates/modules',
-	'product_list'        => 'system/modules/catalog/templates/product',
-	'product_full'        => 'system/modules/catalog/templates/product',
-	'product_short'       => 'system/modules/catalog/templates/product',
+	'mod_catalog_list'   => 'system/modules/catalog/templates/modules',
+	'mod_catalog_detail' => 'system/modules/catalog/templates/modules',
+	'product_list'       => 'system/modules/catalog/templates/product',
+	'product_full'       => 'system/modules/catalog/templates/product',
+	'product_short'      => 'system/modules/catalog/templates/product',
+	'product_type'       => 'system/modules/catalog/templates/type',
+	'product_related'    => 'system/modules/catalog/templates/related',
 ));

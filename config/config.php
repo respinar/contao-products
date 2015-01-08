@@ -34,7 +34,6 @@ array_insert($GLOBALS['FE_MOD'], 2, array
 	(
 		'catalog_list'    => 'ModuleCatalogList',
 		'catalog_detail'  => 'ModuleCatalogDetail',
-		'catalog_related' => 'ModuleCatalogRelated',
 	)
 ));
 

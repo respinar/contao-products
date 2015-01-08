@@ -22,3 +22,6 @@ $GLOBALS['TL_LANG']['MSC']['rating']      = 'Rating';
 
 $GLOBALS['TL_LANG']['MSC']['features']    = 'Features';
 $GLOBALS['TL_LANG']['MSC']['specs']       = 'Specifications';
+
+$GLOBALS['TL_LANG']['MSC']['types_headline']    = 'Types';
+$GLOBALS['TL_LANG']['MSC']['relateds_headline'] = 'Related products';

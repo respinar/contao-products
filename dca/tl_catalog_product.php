@@ -132,7 +132,7 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 		                                  {image_legend},singleSRC;
 		                                  {meta_legend},keywords,description;
 		                                  {feature_legend},features;
-		                                  {spec_legend},spec;
+		                                  {spec_legend},specs;
 		                                  {related_legend},related;
 		                                  {enclosure_legend:hide},addEnclosure;
 		                                  {publish_legend},published'
@@ -245,9 +245,9 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 			'eval'                    => array(),
 			'sql'                     => "blob NULL",
 		),
-		'spec' => array
+		'specs' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['spec'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['specs'],
 			'exclude'                 => true,
 			'sorting'                 => true,
 			'inputType'               => 'multiColumnWizard',
@@ -591,7 +591,7 @@ class tl_catalog_product extends Backend
 
 		while( $objItems->next() )
 		{
-				$arrItems[$objItems->id] = $objItems->title;
+				$arrItems[$objItems->id] = $objItems->title . ' (' . $objItems->model . ')' ;
 		}
 
 		return $arrItems;

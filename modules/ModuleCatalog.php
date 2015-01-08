@@ -100,11 +100,14 @@ abstract class ModuleCatalog extends \Module
 			$objTemplate->new_product = true;
 		}
 
-		if (!empty($objProduct->features))
-		{
-			$objTemplate->features    = deserialize($objProduct->features);
+		$objTemplate->features = deserialize($objProduct->features);
+		if ($objTemplate->features[0] == null) {
+			$objTemplate->features = null;
 		}
-		$objTemplate->specs       = deserialize($objProduct->spec);
+		$objTemplate->specs    = deserialize($objProduct->specs);
+		if ($objTemplate->specs[0] == null) {
+			$objTemplate->specs = null;
+		}
 
 		$objTemplate->link        = $this->generateProductUrl($objProduct, $blnAddCategory);
 		$objTemplate->more        = $this->generateLink($GLOBALS['TL_LANG']['MSC']['moredetail'], $objProduct, $blnAddCategory, true);
@@ -346,6 +349,81 @@ abstract class ModuleCatalog extends \Module
 		}
 
 		return $return;
+	}
+
+	/**
+	 * Parse an item and return it as string
+	 * @param object
+	 * @param boolean
+	 * @param string
+	 * @param integer
+	 * @return string
+	 */
+	protected function parseRelated($objProduct, $blnAddCategory=false, $strClass='', $intCount=0)
+	{
+		$objTemplate = new \FrontendTemplate($this->related_template);
+		$objTemplate->setData($objProduct->row());
+
+		$objTemplate->class = (($this->related_Class != '') ? ' ' . $this->related_Class : '') . $strClass;
+
+		if (time() - $objProduct->date < 2592000) {
+			$objTemplate->new_product = true;
+		}
+
+		$objTemplate->link        = $this->generateProductUrl($objProduct, $blnAddCategory);
+
+		$arrMeta = $this->getMetaFields($objProduct);
+
+		$objTemplate->category    = $objProduct->getRelated('pid');
+
+		$objTemplate->count = $intCount; // see #5708
+
+		$arrMeta = $this->getMetaFields($objProduct);
+
+		// Add the meta information
+		$objTemplate->date = $arrMeta['date'];
+		$objTemplate->hasMetaFields = !empty($arrMeta);
+		$objTemplate->timestamp = $objProduct->date;
+		$objTemplate->datetime = date('Y-m-d\TH:i:sP', $objProduct->date);
+
+		$objTemplate->addImage = false;
+
+		// Add an image
+		if ($objProduct->singleSRC != '')
+		{
+			$objModel = \FilesModel::findByUuid($objProduct->singleSRC);
+
+			if ($objModel === null)
+			{
+				if (!\Validator::isUuid($objProduct->singleSRC))
+				{
+					$objTemplate->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+				}
+			}
+			elseif (is_file(TL_ROOT . '/' . $objModel->path))
+			{
+				// Do not override the field now that we have a model registry (see #6303)
+				$arrProduct = $objProduct->row();
+
+				// Override the default image size
+				if ($this->imgSize != '')
+				{
+					$size = deserialize($this->related_imgSize);
+
+					if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
+					{
+						$arrProduct['size'] = $this->related_imgSize;
+					}
+				}
+
+				$arrProduct['singleSRC'] = $objModel->path;
+				$strLightboxId = 'lightbox[lb' . $this->id . ']';
+				$arrProduct['fullsize'] = false;
+				$this->addImageToTemplate($objTemplate, $arrProduct,null, $strLightboxId);
+			}
+		}
+
+		return $objTemplate->parse();
 	}
 
 }

@@ -3,7 +3,23 @@
 <?php $this->block('content'); ?>
 
 
-  <?php echo $this->products; ?>
+  <?php echo $this->product; ?>
+
+
+  <?php if (!empty($this->types)): ?>
+    <div class="types">
+      <h3><?php echo $this->types_headline; ?></h3>
+      <?php echo implode('', $this->types); ?>
+    </div>
+  <?php endif; ?>
+
+  <?php if (!empty($this->relateds)): ?>
+    <div class="relateds">
+      <h3><?php echo $this->relateds_headline; ?></h3>
+      <?php echo implode('', $this->relateds); ?>
+    </div>
+  <?php endif; ?>
+
 
   <!-- indexer::stop -->
   <p class="back"><a href="<?php echo $this->referer; ?>" title="<?php echo $this->back; ?>"><?php echo $this->back; ?></a></p>

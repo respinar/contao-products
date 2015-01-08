@@ -30,7 +30,7 @@
 
   </figure>
 
-  <?php if($this->features !== null) { ?>
+  <?php if($this->features) { ?>
   <div class="features">
     <h3><?php echo $this->features_text; ?></h3>
     <ul>
@@ -41,7 +41,7 @@
   </div>
   <?php } ?>
 
-  <?php if($this->specs !== null) { ?>
+  <?php if($this->specs) { ?>
   <div class="specs">
     <h3><?php echo $this->specs_text; ?></h3>
     <ul>
@@ -52,27 +52,16 @@
   </div>
   <?php } ?>
 
-  <?php if ($this->text): ?>
-    <?php echo $this->text; ?>
-  <?php endif; ?>
-
-  <?php if ($this->types) {?>
-  <div class="types">
-	<h3>مدل‌ها</h3>
-		<?php foreach($this->types as $type) { ?>
-			<div class="type <?php echo $this->typeClass; ?>">
-				<figure><?php echo $type[image]; ?></figure>
-			</div>
-		<?php } ?>
-	</div>
-  <?php } ?>
-
   <?php if ($this->enclosure): ?>
     <div class="enclosure">
       <?php foreach ($this->enclosure as $enclosure): ?>
         <p><img src="<?php echo $enclosure['icon']; ?>" width="18" height="18" alt="<?php echo $enclosure['mime']; ?>" class="mime_icon"> <a href="<?php echo $enclosure['href']; ?>" title="<?php echo $enclosure['title']; ?>"><?php echo $enclosure['link']; ?> <span class="size">(<?php echo $enclosure['filesize']; ?>)</span></a></p>
       <?php endforeach; ?>
     </div>
+  <?php endif; ?>
+
+  <?php if ($this->text): ?>
+    <?php echo $this->text; ?>
   <?php endif; ?>
 
 </div>

@@ -75,7 +75,9 @@ class ModuleCatalogDetail extends \ModuleCatalog
 
 		$this->Template->products = '';
 		$this->Template->referer = 'javascript:history.go(-1)';
-		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
+		$this->Template->back              = $GLOBALS['TL_LANG']['MSC']['goBack'];
+		$this->Template->types_headline    = $GLOBALS['TL_LANG']['MSC']['types_headline'];
+		$this->Template->relateds_headline = $GLOBALS['TL_LANG']['MSC']['relateds_headline'];
 
 		$objProduct = \CatalogProductModel::findPublishedByParentAndIdOrAlias(\Input::get('items'),$this->catalog_categories);
 
@@ -98,7 +100,22 @@ class ModuleCatalogDetail extends \ModuleCatalog
 
 		$arrProduct = $this->parseProduct($objProduct);
 
-		$this->Template->products = $arrProduct;
+		$this->Template->product = $arrProduct;
+
+		$this->Template->types    = $arrTypes;
+
+		$objProduct->related = deserialize($objProduct->related);
+
+		if (!empty($objProduct->related)) {
+			foreach ($objProduct->related as $related_id) {
+				$objRelated = \CatalogProductModel::findPublishedByParentAndIdOrAlias($related_id,$this->catalog_categories);
+				$arrRelateds[] = $this->parseRelated($objRelated);
+			}
+			$this->Template->relateds = $arrRelateds;
+		}
+
+
+
 
 	}
 }
