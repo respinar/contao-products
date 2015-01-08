@@ -27,9 +27,9 @@
 
   </figure>
 
-  <?php if($this->features !== null) { ?>
+  <?php if($this->features) { ?>
   <div class="features">
-    <h3>ویژگی‌ها</h3>
+    <h3><?php echo $this->features_text; ?></h3>
     <ul>
       <?php foreach($this->features as $feature) { ?>
         <li><?php echo $feature; ?></li>
@@ -38,9 +38,9 @@
   </div>
   <?php } ?>
 
-  <?php if($this->specs !== null) { ?>
+  <?php if($this->specs) { ?>
   <div class="specs">
-    <h3>خصوصیات</h3>
+    <h3><?php echo $this->specs_text; ?></h3>
     <ul>
       <?php foreach($this->specs as $spec) { ?>
         <li><?php echo $spec[spectitle]; ?>:<?php echo $spec[specvalue]; ?></li>

@@ -128,11 +128,10 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('addEnclosure','published'),
-		'default'                     => '{title_legend},title,alias,model,date,featured;
+		'default'                     => '{title_legend},title,alias,model;
+		                                  {config_legend:hide},featured,date;
 		                                  {image_legend},singleSRC;
 		                                  {meta_legend},keywords,description;
-		                                  {feature_legend},features;
-		                                  {spec_legend},specs;
 		                                  {related_legend},related;
 		                                  {enclosure_legend:hide},addEnclosure;
 		                                  {publish_legend},published'
@@ -224,7 +223,7 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
 			'search'                  => true,
-			'eval'                    => array('decodeEntities'=>true),
+			'eval'                    => array('style'=>'height:60px', 'decodeEntities'=>true),
 			'sql'                     => "text NULL"
 		),
 		'description' => array
@@ -233,45 +232,8 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
 			'search'                  => true,
-			'eval'                    => array('rte'=>'tinyMCE','tl_class'=>'clr'),
+			'eval'                    => array('style'=>'height:60px', 'decodeEntities'=>true, 'tl_class'=>'clr'),
 			'sql'                     => "text NULL"
-		),
-		'features' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['features'],
-			'exclude'                 => true,
-			'sorting'                 => true,
-			'inputType'               => 'listWizard',
-			'eval'                    => array(),
-			'sql'                     => "blob NULL",
-		),
-		'specs' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['specs'],
-			'exclude'                 => true,
-			'sorting'                 => true,
-			'inputType'               => 'multiColumnWizard',
-			'eval'                    => array
-			(
-				'columnFields' => array
-				(
-					'spectitle' => array
-					(
-						'label'       => &$GLOBALS['TL_LANG']['tl_catalog_product']['spectitle'],
-						'exclude'     => true,
-						'inputType'   => 'text',
-						'eval'        => array('style'=>'width:280px'),
-					),
-					'specvalue' => array
-					(
-						'label'       => &$GLOBALS['TL_LANG']['tl_catalog_product']['specvalue'],
-						'exclude'     => true,
-						'inputType'   => 'text',
-						'eval'        => array('style'=>'width:280px'),
-					)
-				)
-			),
-			'sql'                     => "blob NULL",
 		),
 		'singleSRC' => array
 		(
@@ -591,7 +553,9 @@ class tl_catalog_product extends Backend
 
 		while( $objItems->next() )
 		{
+			if ($objItems->id !== $dc->activeRecord->id) {
 				$arrItems[$objItems->id] = $objItems->title . ' (' . $objItems->model . ')' ;
+			}
 		}
 
 		return $arrItems;

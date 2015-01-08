@@ -20,7 +20,7 @@ namespace catalog;
 /**
  * Class ModuleCatalog
  *
- * Parent class for kitchenware modules.
+ * Parent class for catalog modules.
  * @copyright  Hamid Abbaszadeh 2014
  * @author     Hamid Abbaszadeh <https://respinar.com>
  * @package    Kitchenware
@@ -98,15 +98,6 @@ abstract class ModuleCatalog extends \Module
 
 		if (time() - $objProduct->date < 2592000) {
 			$objTemplate->new_product = true;
-		}
-
-		$objTemplate->features = deserialize($objProduct->features);
-		if ($objTemplate->features[0] == null) {
-			$objTemplate->features = null;
-		}
-		$objTemplate->specs    = deserialize($objProduct->specs);
-		if ($objTemplate->specs[0] == null) {
-			$objTemplate->specs = null;
 		}
 
 		$objTemplate->link        = $this->generateProductUrl($objProduct, $blnAddCategory);

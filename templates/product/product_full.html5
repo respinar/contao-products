@@ -30,28 +30,6 @@
 
   </figure>
 
-  <?php if($this->features) { ?>
-  <div class="features">
-    <h3><?php echo $this->features_text; ?></h3>
-    <ul>
-      <?php foreach($this->features as $feature) { ?>
-        <li><?php echo $feature; ?></li>
-      <?php } ?>
-    </ul>
-  </div>
-  <?php } ?>
-
-  <?php if($this->specs) { ?>
-  <div class="specs">
-    <h3><?php echo $this->specs_text; ?></h3>
-    <ul>
-      <?php foreach($this->specs as $spec) { ?>
-        <li><?php echo $spec[spectitle]; ?>:<?php echo $spec[specvalue]; ?></li>
-      <?php } ?>
-    </ul>
-  </div>
-  <?php } ?>
-
   <?php if ($this->enclosure): ?>
     <div class="enclosure">
       <?php foreach ($this->enclosure as $enclosure): ?>
