@@ -101,7 +101,6 @@ abstract class ModuleCatalog extends \Module
 		}
 
 		$objTemplate->link        = $this->generateProductUrl($objProduct, $blnAddCategory);
-		$objTemplate->more        = $this->generateLink($GLOBALS['TL_LANG']['MSC']['moredetail'], $objProduct, $blnAddCategory, true);
 
 		$arrMeta = $this->getMetaFields($objProduct);
 

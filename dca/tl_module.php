@@ -161,7 +161,6 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['type_perRow'] = array
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );
-
 $GLOBALS['TL_DCA']['tl_module']['fields']['related_show'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['related_show'],
