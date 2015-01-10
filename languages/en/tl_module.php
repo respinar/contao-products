@@ -22,16 +22,17 @@ $GLOBALS['TL_LANG']['tl_module']['catalog_metaFields']   = array('Meta fields', 
 $GLOBALS['TL_LANG']['tl_module']['catalog_sortBy']       = array('Sort by', 'Here you can select the sorting fields.');
 $GLOBALS['TL_LANG']['tl_module']['product_template']     = array('Product template', 'Here you can select the product template.');
 $GLOBALS['TL_LANG']['tl_module']['product_Class']        = array('Product CSS class', 'Here you can set one or more classes for products.');
-$GLOBALS['TL_LANG']['tl_module']['product_ImageSize']    = array('Product image width and height', 'Here you can set the image dimensions and the resize mode.');
+$GLOBALS['TL_LANG']['tl_module']['product_perRow']       = array('Product per row', 'Here you can set the image dimensions and the resize mode.');
 $GLOBALS['TL_LANG']['tl_module']['type_show']            = array('Show types of product', 'Here you can set one or more classes for types.');
 $GLOBALS['TL_LANG']['tl_module']['type_template']        = array('Type template', 'Here you can select the type template.');
 $GLOBALS['TL_LANG']['tl_module']['type_Class']           = array('Type CSS class', 'Here you can set one or more classes for types.');
-$GLOBALS['TL_LANG']['tl_module']['type_ImageSize']       = array('Type image width and height', 'Here you can set the image dimensions and the resize mode.');
-$GLOBALS['TL_LANG']['tl_module']['perRow']               = array('Items per row', 'The number of items per row.');
+$GLOBALS['TL_LANG']['tl_module']['type_imgSize']       = array('Type image width and height', 'Here you can set the image dimensions and the resize mode.');
+$GLOBALS['TL_LANG']['tl_module']['type_perRow']          = array('Type per row', 'The number of items per row.');
 $GLOBALS['TL_LANG']['tl_module']['related_show']         = array('Show related product', 'Here you can set one or more classes for types.');
 $GLOBALS['TL_LANG']['tl_module']['related_template']     = array('Related product template', 'Here you can select the related product template.');
 $GLOBALS['TL_LANG']['tl_module']['related_Class']        = array('Related product CSS class', 'Here you can set one or more classes for related products.');
-$GLOBALS['TL_LANG']['tl_module']['related_ImageSize']    = array('Related product image width and height', 'Here you can set the image dimensions and the resize mode.');
+$GLOBALS['TL_LANG']['tl_module']['related_imgSize']    = array('Related product image width and height', 'Here you can set the image dimensions and the resize mode.');
+$GLOBALS['TL_LANG']['tl_module']['related_perRow']          = array('Type per row', 'The number of items per row.');
 
 
 
