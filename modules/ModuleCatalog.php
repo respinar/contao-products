@@ -93,6 +93,9 @@ abstract class ModuleCatalog extends \Module
 		$objTemplate = new \FrontendTemplate($this->product_template);
 		$objTemplate->setData($objProduct->row());
 
+		$objTemplate->featured_text = "Featured";
+		$objTemplate->new_text = "New";
+
 		$objTemplate->class = (($this->product_Class != '') ? ' ' . $this->product_Class : '') . $strClass;
 		$objTemplate->type_Class = $this->type_Class;
 

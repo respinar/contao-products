@@ -50,9 +50,9 @@ $GLOBALS['TL_LANG']['tl_module']['protected_legend'] = 'Access protection';
  *
  */
 
-$GLOBALS['TL_LANG']['tl_module']['all_customers']       = 'All customers';
-$GLOBALS['TL_LANG']['tl_module']['feature_customers']   = 'Only feature customers';
-$GLOBALS['TL_LANG']['tl_module']['unfeature_customers'] = 'Unfeature customers';
+$GLOBALS['TL_LANG']['tl_module']['all_product']         = 'All products';
+$GLOBALS['TL_LANG']['tl_module']['featured_product']    = 'Featured products';
+$GLOBALS['TL_LANG']['tl_module']['unfeatured_product'] = 'Unfeatured products';
 
 $GLOBALS['TL_LANG']['tl_module']['custom'] = 'Custom order';
 $GLOBALS['TL_LANG']['tl_module']['title_asc'] = 'Title (A-Z)';
