@@ -90,12 +90,12 @@ class ModuleCatalogDetail extends \ModuleCatalog
 		// Overwrite the page description
 		if ($objProduct->description != '')
 		{
-			$objPage->description = $this->prepareMetaDescription($objProduct->description);
+			$objPage->description = $this->prepareMetaDescription($objProduct->metaDescription);
 		}
 
 		if ($objProduct->keywords != '')
 		{
-			$GLOBALS['TL_KEYWORDS'] .= (($GLOBALS['TL_KEYWORDS'] != '') ? ', ' : '') . $objProduct->keywords;
+			$GLOBALS['TL_KEYWORDS'] .= (($GLOBALS['TL_KEYWORDS'] != '') ? ', ' : '') . $objProduct->metaKeywords;
 		}
 
 		$arrProduct = $this->parseProduct($objProduct);

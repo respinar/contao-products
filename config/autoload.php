@@ -27,7 +27,6 @@ ClassLoader::addClasses(array
 (
 	// Modules
 	'catalog\ModuleCatalogDetail'  => 'system/modules/catalog/modules/ModuleCatalogDetail.php',
-	'catalog\ModuleCatalogRelated' => 'system/modules/catalog/modules/ModuleCatalogRelated.php',
 	'catalog\ModuleCatalog'        => 'system/modules/catalog/modules/ModuleCatalog.php',
 	'catalog\ModuleCatalogList'    => 'system/modules/catalog/modules/ModuleCatalogList.php',
 
