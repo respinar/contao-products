@@ -131,7 +131,7 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 		'default'                     => '{title_legend},title,alias,model;
 		                                  {config_legend:hide},featured,date;
 		                                  {image_legend},singleSRC;
-		                                  {meta_legend},keywords,description;
+		                                  {meta_legend},metaKeywords,metaDescription;
 		                                  {related_legend},related;
 		                                  {enclosure_legend:hide},addEnclosure;
 		                                  {publish_legend},published'
@@ -217,18 +217,18 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 			'eval'                    => array('rgxp'=>'date', 'doNotCopy'=>true, 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
-		'keywords' => array
+		'metaKeywords' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['keywords'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['metaKeywords'],
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
 			'search'                  => true,
 			'eval'                    => array('style'=>'height:60px', 'decodeEntities'=>true),
 			'sql'                     => "text NULL"
 		),
-		'description' => array
+		'metaDescription' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['description'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['metaDescription'],
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
 			'search'                  => true,
@@ -442,9 +442,9 @@ class tl_catalog_product extends Backend
 		}
 
 		// Check permissions AFTER checking the fid, so hacking attempts are logged
-		//if (!$this->User->hasAccess('tl_catalog_product::featured', 'alexf'))
+		//if (!$this->User->hasAccess('tl_news::featured', 'alexf'))
 		//{
-			//return '';
+		//	return '';
 		//}
 
 		$href .= '&amp;fid='.$row['id'].'&amp;state='.($row['featured'] ? '' : 1);
@@ -469,22 +469,22 @@ class tl_catalog_product extends Backend
 		// Check permissions to edit
 		Input::setGet('id', $intId);
 		Input::setGet('act', 'feature');
-		$this->checkPermission();
+		//$this->checkPermission();
 
 		// Check permissions to feature
-		//if (!$this->User->hasAccess('tl_catalog_product::featured', 'alexf'))
+		//if (!$this->User->hasAccess('tl_news::featured', 'alexf'))
 		//{
-			//$this->log('Not enough permissions to feature/unfeature news item ID "'.$intId.'"', __METHOD__, TL_ERROR);
-			//$this->redirect('contao/main.php?act=error');
+		//	$this->log('Not enough permissions to feature/unfeature news item ID "'.$intId.'"', __METHOD__, TL_ERROR);
+		//	$this->redirect('contao/main.php?act=error');
 		//}
 
-		$objVersions = new Versions('tl_news', $intId);
+		$objVersions = new Versions('tl_catalog_product', $intId);
 		$objVersions->initialize();
 
 		// Trigger the save_callback
-		if (is_array($GLOBALS['TL_DCA']['tl_catalog_product']['fields']['featured']['save_callback']))
+		if (is_array($GLOBALS['TL_DCA']['tl_news']['fields']['featured']['save_callback']))
 		{
-			foreach ($GLOBALS['TL_DCA']['tl_catalog_product']['fields']['featured']['save_callback'] as $callback)
+			foreach ($GLOBALS['TL_DCA']['tl_news']['fields']['featured']['save_callback'] as $callback)
 			{
 				if (is_array($callback))
 				{
@@ -503,7 +503,7 @@ class tl_catalog_product extends Backend
 					   ->execute($intId);
 
 		$objVersions->create();
-		$this->log('A new version of record "tl_catalog_product.id='.$intId.'" has been created'.$this->getParentEntries('tl_news', $intId), __METHOD__, TL_GENERAL);
+		$this->log('A new version of record "tl_catalog_product.id='.$intId.'" has been created'.$this->getParentEntries('tl_catalog_product', $intId), __METHOD__, TL_GENERAL);
 	}
 
 
