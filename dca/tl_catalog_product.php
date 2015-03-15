@@ -67,14 +67,14 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 			'edit' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_product']['edit'],
-				'href'                => 'table=tl_content',
+				'href'                => 'act=edit',
 				'icon'                => 'edit.gif'
 			),
-			'editheader' => array
+			'editpage' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_product']['editmeta'],
-				'href'                => 'act=edit',
-				'icon'                => 'header.gif'
+				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_product']['editpage'],
+				'href'                => 'table=tl_content',
+				'icon'                => 'system/modules/catalog/assets/page.png'
 			),
 			'type' => array
 			(
@@ -131,7 +131,7 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 		'default'                     => '{title_legend},title,alias,model;
 		                                  {config_legend:hide},featured,date;
 		                                  {image_legend},singleSRC;
-		                                  {meta_legend},metaKeywords,metaDescription;
+		                                  {meta_legend},metaDescription,metaKeywords;
 		                                  {related_legend},related;
 		                                  {enclosure_legend:hide},addEnclosure;
 		                                  {publish_legend},published'

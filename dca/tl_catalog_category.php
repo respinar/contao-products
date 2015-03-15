@@ -56,13 +56,6 @@ $GLOBALS['TL_DCA']['tl_catalog_category'] = array
 				'href'                => 'act=select',
 				'class'               => 'header_edit_all',
 				'attributes'          => 'onclick="Backend.getScrollOffset()" accesskey="e"'
-			),
-			'categories' => array
-			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_category']['categories'],
-				'href'                => 'table=tl_catalog_product',
-				'class'               => 'header_categories',
-				'attributes'          => 'onclick="Backend.getScrollOffset()" accesskey="c"'
 			)
 		),
 		'operations' => array
