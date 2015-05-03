@@ -18,8 +18,8 @@
       <?php endif; ?>
 
       <div class="tag_container">
-          <?php if ($this->featured): ?><div class="featured"><?php echo $this->featured_text; ?></div><?php endif; ?>
-          <?php if ($this->new_product): ?><div class="new"><?php echo $this->new_text; ?></div><?php endif; ?>
+          <?php if ($this->featured): ?><div class="featured"></div><?php endif; ?>
+          <?php if ($this->new_product): ?><div class="new"></div><?php endif; ?>
       </div>
 
   </figure>
