@@ -18,9 +18,8 @@
     },
     "require": {
         "php":">=5.3.2",
-		"contao/core":">=3.2,<4-dev",
-		"contao-community-alliance/composer-plugin":"2.*",
-		"terminal42/contao-changelanguage":">=2.0"
+        "contao/core":">=3.2,<4-dev",
+        "terminal42/contao-changelanguage":">=2.0"
     },
     "autoload": {
         "classmap": [""]
@@ -31,11 +30,11 @@
                 "": "system/modules/catalog"
             },
             "transifex": {
-				"project": "catalog",
-				"prefix": "master-",
-				"languages_cto": "languages",
-				"languages_tx": ".tx"
-			}
+                "project": "catalog",
+                "prefix": "master-",
+                "languages_cto": "languages",
+                "languages_tx": ".tx"
+            }
         }
     }
 }

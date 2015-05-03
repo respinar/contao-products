@@ -23,7 +23,7 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 	(
 		'dataContainer'               => 'Table',
 		'ptable'                      => 'tl_catalog_category',
-		'ctable'                      => array('tl_catalog_type','tl_content'),
+		'ctable'                      => array('tl_content','tl_catalog_type','tl_catalog_price'),
 		'switchToEdit'                => true,
 		'enableVersioning'            => true,
 		'onload_callback'             => array
@@ -81,6 +81,12 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_product']['type'],
 				'href'                => 'table=tl_catalog_type',
 				'icon'                => 'system/modules/catalog/assets/type.png'
+			),
+			'price' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_product']['price'],
+				'href'                => 'table=tl_catalog_price',
+				'icon'                => 'system/modules/catalog/assets/price.png'
 			),
 			'copy' => array
 			(

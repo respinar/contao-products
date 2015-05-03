@@ -5,9 +5,7 @@
  *
  * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Catalog
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -47,9 +45,9 @@ TemplateLoader::addFiles(array
 (
 	'mod_catalog_list'   => 'system/modules/catalog/templates/modules',
 	'mod_catalog_detail' => 'system/modules/catalog/templates/modules',
+	'product_type'       => 'system/modules/catalog/templates/type',
+	'product_related'    => 'system/modules/catalog/templates/related',
 	'product_list'       => 'system/modules/catalog/templates/product',
 	'product_full'       => 'system/modules/catalog/templates/product',
 	'product_short'      => 'system/modules/catalog/templates/product',
-	'product_type'       => 'system/modules/catalog/templates/type',
-	'product_related'    => 'system/modules/catalog/templates/related',
 ));
