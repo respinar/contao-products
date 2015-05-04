@@ -100,15 +100,10 @@ $GLOBALS['TL_DCA']['tl_catalog_type'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('published'),
-		'default'                     => '{title_legend},title,model,date;{image_legend},singleSRC;{spec_legend},spec;{description_legend:hide},description;{publish_legend},published'
+		'default'                     => '{title_legend},title,model,date;{image_legend},singleSRC;{description_legend:hide},description;{publish_legend},published'
 	),
 
-	// Subpalettes
-	'subpalettes' => array
-	(
-		'published'                   => 'start,stop'
-	),
+
 
 	// Fields
 	'fields' => array
@@ -162,34 +157,6 @@ $GLOBALS['TL_DCA']['tl_catalog_type'] = array
 			'eval'                    => array('rgxp'=>'date', 'doNotCopy'=>true, 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
-		'spec' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_type']['spec'],
-			'exclude'                 => true,
-			'sorting'                 => true,
-			'inputType'               => 'multiColumnWizard',
-			'eval'                    => array
-			(
-				'columnFields' => array
-				(
-					'spectitle' => array
-					(
-						'label'       => &$GLOBALS['TL_LANG']['tl_catalog_type']['spectitle'],
-						'exclude'     => true,
-						'inputType'   => 'text',
-						'eval'        => array('style'=>'width:280px'),
-					),
-					'specvalue' => array
-					(
-						'label'       => &$GLOBALS['TL_LANG']['tl_catalog_type']['specvalue'],
-						'exclude'     => true,
-						'inputType'   => 'text',
-						'eval'        => array('style'=>'width:280px'),
-					)
-				)
-			),
-			'sql'                     => "blob NULL",
-		),
 		'singleSRC' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_type']['singleSRC'],
@@ -213,24 +180,8 @@ $GLOBALS['TL_DCA']['tl_catalog_type'] = array
 			'filter'                  => true,
 			'flag'                    => 1,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('doNotCopy'=>true,'submitOnChange'=>true),
+			'eval'                    => array('doNotCopy'=>true),
 			'sql'                     => "char(1) NOT NULL default ''"
-		),
-		'start' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_type']['start'],
-			'exclude'                 => true,
-			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
-			'sql'                     => "varchar(10) NOT NULL default ''"
-		),
-		'stop' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_type']['stop'],
-			'exclude'                 => true,
-			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
-			'sql'                     => "varchar(10) NOT NULL default ''"
 		)
 	)
 );
@@ -255,7 +206,7 @@ class tl_catalog_type extends Backend
 			$strImage = \Image::getHtml(\Image::get($objImage->path, '80', '60', 'center_center'));
 		}
 
-		return '<div><div style="float:left; margin-right:10px;">'.$strImage.'</div>'. $arrRow['title'] . '<br /><span style="padding-left:3px;color:#b3b3b3;">کد: ' . $arrRow['code'] . '<br>قیمت: '. number_format($arrRow[price]) .' ریال</span></div>';
+		return '<div><div style="float:left; margin-right:10px;">'.$strImage.'</div>'. $arrRow['title'] . '<br /><span style="padding-left:3px;color:#b3b3b3;">کد: ' . $arrRow['model'] . '</span></div>';
 	}
 
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
