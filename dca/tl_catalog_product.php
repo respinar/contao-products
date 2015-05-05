@@ -23,7 +23,7 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 	(
 		'dataContainer'               => 'Table',
 		'ptable'                      => 'tl_catalog_category',
-		'ctable'                      => array('tl_content','tl_catalog_type','tl_catalog_price'),
+		'ctable'                      => array('tl_content','tl_catalog_price'),
 		'switchToEdit'                => true,
 		'enableVersioning'            => true,
 		'onload_callback'             => array
@@ -76,12 +76,6 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 				'href'                => 'table=tl_content',
 				'icon'                => 'system/modules/catalog/assets/page.png'
 			),
-			'type' => array
-			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_product']['type'],
-				'href'                => 'table=tl_catalog_type',
-				'icon'                => 'system/modules/catalog/assets/type.png'
-			),
 			'price' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_product']['price'],
@@ -133,13 +127,14 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('addEnclosure','published'),
-		'default'                     => '{title_legend},title,alias,model;
-		                                  {config_legend:hide},featured,date;
-		                                  {image_legend},singleSRC;
-		                                  {meta_legend},metaDescription,metaKeywords;
-		                                  {related_legend},related;
-		                                  {enclosure_legend:hide},addEnclosure;
+		'__selector__'                => array('type','addEnclosure','published'),
+		'default'                     => '{type_legend},type;{title_legend},title,alias,model;{config_legend:hide},featured,date;
+		                                  {image_legend},singleSRC;{meta_legend},metaDescription,metaKeywords;
+		                                  {related_legend},related;{enclosure_legend:hide},addEnclosure;
+		                                  {publish_legend},published',
+		'other'                       => '{type_legend},type;{title_legend},title,alias,model;{config_legend:hide},featured,date;
+		                                  {image_legend},singleSRC;{meta_legend},metaDescription,metaKeywords;
+		                                  {related_legend},related;{enclosure_legend:hide},addEnclosure;
 		                                  {publish_legend},published'
 	),
 
@@ -170,6 +165,17 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 		'tstamp' => array
 		(
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'type' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['type'],
+			'default'                 => 'default',
+			'filter'                  => true,
+			'inputType'               => 'select',
+			'options'                 => array('default', 'other'),
+			'reference'               => &$GLOBALS['TL_LANG']['tl_catalog_product']['type'],
+			'eval'                    => array('helpwizard'=>true, 'submitOnChange'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(15) NOT NULL default ''"
 		),
 		'title' => array
 		(
@@ -586,8 +592,10 @@ class tl_catalog_product extends Backend
 			if($objCategory->numRows && $objCategory->master > 0)
 			{
 				$GLOBALS['TL_DCA']['tl_catalog_product']['palettes']['default'] = preg_replace('@([,|;])(alias[,|;])@','$1languageMain,$2', $GLOBALS['TL_DCA']['tl_catalog_product']['palettes']['default']);
+				$GLOBALS['TL_DCA']['tl_catalog_product']['palettes']['other'] = preg_replace('@([,|;])(alias[,|;])@','$1languageMain,$2', $GLOBALS['TL_DCA']['tl_catalog_product']['palettes']['other']);
 				$GLOBALS['TL_DCA']['tl_catalog_product']['fields']['title']['eval']['tl_class'] = 'w50';
 				$GLOBALS['TL_DCA']['tl_catalog_product']['fields']['alias']['eval']['tl_class'] = 'clr w50';
+
 			}
 		}
 		else if($this->Input->get('act') == "editAll")

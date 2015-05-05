@@ -31,7 +31,6 @@ ClassLoader::addClasses(array
 	// Models
 	'catalog\CatalogProductModel'  => 'system/modules/catalog/models/CatalogProductModel.php',
 	'catalog\CatalogCategoryModel' => 'system/modules/catalog/models/CatalogCategoryModel.php',
-	'catalog\CatalogTypeModel'     => 'system/modules/catalog/models/CatalogTypeModel.php',
 
 	// Classes
 	'catalog\Catalog'              => 'system/modules/catalog/classes/Catalog.php',
@@ -45,7 +44,6 @@ TemplateLoader::addFiles(array
 (
 	'mod_catalog_list'   => 'system/modules/catalog/templates/modules',
 	'mod_catalog_detail' => 'system/modules/catalog/templates/modules',
-	'product_type'       => 'system/modules/catalog/templates/type',
 	'product_related'    => 'system/modules/catalog/templates/related',
 	'product_list'       => 'system/modules/catalog/templates/product',
 	'product_full'       => 'system/modules/catalog/templates/product',
