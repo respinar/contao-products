@@ -18,19 +18,19 @@
 namespace catalog;
 
 /**
- * Class CatalogCategoryModel
+ * Class CatalogPriceModel
  *
  * @copyright  2014
  * @author     Hamid Abbaszadeh
  * @package    Devtools
  */
-class CatalogCategoryModel extends \Model
+class CatalogPriceModel extends \Model
 {
 
 	/**
 	 * Name of the table
 	 * @var string
 	 */
-	protected static $strTable = 'tl_catalog_category';
+	protected static $strTable = 'tl_catalog_price';
 
 }

@@ -30,6 +30,7 @@ ClassLoader::addClasses(array
 
 	// Models
 	'catalog\CatalogProductModel'  => 'system/modules/catalog/models/CatalogProductModel.php',
+	'catalog\CatalogPriceModel'    => 'system/modules/catalog/models/CatalogPriceModel.php',
 	'catalog\CatalogCategoryModel' => 'system/modules/catalog/models/CatalogCategoryModel.php',
 
 	// Classes
