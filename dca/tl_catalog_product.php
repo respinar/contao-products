@@ -132,7 +132,7 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 		                                  {image_legend},singleSRC;{meta_legend},metaDescription,metaKeywords;
 		                                  {related_legend},related;{enclosure_legend:hide},addEnclosure;
 		                                  {publish_legend},published',
-		'other'                       => '{type_legend},type;{title_legend},title,alias,model;{config_legend:hide},featured,date;
+		'other'                       => '{type_legend},type,mainID;{title_legend},title,alias,model;{config_legend:hide},featured,date;
 		                                  {image_legend},singleSRC;{meta_legend},metaDescription,metaKeywords;
 		                                  {related_legend},related;{enclosure_legend:hide},addEnclosure;
 		                                  {publish_legend},published'
@@ -176,6 +176,14 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 			'reference'               => &$GLOBALS['TL_LANG']['tl_catalog_product']['type'],
 			'eval'                    => array('helpwizard'=>true, 'submitOnChange'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(15) NOT NULL default ''"
+		),
+		'mainID' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['mainID'],
+			'foreignKey'              => 'tl_catalog_product.title',
+			'inputType'               => 'select',
+			'relation'                => array('type'=>'belongsTo', 'load'=>'eager'),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'title' => array
 		(
@@ -561,7 +569,7 @@ class tl_catalog_product extends Backend
 	public function getProducts(DataContainer $dc)
 	{
 
-		$objItems = $this->Database->prepare("SELECT * FROM tl_catalog_product WHERE pid=? ORDER BY date DESC")->execute($dc->activeRecord->pid);
+		$objItems = $this->Database->prepare("SELECT * FROM tl_catalog_product WHERE pid=? AND type='default' ORDER BY date DESC")->execute($dc->activeRecord->pid);
 
 		while( $objItems->next() )
 		{
