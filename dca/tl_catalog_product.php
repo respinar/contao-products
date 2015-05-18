@@ -129,7 +129,7 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 	(
 		'__selector__'                => array('type','addEnclosure','published'),
 		'default'                     => '{type_legend},type;{title_legend},title,alias,model;{config_legend:hide},featured,date;
-		                                  {image_legend},singleSRC;{meta_legend},metaDescription,metaKeywords;
+		                                  {image_legend},singleSRC;{meta_legend},description;
 		                                  {related_legend},related;{enclosure_legend:hide},addEnclosure;
 		                                  {publish_legend},published',
 		'other'                       => '{type_legend},type,mainID;{title_legend},title,alias,model;{config_legend:hide},featured,date;
@@ -237,18 +237,9 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 			'eval'                    => array('rgxp'=>'date', 'doNotCopy'=>true, 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
-		'metaKeywords' => array
+		'description' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['metaKeywords'],
-			'exclude'                 => true,
-			'inputType'               => 'textarea',
-			'search'                  => true,
-			'eval'                    => array('style'=>'height:60px', 'decodeEntities'=>true),
-			'sql'                     => "text NULL"
-		),
-		'metaDescription' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['metaDescription'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['description'],
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
 			'search'                  => true,
