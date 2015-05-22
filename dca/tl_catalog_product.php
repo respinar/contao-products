@@ -181,6 +181,7 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['mainID'],
 			'foreignKey'              => 'tl_catalog_product.title',
+			'options_callback'        => array('tl_catalog_product', 'getProducts'),
 			'inputType'               => 'select',
 			'relation'                => array('type'=>'belongsTo', 'load'=>'eager'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
@@ -372,7 +373,7 @@ class tl_catalog_product extends Backend
 			$strImage = \Image::getHtml(\Image::get($objImage->path, '80', '60', 'center_center'));
 		}
 
-		return '<div><div style="float:left; margin-right:10px;">'.$strImage.'</div>'. $arrRow['title'] . '</div>';
+		return '<div><div style="float:left; margin-right:10px;">'.$strImage.'</div>'. $arrRow['title']. ' ['. $arrRow['type'] . ']</div>';
 	}
 
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
@@ -594,7 +595,6 @@ class tl_catalog_product extends Backend
 				$GLOBALS['TL_DCA']['tl_catalog_product']['palettes']['other'] = preg_replace('@([,|;])(alias[,|;])@','$1languageMain,$2', $GLOBALS['TL_DCA']['tl_catalog_product']['palettes']['other']);
 				$GLOBALS['TL_DCA']['tl_catalog_product']['fields']['title']['eval']['tl_class'] = 'w50';
 				$GLOBALS['TL_DCA']['tl_catalog_product']['fields']['alias']['eval']['tl_class'] = 'clr w50';
-
 			}
 		}
 		else if($this->Input->get('act') == "editAll")

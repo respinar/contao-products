@@ -23,10 +23,8 @@ $GLOBALS['TL_LANG']['tl_catalog_product']['model']['0']       = 'Product model';
 $GLOBALS['TL_LANG']['tl_catalog_product']['model']['1']       = 'Please enter the product model.';
 $GLOBALS['TL_LANG']['tl_catalog_product']['date']['0']        = 'Date';
 $GLOBALS['TL_LANG']['tl_catalog_product']['date']['1']        = 'Please enter the date according to the global date format.';
-$GLOBALS['TL_LANG']['tl_catalog_product']['metaDescription']['0'] = 'Meta description';
-$GLOBALS['TL_LANG']['tl_catalog_product']['metaDescription']['1'] = 'Here you can enter a short description of the product which will be evaluated by search engines like Google or Yahoo. Search engines usually indicate between 150 and 300 characters.';
-$GLOBALS['TL_LANG']['tl_catalog_product']['metaKeywords']['0']    = 'Meta keywords';
-$GLOBALS['TL_LANG']['tl_catalog_product']['metaKeywords']['1']    = 'Here you can enter a list of comma separated keywords. Keywords, however, are no longer relevant to most search engines (including Google.';
+$GLOBALS['TL_LANG']['tl_catalog_product']['description']['0'] = 'Meta description';
+$GLOBALS['TL_LANG']['tl_catalog_product']['description']['1'] = 'Here you can enter a short description of the product which will be evaluated by search engines like Google or Yahoo. Search engines usually indicate between 150 and 300 characters.';
 $GLOBALS['TL_LANG']['tl_catalog_product']['singleSRC']['0']   = 'Source file';
 $GLOBALS['TL_LANG']['tl_catalog_product']['singleSRC']['1']   = 'Please select an image.';
 $GLOBALS['TL_LANG']['tl_catalog_product']['addEnclosure']['0']= 'Add enclosures';
@@ -50,7 +48,7 @@ $GLOBALS['TL_LANG']['tl_catalog_product']['related']['1']     = 'Choose related 
  * Legends
  */
 $GLOBALS['TL_LANG']['tl_catalog_product']['title_legend']       = 'Product title';
-$GLOBALS['TL_LANG']['tl_catalog_product']['meta_legend']        = 'Meta information for SEO';
+$GLOBALS['TL_LANG']['tl_catalog_product']['description_legend'] = 'Meta information for SEO';
 $GLOBALS['TL_LANG']['tl_catalog_product']['config_legend']      = 'Date and feature';
 $GLOBALS['TL_LANG']['tl_catalog_product']['enclosure_legend']   = 'Enclosures';
 $GLOBALS['TL_LANG']['tl_catalog_product']['image_legend']       = 'Image settings';

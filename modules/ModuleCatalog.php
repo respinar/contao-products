@@ -107,8 +107,6 @@ abstract class ModuleCatalog extends \Module
 
 		$arrMeta = $this->getMetaFields($objProduct);
 
-		$objTemplate->types       = $this->parseType($objProduct);
-
 		$objTemplate->category    = $objProduct->getRelated('pid');
 
 		$objTemplate->count = $intCount; // see #5708
@@ -270,80 +268,6 @@ abstract class ModuleCatalog extends \Module
 	}
 
 	/**
-	 * Generate a elements as array
-	 * @param string
-	 * @param object
-	 * @param boolean
-	 * @param boolean
-	 * @return string
-	 */
-	protected function parseType($objType)
-	{
-		$objTemplate = new \FrontendTemplate($this->type_template);
-		$objTemplate->setData($objType->row());
-
-		$objTemplate->class = (($this->type_Class != '') ? ' ' . $this->type_Class : '') . $strClass;
-
-		if (time() - $objType->date < 2592000) {
-			$objTemplate->new_type = true;
-		}
-
-		$arrMeta = $this->getMetaFields($objType);
-
-		$objTemplate->product    = $objType->getRelated('pid');
-
-		$objTemplate->count = $intCount; // see #5708
-
-		$arrMeta = $this->getMetaFields($objType);
-
-		// Add the meta information
-		$objTemplate->date = $arrMeta['date'];
-		$objTemplate->hasMetaFields = !empty($arrMeta);
-		$objTemplate->timestamp = $objType->date;
-		$objTemplate->datetime = date('Y-m-d\TH:i:sP', $objType->date);
-
-		$objTemplate->addImage = false;
-
-		// Add an image
-		if ($objType->singleSRC != '')
-		{
-			$objModel = \FilesModel::findByUuid($objType->singleSRC);
-
-			if ($objModel === null)
-			{
-				if (!\Validator::isUuid($objType->singleSRC))
-				{
-					$objTemplate->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-				}
-			}
-			elseif (is_file(TL_ROOT . '/' . $objModel->path))
-			{
-				// Do not override the field now that we have a model registry (see #6303)
-				$arrType = $objType->row();
-
-				// Override the default image size
-				if ($this->type_imgSize != '')
-				{
-					$size = deserialize($this->type_imgSize);
-
-					if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
-					{
-						$arrType['size'] = $this->type_imgSize;
-					}
-				}
-
-				$arrType['singleSRC'] = $objModel->path;
-				$strLightboxId = 'lightbox[lb' . $objType->id . ']';
-				$arrType['fullsize'] = true;
-				$this->addImageToTemplate($objTemplate, $arrType,null, $strLightboxId);
-			}
-		}
-
-		return $objTemplate->parse();
-
-	}
-
-	/**
 	 * Return the meta fields of a news article as array
 	 * @param object
 	 * @return array
@@ -472,33 +396,6 @@ abstract class ModuleCatalog extends \Module
 		}
 
 		return $arrProducts;
-	}
-
-
-	/**
-	 * Parse one or more items and return them as array
-	 * @param object
-	 * @param boolean
-	 * @return array
-	 */
-	protected function parseTypes($objTypes, $blnAddCategory=false)
-	{
-		$limit = $objTypes->count();
-
-		if ($limit < 1)
-		{
-			return array();
-		}
-
-		$count = 0;
-		$arrTypes = array();
-
-		while ($objTypes->next())
-		{
-			$arrTypes[] = $this->parseType($objTypes, $blnAddCategory, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % $this->type_perRow) == 0) ? ' last_col' : '') . ((($count % $this->type_perRow) == 1) ? ' first_col' : ''), $count);
-		}
-
-		return $arrTypes;
 	}
 
 }

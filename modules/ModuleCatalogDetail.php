@@ -98,12 +98,6 @@ class ModuleCatalogDetail extends \ModuleCatalog
 		$this->Template->product = $arrProduct;
 
 
-		$objTypes = \CatalogTypeModel::findPublishedByPid($objProduct->id);
-
-		if ($objTypes !== null) {
-			$this->Template->types    = $this->parseTypes($objTypes);
-		}
-
 		$objProduct->related = deserialize($objProduct->related);
 
 		if (!empty($objProduct->related)) {
