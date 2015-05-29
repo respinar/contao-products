@@ -1,26 +1,22 @@
 <?php
-
 /**
- * Contao Open Source CMS
+ * Translations are managed using Transifex. To create a new translation
+ * or to help to maintain an existing one, please register at transifex.com.
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * @link http://help.transifex.com/intro/translating.html
+ * @link https://www.transifex.com/projects/p/catalog-contao/language/fa/
  *
- * @package   catalog
- * @author    Hamid Abbaszadeh
- * @license   GNU/LGPL
- * @copyright 2014
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ *
+ * last-updated: 2015-03-15T21:46:18+03:30
  */
 
 
-/**
- * Back end modules
- */
-$GLOBALS['TL_LANG']['MOD']['catalog'] = array('کاتالوگ', 'Catalog and products management');
+$GLOBALS['TL_LANG']['FMD']['catalog']             = 'کاتالوگ';
+$GLOBALS['TL_LANG']['FMD']['catalog_detail']['0'] = 'جزئیات کالا';
+$GLOBALS['TL_LANG']['FMD']['catalog_detail']['1'] = 'جزئیات کالا';
+$GLOBALS['TL_LANG']['FMD']['catalog_list']['0']   = 'فهرست کاتالوگ';
+$GLOBALS['TL_LANG']['FMD']['catalog_list']['1']   = 'فهرست کالا';
+$GLOBALS['TL_LANG']['MOD']['catalog']['0']        = 'کاتالوگ';
+$GLOBALS['TL_LANG']['MOD']['catalog']['1']        = 'مدیریت کاتالوگ و کالاها';
 
-
-/**
- * Front end modules
- */
-$GLOBALS['TL_LANG']['FMD']['catalog']         = 'کاتالوگ';
-$GLOBALS['TL_LANG']['FMD']['catalog_list']    = array('Product list', '');
-$GLOBALS['TL_LANG']['FMD']['catalog_detail']  = array('Product detail', '');

@@ -21,6 +21,10 @@ $GLOBALS['TL_LANG']['tl_catalog_product']['alias']['0']       = 'Product alias';
 $GLOBALS['TL_LANG']['tl_catalog_product']['alias']['1']       = 'Please enter the product alias.';
 $GLOBALS['TL_LANG']['tl_catalog_product']['model']['0']       = 'Product model';
 $GLOBALS['TL_LANG']['tl_catalog_product']['model']['1']       = 'Please enter the product model.';
+$GLOBALS['TL_LANG']['tl_catalog_product']['type']['0']        = 'Product type';
+$GLOBALS['TL_LANG']['tl_catalog_product']['type']['1']        = 'Please choose the product type.';
+$GLOBALS['TL_LANG']['tl_catalog_product']['mainID']['0']      = 'Main Product';
+$GLOBALS['TL_LANG']['tl_catalog_product']['mainID']['1']      = 'Please select the main product.';
 $GLOBALS['TL_LANG']['tl_catalog_product']['date']['0']        = 'Date';
 $GLOBALS['TL_LANG']['tl_catalog_product']['date']['1']        = 'Please enter the date according to the global date format.';
 $GLOBALS['TL_LANG']['tl_catalog_product']['description']['0'] = 'Meta description';
@@ -50,6 +54,7 @@ $GLOBALS['TL_LANG']['tl_catalog_product']['related']['1']     = 'Choose related 
 $GLOBALS['TL_LANG']['tl_catalog_product']['title_legend']       = 'Product title';
 $GLOBALS['TL_LANG']['tl_catalog_product']['description_legend'] = 'Meta information for SEO';
 $GLOBALS['TL_LANG']['tl_catalog_product']['config_legend']      = 'Date and feature';
+$GLOBALS['TL_LANG']['tl_catalog_product']['type_legend']        = 'Type';
 $GLOBALS['TL_LANG']['tl_catalog_product']['enclosure_legend']   = 'Enclosures';
 $GLOBALS['TL_LANG']['tl_catalog_product']['image_legend']       = 'Image settings';
 $GLOBALS['TL_LANG']['tl_catalog_product']['related_legend']     = 'Related products';
@@ -76,5 +81,7 @@ $GLOBALS['TL_LANG']['tl_catalog_product']['delete']['1'] = 'Delete product ID %s
 /**
  * References
  */
-$GLOBALS['TL_LANG']['tl_catalog_product']['sameDay']	= 'Same day';
-$GLOBALS['TL_LANG']['tl_catalog_product']['otherDay']	= 'Other days';
+$GLOBALS['TL_LANG']['tl_catalog_product']['sameDay']         = 'Same day';
+$GLOBALS['TL_LANG']['tl_catalog_product']['otherDay']        = 'Other days';
+$GLOBALS['TL_LANG']['tl_catalog_product']['type']['default'] = 'Main product';
+$GLOBALS['TL_LANG']['tl_catalog_product']['type']['other']   = 'Type';

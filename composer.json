@@ -30,7 +30,7 @@
                 "": "system/modules/catalog"
             },
             "transifex": {
-                "project": "catalog",
+                "project": "catalog-contao",
                 "prefix": "master-",
                 "languages_cto": "languages",
                 "languages_tx": ".tx"

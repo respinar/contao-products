@@ -1,28 +1,23 @@
 <?php
-
 /**
- * Contao Open Source CMS
+ * Translations are managed using Transifex. To create a new translation
+ * or to help to maintain an existing one, please register at transifex.com.
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * @link http://help.transifex.com/intro/translating.html
+ * @link https://www.transifex.com/projects/p/catalog-contao/language/fa/
  *
- * @package   catalog
- * @author    Hamid Abbaszadeh
- * @license   GNU/LGPL
- * @copyright 2014
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ *
+ * last-updated: 2015-01-08T10:12:26+03:30
  */
 
 
-/**
- * Miscellaneous
- */
-$GLOBALS['TL_LANG']['MSC']['emptyCatalog']='There is no product items!';
+$GLOBALS['TL_LANG']['MSC']['emptyCatalog']      = 'کالایی برای نمایش وجود ندارد!';
+$GLOBALS['TL_LANG']['MSC']['features']          = 'ویژگی‌ها';
+$GLOBALS['TL_LANG']['MSC']['model_text']        = 'مدل';
+$GLOBALS['TL_LANG']['MSC']['price']             = 'قیمت';
+$GLOBALS['TL_LANG']['MSC']['rating']            = 'رتبه';
+$GLOBALS['TL_LANG']['MSC']['relateds_headline'] = 'کالاهای مرتبط';
+$GLOBALS['TL_LANG']['MSC']['specs']             = 'مشخصات';
+$GLOBALS['TL_LANG']['MSC']['types_headline']    = 'نوع‌ها';
 
-$GLOBALS['TL_LANG']['MSC']['price']       = 'Price';
-$GLOBALS['TL_LANG']['MSC']['rating']      = 'Rating';
-
-$GLOBALS['TL_LANG']['MSC']['features']    = 'Features';
-$GLOBALS['TL_LANG']['MSC']['specs']       = 'Specifications';
-
-$GLOBALS['TL_LANG']['MSC']['model_text']        = 'Model';
-$GLOBALS['TL_LANG']['MSC']['types_headline']    = 'Types';
-$GLOBALS['TL_LANG']['MSC']['relateds_headline'] = 'Related products';
