@@ -48,3 +48,8 @@ $GLOBALS['TL_HOOKS']['getSearchablePages'][]     = array('Catalog', 'getSearchab
  */
 $GLOBALS['TL_HOOKS']['translateUrlParameters'][] = array('Catalog', 'translateUrlParameters');
 
+/**
+ * Add permissions
+ */
+$GLOBALS['TL_PERMISSIONS'][] = 'catalogs';
+$GLOBALS['TL_PERMISSIONS'][] = 'catalogp';
