@@ -322,6 +322,16 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
  */
 class tl_catalog_product extends Backend
 {
+	
+	
+	/**
+	 * Import the back end user object
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+		$this->import('BackendUser', 'User');
+	}
 
 	/**
 	 * Auto-generate the product alias if it has not been set yet
@@ -385,10 +395,10 @@ class tl_catalog_product extends Backend
 		}
 
 		// Check permissions AFTER checking the tid, so hacking attempts are logged
-		//if (!$this->User->isAdmin && !$this->User->hasAccess('tl_prices::published', 'alexf'))
-		//{
-		//	return '';
-		//}
+		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_catalog_product::published', 'alexf'))
+		{
+			return '';
+		}
 
 		$href .= '&amp;tid='.$row['id'].'&amp;state='.($row['published'] ? '' : 1);
 
@@ -406,14 +416,14 @@ class tl_catalog_product extends Backend
 		// Check permissions to edit
 		$this->Input->setGet('id', $intId);
 		$this->Input->setGet('act', 'toggle');
-		//$this->checkPermission();
+		$this->checkPermission();
 
 		// Check permissions to publish
-		//if (!$this->User->isAdmin && !$this->User->hasAccess('tl_news::published', 'alexf'))
-		//{
-		//	$this->log('Not enough permissions to publish/unpublish news item ID "'.$intId.'"', 'tl_news toggleVisibility', TL_ERROR);
-		//	$this->redirect('contao/main.php?act=error');
-		//}
+		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_catalog_product::published', 'alexf'))
+		{
+			$this->log('Not enough permissions to publish/unpublish product item ID "'.$intId.'"', 'tl_catalog_product toggleVisibility', TL_ERROR);
+			$this->redirect('contao/main.php?act=error');
+		}
 
 		$this->createInitialVersion('tl_catalog_product', $intId);
 
@@ -454,10 +464,10 @@ class tl_catalog_product extends Backend
 		}
 
 		// Check permissions AFTER checking the fid, so hacking attempts are logged
-		//if (!$this->User->hasAccess('tl_news::featured', 'alexf'))
-		//{
-		//	return '';
-		//}
+		if (!$this->User->hasAccess('tl_catalog_product::featured', 'alexf'))
+		{
+			return '';
+		}
 
 		$href .= '&amp;fid='.$row['id'].'&amp;state='.($row['featured'] ? '' : 1);
 
@@ -481,14 +491,14 @@ class tl_catalog_product extends Backend
 		// Check permissions to edit
 		Input::setGet('id', $intId);
 		Input::setGet('act', 'feature');
-		//$this->checkPermission();
+		$this->checkPermission();
 
 		// Check permissions to feature
-		//if (!$this->User->hasAccess('tl_news::featured', 'alexf'))
-		//{
-		//	$this->log('Not enough permissions to feature/unfeature news item ID "'.$intId.'"', __METHOD__, TL_ERROR);
-		//	$this->redirect('contao/main.php?act=error');
-		//}
+		if (!$this->User->hasAccess('tl_catalog_product::featured', 'alexf'))
+		{
+			$this->log('Not enough permissions to feature/unfeature news item ID "'.$intId.'"', __METHOD__, TL_ERROR);
+			$this->redirect('contao/main.php?act=error');
+		}
 
 		$objVersions = new Versions('tl_catalog_product', $intId);
 		$objVersions->initialize();

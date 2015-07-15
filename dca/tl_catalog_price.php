@@ -150,6 +150,16 @@ $GLOBALS['TL_DCA']['tl_catalog_price'] = array
  */
 class tl_catalog_price extends Backend
 {
+	
+	
+	/**
+	 * Import the back end user object
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+		$this->import('BackendUser', 'User');
+	}
 
 	/**
 	 * Add the type of input field
@@ -180,10 +190,10 @@ class tl_catalog_price extends Backend
 		}
 
 		// Check permissions AFTER checking the tid, so hacking attempts are logged
-		//if (!$this->User->hasAccess('tl_catalog_price::published', 'alexf'))
-		//{
-		//	return '';
-		//}
+		if (!$this->User->hasAccess('tl_catalog_price::published', 'alexf'))
+		{
+			return '';
+		}
 
 		$href .= '&amp;tid='.$row['id'].'&amp;state='.($row['published'] ? '' : 1);
 
@@ -207,14 +217,14 @@ class tl_catalog_price extends Backend
 		// Check permissions to edit
 		Input::setGet('id', $intId);
 		Input::setGet('act', 'toggle');
-		//$this->checkPermission();
+		$this->checkPermission();
 
 		// Check permissions to publish
-		//if (!$this->User->hasAccess('tl_news::published', 'alexf'))
-		//{
-		//	$this->log('Not enough permissions to publish/unpublish news item ID "'.$intId.'"', __METHOD__, TL_ERROR);
-		//	$this->redirect('contao/main.php?act=error');
-		//}
+		if (!$this->User->hasAccess('tl_catalog_price::published', 'alexf'))
+		{
+			$this->log('Not enough permissions to publish/unpublish price item ID "'.$intId.'"', __METHOD__, TL_ERROR);
+			$this->redirect('contao/main.php?act=error');
+		}
 
 		$objVersions = new Versions('tl_catalog_price', $intId);
 		$objVersions->initialize();

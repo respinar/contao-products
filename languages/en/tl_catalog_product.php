@@ -49,7 +49,7 @@ $GLOBALS['TL_LANG']['tl_catalog_product']['publish_legend']     = 'Publish setti
 /**
  * Buttons
  */
-$GLOBALS['TL_LANG']['tl_catalog_product']['new']    = array('New Product';,'Create a new product');
+$GLOBALS['TL_LANG']['tl_catalog_product']['new']    = array('New Product','Create a new product');
 $GLOBALS['TL_LANG']['tl_catalog_product']['show']   = array('Product details','Show the details of product ID %s');
 $GLOBALS['TL_LANG']['tl_catalog_product']['edit']   = array('Edit product','Edit product ID %s');
 $GLOBALS['TL_LANG']['tl_catalog_product']['cut']    = array('Move product','Move product ID %s');
