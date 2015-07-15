@@ -22,7 +22,7 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 	'config' => array
 	(
 		'dataContainer'               => 'Table',
-		'ptable'                      => 'tl_catalog_category',
+		'ptable'                      => 'tl_catalog',
 		'ctable'                      => array('tl_content','tl_catalog_price'),
 		'switchToEdit'                => true,
 		'enableVersioning'            => true,
@@ -154,7 +154,7 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 		),
 		'pid' => array
 		(
-			'foreignKey'              => 'tl_catalog_category.title',
+			'foreignKey'              => 'tl_catalog.title',
 			'sql'                     => "int(10) unsigned NOT NULL default '0'",
 			'relation'                => array('type'=>'belongsTo', 'load'=>'eager')
 		),
@@ -542,7 +542,7 @@ class tl_catalog_product extends Backend
 		$otherDay = $GLOBALS['TL_LANG']['tl_catalog_product']['otherDay'];
 
 		$arrItems = array($sameDay => array(), $otherDay => array());
-		$objItems = $this->Database->prepare("SELECT * FROM tl_catalog_product WHERE pid=(SELECT tl_catalog_category.master FROM tl_catalog_category LEFT OUTER JOIN tl_catalog_product ON tl_catalog_product.pid=tl_catalog_category.id WHERE tl_catalog_product.id=?) ORDER BY date DESC")->execute($dc->id);
+		$objItems = $this->Database->prepare("SELECT * FROM tl_catalog_product WHERE pid=(SELECT tl_catalog.master FROM tl_catalog LEFT OUTER JOIN tl_catalog_product ON tl_catalog_product.pid=tl_catalog.id WHERE tl_catalog_product.id=?) ORDER BY date DESC")->execute($dc->id);
 
 		$dayBegin = strtotime('0:00', $dc->activeRecord->date);
 
@@ -595,7 +595,7 @@ class tl_catalog_product extends Backend
 	{
 		if($this->Input->get('act') == "edit")
 		{
-			$objCategory = $this->Database->prepare("SELECT tl_catalog_category.* FROM tl_catalog_category LEFT OUTER JOIN tl_catalog_product ON tl_catalog_product.pid=tl_catalog_category.id WHERE tl_catalog_product.id=?")
+			$objCategory = $this->Database->prepare("SELECT tl_catalog.* FROM tl_catalog LEFT OUTER JOIN tl_catalog_product ON tl_catalog_product.pid=tl_catalog.id WHERE tl_catalog_product.id=?")
 										 ->limit(1)
 										 ->execute($dc->id);
 

@@ -13,8 +13,8 @@
 
 
 $GLOBALS['TL_LANG']['tl_module']['all_product']               = 'همه کالاها';
-$GLOBALS['TL_LANG']['tl_module']['catalog_categories']['0']   = 'دسته‌بندی‌های کاتالوگ';
-$GLOBALS['TL_LANG']['tl_module']['catalog_categories']['1']   = 'لطفا یک یا چند دسته‌بندی کاتالوگ انتخاب نمایید.';
+$GLOBALS['TL_LANG']['tl_module']['catalogs']['0']   = 'دسته‌بندی‌های کاتالوگ';
+$GLOBALS['TL_LANG']['tl_module']['catalogs']['1']   = 'لطفا یک یا چند دسته‌بندی کاتالوگ انتخاب نمایید.';
 $GLOBALS['TL_LANG']['tl_module']['catalog_detailModule']['0'] = 'ماژول جزئیات کالا';
 $GLOBALS['TL_LANG']['tl_module']['catalog_detailModule']['1'] = 'به صورت خودکار به ماژول کالا تعویض می شود اگر آیتمی انتخاب شده بود.';
 $GLOBALS['TL_LANG']['tl_module']['catalog_featured']['0']     = 'محصولات ویژه';

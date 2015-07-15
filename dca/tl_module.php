@@ -16,13 +16,13 @@
  */
 
 $GLOBALS['TL_DCA']['tl_module']['palettes']['catalog_list']    = '{title_legend},name,headline,type;
-                                                                  {catalog_legend},catalog_categories,catalog_featured,catalog_detailModule,catalog_sortBy,numberOfItems,perPage,skipFirst;
+                                                                  {catalog_legend},catalogs,catalog_featured,catalog_detailModule,catalog_sortBy,numberOfItems,perPage,skipFirst;
                                                                   {template_legend},catalog_metaFields,customTpl;
                                                                   {product_legend},product_template,product_Class,product_perRow,imgSize;
                                                                   {protected_legend:hide},protected;
                                                                   {expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['catalog_detail']  = '{title_legend},name,headline,type;
-                                                                  {catalog_legend},catalog_categories;
+                                                                  {catalog_legend},catalogs;
                                                                   {template_legend},catalog_metaFields,customTpl;
                                                                   {product_legend},product_template,imgSize,fullsize;
                                                                   {type_legend},type_show,type_template,type_perRow,type_Class,type_imgSize;
@@ -33,9 +33,9 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['catalog_detail']  = '{title_legend}
 /**
  * Add fields to tl_module
  */
-$GLOBALS['TL_DCA']['tl_module']['fields']['catalog_categories'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['catalogs'] = array
 (
-	'label'                => &$GLOBALS['TL_LANG']['tl_module']['catalog_categories'],
+	'label'                => &$GLOBALS['TL_LANG']['tl_module']['catalogs'],
 	'exclude'              => true,
 	'inputType'            => 'checkbox',
 	'options_callback'     => array('tl_module_catalog', 'getCategories'),
@@ -234,7 +234,7 @@ class tl_module_catalog extends Backend
 		//}
 
 		$arrCategories = array();
-		$objCategories = $this->Database->execute("SELECT id, title FROM tl_catalog_category ORDER BY title");
+		$objCategories = $this->Database->execute("SELECT id, title FROM tl_catalog ORDER BY title");
 
 		while ($objCategories->next())
 		{

@@ -18,12 +18,12 @@ namespace catalog;
 
 
 /**
- * Class News
+ * Class Catalog
  *
  * Provide methods regarding news archives.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    News
+ * @copyright  Hamid Abbaszadeh 2005-2014
+ * @author     Hamid Abbaszadeh <https://contao.org>
+ * @package    Catalog
  */
 class Catalog extends \Frontend
 {
@@ -48,29 +48,29 @@ class Catalog extends \Frontend
 		$arrProcessed = array();
 
 		// Get all catalog categories
-		$objCategory = \CatalogCategoryModel::findByProtected('');
+		$objCatalog = \CatalogModel::findByProtected('');
 
 		// Walk through each archive
-		if ($objCategory !== null)
+		if ($objCatalog !== null)
 		{
-			while ($objCategory->next())
+			while ($objCatalog->next())
 			{
 				// Skip catalog categories without target page
-				if (!$objCategory->jumpTo)
+				if (!$objCatalog->jumpTo)
 				{
 					continue;
 				}
 
 				// Skip catalog categories outside the root nodes
-				if (!empty($arrRoot) && !in_array($objCategory->jumpTo, $arrRoot))
+				if (!empty($arrRoot) && !in_array($objCatalog->jumpTo, $arrRoot))
 				{
 					continue;
 				}
 
 				// Get the URL of the jumpTo page
-				if (!isset($arrProcessed[$objCategory->jumpTo]))
+				if (!isset($arrProcessed[$objCatalog->jumpTo]))
 				{
-					$objParent = \PageModel::findWithDetails($objCategory->jumpTo);
+					$objParent = \PageModel::findWithDetails($objCatalog->jumpTo);
 
 					// The target page does not exist
 					if ($objParent === null)
@@ -94,13 +94,13 @@ class Catalog extends \Frontend
 					$domain = ($objParent->rootUseSSL ? 'https://' : 'http://') . ($objParent->domain ?: \Environment::get('host')) . TL_PATH . '/';
 
 					// Generate the URL
-					$arrProcessed[$objCategory->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/%s' : '/items/%s'), $objParent->language);
+					$arrProcessed[$objCatalog->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/%s' : '/items/%s'), $objParent->language);
 				}
 
-				$strUrl = $arrProcessed[$objCategory->jumpTo];
+				$strUrl = $arrProcessed[$objCatalog->jumpTo];
 
 				// Get the items
-				$objProduct = \CatalogProductModel::findPublishedByPid($objCategory->id);
+				$objProduct = \CatalogProductModel::findPublishedByPid($objCatalog->id);
 
 				if ($objProduct !== null)
 				{
@@ -150,7 +150,7 @@ class Catalog extends \Frontend
 
         if ($strItem != '')
         {
-        	$objProduct = $this->Database->prepare("SELECT tl_catalog_product.*, tl_catalog_category.master FROM tl_catalog_product LEFT OUTER JOIN tl_catalog_category ON tl_catalog_product.pid=tl_catalog_category.id WHERE tl_catalog_product.id=? OR tl_catalog_product.alias=?")
+        	$objProduct = $this->Database->prepare("SELECT tl_catalog_product.*, tl_catalog.master FROM tl_catalog_product LEFT OUTER JOIN tl_catalog ON tl_catalog_product.pid=tl_catalog.id WHERE tl_catalog_product.id=? OR tl_catalog_product.alias=?")
         							  ->limit(1)
         							  ->execute((int)$strItem, $strItem);
 
@@ -158,7 +158,7 @@ class Catalog extends \Frontend
         	if ($objProduct->numRows)
         	{
         		$id = ($objProduct->master > 0) ? $objProduct->languageMain : $objProduct->id;
-        		$objItem = $this->Database->prepare("SELECT tl_catalog_product.id, tl_catalog_product.alias FROM tl_catalog_product LEFT OUTER JOIN tl_catalog_category ON tl_catalog_product.pid=tl_catalog_category.id WHERE tl_catalog_category.language=? AND (tl_catalog_product.id=? OR languageMain=?)")->execute($strLanguage, $id, $id);
+        		$objItem = $this->Database->prepare("SELECT tl_catalog_product.id, tl_catalog_product.alias FROM tl_catalog_product LEFT OUTER JOIN tl_catalog ON tl_catalog_product.pid=tl_catalog.id WHERE tl_catalog.language=? AND (tl_catalog_product.id=? OR languageMain=?)")->execute($strLanguage, $id, $id);
 
 				if ($objItem->numRows)
 				{

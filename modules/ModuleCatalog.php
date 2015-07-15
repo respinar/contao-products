@@ -48,7 +48,7 @@ abstract class ModuleCatalog extends \Module
 		}
 
 		$this->import('FrontendUser', 'User');
-		$objCategory = \CatalogCategoryModel::findMultipleByIds($arrCategories);
+		$objCategory = \CatalogModel::findMultipleByIds($arrCategories);
 		$arrCategories = array();
 
 		if ($objCategory !== null)

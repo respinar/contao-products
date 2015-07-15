@@ -59,7 +59,7 @@ class ModuleCatalogDetail extends \ModuleCatalog
 			\Input::setGet('items', \Input::get('auto_item'));
 		}
 
-		$this->catalog_categories = $this->sortOutProtected(deserialize($this->catalog_categories));
+		$this->catalogs = $this->sortOutProtected(deserialize($this->catalogs));
 
 		return parent::generate();
 	}
@@ -79,7 +79,7 @@ class ModuleCatalogDetail extends \ModuleCatalog
 		$this->Template->types_headline    = $GLOBALS['TL_LANG']['MSC']['types_headline'];
 		$this->Template->relateds_headline = $GLOBALS['TL_LANG']['MSC']['relateds_headline'];
 
-		$objProduct = \CatalogProductModel::findPublishedByParentAndIdOrAlias(\Input::get('items'),$this->catalog_categories);
+		$objProduct = \CatalogProductModel::findPublishedByParentAndIdOrAlias(\Input::get('items'),$this->catalogs);
 
 		// Overwrite the page title
 		if ($objProduct->title != '')
