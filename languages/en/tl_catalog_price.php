@@ -17,7 +17,7 @@
  */
 $GLOBALS['TL_LANG']['tl_catalog_price']['price']     = array('Price','Please enter the price.');
 $GLOBALS['TL_LANG']['tl_catalog_price']['date']      = array('Date','Please enter the date .');
-$GLOBALS['TL_LANG']['tl_catalog_price']['published'] = array('Publish price'.'Please enter the .');
+$GLOBALS['TL_LANG']['tl_catalog_price']['published'] = array('Publish price','Please enter the .');
 
 
 /**
