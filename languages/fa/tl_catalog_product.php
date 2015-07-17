@@ -8,8 +8,9 @@
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2015-07-15T17:10:29+04:30
+ * last-updated: 2015-07-17T12:08:41+04:30
  */
+
 
 $GLOBALS['TL_LANG']['tl_catalog_product']['addEnclosure']['0']  = 'افزودن پیوست';
 $GLOBALS['TL_LANG']['tl_catalog_product']['addEnclosure']['1']  = 'لطفا یک یا چند پرونده قابل دانلود اضافه نمایید.';
@@ -36,7 +37,6 @@ $GLOBALS['TL_LANG']['tl_catalog_product']['featured']['0']      = 'کالای و
 $GLOBALS['TL_LANG']['tl_catalog_product']['featured']['1']      = 'کالا را در فهرست ویژه نمایش می‌دهد.';
 $GLOBALS['TL_LANG']['tl_catalog_product']['image_legend']       = 'تنظیمات تصویر';
 $GLOBALS['TL_LANG']['tl_catalog_product']['languageMain']['0']  = 'کالای اصلی';
-$GLOBALS['TL_LANG']['tl_catalog_product']['languageMain']['1']  = 'کالای دسته‌بندی اصلی برابر با این کالا را انتخاب انتخاب نمایید';
 $GLOBALS['TL_LANG']['tl_catalog_product']['mainID']['0']        = 'کالا اصلی';
 $GLOBALS['TL_LANG']['tl_catalog_product']['mainID']['1']        = 'لطفا کالا اصلی را انتخاب نمایید.';
 $GLOBALS['TL_LANG']['tl_catalog_product']['model']['0']         = 'مدل کالا';
@@ -49,7 +49,6 @@ $GLOBALS['TL_LANG']['tl_catalog_product']['publish_legend']     = 'تنظیما�
 $GLOBALS['TL_LANG']['tl_catalog_product']['published']['0']     = 'انتشار کالا';
 $GLOBALS['TL_LANG']['tl_catalog_product']['published']['1']     = 'کالا را در وب‌سایت قابل دیدن می‌نماید.';
 $GLOBALS['TL_LANG']['tl_catalog_product']['related']['0']       = 'کالاهای مرتبط';
-$GLOBALS['TL_LANG']['tl_catalog_product']['related']['1']       = 'کالاهای مرتبط این محصول در این دسته‌بندی را انتخاب نمایید.';
 $GLOBALS['TL_LANG']['tl_catalog_product']['related_legend']     = 'محصولات مرتبط';
 $GLOBALS['TL_LANG']['tl_catalog_product']['sameDay']            = 'همان روز';
 $GLOBALS['TL_LANG']['tl_catalog_product']['show']['0']          = 'جزئیات کالا';

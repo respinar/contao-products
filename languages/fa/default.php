@@ -8,8 +8,9 @@
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2015-07-15T17:10:29+04:30
+ * last-updated: 2015-07-17T12:08:39+04:30
  */
+
 
 $GLOBALS['TL_LANG']['MSC']['emptyCatalog']      = 'کالایی وجود ندارد!';
 $GLOBALS['TL_LANG']['MSC']['features']          = 'ویژگی‌ها';

@@ -8,15 +8,15 @@
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2015-07-15T17:35:31+04:30
+ * last-updated: 2015-07-17T12:08:41+04:30
  */
+
 
 $GLOBALS['TL_LANG']['tl_module']['all_product']               = 'همه کالاها';
 $GLOBALS['TL_LANG']['tl_module']['catalog_detailModule']['0'] = 'ماژول جزئیات کالا';
 $GLOBALS['TL_LANG']['tl_module']['catalog_detailModule']['1'] = 'به صورت خودکار به ماژول کالا تعویض می‌شود اگر آیتمی انتخاب شده بود.';
 $GLOBALS['TL_LANG']['tl_module']['catalog_featured']['0']     = 'کالاهای ویژه';
 $GLOBALS['TL_LANG']['tl_module']['catalog_featured']['1']     = 'اینجا می‌توانید چگونگی بکارگیری محصولات ویژه را  انتخاب نمایید.';
-$GLOBALS['TL_LANG']['tl_module']['catalog_legend']            = 'دسته‌بندی';
 $GLOBALS['TL_LANG']['tl_module']['catalog_metaFields']['0']   = 'متا فیلد';
 $GLOBALS['TL_LANG']['tl_module']['catalog_metaFields']['1']   = 'اینجا می‌توانید فیلدهای متا را انتخاب نمایید.';
 $GLOBALS['TL_LANG']['tl_module']['catalog_sortBy']['0']       = 'مرتب سازی';
