@@ -29,8 +29,8 @@ $GLOBALS['TL_LANG']['tl_catalog_product']['published']    = array('Publish produ
 $GLOBALS['TL_LANG']['tl_catalog_product']['featured']     = array('Feature product','Show the product item in a featured list.');
 $GLOBALS['TL_LANG']['tl_catalog_product']['start']        = array('Show from','Do not show the product item on the website before this day.');
 $GLOBALS['TL_LANG']['tl_catalog_product']['stop']         = array('Show until','Do not show the product item on the website on and after this day.');
-$GLOBALS['TL_LANG']['tl_catalog_product']['languageMain'] = array('Master product','Choose the product in the master category equaling this product.');
-$GLOBALS['TL_LANG']['tl_catalog_product']['related']      = array('Related products','Choose related products in this category to this product.');
+$GLOBALS['TL_LANG']['tl_catalog_product']['languageMain'] = array('Master product','Choose the product in the master catalog equaling this product.');
+$GLOBALS['TL_LANG']['tl_catalog_product']['related']      = array('Related products','Choose related products in this catalog to this product.');
 
 /**
  * Legends
@@ -49,7 +49,7 @@ $GLOBALS['TL_LANG']['tl_catalog_product']['publish_legend']     = 'Publish setti
 /**
  * Buttons
  */
-$GLOBALS['TL_LANG']['tl_catalog_product']['new']    = array('New Product','Create a new product');
+$GLOBALS['TL_LANG']['tl_catalog_product']['new']    = array('Add Product','Add a new product');
 $GLOBALS['TL_LANG']['tl_catalog_product']['show']   = array('Product details','Show the details of product ID %s');
 $GLOBALS['TL_LANG']['tl_catalog_product']['edit']   = array('Edit product','Edit product ID %s');
 $GLOBALS['TL_LANG']['tl_catalog_product']['cut']    = array('Move product','Move product ID %s');

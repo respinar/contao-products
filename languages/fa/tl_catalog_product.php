@@ -8,9 +8,8 @@
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2015-07-15T17:10:18+04:30
+ * last-updated: 2015-07-15T17:10:29+04:30
  */
-
 
 $GLOBALS['TL_LANG']['tl_catalog_product']['addEnclosure']['0']  = 'افزودن پیوست';
 $GLOBALS['TL_LANG']['tl_catalog_product']['addEnclosure']['1']  = 'لطفا یک یا چند پرونده قابل دانلود اضافه نمایید.';
@@ -38,12 +37,12 @@ $GLOBALS['TL_LANG']['tl_catalog_product']['featured']['1']      = 'کالا را
 $GLOBALS['TL_LANG']['tl_catalog_product']['image_legend']       = 'تنظیمات تصویر';
 $GLOBALS['TL_LANG']['tl_catalog_product']['languageMain']['0']  = 'کالای اصلی';
 $GLOBALS['TL_LANG']['tl_catalog_product']['languageMain']['1']  = 'کالای دسته‌بندی اصلی برابر با این کالا را انتخاب انتخاب نمایید';
-$GLOBALS['TL_LANG']['tl_catalog_product']['mainID']['0']        = 'محصول اصلی';
-$GLOBALS['TL_LANG']['tl_catalog_product']['mainID']['1']        = 'لطفا محصول اصلی را انتخاب نمایید.';
+$GLOBALS['TL_LANG']['tl_catalog_product']['mainID']['0']        = 'کالا اصلی';
+$GLOBALS['TL_LANG']['tl_catalog_product']['mainID']['1']        = 'لطفا کالا اصلی را انتخاب نمایید.';
 $GLOBALS['TL_LANG']['tl_catalog_product']['model']['0']         = 'مدل کالا';
 $GLOBALS['TL_LANG']['tl_catalog_product']['model']['1']         = 'لطفا مدل کالا را وارد نمایید.';
-$GLOBALS['TL_LANG']['tl_catalog_product']['new']['0']           = 'کالای جدید';
-$GLOBALS['TL_LANG']['tl_catalog_product']['new']['1']           = 'ایجاد کالای جدید';
+$GLOBALS['TL_LANG']['tl_catalog_product']['new']['0']           = 'افزودن کالا';
+$GLOBALS['TL_LANG']['tl_catalog_product']['new']['1']           = 'افزودن یک کالای جدید';
 $GLOBALS['TL_LANG']['tl_catalog_product']['otherDay']           = 'روزهای دیگر';
 $GLOBALS['TL_LANG']['tl_catalog_product']['protected_legend']   = 'حفاظت دسترسی';
 $GLOBALS['TL_LANG']['tl_catalog_product']['publish_legend']     = 'تنظیمات انتشار';
@@ -66,7 +65,7 @@ $GLOBALS['TL_LANG']['tl_catalog_product']['title']['1']         = 'لطفا عن
 $GLOBALS['TL_LANG']['tl_catalog_product']['title_legend']       = 'عنوان کالا';
 $GLOBALS['TL_LANG']['tl_catalog_product']['type']['0']          = 'نوع کالا';
 $GLOBALS['TL_LANG']['tl_catalog_product']['type']['1']          = 'لطفا نوع کالا را انتخاب نمایید.';
-$GLOBALS['TL_LANG']['tl_catalog_product']['type']['default']    = 'محصول اصلی';
+$GLOBALS['TL_LANG']['tl_catalog_product']['type']['default']    = 'کالا اصلی';
 $GLOBALS['TL_LANG']['tl_catalog_product']['type']['other']      = 'نوع';
 $GLOBALS['TL_LANG']['tl_catalog_product']['type_legend']        = 'نوع';
 

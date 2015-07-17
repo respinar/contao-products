@@ -1,5 +1,5 @@
 <?php
-	
+
 /**
  * Contao Open Source CMS
  *
@@ -10,13 +10,13 @@
  * @license   LGPL-3.0+
  * @copyright 2014-2015
  */
- 
+
 
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_user']['catalogs'] = array('Allowed Catalog categories', 'Here you can grant access to one or more Catalog categories.');
-$GLOBALS['TL_LANG']['tl_user']['catalogp'] = array('Catalog category permissions', 'Here you can define the Catalog category permissions.');
+$GLOBALS['TL_LANG']['tl_user']['catalogs'] = array('Allowed Catalogs', 'Here you can grant access to one or more Catalogs.');
+$GLOBALS['TL_LANG']['tl_user']['catalogp'] = array('Catalog permissions', 'Here you can define the catalog permissions.');
 
 
 /**

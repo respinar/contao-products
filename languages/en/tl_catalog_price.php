@@ -30,7 +30,7 @@ $GLOBALS['TL_LANG']['tl_catalog_price']['publish_legend']     = 'Publish setting
 /**
  * Buttons
  */
-$GLOBALS['TL_LANG']['tl_catalog_price']['new']    = array('New Price','Add a new price');
+$GLOBALS['TL_LANG']['tl_catalog_price']['new']    = array('Add Price','Add a new price');
 $GLOBALS['TL_LANG']['tl_catalog_price']['show']   = array('Price details', 'Show the details of price ID %s');
 $GLOBALS['TL_LANG']['tl_catalog_price']['edit']   = array('Edit price','Edit price ID %s');
 $GLOBALS['TL_LANG']['tl_catalog_price']['delete'] = array('Delete price','Delete price ID %s');
