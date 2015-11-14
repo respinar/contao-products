@@ -67,14 +67,14 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 			'edit' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_product']['edit'],
-				'href'                => 'act=edit',
+				'href'                => 'table=tl_content',
 				'icon'                => 'edit.gif'
 			),
-			'editpage' => array
+			'editheader' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_product']['editpage'],
-				'href'                => 'table=tl_content',
-				'icon'                => 'system/modules/catalog/assets/page.png'
+				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_product']['editheader'],
+				'href'                => 'act=edit',
+				'icon'                => 'header.gif'
 			),
 			'price' => array
 			(
@@ -127,15 +127,11 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('type','addEnclosure','published'),
-		'default'                     => '{type_legend},type;{title_legend},title,alias,model;{config_legend:hide},featured,date;
-		                                  {image_legend},singleSRC;{meta_legend},description;
+		'__selector__'                => array('addEnclosure','published'),
+		'default'                     => '{title_legend},title,alias,model;{config_legend:hide},date,featured;
+		                                  {image_legend},singleSRC;{images_legend:hide},multiSRC;{meta_legend},description;
 		                                  {related_legend},related;{enclosure_legend:hide},addEnclosure;
 		                                  {publish_legend},published',
-		'other'                       => '{type_legend},type,mainID;{title_legend},title,alias,model;{config_legend:hide},featured,date;
-		                                  {image_legend},singleSRC;{meta_legend},metaDescription,metaKeywords;
-		                                  {related_legend},related;{enclosure_legend:hide},addEnclosure;
-		                                  {publish_legend},published'
 	),
 
 	// Subpalettes
@@ -166,26 +162,6 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 		(
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
-		'type' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['type'],
-			'default'                 => 'default',
-			'filter'                  => true,
-			'inputType'               => 'select',
-			'options'                 => array('default', 'other'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_catalog_product']['type'],
-			'eval'                    => array('helpwizard'=>true, 'submitOnChange'=>true, 'tl_class'=>'w50'),
-			'sql'                     => "varchar(15) NOT NULL default ''"
-		),
-		'mainID' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['mainID'],
-			'foreignKey'              => 'tl_catalog_product.title',
-			'options_callback'        => array('tl_catalog_product', 'getProducts'),
-			'inputType'               => 'select',
-			'relation'                => array('type'=>'belongsTo', 'load'=>'eager'),
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
-		),
 		'title' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['title'],
@@ -200,7 +176,6 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['alias'],
 			'exclude'                 => true,
 			'search'                  => true,
-			'sorting'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'rgxp'=>'alias','unique'=>true,'maxlength'=>128, 'tl_class'=>'w50'),
 			'save_callback' => array
@@ -232,7 +207,6 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 			'default'                 => time(),
 			'exclude'                 => true,
 			'filter'                  => true,
-			'sorting'                 => true,
 			'flag'                    => 8,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'date', 'doNotCopy'=>true, 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
@@ -254,6 +228,23 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 			'inputType'               => 'fileTree',
 			'eval'                    => array('mandatory'=>true,'fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes']),
 			'sql'                     => "binary(16) NULL"
+		),
+		'multiSRC' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['multiSRC'],
+			'exclude'                 => true,
+			'inputType'               => 'fileTree',
+			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'orderField'=>'orderSRC', 'files'=>true),
+			'sql'                     => "blob NULL",
+			'load_callback' => array
+			(
+				array('tl_catalog_product', 'setMultiSrcFlags')
+			)
+		),
+		'orderSRC' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['orderSRC'],
+			'sql'                     => "blob NULL"
 		),
 		'addEnclosure' => array
 		(
@@ -322,8 +313,8 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
  */
 class tl_catalog_product extends Backend
 {
-	
-	
+
+
 	/**
 	 * Import the back end user object
 	 */
@@ -383,7 +374,7 @@ class tl_catalog_product extends Backend
 			$strImage = \Image::getHtml(\Image::get($objImage->path, '80', '60', 'center_center'));
 		}
 
-		return '<div><div style="float:left; margin-right:10px;">'.$strImage.'</div>'. $arrRow['title']. ' ['. $arrRow['type'] . ']</div>';
+		return '<div><div style="float:left; margin-right:10px;">'.$strImage.'</div>'. $arrRow['title']. ' ['. $arrRow['model'] . ']</div>';
 	}
 
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
@@ -571,12 +562,12 @@ class tl_catalog_product extends Backend
 	public function getProducts(DataContainer $dc)
 	{
 
-		$objItems = $this->Database->prepare("SELECT * FROM tl_catalog_product WHERE pid=? AND type='default' ORDER BY date DESC")->execute($dc->activeRecord->pid);
+		$objItems = $this->Database->prepare("SELECT * FROM tl_catalog_product WHERE pid=? ORDER BY date DESC")->execute($dc->activeRecord->pid);
 
 		while( $objItems->next() )
 		{
 			if ($objItems->id !== $dc->activeRecord->id) {
-				$arrItems[$objItems->id] = $objItems->title . ' (' . $objItems->model . ')' ;
+				$arrItems[$objItems->id] = $objItems->title . ' [' . $objItems->model . ']' ;
 			}
 		}
 
@@ -611,6 +602,26 @@ class tl_catalog_product extends Backend
 		{
 			$GLOBALS['TL_DCA']['tl_catalog_product']['palettes']['regular'] = preg_replace('@([,|;]{1}language)([,|;]{1})@','$1,languageMain$2', $GLOBALS['TL_DCA']['tl_catalog_product']['palettes']['regular']);
 		}
+	}
+
+
+	/**
+	 * Dynamically add flags to the "multiSRC" field
+	 * @param mixed
+	 * @param \DataContainer
+	 * @return mixed
+	 */
+	public function setMultiSrcFlags($varValue, DataContainer $dc)
+	{
+		if ($dc->activeRecord)
+		{
+
+			$GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['isGallery'] = true;
+			$GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['extensions'] = Config::get('validImageTypes');
+
+		}
+
+		return $varValue;
 	}
 
 
