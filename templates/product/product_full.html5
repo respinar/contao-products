@@ -6,43 +6,18 @@
 
   <?php if ($this->hasMetaFields): ?>
     <p class="info"><time datetime="<?php echo $this->datetime; ?>"><?php echo $this->date; ?></time></p>
-  <?php endif; ?>
+  <?php endif; ?>  
 
-
-  <figure class="image_container<?php echo $this->floatClass; ?>"<?php if ($this->margin): ?> style="<?php echo $this->margin; ?>"<?php endif; ?>>
-
-      <?php if ($this->href): ?>
-        <a href="<?php echo $this->href; ?>"<?php echo $this->attributes; ?> title="<?php echo $this->alt; ?>">
-      <?php endif; ?>
-
-      <?php $this->insert('picture_default', $this->picture); ?>
-
-      <?php if ($this->href): ?>
-        </a>
-      <?php endif; ?>
-
-      <?php if ($this->caption): ?>
-        <figcaption class="caption" style="width:<?php echo $this->arrSize[0]; ?>px"><?php echo $this->caption; ?></figcaption>
-      <?php endif; ?>
-
-      <div class="tag_container">
-          <?php if ($this->featured): ?><div class="featured"></div><?php endif; ?>
-          <?php if ($this->new_product): ?><div class="new"></div><?php endif; ?>
-      </div>
-
-
-  </figure>
-
+  <?php if ($this->text): ?>
+    <?php echo $this->text; ?>
+  <?php endif; ?> 
+  
   <?php if ($this->enclosure): ?>
     <div class="enclosure">
       <?php foreach ($this->enclosure as $enclosure): ?>
         <p><img src="<?php echo $enclosure['icon']; ?>" width="18" height="18" alt="<?php echo $enclosure['mime']; ?>" class="mime_icon"> <a href="<?php echo $enclosure['href']; ?>" title="<?php echo $enclosure['title']; ?>"><?php echo $enclosure['link']; ?> <span class="size">(<?php echo $enclosure['filesize']; ?>)</span></a></p>
       <?php endforeach; ?>
     </div>
-  <?php endif; ?>
-
-  <?php if ($this->text): ?>
-    <?php echo $this->text; ?>
   <?php endif; ?>
 
 </div>
