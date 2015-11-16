@@ -104,7 +104,7 @@ class ModuleCatalogDetail extends \ModuleCatalog
 
 			$objProducts = \CatalogProductModel::findPublishedByIds($objProduct->related);
 
-			$this->Template->relateds = $this->parseRelateds($objProducts);
+			//$this->Template->relateds = $this->parseRelateds($objProducts);
 		}
 
 
