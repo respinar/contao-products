@@ -15,13 +15,21 @@
 /**
  * Back end modules
  */
-array_insert($GLOBALS['BE_MOD']['content'], 1, array
+array_insert($GLOBALS['BE_MOD'], 1, array
 (
-	'catalog' => array
+	'catalog' => array	
 	(
-		'tables'     => array('tl_catalog','tl_catalog_product','tl_catalog_price','tl_content'),
-		'icon'       => 'system/modules/catalog/assets/icon.png',
-	)
+		'products' => array
+		(
+			'tables'     => array('tl_catalog','tl_catalog_product','tl_content'),
+			'icon'       => 'system/modules/catalog/assets/icon.png',
+		),
+		//'prices' => array
+		//(
+		//	'tables'     => array('tl_catalog_price_category','tl_catalog_price'),
+		//	'icon'       => 'system/modules/catalog/assets/price.png',
+		//),		
+	),	
 ));
 
 /**
