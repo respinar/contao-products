@@ -1,6 +1,6 @@
 
-<div class="block<?php echo $this->class; ?>">
+<div class="block<??= $this->class; ?>">
 
-  <a href="<?php echo $this->link; ?>"><?php echo $this->title; ?></a>
+  <a href="<??= $this->link; ?>"><??= $this->title; ?></a>
 
 </div>
