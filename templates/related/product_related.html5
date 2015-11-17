@@ -1,10 +1,10 @@
 
-<div class="related_product<?php echo $this->class; ?>">
+<div class="related_product<?= $this->class; ?>">
 
-  <figure class="image_container<?php echo $this->floatClass; ?>"<?php if ($this->margin): ?> style="<?php echo $this->margin; ?>"<?php endif; ?>>
+  <figure class="image_container<?= $this->floatClass; ?>"<?php if ($this->margin): ?> style="<?= $this->margin; ?>"<?php endif; ?>>
 
       <?php if ($this->link): ?>
-        <a href="<?php echo $this->link; ?>"<?php echo $this->attributes; ?> title="<?php echo $this->alt; ?>">
+        <a href="<?= $this->link; ?>"<?= $this->attributes; ?> title="<?= $this->alt; ?>">
       <?php endif; ?>
 
       <?php $this->insert('picture_default', $this->picture); ?>
@@ -14,16 +14,18 @@
       <?php endif; ?>
 
       <?php if ($this->caption): ?>
-        <figcaption class="caption" style="width:<?php echo $this->arrSize[0]; ?>px"><?php echo $this->caption; ?></figcaption>
+        <figcaption class="caption" style="width:<?= $this->arrSize[0]; ?>px"><?= $this->caption; ?></figcaption>
       <?php endif; ?>
 
-      <?php if ($this->featured): ?><div class="featured"></div><?php endif; ?>
-      <?php if ($this->new_product): ?><div class="new"></div><?php endif; ?>
+      <div class="tag_container">
+          <?php if ($this->featured): ?><div class="featured"></div><?php endif; ?>
+          <?php if ($this->new_product): ?><div class="new"></div><?php endif; ?>
+      </div>
 
   </figure>
 
 
-  <div class="title"><a href="<?php echo $this->link; ?>"><?php echo $this->title; ?> (<?php echo $this->model; ?>)</a></div>
+  <div class="title"><a href="<?= $this->link; ?>"><?= $this->title; ?> (<?= $this->model; ?>)</a></div>
 
 
 </div>
