@@ -22,7 +22,7 @@ $GLOBALS['TL_DCA']['tl_catalog_price'] = array
 	'config' => array
 	(
 		'dataContainer'               => 'Table',
-		'ptable'                      => 'tl_catalog_product',
+		'ptable'                      => 'tl_catalog_price_category',
 		'enableVersioning'            => true,
 		'sql' => array
 		(
