@@ -23,7 +23,7 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 	(
 		'dataContainer'               => 'Table',
 		'ptable'                      => 'tl_catalog',
-		'ctable'                      => array('tl_content','tl_catalog_price'),
+		'ctable'                      => array('tl_content'),
 		'switchToEdit'                => true,
 		'enableVersioning'            => true,
 		'onload_callback'             => array
@@ -75,12 +75,6 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_product']['editheader'],
 				'href'                => 'act=edit',
 				'icon'                => 'header.gif'
-			),
-			'price' => array
-			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_product']['price'],
-				'href'                => 'table=tl_catalog_price',
-				'icon'                => 'system/modules/catalog/assets/price.png'
 			),
 			'copy' => array
 			(
@@ -487,7 +481,7 @@ class tl_catalog_product extends Backend
 		// Check permissions to feature
 		if (!$this->User->hasAccess('tl_catalog_product::featured', 'alexf'))
 		{
-			$this->log('Not enough permissions to feature/unfeature news item ID "'.$intId.'"', __METHOD__, TL_ERROR);
+			$this->log('Not enough permissions to feature/unfeature products item ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -495,9 +489,9 @@ class tl_catalog_product extends Backend
 		$objVersions->initialize();
 
 		// Trigger the save_callback
-		if (is_array($GLOBALS['TL_DCA']['tl_news']['fields']['featured']['save_callback']))
+		if (is_array($GLOBALS['TL_DCA']['tl_catalog_product']['fields']['featured']['save_callback']))
 		{
-			foreach ($GLOBALS['TL_DCA']['tl_news']['fields']['featured']['save_callback'] as $callback)
+			foreach ($GLOBALS['TL_DCA']['tl_catalog_product']['fields']['featured']['save_callback'] as $callback)
 			{
 				if (is_array($callback))
 				{
