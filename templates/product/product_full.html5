@@ -8,7 +8,7 @@
 
   <?php if ($this->hasMetaFields): ?>
     <p class="info"><time datetime="<?= $this->datetime; ?>"><?= $this->date; ?></time></p>
-  <?php endif; ?>  
+  <?php endif; ?>
 
   <?php if ($this->text): ?>
     <?= $this->text; ?>
