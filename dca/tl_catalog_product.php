@@ -123,7 +123,7 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 	(
 		'__selector__'                => array('addEnclosure','published'),
 		'default'                     => '{title_legend},title,alias,model;{config_legend:hide},date,featured;
-		                                  {image_legend},singleSRC;{images_legend:hide},multiSRC;{meta_legend},description;
+		                                  {image_legend},singleSRC;{meta_legend},description;
 		                                  {related_legend},related;{enclosure_legend:hide},addEnclosure;
 		                                  {publish_legend},published',
 	),
@@ -222,23 +222,6 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 			'inputType'               => 'fileTree',
 			'eval'                    => array('mandatory'=>true,'fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes']),
 			'sql'                     => "binary(16) NULL"
-		),
-		'multiSRC' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['multiSRC'],
-			'exclude'                 => true,
-			'inputType'               => 'fileTree',
-			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'orderField'=>'orderSRC', 'files'=>true),
-			'sql'                     => "blob NULL",
-			'load_callback' => array
-			(
-				array('tl_catalog_product', 'setMultiSrcFlags')
-			)
-		),
-		'orderSRC' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['orderSRC'],
-			'sql'                     => "blob NULL"
 		),
 		'addEnclosure' => array
 		(
@@ -561,7 +544,11 @@ class tl_catalog_product extends Backend
 		while( $objItems->next() )
 		{
 			if ($objItems->id !== $dc->activeRecord->id) {
-				$arrItems[$objItems->id] = $objItems->title . ' [' . $objItems->model . ']' ;
+				if ($objItems->model) {
+					$arrItems[$objItems->id] = $objItems->title . ' [' . $objItems->model . ']' ;					
+				} else {
+					$arrItems[$objItems->id] = $objItems->title;
+				}
 			}
 		}
 
