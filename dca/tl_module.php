@@ -24,7 +24,7 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['catalog_list']    = '{title_legend}
 $GLOBALS['TL_DCA']['tl_module']['palettes']['catalog_detail']  = '{title_legend},name,headline,type;
                                                                   {catalog_legend},catalogs;
                                                                   {template_legend},catalog_metaFields,customTpl;
-                                                                  {product_legend},product_template,imgSize,fullsize;
+                                                                  {product_legend},product_template;
                                                                   {type_legend},type_show,type_template,type_perRow,type_Class,type_imgSize;
                                                                   {related_legend},related_show,related_template,related_perRow,related_Class,related_imgSize;
                                                                   {protected_legend:hide},protected;
