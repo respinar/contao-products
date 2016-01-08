@@ -206,6 +206,8 @@ abstract class ModuleCatalog extends \Module
 		{
 			$arrProducts[] = $this->parseProduct($objProducts, $blnAddCategory, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % $this->product_perRow) == 0) ? ' last_col' : '') . ((($count % $this->product_perRow) == 1) ? ' first_col' : ''), $count);
 		}
+        
+        $arrProducts = array_chunk($arrProducts,$this->product_perRow);
 
 		return $arrProducts;
 	}
@@ -376,6 +378,7 @@ abstract class ModuleCatalog extends \Module
 		{
 			$arrProducts[] = $this->parseRelated($objProducts, $blnAddCategory, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % $this->related_perRow) == 0) ? ' last_col' : '') . ((($count % $this->related_perRow) == 1) ? ' first_col' : ''), $count);
 		}
+        
 		return $arrProducts;
 	}
 

@@ -5,7 +5,7 @@
   <?php if (empty($this->products)): ?>
     <p class="empty"><?php echo $this->empty; ?></p>
   <?php else: ?>
-    <?php echo implode('', $this->products); ?>
+    <?php foreach($this->products as $products) { echo '<div class="row">'.implode('', $products).'</div>'; } ?>
     <?php echo $this->pagination; ?>
   <?php endif; ?>
 
