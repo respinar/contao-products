@@ -1,7 +1,7 @@
 
 <div class="product_full<?= $this->class; ?>">
 
-  <h2><?= $this->title; ?></h2>
+  <h1><?= $this->title; ?></h1>
   <?php if($this->model): ?>
   <p class="model"><?= $this->model_text; ?>: <?= $this->model; ?></p>
   <?php endif; ?>
