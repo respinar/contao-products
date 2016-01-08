@@ -44,9 +44,8 @@ ClassLoader::addClasses(array
 TemplateLoader::addFiles(array
 (
 	'mod_catalog_list'   => 'system/modules/catalog/templates/modules',
-	'mod_catalog_detail' => 'system/modules/catalog/templates/modules',
-	'product_related'    => 'system/modules/catalog/templates/related',
-	'product_list'       => 'system/modules/catalog/templates/product',
+	'mod_catalog_detail' => 'system/modules/catalog/templates/modules',	
 	'product_full'       => 'system/modules/catalog/templates/product',
 	'product_short'      => 'system/modules/catalog/templates/product',
+    'related_short'      => 'system/modules/catalog/templates/related',
 ));
