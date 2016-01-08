@@ -24,7 +24,7 @@ namespace catalog;
  * @author     Hamid Abbaszadeh
  * @package    Devtools
  */
-class CatalogCategoryModel extends \Model
+class CatalogModel extends \Model
 {
 
 	/**
