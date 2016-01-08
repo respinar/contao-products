@@ -101,7 +101,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_perRow'] = array
 	'default'              => '4',
 	'exclude'              => true,
 	'inputType'            => 'select',
-	'options'              => array('1','2','3','4','6','12'),
+	'options'              => array('1','2','3','4','5','6','7','8','9','10','11','12'),
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );
@@ -157,7 +157,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['type_perRow'] = array
 	'default'              => '4',
 	'exclude'              => true,
 	'inputType'            => 'select',
-	'options'              => array('1','2','3','4','6','12'),
+	'options'              => array('1','2','3','4','5','6','7','8','9','10','11','12'),
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );
@@ -175,7 +175,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['related_template'] = array
 	'default'              => 'product_related',
 	'exclude'              => true,
 	'inputType'            => 'select',
-	'options_callback'     => array('tl_module_catalog', 'getProductTemplates'),
+	'options_callback'     => array('tl_module_catalog', 'getRelatedTemplates'),
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );
@@ -194,7 +194,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['related_perRow'] = array
 	'default'              => '4',
 	'exclude'              => true,
 	'inputType'            => 'select',
-	'options'              => array('1','2','3','4','6','12'),
+	'options'              => array('1','2','3','4','5','6','7','8','9','10','11','12'),
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );
@@ -255,6 +255,16 @@ class tl_module_catalog extends Backend
 	public function getProductTemplates(DataContainer $dc)
 	{
 		return $this->getTemplateGroup('product_', $dc->activeRecord->pid);
+	}
+    
+    /**
+	 * Return all prices templates as array
+	 * @param object
+	 * @return array
+	 */
+	public function getRelatedTemplates(DataContainer $dc)
+	{
+		return $this->getTemplateGroup('related_', $dc->activeRecord->pid);
 	}
 
 	/**
