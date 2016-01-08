@@ -38,7 +38,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['catalogs'] = array
 	'label'                => &$GLOBALS['TL_LANG']['tl_module']['catalogs'],
 	'exclude'              => true,
 	'inputType'            => 'checkbox',
-	'options_callback'     => array('tl_module_catalog', 'getCategories'),
+	'options_callback'     => array('tl_module_catalog', 'getCatalogs'),
 	'eval'                 => array('multiple'=>true, 'mandatory'=>true),
     'sql'                  => "blob NULL"
 );
@@ -226,25 +226,25 @@ class tl_module_catalog extends Backend
 	 * Get all news archives and return them as array
 	 * @return array
 	 */
-	public function getCategories()
+	public function getCatalogs()
 	{
 		//if (!$this->User->isAdmin && !is_array($this->User->news))
 		//{
 		//	return array();
 		//}
 
-		$arrCategories = array();
-		$objCategories = $this->Database->execute("SELECT id, title FROM tl_catalog ORDER BY title");
+		$arrCatalogs = array();
+		$objCatalogs = $this->Database->execute("SELECT id, title FROM tl_catalog ORDER BY title");
 
-		while ($objCategories->next())
+		while ($objCatalogs->next())
 		{
 			//if ($this->User->hasAccess($objArchives->id, 'news'))
 			//{
-				$arrCategories[$objCategories->id] = $objCategories->title;
+				$arrCatalogs[$objCatalogs->id] = $objCatalogs->title;
 			//}
 		}
 
-		return $arrCategories;
+		return $arrCatalogs;
 	}
 
 	/**
