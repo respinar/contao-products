@@ -13,19 +13,20 @@
 
 
 /**
- * Table tl_catalog_category
+ * Table tl_catalog
  */
-$GLOBALS['TL_DCA']['tl_catalog_category'] = array
+$GLOBALS['TL_DCA']['tl_catalog'] = array
 (
 
 	// Config
 	'config' => array
 	(
-		'dataContainer'               => 'Table',		
+		'dataContainer'               => 'Table',
+		'ctable'                      => array('tl_catalog_product'),
 		'enableVersioning'            => true,
 		'onload_callback' => array
 		(
-			array('tl_catalog_category', 'checkPermission')
+			array('tl_catalog', 'checkPermission')
 		),
 		'sql' => array
 		(
@@ -65,28 +66,35 @@ $GLOBALS['TL_DCA']['tl_catalog_category'] = array
 		(
 			'edit' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_category']['edit'],
-				'href'                => 'act=edit',
+				'label'               => &$GLOBALS['TL_LANG']['tl_catalog']['edit'],
+				'href'                => 'table=tl_catalog_product',
 				'icon'                => 'edit.gif'
+			),
+			'editheader' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_catalog']['editheader'],
+				'href'                => 'act=edit',
+				'icon'                => 'header.gif',
+				'button_callback'     => array('tl_catalog', 'editHeader')
 			),
 			'copy' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_category']['copy'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_catalog']['copy'],
 				'href'                => 'act=copy',
 				'icon'                => 'copy.gif',
-				'button_callback'     => array('tl_catalog_category', 'copyCategory')
+				'button_callback'     => array('tl_catalog', 'copyCategory')
 			),
 			'delete' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_category']['delete'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_catalog']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
 				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"',
-				'button_callback'     => array('tl_catalog_category', 'deleteCategory')
+				'button_callback'     => array('tl_catalog', 'deleteCategory')
 			),
 			'show' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_catalog_category']['show'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_catalog']['show'],
 				'href'                => 'act=show',
 				'icon'                => 'show.gif'
 			)
@@ -119,7 +127,7 @@ $GLOBALS['TL_DCA']['tl_catalog_category'] = array
 		),
 		'title' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_category']['title'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog']['title'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
@@ -128,7 +136,7 @@ $GLOBALS['TL_DCA']['tl_catalog_category'] = array
 		),
 		'language' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_category']['language'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog']['language'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'filter'                  => true,
@@ -138,16 +146,16 @@ $GLOBALS['TL_DCA']['tl_catalog_category'] = array
 		),
 		'master' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_category']['master'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog']['master'],
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options_callback'        => array('tl_catalog_category', 'getCategories'),
-			'eval'                    => array('includeBlankOption'=>true, 'blankOptionLabel'=>&$GLOBALS['TL_LANG']['tl_catalog_category']['isMaster']),
+			'options_callback'        => array('tl_catalog', 'getCategories'),
+			'eval'                    => array('includeBlankOption'=>true, 'blankOptionLabel'=>&$GLOBALS['TL_LANG']['tl_catalog']['isMaster']),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'jumpTo' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_category']['jumpTo'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog']['jumpTo'],
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
 			'foreignKey'              => 'tl_page.title',
@@ -157,7 +165,7 @@ $GLOBALS['TL_DCA']['tl_catalog_category'] = array
 		),
 		'protected' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_category']['protected'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog']['protected'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('submitOnChange'=>true),
@@ -165,7 +173,7 @@ $GLOBALS['TL_DCA']['tl_catalog_category'] = array
 		),
 		'groups' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_category']['groups'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog']['groups'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'foreignKey'              => 'tl_member_group.name',
@@ -177,7 +185,7 @@ $GLOBALS['TL_DCA']['tl_catalog_category'] = array
 );
 
 
-class tl_catalog_category extends Backend
+class tl_catalog extends Backend
 {
 
 	/**
@@ -210,12 +218,12 @@ class tl_catalog_category extends Backend
 			$root = $this->User->catalogs;
 		}
 
-		$GLOBALS['TL_DCA']['tl_catalog_category']['list']['sorting']['root'] = $root;
+		$GLOBALS['TL_DCA']['tl_catalog']['list']['sorting']['root'] = $root;
 
 		// Check permissions to add Catalog categories
 		if (!$this->User->hasAccess('create', 'catalogp'))
 		{
-			$GLOBALS['TL_DCA']['tl_catalog_category']['config']['closed'] = true;
+			$GLOBALS['TL_DCA']['tl_catalog']['config']['closed'] = true;
 		}
 
 		// Check current action
@@ -232,7 +240,7 @@ class tl_catalog_category extends Backend
 				{
 					$arrNew = $this->Session->get('new_records');
 
-					if (is_array($arrNew['tl_catalog_category']) && in_array(Input::get('id'), $arrNew['tl_catalog_category']))
+					if (is_array($arrNew['tl_catalog']) && in_array(Input::get('id'), $arrNew['tl_catalog']))
 					{
 						// Add permissions on user level
 						if ($this->User->inherit == 'custom' || !$this->User->groups[0])
@@ -328,7 +336,7 @@ class tl_catalog_category extends Backend
 	 */
 	public function editHeader($row, $href, $label, $title, $icon, $attributes)
 	{
-		return $this->User->canEditFieldsOf('tl_catalog_category') ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return $this->User->canEditFieldsOf('tl_catalog') ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -378,11 +386,11 @@ class tl_catalog_category extends Backend
 	public function getCategories(DataContainer $dc)
 	{
 		$arrCategories = array();
-		$objCategories = $this->Database->prepare("SELECT * FROM tl_catalog_category WHERE language!=? AND id!=? AND master=0 ORDER BY title")->execute($dc->activeRecord->language, $dc->id);
+		$objCategories = $this->Database->prepare("SELECT * FROM tl_catalog WHERE language!=? AND id!=? AND master=0 ORDER BY title")->execute($dc->activeRecord->language, $dc->id);
 
 		while( $objCategories->next() )
 		{
-			$arrCategories[$objCategories->id] = sprintf($GLOBALS['TL_LANG']['tl_catalog_category']['isSlave'], $objCategories->title);
+			$arrCategories[$objCategories->id] = sprintf($GLOBALS['TL_LANG']['tl_catalog']['isSlave'], $objCategories->title);
 		}
 
 		return $arrCategories;

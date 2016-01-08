@@ -31,6 +31,6 @@ class CatalogCategoryModel extends \Model
 	 * Name of the table
 	 * @var string
 	 */
-	protected static $strTable = 'tl_catalog_category';
+	protected static $strTable = 'tl_catalog';
 
 }
