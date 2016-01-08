@@ -34,9 +34,9 @@ $GLOBALS['TL_DCA']['tl_catalog_product'] = array
 		(
 			'keys' => array
 			(
-				'id'    => 'primary',
-				'pid'   => 'index',
-				'alias' => 'index'
+				'id' => 'primary',
+				'alias' => 'index',
+				'pid,start,stop,published' => 'index'
 			)
 		)
 	),
@@ -545,7 +545,7 @@ class tl_catalog_product extends Backend
 		{
 			if ($objItems->id !== $dc->activeRecord->id) {
 				if ($objItems->model) {
-					$arrItems[$objItems->id] = $objItems->title . ' [' . $objItems->model . ']' ;					
+					$arrItems[$objItems->id] = $objItems->title . ' [' . $objItems->model . ']' ;
 				} else {
 					$arrItems[$objItems->id] = $objItems->title;
 				}
