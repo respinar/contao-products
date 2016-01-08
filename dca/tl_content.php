@@ -14,10 +14,9 @@
 /**
  * Dynamically add the permission check and parent table
  */
-if (Input::get('do') == 'catalog')
+if (Input::get('do') == 'products')
 {
 	$GLOBALS['TL_DCA']['tl_content']['config']['ptable'] = 'tl_catalog_product';
-	//$GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'][] = array('tl_content_news', 'checkPermission');
 }
 
 
