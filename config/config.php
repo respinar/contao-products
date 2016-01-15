@@ -17,9 +17,9 @@
  */
 array_insert($GLOBALS['BE_MOD'], 1, array
 (
-	'catalog' => array	
+	'products' => array	
 	(
-		'products' => array
+		'catalog' => array
 		(
 			'tables'     => array('tl_catalog','tl_catalog_product','tl_content'),
 			'icon'       => 'system/modules/catalog/assets/icon.png',
