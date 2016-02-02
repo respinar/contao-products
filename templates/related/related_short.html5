@@ -25,7 +25,7 @@
   </figure>
 
 
-  <div class="title"><a href="<?= $this->link; ?>"><?= $this->title; ?> (<?= $this->model; ?>)</a></div>
+  <div class="title"><a href="<?= $this->link; ?>"><?= $this->title; ?> <?php if(!empty($this->model)): ?> (<?= $this->model; ?>) <?php endif; ?></a></div>
 
 
 </div>
