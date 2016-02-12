@@ -379,7 +379,10 @@ abstract class ModuleCatalog extends \Module
 		$arrProducts = array();
 		while ($objProducts->next())
 		{
-			$arrProducts[] = $this->parseRelated($objProducts, $blnAddCategory, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % $this->related_perRow) == 0) ? ' last_col' : '') . ((($count % $this->related_perRow) == 1) ? ' first_col' : ''), $count);
+            
+            $objProduct = $objProducts->current();
+            
+			$arrProducts[] = $this->parseRelated($objProduct, $blnAddCategory, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % $this->related_perRow) == 0) ? ' last_col' : '') . ((($count % $this->related_perRow) == 1) ? ' first_col' : ''), $count);
 		}
         
 		return $arrProducts;
