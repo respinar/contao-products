@@ -204,7 +204,10 @@ abstract class ModuleCatalog extends \Module
 
 		while ($objProducts->next())
 		{
-			$arrProducts[] = $this->parseProduct($objProducts, $blnAddCategory, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % $this->product_perRow) == 0) ? ' last_col' : '') . ((($count % $this->product_perRow) == 1) ? ' first_col' : ''), $count);
+            
+            $objProduct = $objProducts->current();
+            
+			$arrProducts[] = $this->parseProduct($objProduct, $blnAddCategory, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % $this->product_perRow) == 0) ? ' last_col' : '') . ((($count % $this->product_perRow) == 1) ? ' first_col' : ''), $count);
 		}
         
         $arrProducts = array_chunk($arrProducts,$this->product_perRow);
