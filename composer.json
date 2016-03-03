@@ -1,9 +1,9 @@
 {
-    "name": "respinar/contao-catalog",
+    "name": "respinar/contao-product",
     "description": "Products catalog for Contao",
     "keywords": ["contao", "product", "catalog"],
     "type": "contao-module",
-    "homepage": "https://github.com/respinar/contao-catalog",
+    "homepage": "https://github.com/respinar/contao-product",
     "license": "LGPL-3.0+",
     "authors": [
         {
@@ -14,7 +14,7 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/respinar/contao-catalog/issues"
+        "issues": "https://github.com/respinar/contao-product/issues"
     },
     "require": {
         "php": ">=5.3.2",
@@ -27,10 +27,10 @@
     "extra": {
         "contao": {
             "sources": {
-                "": "system/modules/catalog"
+                "": "system/modules/product"
             },
             "transifex": {
-                "project": "contao-catalog",
+                "project": "contao-product",
                 "prefix": "master-",
                 "languages_cto": "languages",
                 "languages_tx": ".tx"

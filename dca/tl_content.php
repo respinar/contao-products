@@ -3,20 +3,21 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2016 Leo Feyer
  *
- * @package News
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @package   product
+ * @author    Hamid Abbaszadeh
+ * @license   LGPL-3.0+
+ * @copyright 2014-2016
  */
 
 
 /**
  * Dynamically add the permission check and parent table
  */
-if (Input::get('do') == 'products')
+if (Input::get('do') == 'product')
 {
-	$GLOBALS['TL_DCA']['tl_content']['config']['ptable'] = 'tl_catalog_product';
+	$GLOBALS['TL_DCA']['tl_content']['config']['ptable'] = 'tl_product';
 }
 
 
@@ -28,7 +29,7 @@ if (Input::get('do') == 'products')
  * @author     Leo Feyer <https://contao.org>
  * @package    News
  */
-class tl_content_catalog_product extends Backend
+class tl_content_product extends Backend
 {
 
 	/**
@@ -89,7 +90,7 @@ class tl_content_catalog_product extends Backend
 					$this->redirect('contao/main.php?act=error');
 				}
 
-				$objCes = $this->Database->prepare("SELECT id FROM tl_content WHERE ptable='tl_news' AND pid=?")
+				$objCes = $this->Database->prepare("SELECT id FROM tl_content WHERE ptable='tl_product' AND pid=?")
 										 ->execute(CURRENT_ID);
 
 				$session = $this->Session->getData();
@@ -128,13 +129,13 @@ class tl_content_catalog_product extends Backend
 	{
 		if ($blnIsPid)
 		{
-			$objArchive = $this->Database->prepare("SELECT a.id, n.id AS nid FROM tl_news n, tl_news_archive a WHERE n.id=? AND n.pid=a.id")
+			$objArchive = $this->Database->prepare("SELECT a.id, n.id AS nid FROM tl_product n, tl_product_catalog a WHERE n.id=? AND n.pid=a.id")
 										 ->limit(1)
 										 ->execute($id);
 		}
 		else
 		{
-			$objArchive = $this->Database->prepare("SELECT a.id, n.id AS nid FROM tl_content c, tl_news n, tl_news_archive a WHERE c.id=? AND c.pid=n.id AND n.pid=a.id")
+			$objArchive = $this->Database->prepare("SELECT a.id, n.id AS nid FROM tl_content c, tl_product n, tl_product_catalog a WHERE c.id=? AND c.pid=n.id AND n.pid=a.id")
 										 ->limit(1)
 										 ->execute($id);
 		}
@@ -142,14 +143,14 @@ class tl_content_catalog_product extends Backend
 		// Invalid ID
 		if ($objArchive->numRows < 1)
 		{
-			$this->log('Invalid news content element ID ' . $id, __METHOD__, TL_ERROR);
+			$this->log('Invalid product content element ID ' . $id, __METHOD__, TL_ERROR);
 			return false;
 		}
 
 		// The news archive is not mounted
 		if (!in_array($objArchive->id, $root))
 		{
-			$this->log('Not enough permissions to modify article ID ' . $objArchive->nid . ' in news archive ID ' . $objArchive->id, __METHOD__, TL_ERROR);
+			$this->log('Not enough permissions to modify article ID ' . $objArchive->nid . ' in product catalog ID ' . $objArchive->id, __METHOD__, TL_ERROR);
 			return false;
 		}
 

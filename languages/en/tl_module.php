@@ -3,12 +3,12 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2015 Leo Feyer
+ * Copyright (c) 2005-2016 Leo Feyer
  *
- * @package   catalog
+ * @package   product
  * @author    Hamid Abbaszadeh
- * @license   GNU/LGPL
- * @copyright 2014-2015
+ * @license   LGPL-3.0+
+ * @copyright 2014-2016
  */
 
 

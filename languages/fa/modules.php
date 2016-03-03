@@ -4,7 +4,7 @@
  * or to help to maintain an existing one, please register at transifex.com.
  *
  * @link http://help.transifex.com/intro/translating.html
- * @link https://www.transifex.com/projects/p/contao-catalog/language/fa/
+ * @link https://www.transifex.com/projects/p/contao-product/language/fa/
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
@@ -12,11 +12,11 @@
  */
 
 
-$GLOBALS['TL_LANG']['FMD']['catalog']             = 'کاتالوگ';
-$GLOBALS['TL_LANG']['FMD']['catalog_detail']['0'] = 'جزئیات کالا';
-$GLOBALS['TL_LANG']['FMD']['catalog_detail']['1'] = 'جزئیات کالا';
-$GLOBALS['TL_LANG']['FMD']['catalog_list']['0']   = 'فهرست کاتالوگ';
-$GLOBALS['TL_LANG']['FMD']['catalog_list']['1']   = 'فهرست کالا';
-$GLOBALS['TL_LANG']['MOD']['catalog']['0']        = 'کاتالوگ';
-$GLOBALS['TL_LANG']['MOD']['catalog']['1']        = 'مدیریت کاتالوگ و کالاها';
+$GLOBALS['TL_LANG']['FMD']['products']            = 'کالاها';
+$GLOBALS['TL_LANG']['FMD']['product_detail']['0'] = 'جزئیات کالا';
+$GLOBALS['TL_LANG']['FMD']['product_detail']['1'] = 'جزئیات کالا';
+$GLOBALS['TL_LANG']['FMD']['product_list']['0']   = 'فهرست کالاها';
+$GLOBALS['TL_LANG']['FMD']['product_list']['1']   = 'فهرست کالا';
+$GLOBALS['TL_LANG']['MOD']['product']['0']        = 'کالاها';
+$GLOBALS['TL_LANG']['MOD']['product']['1']        = 'مدیریت کاتالوگ و کالاها';
 

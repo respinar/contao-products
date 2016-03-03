@@ -3,25 +3,25 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2016 Leo Feyer
  *
- * @package   catalog
+ * @package   product
  * @author    Hamid Abbaszadeh
- * @license   GNU/LGPL
- * @copyright 2014
+ * @license   LGPL-3.0+
+ * @copyright 2014-2016
  */
 
 /**
  * Add palettes to tl_module
  */
 
-$GLOBALS['TL_DCA']['tl_module']['palettes']['catalog_list']    = '{title_legend},name,headline,type;
+$GLOBALS['TL_DCA']['tl_module']['palettes']['product_list']    = '{title_legend},name,headline,type;
                                                                   {catalog_legend},catalogs,catalog_featured,catalog_detailModule,catalog_sortBy,numberOfItems,perPage,skipFirst;
                                                                   {template_legend},catalog_metaFields,customTpl;
                                                                   {product_legend},product_template,product_Class,product_perRow,imgSize;
                                                                   {protected_legend:hide},protected;
                                                                   {expert_legend:hide},guests,cssID,space';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['catalog_detail']  = '{title_legend},name,headline,type;
+$GLOBALS['TL_DCA']['tl_module']['palettes']['product_detail']  = '{title_legend},name,headline,type;
                                                                   {catalog_legend},catalogs;
                                                                   {template_legend},catalog_metaFields,customTpl;
                                                                   {product_legend},product_template;
@@ -234,7 +234,7 @@ class tl_module_catalog extends Backend
 		//}
 
 		$arrCatalogs = array();
-		$objCatalogs = $this->Database->execute("SELECT id, title FROM tl_catalog ORDER BY title");
+		$objCatalogs = $this->Database->execute("SELECT id, title FROM tl_product_catalog ORDER BY title");
 
 		while ($objCatalogs->next())
 		{

@@ -3,12 +3,12 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2016 Leo Feyer
  *
- * @package   catalog
+ * @package   product
  * @author    Hamid Abbaszadeh
- * @license   GNU/LGPL
- * @copyright 2014
+ * @license   LGPL-3.0+
+ * @copyright 2014-2016
  */
 
 
@@ -19,15 +19,15 @@ array_insert($GLOBALS['BE_MOD'], 1, array
 (
 	'products' => array	
 	(
-		'catalog' => array
+		'product' => array
 		(
-			'tables'     => array('tl_catalog','tl_catalog_product','tl_content'),
-			'icon'       => 'system/modules/catalog/assets/icon.png',
+			'tables'     => array('tl_product_catalog','tl_product','tl_content'),
+			'icon'       => 'system/modules/product/assets/icon.png',
 		),
 		//'prices' => array
 		//(
-		//	'tables'     => array('tl_catalog_price_category','tl_catalog_price'),
-		//	'icon'       => 'system/modules/catalog/assets/price.png',
+		//	'tables'     => array('tl_product_price_category','tl_product_price'),
+		//	'icon'       => 'system/modules/product/assets/price.png',
 		//),		
 	),	
 ));
@@ -38,10 +38,10 @@ array_insert($GLOBALS['BE_MOD'], 1, array
 
 array_insert($GLOBALS['FE_MOD'], 2, array
 (
-	'catalog' => array
+	'products' => array
 	(
-		'catalog_list'    => 'ModuleCatalogList',
-		'catalog_detail'  => 'ModuleCatalogDetail',
+		'product_list'    => 'ModuleProductList',
+		'product_detail'  => 'ModuleProductDetail',
 	)
 ));
 
@@ -49,15 +49,15 @@ array_insert($GLOBALS['FE_MOD'], 2, array
 /**
  * Register hook to add carpets items to the indexer
  */
-$GLOBALS['TL_HOOKS']['getSearchablePages'][]     = array('Catalog', 'getSearchablePages');
+$GLOBALS['TL_HOOKS']['getSearchablePages'][]     = array('Product', 'getSearchablePages');
 
 /**
  * Hooks
  */
-$GLOBALS['TL_HOOKS']['translateUrlParameters'][] = array('Catalog', 'translateUrlParameters');
+$GLOBALS['TL_HOOKS']['translateUrlParameters'][] = array('Product', 'translateUrlParameters');
 
 /**
  * Add permissions
  */
-$GLOBALS['TL_PERMISSIONS'][] = 'catalogs';
-$GLOBALS['TL_PERMISSIONS'][] = 'catalogp';
+$GLOBALS['TL_PERMISSIONS'][] = 'products';
+$GLOBALS['TL_PERMISSIONS'][] = 'productp';

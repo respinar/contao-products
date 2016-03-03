@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2015 Leo Feyer
+ * Copyright (c) 2005-2016 Leo Feyer
  *
  * @license LGPL-3.0+
  */
@@ -14,7 +14,7 @@
  */
 ClassLoader::addNamespaces(array
 (
-	'catalog',
+	'product',
 ));
 
 
@@ -23,18 +23,18 @@ ClassLoader::addNamespaces(array
  */
 ClassLoader::addClasses(array
 (
-	// Modules
-	'catalog\ModuleCatalogDetail'  => 'system/modules/catalog/modules/ModuleCatalogDetail.php',
-	'catalog\ModuleCatalog'        => 'system/modules/catalog/modules/ModuleCatalog.php',
-	'catalog\ModuleCatalogList'    => 'system/modules/catalog/modules/ModuleCatalogList.php',
+	// Classes
+	'product\Product'             => 'system/modules/product/classes/Product.php',
 
 	// Models
-	'catalog\CatalogProductModel'  => 'system/modules/catalog/models/CatalogProductModel.php',
-	'catalog\CatalogPriceModel'    => 'system/modules/catalog/models/CatalogPriceModel.php',
-	'catalog\CatalogModel'         => 'system/modules/catalog/models/CatalogModel.php',
+	'product\ProductCatalogModel' => 'system/modules/product/models/ProductCatalogModel.php',
+	'product\ProductModel'        => 'system/modules/product/models/ProductModel.php',
+	'product\ProductPriceModel'   => 'system/modules/product/models/ProductPriceModel.php',
 
-	// Classes
-	'catalog\Catalog'              => 'system/modules/catalog/classes/Catalog.php',
+	// Modules
+	'product\ModuleProductList'   => 'system/modules/product/modules/ModuleProductList.php',
+	'product\ModuleProductDetail' => 'system/modules/product/modules/ModuleProductDetail.php',
+	'product\ModuleProduct'       => 'system/modules/product/modules/ModuleProduct.php',
 ));
 
 
@@ -43,9 +43,9 @@ ClassLoader::addClasses(array
  */
 TemplateLoader::addFiles(array
 (
-	'mod_catalog_list'   => 'system/modules/catalog/templates/modules',
-	'mod_catalog_detail' => 'system/modules/catalog/templates/modules',	
-	'product_full'       => 'system/modules/catalog/templates/product',
-	'product_short'      => 'system/modules/catalog/templates/product',
-    'related_short'      => 'system/modules/catalog/templates/related',
+	'mod_product_detail' => 'system/modules/product/templates/modules',
+	'mod_product_list'   => 'system/modules/product/templates/modules',
+	'product_full'       => 'system/modules/product/templates/product',
+	'product_short'      => 'system/modules/product/templates/product',
+	'related_short'      => 'system/modules/product/templates/related',
 ));
