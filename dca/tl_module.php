@@ -274,7 +274,7 @@ class tl_module_catalog extends Backend
 	public function getDetailModules()
 	{
 		$arrModules = array();
-		$objModules = $this->Database->execute("SELECT m.id, m.name, t.name AS theme FROM tl_module m LEFT JOIN tl_theme t ON m.pid=t.id WHERE m.type='catalog_detail' ORDER BY t.name, m.name");
+		$objModules = $this->Database->execute("SELECT m.id, m.name, t.name AS theme FROM tl_module m LEFT JOIN tl_theme t ON m.pid=t.id WHERE m.type='product_detail' ORDER BY t.name, m.name");
 
 		while ($objModules->next())
 		{
