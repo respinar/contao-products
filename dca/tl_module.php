@@ -16,14 +16,14 @@
  */
 
 $GLOBALS['TL_DCA']['tl_module']['palettes']['product_list']    = '{title_legend},name,headline,type;
-                                                                  {catalog_legend},catalogs,catalog_featured,catalog_detailModule,catalog_sortBy,numberOfItems,perPage,skipFirst;
-                                                                  {template_legend},catalog_metaFields,customTpl;
+                                                                  {catalog_legend},catalogs,product_featured,product_detailModule,product_sortBy,numberOfItems,perPage,skipFirst;
+                                                                  {template_legend},product_metaFields,customTpl;
                                                                   {product_legend},product_template,product_Class,product_perRow,imgSize;
                                                                   {protected_legend:hide},protected;
                                                                   {expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['product_detail']  = '{title_legend},name,headline,type;
                                                                   {catalog_legend},catalogs;
-                                                                  {template_legend},catalog_metaFields,customTpl;
+                                                                  {template_legend},product_metaFields,customTpl;
                                                                   {product_legend},product_template;
                                                                   {type_legend},type_show,type_template,type_perRow,type_Class,type_imgSize;
                                                                   {related_legend},related_show,related_template,related_perRow,related_Class,related_imgSize;
@@ -38,13 +38,13 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['catalogs'] = array
 	'label'                => &$GLOBALS['TL_LANG']['tl_module']['catalogs'],
 	'exclude'              => true,
 	'inputType'            => 'checkbox',
-	'options_callback'     => array('tl_module_catalog', 'getCatalogs'),
+	'options_callback'     => array('tl_module_product', 'getCatalogs'),
 	'eval'                 => array('multiple'=>true, 'mandatory'=>true),
     'sql'                  => "blob NULL"
 );
-$GLOBALS['TL_DCA']['tl_module']['fields']['catalog_featured'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_featured'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['catalog_featured'],
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['product_featured'],
 	'default'                 => 'all_product',
 	'exclude'                 => true,
 	'inputType'               => 'select',
@@ -53,9 +53,9 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['catalog_featured'] = array
 	'eval'                    => array('tl_class'=>'w50'),
 	'sql'                     => "varchar(20) NOT NULL default ''"
 );
-$GLOBALS['TL_DCA']['tl_module']['fields']['catalog_sortBy'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_sortBy'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['catalog_sortBy'],
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['product_sortBy'],
 	'default'                 => 'custom',
 	'exclude'                 => true,
 	'inputType'               => 'select',
@@ -64,9 +64,9 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['catalog_sortBy'] = array
 	'eval'                    => array('tl_class'=>'w50'),
 	'sql'                     => "varchar(16) NOT NULL default ''"
 );
-$GLOBALS['TL_DCA']['tl_module']['fields']['catalog_metaFields'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_metaFields'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['catalog_metaFields'],
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['product_metaFields'],
 	'default'                 => array('date'),
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
@@ -75,12 +75,12 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['catalog_metaFields'] = array
 	'eval'                    => array('multiple'=>true),
 	'sql'                     => "varchar(255) NOT NULL default ''"
 );
-$GLOBALS['TL_DCA']['tl_module']['fields']['catalog_detailModule'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_detailModule'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['catalog_detailModule'],
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['product_detailModule'],
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options_callback'        => array('tl_module_catalog', 'getDetailModules'),
+	'options_callback'        => array('tl_module_product', 'getDetailModules'),
 	'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
 	'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
 	'sql'                     => "int(10) unsigned NOT NULL default '0'"
@@ -91,7 +91,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_template'] = array
 	'default'              => 'product_short',
 	'exclude'              => true,
 	'inputType'            => 'select',
-	'options_callback'     => array('tl_module_catalog', 'getProductTemplates'),
+	'options_callback'     => array('tl_module_product', 'getProductTemplates'),
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );
@@ -128,7 +128,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['type_template'] = array
 	'default'              => 'product_type',
 	'exclude'              => true,
 	'inputType'            => 'select',
-	'options_callback'     => array('tl_module_catalog', 'getProductTemplates'),
+	'options_callback'     => array('tl_module_product', 'getProductTemplates'),
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );
@@ -175,7 +175,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['related_template'] = array
 	'default'              => 'product_related',
 	'exclude'              => true,
 	'inputType'            => 'select',
-	'options_callback'     => array('tl_module_catalog', 'getRelatedTemplates'),
+	'options_callback'     => array('tl_module_product', 'getRelatedTemplates'),
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );
@@ -212,14 +212,14 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['related_imgSize'] = array
 
 
 /**
- * Class tl_module_catalog
+ * Class tl_module_product
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Hamid Abbaszadeh 2014
  * @author     Hamid Abbaszadeh <http://respinar.com>
  * @package    Catalog
  */
-class tl_module_catalog extends Backend
+class tl_module_product extends Backend
 {
 
 	/**
