@@ -44,7 +44,7 @@ class ModuleProductList extends \ModuleProduct
 		{
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
-			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['catalog_list'][0]) . ' ###';
+			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['product_list'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;
@@ -55,16 +55,16 @@ class ModuleProductList extends \ModuleProduct
 
 		$this->catalogs = $this->sortOutProtected(deserialize($this->catalogs));
 
-		// No catalog categries available
+		// No catalog available
 		if (!is_array($this->catalogs) || empty($this->catalogs))
 		{
 			return '';
 		}
 
 		// Show the catalog detail if an item has been selected
-		if ($this->catalog_detailModule > 0 && (isset($_GET['items']) || ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))))
+		if ($this->product_detailModule > 0 && (isset($_GET['items']) || ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))))
 		{
-			return $this->getFrontendModule($this->catalog_detailModule, $this->strColumn);
+			return $this->getFrontendModule($this->product_detailModule, $this->strColumn);
 		}
 
 		return parent::generate();
@@ -87,11 +87,11 @@ class ModuleProductList extends \ModuleProduct
 		}
 
 		// Handle featured news
-		if ($this->catalog_featured == 'featured_product')
+		if ($this->product_featured == 'featured_product')
 		{
 			$blnFeatured = true;
 		}
-		elseif ($this->catalog_featured == 'unfeatured_product')
+		elseif ($this->product_featured == 'unfeatured_product')
 		{
 			$blnFeatured = false;
 		}
@@ -155,9 +155,9 @@ class ModuleProductList extends \ModuleProduct
 		}
 
 		$arrOptions = array();
-		if ($this->catalog_sortBy)
+		if ($this->product_sortBy)
 		{
-			switch ($this->catalog_sortBy)
+			switch ($this->product_sortBy)
 			{
 				case 'title_asc':
 					$arrOptions['order'] = "title ASC";

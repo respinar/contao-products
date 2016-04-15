@@ -18,12 +18,12 @@ namespace product;
 
 
 /**
- * Class ModuleCatalog
+ * Class ModuleProduct
  *
- * Parent class for catalog modules.
+ * Parent class for product modules.
  * @copyright  Hamid Abbaszadeh 2014
  * @author     Hamid Abbaszadeh <https://respinar.com>
- * @package    Catalog
+ * @package    product
  */
 abstract class ModuleProduct extends \Module
 {
@@ -40,29 +40,29 @@ abstract class ModuleProduct extends \Module
 	 * @param array
 	 * @return array
 	 */
-	protected function sortOutProtected($arrCategories)
+	protected function sortOutProtected($arrCatalogs)
 	{
-		if (BE_USER_LOGGED_IN || !is_array($arrCategories) || empty($arrCategories))
+		if (BE_USER_LOGGED_IN || !is_array($arrCatalogs) || empty($arrCatalogs))
 		{
-			return $arrCategories;
+			return $arrCatalogs;
 		}
 
 		$this->import('FrontendUser', 'User');
-		$objCategory = \ProductCatalogModel::findMultipleByIds($arrCategories);
-		$arrCategories = array();
+		$objCatalog = \ProductCatalogModel::findMultipleByIds($arrCatalogs);
+		$arrCatalogs = array();
 
-		if ($objCategory !== null)
+		if ($objCatalog !== null)
 		{
-			while ($objCategory->next())
+			while ($objCatalog->next())
 			{
-				if ($objCategory->protected)
+				if ($objCatalog->protected)
 				{
 					if (!FE_USER_LOGGED_IN)
 					{
 						continue;
 					}
 
-					$groups = deserialize($objCategory->groups);
+					$groups = deserialize($objCatalog->groups);
 
 					if (!is_array($groups) || empty($groups) || !count(array_intersect($groups, $this->User->groups)))
 					{
@@ -70,11 +70,11 @@ abstract class ModuleProduct extends \Module
 					}
 				}
 
-				$arrCategories[] = $objCategory->id;
+				$arrCatalogs[] = $objCatalog->id;
 			}
 		}
 
-		return $arrCategories;
+		return $arrCatalogs;
 	}
 
 
@@ -280,7 +280,7 @@ abstract class ModuleProduct extends \Module
 	 */
 	protected function getMetaFields($objProduct)
 	{
-		$meta = deserialize($this->catalog_metaFields);
+		$meta = deserialize($this->product_metaFields);
 
 		if (!is_array($meta))
 		{

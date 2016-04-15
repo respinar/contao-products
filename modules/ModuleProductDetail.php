@@ -19,7 +19,7 @@ namespace product;
 
 
 /**
- * Class ModuleCatalogDetail
+ * Class ModuleProductDetail
  *
  * @copyright  2014
  * @author     Hamid Abbaszadeh
@@ -44,7 +44,7 @@ class ModuleProductDetail extends \ModuleProduct
 		{
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
-			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['catalog_detail'][0]) . ' ###';
+			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['product_detail'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;
