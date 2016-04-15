@@ -16,10 +16,10 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_module']['catalogs']             = array('Catelogs','Please select one or more catalogs.');
-$GLOBALS['TL_LANG']['tl_module']['catalog_featured']     = array('Featured product','Here you can choose how featured products are handled.');
-$GLOBALS['TL_LANG']['tl_module']['catalog_detailModule'] = array('Product detail module','Automatically switch to the product module if an item has been selected.');
-$GLOBALS['TL_LANG']['tl_module']['catalog_metaFields']   = array('Meta fields','Here you can select the meta fields.');
-$GLOBALS['TL_LANG']['tl_module']['catalog_sortBy']       = array('Sort by','Here you can select the sorting fields.');
+$GLOBALS['TL_LANG']['tl_module']['product_featured']     = array('Featured product','Here you can choose how featured products are handled.');
+$GLOBALS['TL_LANG']['tl_module']['product_detailModule'] = array('Product detail module','Automatically switch to the product module if an item has been selected.');
+$GLOBALS['TL_LANG']['tl_module']['product_metaFields']   = array('Meta fields','Here you can select the meta fields.');
+$GLOBALS['TL_LANG']['tl_module']['product_sortBy']       = array('Sort by','Here you can select the sorting fields.');
 $GLOBALS['TL_LANG']['tl_module']['product_template']     = array('Product template','Here you can select the product template.');
 $GLOBALS['TL_LANG']['tl_module']['product_Class']        = array('Product CSS class','Here you can set one or more classes for products.');
 $GLOBALS['TL_LANG']['tl_module']['product_perRow']       = array('Product per row','Here you can set the image dimensions and the resize mode.');

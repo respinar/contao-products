@@ -4,16 +4,15 @@
  * or to help to maintain an existing one, please register at transifex.com.
  *
  * @link http://help.transifex.com/intro/translating.html
- * @link https://www.transifex.com/projects/p/contao-catalog/language/fa/
+ * @link https://www.transifex.com/projects/p/contao-product/language/fa/
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2015-07-17T12:08:42+04:30
+ * last-updated: 2016-04-15T09:34:13+00:00
  */
 
-
-$GLOBALS['TL_LANG']['tl_user']['catalog_legend'] = 'مجوزهای کاتالوگ';
-$GLOBALS['TL_LANG']['tl_user']['catalogp']['0']  = 'مجوزهای کاتالوگ';
-$GLOBALS['TL_LANG']['tl_user']['catalogp']['1']  = 'اینجا می‌توانید مجوزهای کاتلوگ را تعریف نمایید.';
-$GLOBALS['TL_LANG']['tl_user']['catalogs']['0']  = 'کاتالوگ‌های مجاز';
+$GLOBALS['TL_LANG']['tl_user']['product_legend'] = 'مجوزهای محصول';
+$GLOBALS['TL_LANG']['tl_user']['productp']['0']  = 'مجوزهای کاتالوگ محصول';
+$GLOBALS['TL_LANG']['tl_user']['productp']['1']  = 'اینجا می‌توانید مجوزهای کاتالوگ محصول را تعریف نمایید.';
+$GLOBALS['TL_LANG']['tl_user']['products']['0']  = 'کاتالوگ‌های مجاز';
 

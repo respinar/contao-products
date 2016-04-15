@@ -4,13 +4,12 @@
  * or to help to maintain an existing one, please register at transifex.com.
  *
  * @link http://help.transifex.com/intro/translating.html
- * @link https://www.transifex.com/projects/p/contao-catalog/language/fa/
+ * @link https://www.transifex.com/projects/p/contao-product/language/fa/
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2015-07-17T12:08:43+04:30
+ * last-updated: 2016-04-15T09:34:13+00:00
  */
 
-
-$GLOBALS['TL_LANG']['tl_user_group']['catalog_legend'] = 'مجوزهای کاتالوگ';
+$GLOBALS['TL_LANG']['tl_user_group']['product_legend'] = 'مجوزهای کاتالوگ محصول';
 
