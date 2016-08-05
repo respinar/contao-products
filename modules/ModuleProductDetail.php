@@ -81,6 +81,13 @@ class ModuleProductDetail extends \ModuleProduct
 
 		$objProduct = \ProductModel::findPublishedByParentAndIdOrAlias(\Input::get('items'),$this->catalogs);
 
+		if (null === $objProduct)
+		{
+			/** @var \PageError404 $objHandler */
+			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
+			$objHandler->generate($objPage->id);
+		}
+
 		// Overwrite the page title
 		if ($objProduct->title != '')
 		{
@@ -106,9 +113,6 @@ class ModuleProductDetail extends \ModuleProduct
 
 			$this->Template->relateds = $this->parseRelateds($objProducts);
 		}
-
-
-
 
 	}
 }
