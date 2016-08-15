@@ -123,7 +123,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 	(
 		'__selector__'                => array('addEnclosure','published'),
 		'default'                     => '{title_legend},title,alias,model;{config_legend:hide},date,featured;
-		                                  {image_legend},singleSRC;{meta_legend},description;
+		                                  {image_legend},singleSRC,alt;{meta_legend},description;
 		                                  {related_legend},related;{enclosure_legend:hide},addEnclosure;
 		                                  {publish_legend},published',
 	),
@@ -222,6 +222,15 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 			'inputType'               => 'fileTree',
 			'eval'                    => array('mandatory'=>true,'fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes']),
 			'sql'                     => "binary(16) NULL"
+		),
+		'alt' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_product']['alt'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'long'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'addEnclosure' => array
 		(

@@ -150,7 +150,6 @@ abstract class ModuleProduct extends \Module
 				}
 
 				$arrProduct['singleSRC'] = $objModel->path;
-				$arrProduct['alt'] = $objProduct->title;
 				$strLightboxId = 'lightbox[lb' . $objProduct->id . ']';
 				$arrProduct['fullsize'] = $this->fullsize;
 				$this->addImageToTemplate($objTemplate, $arrProduct, null, $strLightboxId);
@@ -355,7 +354,6 @@ abstract class ModuleProduct extends \Module
 					}
 				}
 				$arrProduct['singleSRC'] = $objModel->path;
-				$arrProduct['alt'] = $objProduct->title;
 				$strLightboxId = 'lightbox[lb' . $objProduct->id . ']';
 				$arrProduct['fullsize'] = false;
 				$this->addImageToTemplate($objTemplate, $arrProduct,null, $strLightboxId);
