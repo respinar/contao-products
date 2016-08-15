@@ -23,18 +23,18 @@ ClassLoader::addNamespaces(array
  */
 ClassLoader::addClasses(array
 (
-	// Classes
-	'product\Product'             => 'system/modules/product/classes/Product.php',
+	// Modules
+	'product\ModuleProduct'       => 'system/modules/products/modules/ModuleProduct.php',
+	'product\ModuleProductDetail' => 'system/modules/products/modules/ModuleProductDetail.php',
+	'product\ModuleProductList'   => 'system/modules/products/modules/ModuleProductList.php',
 
 	// Models
-	'product\ProductCatalogModel' => 'system/modules/product/models/ProductCatalogModel.php',
-	'product\ProductModel'        => 'system/modules/product/models/ProductModel.php',
-	'product\ProductPriceModel'   => 'system/modules/product/models/ProductPriceModel.php',
+	'product\ProductPriceModel'   => 'system/modules/products/models/ProductPriceModel.php',
+	'product\ProductModel'        => 'system/modules/products/models/ProductModel.php',
+	'product\ProductCatalogModel' => 'system/modules/products/models/ProductCatalogModel.php',
 
-	// Modules
-	'product\ModuleProductList'   => 'system/modules/product/modules/ModuleProductList.php',
-	'product\ModuleProductDetail' => 'system/modules/product/modules/ModuleProductDetail.php',
-	'product\ModuleProduct'       => 'system/modules/product/modules/ModuleProduct.php',
+	// Classes
+	'product\Product'             => 'system/modules/products/classes/Product.php',
 ));
 
 
@@ -43,9 +43,9 @@ ClassLoader::addClasses(array
  */
 TemplateLoader::addFiles(array
 (
-	'mod_product_detail' => 'system/modules/product/templates/modules',
-	'mod_product_list'   => 'system/modules/product/templates/modules',
-	'product_full'       => 'system/modules/product/templates/product',
-	'product_short'      => 'system/modules/product/templates/product',
-	'related_short'      => 'system/modules/product/templates/related',
+	'mod_product_detail' => 'system/modules/products/templates/modules',
+	'mod_product_list'   => 'system/modules/products/templates/modules',
+	'product_short'      => 'system/modules/products/templates/product',
+	'product_full'       => 'system/modules/products/templates/product',
+	'related_short'      => 'system/modules/products/templates/related',
 ));

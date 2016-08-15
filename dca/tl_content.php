@@ -15,7 +15,7 @@
 /**
  * Dynamically add the permission check and parent table
  */
-if (Input::get('do') == 'product')
+if (Input::get('do') == 'catalogs')
 {
 	$GLOBALS['TL_DCA']['tl_content']['config']['ptable'] = 'tl_product';
 }

@@ -16,7 +16,7 @@
  * Back end modules
  */
 $GLOBALS['TL_LANG']['MOD']['products']      = 'Products';
-$GLOBALS['TL_LANG']['MOD']['product']       = array('Catalogs','Catalog and products management');
+$GLOBALS['TL_LANG']['MOD']['catalogs']      = array('Catalogs','Catalog and products management');
 $GLOBALS['TL_LANG']['MOD']['prices']        = array('Prices','Price management');
 
 

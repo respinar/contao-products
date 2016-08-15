@@ -19,15 +19,20 @@ array_insert($GLOBALS['BE_MOD'], 1, array
 (
 	'products' => array	
 	(
-		'product' => array
+		'catalogs' => array
 		(
 			'tables'     => array('tl_product_catalog','tl_product','tl_content'),
-			'icon'       => 'system/modules/product/assets/icon.png',
+			'icon'       => 'system/modules/products/assets/icon.png',
 		),
+		//'categories' => array
+		//(
+		//	'tables'     => array('tl_product_categories'),
+		//	'icon'       => 'system/modules/products/assets/icon.png',
+		//),
 		//'prices' => array
 		//(
 		//	'tables'     => array('tl_product_price_category','tl_product_price'),
-		//	'icon'       => 'system/modules/product/assets/price.png',
+		//	'icon'       => 'system/modules/products/assets/price.png',
 		//),		
 	),	
 ));
