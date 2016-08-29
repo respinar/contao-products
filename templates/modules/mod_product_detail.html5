@@ -16,7 +16,7 @@
   <?php if (!empty($this->relateds)): ?>
     <div class="relateds">
       <h3><?php echo $this->relateds_headline; ?></h3>
-      <?php echo implode('', $this->relateds); ?>
+      <?php foreach($this->relateds as $relateds) { echo '<div class="row">'.implode('', $relateds).'</div>'; } ?>
     </div>
   <?php endif; ?>
 
