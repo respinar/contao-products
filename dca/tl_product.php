@@ -372,16 +372,29 @@ class tl_product extends Backend
 		return '<div><div style="float:left; margin-right:10px;">'.$strImage.'</div>'. $arrRow['title'].' <br><br> Model: '. $arrRow['model']. ' <br> Code: '. $arrRow['code'] . '</div>';
 	}
 
+	/**
+	 * Return the "toggle visibility" button
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
+	 * @return string
+	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
-		if (strlen($this->Input->get('tid')))
+		
+		if (strlen(Input::get('tid')))
 		{
-			$this->toggleVisibility($this->Input->get('tid'), ($this->Input->get('state') == 1));
+			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1), (@func_get_arg(12) ?: null));
 			$this->redirect($this->getReferer());
 		}
 
 		// Check permissions AFTER checking the tid, so hacking attempts are logged
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_product::published', 'alexf'))
+		if (!$this->User->hasAccess('tl_product::published', 'alexf'))
 		{
 			return '';
 		}
@@ -393,59 +406,83 @@ class tl_product extends Backend
 			$icon = 'invisible.gif';
 		}
 
-		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
+		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label, 'data-state="' . ($row['published'] ? 1 : 0) . '"').'</a> ';
 	}
 
 
-	public function toggleVisibility($intId, $blnVisible)
+	/**
+	 * Disable/enable a user group
+	 *
+	 * @param integer       $intId
+	 * @param boolean       $blnVisible
+	 * @param DataContainer $dc
+	 */
+	public function toggleVisibility($intId, $blnVisible, DataContainer $dc=null)
 	{
-		// Check permissions to edit
-		$this->Input->setGet('id', $intId);
-		$this->Input->setGet('act', 'toggle');
-		$this->checkPermission();
 
-		// Check permissions to publish
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_product::published', 'alexf'))
+		// Set the ID and action
+		Input::setGet('id', $intId);
+		Input::setGet('act', 'toggle');
+
+		if ($dc)
 		{
-			$this->log('Not enough permissions to publish/unpublish product item ID "'.$intId.'"', 'tl_product toggleVisibility', TL_ERROR);
+			$dc->id = $intId; // see #8043
+		}
+
+		//$this->checkPermission();
+
+		// Check the field access
+		if (!$this->User->hasAccess('tl_product::published', 'alexf'))
+		{
+			$this->log('Not enough permissions to publish/unpublish product item ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$this->createInitialVersion('tl_product', $intId);
+		$objVersions = new Versions('tl_product', $intId);
+		$objVersions->initialize();
 
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_product']['fields']['published']['save_callback']))
 		{
 			foreach ($GLOBALS['TL_DCA']['tl_product']['fields']['published']['save_callback'] as $callback)
 			{
-				$this->import($callback[0]);
-				$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$blnVisible = $this->{$callback[0]}->{$callback[1]}($blnVisible, ($dc ?: $this));
+				}
+				elseif (is_callable($callback))
+				{
+					$blnVisible = $callback($blnVisible, ($dc ?: $this));
+				}
 			}
 		}
 
 		// Update the database
-		$this->Database->prepare("UPDATE tl_product SET tstamp=". time() .", published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
+		$this->Database->prepare("UPDATE tl_product SET tstamp=". time() .", published='" . ($blnVisible ? '1' : '') . "' WHERE id=?")
 					   ->execute($intId);
 
-		$this->createNewVersion('tl_product', $intId);
-
+		$objVersions->create();
+		
 	}
 
 	/**
 	 * Return the "feature/unfeature element" button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function iconFeatured($row, $href, $label, $title, $icon, $attributes)
 	{
 		if (strlen(Input::get('fid')))
 		{
-			$this->toggleFeatured(Input::get('fid'), (Input::get('state') == 1));
+			$this->toggleFeatured(Input::get('fid'), (Input::get('state') == 1), (@func_get_arg(12) ?: null));
 			$this->redirect($this->getReferer());
 		}
 
@@ -462,27 +499,30 @@ class tl_product extends Backend
 			$icon = 'featured_.gif';
 		}
 
-		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ';
+		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label, 'data-state="' . ($row['featured'] ? 1 : 0) . '"').'</a> ';
 	}
 
 
 	/**
-	 * Feature/unfeature a news item
-	 * @param integer
-	 * @param boolean
+	 * Feature/unfeature a product item
+	 *
+	 * @param integer       $intId
+	 * @param boolean       $blnVisible
+	 * @param DataContainer $dc
+	 *
 	 * @return string
 	 */
-	public function toggleFeatured($intId, $blnVisible)
+	public function toggleFeatured($intId, $blnVisible, DataContainer $dc=null)
 	{
 		// Check permissions to edit
 		Input::setGet('id', $intId);
 		Input::setGet('act', 'feature');
-		$this->checkPermission();
+		//$this->checkPermission();
 
 		// Check permissions to feature
 		if (!$this->User->hasAccess('tl_product::featured', 'alexf'))
 		{
-			$this->log('Not enough permissions to feature/unfeature products item ID "'.$intId.'"', __METHOD__, TL_ERROR);
+			$this->log('Not enough permissions to feature/unfeature product item ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -497,7 +537,7 @@ class tl_product extends Backend
 				if (is_array($callback))
 				{
 					$this->import($callback[0]);
-					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+					$blnVisible = $this->{$callback[0]}->{$callback[1]}($blnVisible, ($dc ?: $this));
 				}
 				elseif (is_callable($callback))
 				{
@@ -511,8 +551,8 @@ class tl_product extends Backend
 					   ->execute($intId);
 
 		$objVersions->create();
-		$this->log('A new version of record "tl_product.id='.$intId.'" has been created'.$this->getParentEntries('tl_product', $intId), __METHOD__, TL_GENERAL);
 	}
+
 
 
 	/**
