@@ -76,7 +76,6 @@ class ModuleProductDetail extends \ModuleProduct
 		$this->Template->products = '';
 		$this->Template->referer = 'javascript:history.go(-1)';
 		$this->Template->back              = $GLOBALS['TL_LANG']['MSC']['goBack'];
-		$this->Template->types_headline    = $GLOBALS['TL_LANG']['MSC']['types_headline'];
 		$this->Template->relateds_headline = $GLOBALS['TL_LANG']['MSC']['relateds_headline'];
 
 		$objProduct = \ProductModel::findPublishedByParentAndIdOrAlias(\Input::get('items'),$this->catalogs);
