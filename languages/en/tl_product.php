@@ -18,6 +18,7 @@
 $GLOBALS['TL_LANG']['tl_product']['title']        = array('Product title','Please enter the product title.');
 $GLOBALS['TL_LANG']['tl_product']['alias']        = array('Product alias','Please enter the product alias.');
 $GLOBALS['TL_LANG']['tl_product']['model']        = array('Product model','Please enter the product model.');
+$GLOBALS['TL_LANG']['tl_product']['code']        = array('Product code','Please enter the product code.');
 $GLOBALS['TL_LANG']['tl_product']['type']         = array('Product type','Please choose the product type.');
 $GLOBALS['TL_LANG']['tl_product']['mainID']       = array('Main Product','Please select the main product.');
 $GLOBALS['TL_LANG']['tl_product']['date']         = array('Date','Please enter the date according to the global date format.');

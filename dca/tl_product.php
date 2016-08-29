@@ -122,7 +122,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('addEnclosure','published'),
-		'default'                     => '{title_legend},title,alias,model;{config_legend:hide},date,featured;
+		'default'                     => '{title_legend},title,alias,model,code;{config_legend:hide},date,featured;
 		                                  {image_legend},singleSRC,alt;{meta_legend},description;
 		                                  {related_legend},related;{enclosure_legend:hide},addEnclosure;
 		                                  {publish_legend},published',
@@ -189,6 +189,15 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 		'model' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_product']['model'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50 clr'),
+			'sql'                     => "varchar(128) NOT NULL default ''"
+		),
+		'code' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_product']['code'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
