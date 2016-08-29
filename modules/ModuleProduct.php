@@ -203,13 +203,12 @@ abstract class ModuleProduct extends \Module
 
 		while ($objProducts->next())
 		{
-            
-            $objProduct = $objProducts->current();
-            
+			$objProduct = $objProducts->current();
+
 			$arrProducts[] = $this->parseProduct($objProduct, $blnAddCategory, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % $this->product_perRow) == 0) ? ' last_col' : '') . ((($count % $this->product_perRow) == 1) ? ' first_col' : ''), $count);
 		}
-        
-        $arrProducts = array_chunk($arrProducts,$this->product_perRow);
+
+    $arrProducts = array_chunk($arrProducts,$this->product_perRow);
 
 		return $arrProducts;
 	}
@@ -301,7 +300,7 @@ abstract class ModuleProduct extends \Module
 
 		return $return;
 	}
-	
+
 		/**
 	 * Parse an item and return it as string
 	 * @param object
@@ -378,12 +377,13 @@ abstract class ModuleProduct extends \Module
 		$arrProducts = array();
 		while ($objProducts->next())
 		{
-            
-            $objProduct = $objProducts->current();
-            
+			$objProduct = $objProducts->current();
+
 			$arrProducts[] = $this->parseRelated($objProduct, $blnAddCategory, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % $this->related_perRow) == 0) ? ' last_col' : '') . ((($count % $this->related_perRow) == 1) ? ' first_col' : ''), $count);
 		}
-        
+
+		$arrProducts = array_chunk($arrProducts,$this->related_perRow);
+
 		return $arrProducts;
 	}
 
