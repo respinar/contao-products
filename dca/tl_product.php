@@ -11,6 +11,8 @@
  * @copyright 2014-2016
  */
 
+ System::loadLanguageFile('tl_content');
+
 
 /**
  * Table tl_product
@@ -122,8 +124,11 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('addEnclosure','published'),
-		'default'                     => '{title_legend},title,alias,model,code;{config_legend:hide},date,featured;
-		                                  {image_legend},singleSRC,alt;{meta_legend},description;
+		'default'                     => '{title_legend},title,alias,model,code;		                                  
+		                                  {config_legend:hide},date,featured;
+										  {link_legend},url,target,titleText,linkTitle;
+		                                  {image_legend},singleSRC,alt;
+										  {description_legend},description;
 		                                  {related_legend},related;{enclosure_legend:hide},addEnclosure;
 		                                  {publish_legend},published',
 	),
@@ -214,6 +219,41 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'date', 'doNotCopy'=>true, 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'url' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_product']['url'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
+		),
+		'target' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_product']['target'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50 m12'),
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'titleText' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_product']['titleText'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
+		),
+		'linkTitle' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_product']['linkTitle'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'description' => array
 		(

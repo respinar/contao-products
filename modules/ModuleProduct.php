@@ -91,13 +91,9 @@ abstract class ModuleProduct extends \Module
 		global $objPage;
 
 		$objTemplate = new \FrontendTemplate($this->product_template);
-		$objTemplate->setData($objProduct->row());
-
-		$objTemplate->featured_text = "Featured";
-		$objTemplate->new_text = "New";
+		$objTemplate->setData($objProduct->row());	
 
 		$objTemplate->class = (($this->product_Class != '') ? ' ' . $this->product_Class : '') . $strClass;
-		$objTemplate->type_Class = $this->type_Class;
 
 		if (time() - $objProduct->date < 2592000) {
 			$objTemplate->new_product = true;
@@ -176,6 +172,8 @@ abstract class ModuleProduct extends \Module
 		
 		$objTemplate->model_text    = $GLOBALS['TL_LANG']['MSC']['model_text'];
 		$objTemplate->code_text     = $GLOBALS['TL_LANG']['MSC']['code_text'];
+		$objTemplate->featured_text = "Featured";
+		$objTemplate->new_text      = "New";
 
 
 		return $objTemplate->parse();

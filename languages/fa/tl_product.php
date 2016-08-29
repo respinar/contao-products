@@ -8,7 +8,7 @@
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2016-03-03T11:53:31+00:00
+ * last-updated: 2016-08-29T12:49:28+00:00
  */
 
 $GLOBALS['TL_LANG']['tl_product']['addEnclosure']['0']  = 'افزودن پیوست';
@@ -39,6 +39,9 @@ $GLOBALS['TL_LANG']['tl_product']['featured']['0']      = 'محصول ویژه';
 $GLOBALS['TL_LANG']['tl_product']['featured']['1']      = 'محصول را در فهرست ویژه نمایش می‌دهد.';
 $GLOBALS['TL_LANG']['tl_product']['image_legend']       = 'تنظیمات تصویر';
 $GLOBALS['TL_LANG']['tl_product']['languageMain']['0']  = 'محصول اصلی';
+$GLOBALS['TL_LANG']['tl_product']['linkTitle']['0']     = 'عنوان پیوند';
+$GLOBALS['TL_LANG']['tl_product']['linkTitle']['1']     = 'عنوان پیوند به صورت خصوصیت title در نشانه‌گذاری اچ‌تی‌ام‌ال اضافه می‌شود.';
+$GLOBALS['TL_LANG']['tl_product']['link_legend']        = 'پیوند خارجی';
 $GLOBALS['TL_LANG']['tl_product']['mainID']['0']        = 'کالا اصلی';
 $GLOBALS['TL_LANG']['tl_product']['mainID']['1']        = 'لطفا کالا اصلی را انتخاب نمایید.';
 $GLOBALS['TL_LANG']['tl_product']['meta_legend']        = 'سئو';
@@ -62,12 +65,18 @@ $GLOBALS['TL_LANG']['tl_product']['start']['0']         = 'نمایش از';
 $GLOBALS['TL_LANG']['tl_product']['start']['1']         = 'محصول را قبل از این روزدر وب‌سایت نمایش نخواهد داد.';
 $GLOBALS['TL_LANG']['tl_product']['stop']['0']          = 'نمایش تا';
 $GLOBALS['TL_LANG']['tl_product']['stop']['1']          = 'محصول را بعد از این روز در وب‌سایت نمایش نخواهد داد.';
+$GLOBALS['TL_LANG']['tl_product']['target']['0']        = ' باز کردن در پنجره جدید';
+$GLOBALS['TL_LANG']['tl_product']['target']['1']        = 'پیوند در پنجره جدید مرورگر باز می‌گردد.';
 $GLOBALS['TL_LANG']['tl_product']['title']['0']         = 'عنوان محصول';
 $GLOBALS['TL_LANG']['tl_product']['title']['1']         = 'لطفا عنوان محصول را وارد نمایید.';
+$GLOBALS['TL_LANG']['tl_product']['titleText']['0']     = 'متن پیوند';
+$GLOBALS['TL_LANG']['tl_product']['titleText']['1']     = 'متن پیوند به جای نشانی وب مقصد نمایش داده خواهد شد.';
 $GLOBALS['TL_LANG']['tl_product']['title_legend']       = 'عنوان محصول';
 $GLOBALS['TL_LANG']['tl_product']['type']['0']          = 'نوع کالا';
 $GLOBALS['TL_LANG']['tl_product']['type']['1']          = 'لطفا نوع کالا را انتخاب نمایید.';
 $GLOBALS['TL_LANG']['tl_product']['type']['default']    = 'محصول اصلی';
 $GLOBALS['TL_LANG']['tl_product']['type']['other']      = 'نوع';
 $GLOBALS['TL_LANG']['tl_product']['type_legend']        = 'نوع';
+$GLOBALS['TL_LANG']['tl_product']['url']['0']           = 'مقصد پیوند';
+$GLOBALS['TL_LANG']['tl_product']['url']['1']           = 'لطفا نشانی وب (http://…), یک نشانی ایمیل (mailto:…) یا یک برچسب درجی وارد نمایید.';
 

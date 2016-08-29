@@ -13,6 +13,18 @@
     <p class="info"><time datetime="<?= $this->datetime; ?>"><?= $this->date; ?></time></p>
   <?php endif; ?>
 
+  <?php if($this->url): ?>
+  <div class="external_link">
+    <a href="<?= $this->url ?>" class="hyperlink_txt" title="<?= $this->linkTitle ?>">
+    <?php if($this->titleText): ?>
+      <?= $this->titleText ?>
+    <?php else: ?>
+      <?= $this->url ?>
+    <?php endif; ?>
+    </a>
+    </div>
+  <?php endif; ?>
+
   <?php if ($this->text): ?>
     <?= $this->text; ?>
   <?php endif; ?>
