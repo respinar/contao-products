@@ -5,6 +5,9 @@
   <?php if($this->model): ?>
   <p class="model"><?= $this->model_text; ?>: <?= $this->model; ?></p>
   <?php endif; ?>
+  <?php if($this->code): ?>
+  <p class="code"><?= $this->code_text; ?>: <?= $this->code; ?></p>
+  <?php endif; ?>
 
   <?php if ($this->hasMetaFields): ?>
     <p class="info"><time datetime="<?= $this->datetime; ?>"><?= $this->date; ?></time></p>

@@ -172,11 +172,10 @@ abstract class ModuleProduct extends \Module
 		if ($objProduct->addEnclosure)
 		{
 			$this->addEnclosuresToTemplate($objTemplate, $objProduct->row());
-		}
-
-		$objTemplate->features_text = $GLOBALS['TL_LANG']['MSC']['features'];
-		$objTemplate->specs_text = $GLOBALS['TL_LANG']['MSC']['specs'];
-		$objTemplate->model_text = $GLOBALS['TL_LANG']['MSC']['model_text'];
+		}		
+		
+		$objTemplate->model_text    = $GLOBALS['TL_LANG']['MSC']['model_text'];
+		$objTemplate->code_text     = $GLOBALS['TL_LANG']['MSC']['code_text'];
 
 
 		return $objTemplate->parse();
