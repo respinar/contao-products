@@ -23,11 +23,6 @@ $GLOBALS['TL_LANG']['tl_module']['product_sortBy']       = array('Sort by','Here
 $GLOBALS['TL_LANG']['tl_module']['product_template']     = array('Product template','Here you can select the product template.');
 $GLOBALS['TL_LANG']['tl_module']['product_Class']        = array('Product CSS class','Here you can set one or more classes for products.');
 $GLOBALS['TL_LANG']['tl_module']['product_perRow']       = array('Product per row','Here you can set the image dimensions and the resize mode.');
-$GLOBALS['TL_LANG']['tl_module']['type_show']            = array('Show types of product','Here you can set one or more classes for types.');
-$GLOBALS['TL_LANG']['tl_module']['type_template']        = array('Type template','Here you can select the type template.');
-$GLOBALS['TL_LANG']['tl_module']['type_Class']           = array('Type CSS class','Here you can set one or more classes for types.');
-$GLOBALS['TL_LANG']['tl_module']['type_imgSize']         = array('Type image width and height','Here you can set the image dimensions and the resize mode.');
-$GLOBALS['TL_LANG']['tl_module']['type_perRow']          = array('Type per row','The number of items per row.');
 $GLOBALS['TL_LANG']['tl_module']['related_show']         = array('Show related product','Here you can set one or more classes for types.');
 $GLOBALS['TL_LANG']['tl_module']['related_template']     = array('Related product template','Here you can select the related product template.');
 $GLOBALS['TL_LANG']['tl_module']['related_Class']        = array('Related product CSS class','Here you can set one or more classes for related products.');
@@ -39,9 +34,8 @@ $GLOBALS['TL_LANG']['tl_module']['related_perRow']       = array('Type per row',
 /**
  * Legends
  */
-$GLOBALS['TL_LANG']['tl_module']['catalog_legend']   = 'Catlog';
+$GLOBALS['TL_LANG']['tl_module']['catalog_legend']   = 'Catalog';
 $GLOBALS['TL_LANG']['tl_module']['product_legend']   = 'Product setting';
-$GLOBALS['TL_LANG']['tl_module']['type_legend']      = 'Product\'s types settings';
 $GLOBALS['TL_LANG']['tl_module']['related_legend']   = 'Related products settings';
 $GLOBALS['TL_LANG']['tl_module']['protected_legend'] = 'Access protection';
 
