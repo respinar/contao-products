@@ -17,8 +17,12 @@
  */
 $GLOBALS['TL_LANG']['MSC']['emptyCatalog'] = 'There is no products!';
 
-$GLOBALS['TL_LANG']['MSC']['price']        = 'Price';
-$GLOBALS['TL_LANG']['MSC']['rating']       = 'Rating';
+$GLOBALS['TL_LANG']['MSC']['model']        = 'Model';
+$GLOBALS['TL_LANG']['MSC']['code']         = 'Code';
+$GLOBALS['TL_LANG']['MSC']['brand']        = 'Brand';
+$GLOBALS['TL_LANG']['MSC']['sku']          = 'SKU';
+$GLOBALS['TL_LANG']['MSC']['buy']          = 'Buy link';
+
 
 $GLOBALS['TL_LANG']['MSC']['model_text']   = 'Model';
 $GLOBALS['TL_LANG']['MSC']['code_text']    = 'Code';

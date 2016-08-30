@@ -109,9 +109,16 @@ abstract class ModuleProduct extends \Module
 
 		// Add the meta information
 		$objTemplate->date = $arrMeta['date'];
+		$objTemplate->meta_brand = $arrMeta['brand'];
+		$objTemplate->meta_model = $arrMeta['model'];
+		$objTemplate->meta_code = $arrMeta['code'];
+		$objTemplate->meta_sku = $arrMeta['sku'];
+		$objTemplate->meta_buy = $arrMeta['buy'];
+
 		$objTemplate->hasMetaFields = !empty($arrMeta);
 		$objTemplate->timestamp = $objProduct->date;
 		$objTemplate->datetime = date('Y-m-d\TH:i:sP', $objProduct->date);
+		
 
 		$objTemplate->addImage = false;
 
@@ -168,10 +175,6 @@ abstract class ModuleProduct extends \Module
 			$this->addEnclosuresToTemplate($objTemplate, $objProduct->row());
 		}		
 		
-		$objTemplate->model_text    = $GLOBALS['TL_LANG']['MSC']['model_text'];
-		$objTemplate->code_text     = $GLOBALS['TL_LANG']['MSC']['code_text'];
-		$objTemplate->brand_text    = $GLOBALS['TL_LANG']['MSC']['brand_text'];
-		$objTemplate->sku_text      = $GLOBALS['TL_LANG']['MSC']['sku_text'];
 		$objTemplate->featured_text = "Featured";
 		$objTemplate->new_text      = "New";
 
@@ -291,6 +294,26 @@ abstract class ModuleProduct extends \Module
 			{
 				case 'date':
 					$return['date'] = \Date::parse($objPage->datimFormat, $objProduct->date);
+					break;
+
+				case 'code':
+					$return['code'] = $GLOBALS['TL_LANG']['MSC']['code_text'] .' '. $objProduct->code;
+					break;
+
+				case 'model':
+					$return['model'] = $GLOBALS['TL_LANG']['MSC']['model_text'] .' '. $objProduct->model;
+					break;
+
+				case 'brand':
+					$return['brand'] = $GLOBALS['TL_LANG']['MSC']['brand_text'] .' '. $objProduct->brand;
+					break;
+				
+				case 'sku':
+					$return['sku'] = $GLOBALS['TL_LANG']['MSC']['sku_text'] .' '. $objProduct->sku;
+					break;
+				
+				case 'buy':
+					$return['buy'] = $objProduct->url;
 					break;
 			}
 		}
