@@ -18,6 +18,7 @@
 if (Input::get('do') == 'catalogs')
 {
 	$GLOBALS['TL_DCA']['tl_content']['config']['ptable'] = 'tl_product';
+	$GLOBALS['TL_DCA']['tl_content']['list']['sorting']['headerFields'] = array('title', 'brand','model','code','sku', 'published');
 }
 
 

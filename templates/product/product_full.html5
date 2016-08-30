@@ -2,13 +2,22 @@
 <div class="product_full<?= $this->class; ?>">
 
   <h1><?= $this->title; ?></h1>
-  <?php if($this->model): ?>
-  <p class="model"><?= $this->model_text; ?>: <?= $this->model; ?></p>
-  <?php endif; ?>
-  <?php if($this->code): ?>
-  <p class="code"><?= $this->code_text; ?>: <?= $this->code; ?></p>
-  <?php endif; ?>
 
+  <div class="info">
+    <?php if($this->brand): ?>
+    <span class="brand"><?= $this->brand_text; ?> <?= $this->brand; ?></span>
+    <?php endif; ?>
+    <?php if($this->model): ?>
+    <span class="model"><?= $this->model_text; ?> <?= $this->model; ?></span>
+    <?php endif; ?>
+    <?php if($this->code): ?>
+    <span class="code"><?= $this->code_text; ?> <?= $this->code; ?></span>
+    <?php endif; ?>
+    <?php if($this->sku): ?>
+    <span class="sku"><?= $this->sku_text; ?> <?= $this->sku; ?></span>
+    <?php endif; ?>
+  </div>  
+ 
   <?php if ($this->hasMetaFields): ?>
     <p class="info"><time datetime="<?= $this->datetime; ?>"><?= $this->date; ?></time></p>
   <?php endif; ?>

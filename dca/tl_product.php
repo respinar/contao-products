@@ -124,7 +124,8 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('addEnclosure','published'),
-		'default'                     => '{title_legend},title,alias,model,code;		                                  
+		'default'                     => '{title_legend},title,alias;
+		                                  {product_legend},brand,model,code,sku;		                                  
 		                                  {config_legend:hide},date,featured;
 										  {link_legend},url,target,titleText,linkTitle;
 		                                  {image_legend},singleSRC,alt;
@@ -166,6 +167,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_product']['title'],
 			'exclude'                 => true,
 			'search'                  => true,
+			'sorting'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>128),
 			'sql'                     => "varchar(255) NOT NULL default ''"
@@ -191,13 +193,24 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
+		'brand' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_product']['brand'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'sorting'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(128) NOT NULL default ''"
+		),
 		'model' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_product']['model'],
 			'exclude'                 => true,
 			'search'                  => true,
+			'sorting'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50 clr'),
+			'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
 		'code' => array
@@ -205,6 +218,17 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_product']['code'],
 			'exclude'                 => true,
 			'search'                  => true,
+			'sorting'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50 clr'),
+			'sql'                     => "varchar(128) NOT NULL default ''"
+		),
+		'sku' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_product']['sku'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'sorting'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(128) NOT NULL default ''"
@@ -642,11 +666,17 @@ class tl_product extends Backend
 		while( $objItems->next() )
 		{
 			if ($objItems->id !== $dc->activeRecord->id) {
-				if ($objItems->model) {
-					$arrItems[$objItems->id] = $objItems->title . ' [' . $objItems->model . ']' ;
-				} else {
-					$arrItems[$objItems->id] = $objItems->title;
+
+				$arrItems[$objItems->id] = $objItems->title;
+
+				if($objItems->model) {
+					$arrItems[$objItems->id] .= ' [model: ' . $objItems->model .']';
 				}
+
+				if ($objItems->code) {
+					$arrItems[$objItems->id] .= ' (code: ' . $objItems->code .')';
+				} 				
+				
 			}
 		}
 

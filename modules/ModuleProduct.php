@@ -101,8 +101,6 @@ abstract class ModuleProduct extends \Module
 
 		$objTemplate->link        = $this->generateProductUrl($objProduct, $blnAddCategory);
 
-		$arrMeta = $this->getMetaFields($objProduct);
-
 		$objTemplate->category    = $objProduct->getRelated('pid');
 
 		$objTemplate->count = $intCount; // see #5708
@@ -172,6 +170,8 @@ abstract class ModuleProduct extends \Module
 		
 		$objTemplate->model_text    = $GLOBALS['TL_LANG']['MSC']['model_text'];
 		$objTemplate->code_text     = $GLOBALS['TL_LANG']['MSC']['code_text'];
+		$objTemplate->brand_text    = $GLOBALS['TL_LANG']['MSC']['brand_text'];
+		$objTemplate->sku_text      = $GLOBALS['TL_LANG']['MSC']['sku_text'];
 		$objTemplate->featured_text = "Featured";
 		$objTemplate->new_text      = "New";
 

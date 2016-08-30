@@ -17,8 +17,10 @@
  */
 $GLOBALS['TL_LANG']['tl_product']['title']        = array('Product title','Please enter the product title.');
 $GLOBALS['TL_LANG']['tl_product']['alias']        = array('Product alias','Please enter the product alias.');
-$GLOBALS['TL_LANG']['tl_product']['model']        = array('Product model','Please enter the product model.');
-$GLOBALS['TL_LANG']['tl_product']['code']         = array('Product code','Please enter the product code.');
+$GLOBALS['TL_LANG']['tl_product']['brand']        = array('Brand','Please enter the product brand.');
+$GLOBALS['TL_LANG']['tl_product']['model']        = array('Model','Please enter the product model.');
+$GLOBALS['TL_LANG']['tl_product']['code']         = array('Code','Please enter the product code.');
+$GLOBALS['TL_LANG']['tl_product']['sku']          = array('SKU','Please enter the product SKU (Stock Keeping Unit).');
 $GLOBALS['TL_LANG']['tl_product']['date']         = array('Date','Please enter the date according to the global date format.');
 $GLOBALS['TL_LANG']['tl_product']['url']          = array('Link target','Please enter a web address (http://…), an e-mail address (mailto:…) or an insert tag.');
 $GLOBALS['TL_LANG']['tl_product']['target']       = array('Open in new window','Open the link in a new browser window.');
@@ -40,6 +42,7 @@ $GLOBALS['TL_LANG']['tl_product']['related']      = array('Related products','Ch
  * Legends
  */
 $GLOBALS['TL_LANG']['tl_product']['title_legend']       = 'Product title';
+$GLOBALS['TL_LANG']['tl_product']['product_legend']     = 'Product';
 $GLOBALS['TL_LANG']['tl_product']['description_legend'] = 'Description and SEO';
 $GLOBALS['TL_LANG']['tl_product']['config_legend']      = 'Date and feature';
 $GLOBALS['TL_LANG']['tl_product']['link_legend']        = 'External link';

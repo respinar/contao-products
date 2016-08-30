@@ -8,16 +8,18 @@
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2016-01-08T15:43:29+00:00
+ * last-updated: 2016-08-29T12:44:37+00:00
  */
 
-$GLOBALS['TL_LANG']['MSC']['code_text']         = 'کد محصول';
+$GLOBALS['TL_LANG']['MSC']['brand_text']        = 'برند';
+$GLOBALS['TL_LANG']['MSC']['code_text']         = 'کد';
 $GLOBALS['TL_LANG']['MSC']['emptyCatalog']      = 'محصولی وجود ندارد!';
 $GLOBALS['TL_LANG']['MSC']['features']          = 'ویژگی‌ها';
 $GLOBALS['TL_LANG']['MSC']['model_text']        = 'مدل';
 $GLOBALS['TL_LANG']['MSC']['price']             = 'قیمت';
 $GLOBALS['TL_LANG']['MSC']['rating']            = 'رتبه';
 $GLOBALS['TL_LANG']['MSC']['relateds_headline'] = 'محصولات مرتبط';
+$GLOBALS['TL_LANG']['MSC']['sku_text']          = '‌اس‌کی‌یو';
 $GLOBALS['TL_LANG']['MSC']['specs']             = 'مشخصات';
 $GLOBALS['TL_LANG']['MSC']['types_headline']    = 'نوع‌ها';
 

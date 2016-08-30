@@ -20,7 +20,9 @@ $GLOBALS['TL_LANG']['MSC']['emptyCatalog'] = 'There is no products!';
 $GLOBALS['TL_LANG']['MSC']['price']        = 'Price';
 $GLOBALS['TL_LANG']['MSC']['rating']       = 'Rating';
 
-$GLOBALS['TL_LANG']['MSC']['model_text']        = 'Model';
-$GLOBALS['TL_LANG']['MSC']['code_text']         = 'Code';
+$GLOBALS['TL_LANG']['MSC']['model_text']   = 'Model';
+$GLOBALS['TL_LANG']['MSC']['code_text']    = 'Code';
+$GLOBALS['TL_LANG']['MSC']['brand_text']   = 'Brand';
+$GLOBALS['TL_LANG']['MSC']['sku_text']     = 'SKU';
 
 $GLOBALS['TL_LANG']['MSC']['relateds_headline'] = 'Related products';

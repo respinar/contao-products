@@ -8,7 +8,7 @@
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2016-08-29T12:49:28+00:00
+ * last-updated: 2016-08-29T13:50:24+00:00
  */
 
 $GLOBALS['TL_LANG']['tl_product']['addEnclosure']['0']  = 'افزودن پیوست';
@@ -16,6 +16,8 @@ $GLOBALS['TL_LANG']['tl_product']['addEnclosure']['1']  = 'لطفا یک یا چ
 $GLOBALS['TL_LANG']['tl_product']['alias']['0']         = 'نام مستعار محصول';
 $GLOBALS['TL_LANG']['tl_product']['alias']['1']         = 'لطفا اسم مستعار محصول را وارد نمایید.';
 $GLOBALS['TL_LANG']['tl_product']['alt']['0']           = 'متن جایگزین';
+$GLOBALS['TL_LANG']['tl_product']['brand']['0']         = 'برند';
+$GLOBALS['TL_LANG']['tl_product']['brand']['1']         = 'لطفا برند یا مارک محصول را وارد نمایید.';
 $GLOBALS['TL_LANG']['tl_product']['code']['0']          = 'کد محصول';
 $GLOBALS['TL_LANG']['tl_product']['code']['1']          = 'لطفا کد محصول را وارد نمایید.';
 $GLOBALS['TL_LANG']['tl_product']['config_legend']      = 'تاریخ و مشخصات';
@@ -29,7 +31,7 @@ $GLOBALS['TL_LANG']['tl_product']['delete']['0']        = 'حذف محصول';
 $GLOBALS['TL_LANG']['tl_product']['delete']['1']        = 'حذف محصول شناسه‌ی %s';
 $GLOBALS['TL_LANG']['tl_product']['description']['0']   = 'توضیحات متا';
 $GLOBALS['TL_LANG']['tl_product']['description']['1']   = 'اینجا می‌توانید توضیحی مختصر درباره محصول که توسط موتورهای جستجو مانند گوگل و یاهو ارزیابی خواهد شد را وارد نمایید. موتورهای جستجو معمولا بین ۱۵۰ تا ۳۰۰ نویسه را نشان می‌دهند.';
-$GLOBALS['TL_LANG']['tl_product']['description_legend'] = 'اطلاعات متا برای سئو';
+$GLOBALS['TL_LANG']['tl_product']['description_legend'] = 'توضیحات و سئو';
 $GLOBALS['TL_LANG']['tl_product']['edit']['0']          = 'ویرایش محصول';
 $GLOBALS['TL_LANG']['tl_product']['edit']['1']          = 'ویرایش محصول شناسه‌ی %s';
 $GLOBALS['TL_LANG']['tl_product']['enclosure']['0']     = 'پیوست‌ها';
@@ -45,11 +47,12 @@ $GLOBALS['TL_LANG']['tl_product']['link_legend']        = 'پیوند خارجی
 $GLOBALS['TL_LANG']['tl_product']['mainID']['0']        = 'کالا اصلی';
 $GLOBALS['TL_LANG']['tl_product']['mainID']['1']        = 'لطفا کالا اصلی را انتخاب نمایید.';
 $GLOBALS['TL_LANG']['tl_product']['meta_legend']        = 'سئو';
-$GLOBALS['TL_LANG']['tl_product']['model']['0']         = 'مدل محصول';
+$GLOBALS['TL_LANG']['tl_product']['model']['0']         = 'مدل';
 $GLOBALS['TL_LANG']['tl_product']['model']['1']         = 'لطفا مدل محصول را وارد نمایید.';
 $GLOBALS['TL_LANG']['tl_product']['new']['0']           = 'افزودن محصول';
 $GLOBALS['TL_LANG']['tl_product']['new']['1']           = 'افزودن یک محصول جدید';
 $GLOBALS['TL_LANG']['tl_product']['otherDay']           = 'روزهای دیگر';
+$GLOBALS['TL_LANG']['tl_product']['product_legend']     = 'محصول';
 $GLOBALS['TL_LANG']['tl_product']['protected_legend']   = 'حفاظت دسترسی';
 $GLOBALS['TL_LANG']['tl_product']['publish_legend']     = 'تنظیمات انتشار';
 $GLOBALS['TL_LANG']['tl_product']['published']['0']     = 'انتشار محصول';
@@ -61,6 +64,8 @@ $GLOBALS['TL_LANG']['tl_product']['show']['0']          = 'جزئیات محصو
 $GLOBALS['TL_LANG']['tl_product']['show']['1']          = 'نمایش جزئیات محصول شناسه‌ی %s';
 $GLOBALS['TL_LANG']['tl_product']['singleSRC']['0']     = 'پرونده منبع';
 $GLOBALS['TL_LANG']['tl_product']['singleSRC']['1']     = 'لطفا یک تصویر انتخاب نمایید.';
+$GLOBALS['TL_LANG']['tl_product']['sku']['0']           = '‌اس‌کی‌یو';
+$GLOBALS['TL_LANG']['tl_product']['sku']['1']           = 'لطفا SKU محصول (واحد نگهداری انبار) را وارد نمایید.';
 $GLOBALS['TL_LANG']['tl_product']['start']['0']         = 'نمایش از';
 $GLOBALS['TL_LANG']['tl_product']['start']['1']         = 'محصول را قبل از این روزدر وب‌سایت نمایش نخواهد داد.';
 $GLOBALS['TL_LANG']['tl_product']['stop']['0']          = 'نمایش تا';
