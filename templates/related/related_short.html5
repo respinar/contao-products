@@ -25,7 +25,7 @@
   </figure>
 
 
-  <div class="title"><a href="<?= $this->link; ?>"><?= $this->title; ?> <?php endif; ?></a></div>
+  <div class="title"><a href="<?= $this->link; ?>"><?= $this->title; ?></a></div>
 
   <?php if ($this->hasMetaFields): ?>
     <div class="info">
