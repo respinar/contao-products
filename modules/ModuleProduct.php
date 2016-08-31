@@ -297,23 +297,28 @@ abstract class ModuleProduct extends \Module
 					break;
 
 				case 'code':
-					$return['code'] = $GLOBALS['TL_LANG']['MSC']['code_text'] .' '. $objProduct->code;
+					if ($objProduct->code) 
+						$return['code'] = $GLOBALS['TL_LANG']['MSC']['code_text'] .' '. $objProduct->code;
 					break;
 
 				case 'model':
-					$return['model'] = $GLOBALS['TL_LANG']['MSC']['model_text'] .' '. $objProduct->model;
+					if ($objProduct->model) 
+						$return['model'] = $GLOBALS['TL_LANG']['MSC']['model_text'] .' '. $objProduct->model;
 					break;
 
 				case 'brand':
-					$return['brand'] = $GLOBALS['TL_LANG']['MSC']['brand_text'] .' '. $objProduct->brand;
+					if ($objProduct->brand) 
+						$return['brand'] = $GLOBALS['TL_LANG']['MSC']['brand_text'] .' '. $objProduct->brand;
 					break;
 				
 				case 'sku':
-					$return['sku'] = $GLOBALS['TL_LANG']['MSC']['sku_text'] .' '. $objProduct->sku;
+					if ($objProduct->sku) 
+						$return['sku'] = $GLOBALS['TL_LANG']['MSC']['sku_text'] .' '. $objProduct->sku;
 					break;
 				
 				case 'buy':
-					$return['buy'] = $objProduct->url;
+					if ($objProduct->url) 
+						$return['buy'] = $objProduct->url;
 					break;
 			}
 		}
