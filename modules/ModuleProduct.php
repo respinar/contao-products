@@ -347,8 +347,15 @@ abstract class ModuleProduct extends \Module
 		$objTemplate->category    = $objProduct->getRelated('pid');
 		$objTemplate->count = $intCount; // see #5708
 		$arrMeta = $this->getMetaFields($objProduct);
+
 		// Add the meta information
 		$objTemplate->date = $arrMeta['date'];
+		$objTemplate->meta_brand = $arrMeta['brand'];
+		$objTemplate->meta_model = $arrMeta['model'];
+		$objTemplate->meta_code = $arrMeta['code'];
+		$objTemplate->meta_sku = $arrMeta['sku'];
+		$objTemplate->meta_buy = $arrMeta['buy'];
+
 		$objTemplate->hasMetaFields = !empty($arrMeta);
 		$objTemplate->timestamp = $objProduct->date;
 		$objTemplate->datetime = date('Y-m-d\TH:i:sP', $objProduct->date);
