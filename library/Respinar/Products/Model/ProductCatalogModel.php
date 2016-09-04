@@ -15,22 +15,22 @@
 /**
  * Namespace
  */
-namespace product;
+namespace Respinar\Products;
 
 /**
- * Class CatalogPriceModel
+ * Class CatalogModel
  *
  * @copyright  2014
  * @author     Hamid Abbaszadeh
  * @package    Devtools
  */
-class ProductPriceModel extends \Model
+class ProductCatalogModel extends \Model
 {
 
 	/**
 	 * Name of the table
 	 * @var string
 	 */
-	protected static $strTable = 'tl_product_price';
+	protected static $strTable = 'tl_product_catalog';
 
 }

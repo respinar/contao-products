@@ -15,7 +15,7 @@
 /**
  * Namespace
  */
-namespace product;
+namespace Respinar\Products;
 
 
 /**

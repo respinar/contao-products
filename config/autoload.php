@@ -14,7 +14,7 @@
  */
 ClassLoader::addNamespaces(array
 (
-	'product',
+	'Respinar\Products',
 ));
 
 
@@ -24,17 +24,17 @@ ClassLoader::addNamespaces(array
 ClassLoader::addClasses(array
 (
 	// Modules
-	'product\ModuleProduct'       => 'system/modules/products/modules/ModuleProduct.php',
-	'product\ModuleProductDetail' => 'system/modules/products/modules/ModuleProductDetail.php',
-	'product\ModuleProductList'   => 'system/modules/products/modules/ModuleProductList.php',
+	'Respinar\Products\ModuleProduct'       => 'system/modules/products/library/Respinar/Products/FrontendModule/ModuleProduct.php',
+	'Respinar\Products\ModuleProductDetail' => 'system/modules/products/library/Respinar/Products/FrontendModule/ModuleProductDetail.php',
+	'Respinar\Products\ModuleProductList'   => 'system/modules/products/library/Respinar/Products/FrontendModule/ModuleProductList.php',
 
 	// Models
-	'product\ProductPriceModel'   => 'system/modules/products/models/ProductPriceModel.php',
-	'product\ProductModel'        => 'system/modules/products/models/ProductModel.php',
-	'product\ProductCatalogModel' => 'system/modules/products/models/ProductCatalogModel.php',
+	'Respinar\Products\ProductPriceModel'   => 'system/modules/products/library/Respinar/Products/Model/ProductPriceModel.php',
+	'Respinar\Products\ProductModel'        => 'system/modules/products/library/Respinar/Products/Model/ProductModel.php',
+	'Respinar\Products\ProductCatalogModel' => 'system/modules/products/library/Respinar/Products/Model/ProductCatalogModel.php',
 
 	// Classes
-	'product\Product'             => 'system/modules/products/classes/Product.php',
+	'Respinar\Products\Product'             => 'system/modules/products/library/Respinar/Products/Product.php',
 ));
 
 

@@ -15,7 +15,7 @@
 /**
  * Run in a custom namespace, so the class can be replaced
  */
-namespace product;
+namespace Respinar\Products;
 
 
 /**
