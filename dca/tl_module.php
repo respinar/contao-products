@@ -58,7 +58,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_sortBy'] = array
 	'default'                 => 'custom',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options'                 => array('custom','title_asc', 'title_desc', 'date_asc', 'date_desc'),
+	'options'                 => array('custom','date_desc', 'date_asc','title_asc', 'title_desc'),
 	'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
 	'eval'                    => array('tl_class'=>'w50'),
 	'sql'                     => "varchar(16) NOT NULL default ''"
