@@ -130,45 +130,4 @@ class Product extends \Frontend
 		return sprintf($strUrl, (($objItem->alias != '' && !\Config::get('disableAlias')) ? $objItem->alias : $objItem->id));
 	}
 
-	/**
-	 * Translate the URL parameters using the changelanguage module hook
-	 *
-	 * @param	array
-	 * @param	string
-	 * @param	array
-	 * @return	array
-	 * @see		ModuleChangeLanguage::compile()
-	 */
-	public function translateUrlParameters($arrGet, $strLanguage, $arrRootPage)
-	{
-		// Set the item from the auto_item parameter
-		if ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))
-		{
-			$this->Input->setGet('items', $this->Input->get('auto_item'));
-		}
-
-		$strItem = $this->Input->get('items');
-
-        if ($strItem != '')
-        {
-        	$objProduct = $this->Database->prepare("SELECT tl_product.*, tl_product_catalog.master FROM tl_product LEFT OUTER JOIN tl_product_catalog ON tl_product.pid=tl_product_catalog.id WHERE tl_product.id=? OR tl_product.alias=?")
-        							  ->limit(1)
-        							  ->execute((int)$strItem, $strItem);
-
-        	// We found a news item!!
-        	if ($objProduct->numRows)
-        	{
-        		$id = ($objProduct->master > 0) ? $objProduct->languageMain : $objProduct->id;
-        		$objItem = $this->Database->prepare("SELECT tl_product.id, tl_product.alias FROM tl_product LEFT OUTER JOIN tl_product_catalog ON tl_product.pid=tl_product_catalog.id WHERE tl_product_catalog.language=? AND (tl_product.id=? OR languageMain=?)")->execute($strLanguage, $id, $id);
-
-				if ($objItem->numRows)
-				{
-					$arrGet['url']['items'] = $objItem->alias ? $objItem->alias : $objItem->id;
-				}
-        	}
-        }
-
-		return $arrGet;
-	}
-
 }
