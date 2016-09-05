@@ -37,6 +37,7 @@ $GLOBALS['TL_LANG']['tl_product_catalog']['isSlave']	= 'Master catalog is "%s"';
 $GLOBALS['TL_LANG']['tl_product_catalog']['title_legend']     = 'Catalog Title';
 $GLOBALS['TL_LANG']['tl_product_catalog']['redirect_legend']  = 'Redirect';
 $GLOBALS['TL_LANG']['tl_product_catalog']['protected_legend'] = 'Access protection';
+$GLOBALS['TL_LANG']['tl_product_catalog']['language_legend']  = 'Language settings';
 
 
 /**
