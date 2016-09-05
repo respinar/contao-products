@@ -28,10 +28,6 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 		'ctable'                      => array('tl_content'),
 		'switchToEdit'                => true,
 		'enableVersioning'            => true,
-		'onload_callback'             => array
-		(
-			array('tl_product', 'showSelectbox'),
-		),
 		'sql' => array
 		(
 			'keys' => array
@@ -125,8 +121,8 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 	(
 		'__selector__'                => array('addEnclosure','published'),
 		'default'                     => '{title_legend},title,alias;
-		                                  {product_legend},brand,model,code,sku;		                                  
 		                                  {config_legend:hide},date,featured;
+		                                  {product_legend},brand,model,code,sku;
 										  {link_legend},url,target,titleText,linkTitle;
 		                                  {image_legend},singleSRC,alt;
 										  {description_legend},description;
@@ -184,14 +180,6 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 				array('tl_product', 'generateAlias')
 			),
 			'sql'                     => "varchar(128) NOT NULL default ''"
-		),
-		'languageMain' => array(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_product']['languageMain'],
-			'exclude'                 => false,
-			'inputType'               => 'select',
-			'options_callback'        => array('tl_product', 'getMasterCategory'),
-			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'brand' => array
 		(
@@ -617,40 +605,6 @@ class tl_product extends Backend
 		$objVersions->create();
 	}
 
-
-
-	/**
-	 * Get records from the master category
-	 *
-	 * @param	DataContainer
-	 * @return	array
-	 * @link	http://www.contao.org/callbacks.html#options_callback
-	 */
-	public function getMasterCategory(DataContainer $dc)
-	{
-		$sameDay = $GLOBALS['TL_LANG']['tl_product']['sameDay'];
-		$otherDay = $GLOBALS['TL_LANG']['tl_product']['otherDay'];
-
-		$arrItems = array($sameDay => array(), $otherDay => array());
-		$objItems = $this->Database->prepare("SELECT * FROM tl_product WHERE pid=(SELECT tl_product_catalog.master FROM tl_product_catalog LEFT OUTER JOIN tl_product ON tl_product.pid=tl_product_catalog.id WHERE tl_product.id=?) ORDER BY date DESC")->execute($dc->id);
-
-		$dayBegin = strtotime('0:00', $dc->activeRecord->date);
-
-		while( $objItems->next() )
-		{
-			if (strtotime('0:00', $objItems->date) == $dayBegin)
-			{
-				$arrItems[$sameDay][$objItems->id] = $objItems->title . ' (' . $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objItems->time) . ')';
-			}
-			else
-			{
-				$arrItems[$otherDay][$objItems->id] = $objItems->title . ' (' . $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objItems->time) . ')';
-			}
-		}
-
-		return $arrItems;
-	}
-
 	/**
 	 * Get records from the master category
 	 *
@@ -682,56 +636,4 @@ class tl_product extends Backend
 
 		return $arrItems;
 	}
-
-
-	/**
-	 * Show the select menu only on slave archives
-	 *
-	 * @param	DataContainer
-	 * @return	void
-	 * @link	http://www.contao.org/callbacks.html#onload_callback
-	 */
-	public function showSelectbox(DataContainer $dc)
-	{
-		if($this->Input->get('act') == "edit")
-		{
-			$objCategory = $this->Database->prepare("SELECT tl_product_catalog.* FROM tl_product_catalog LEFT OUTER JOIN tl_product ON tl_product.pid=tl_product_catalog.id WHERE tl_product.id=?")
-										 ->limit(1)
-										 ->execute($dc->id);
-
-			if($objCategory->numRows && $objCategory->master > 0)
-			{
-				$GLOBALS['TL_DCA']['tl_product']['palettes']['default'] = preg_replace('@([,|;])(alias[,|;])@','$1languageMain,$2', $GLOBALS['TL_DCA']['tl_product']['palettes']['default']);
-				$GLOBALS['TL_DCA']['tl_product']['palettes']['other'] = preg_replace('@([,|;])(alias[,|;])@','$1languageMain,$2', $GLOBALS['TL_DCA']['tl_product']['palettes']['other']);
-				$GLOBALS['TL_DCA']['tl_product']['fields']['title']['eval']['tl_class'] = 'w50';
-				$GLOBALS['TL_DCA']['tl_product']['fields']['alias']['eval']['tl_class'] = 'clr w50';
-			}
-		}
-		else if($this->Input->get('act') == "editAll")
-		{
-			$GLOBALS['TL_DCA']['tl_product']['palettes']['regular'] = preg_replace('@([,|;]{1}language)([,|;]{1})@','$1,languageMain$2', $GLOBALS['TL_DCA']['tl_product']['palettes']['regular']);
-		}
-	}
-
-
-	/**
-	 * Dynamically add flags to the "multiSRC" field
-	 * @param mixed
-	 * @param \DataContainer
-	 * @return mixed
-	 */
-	public function setMultiSrcFlags($varValue, DataContainer $dc)
-	{
-		if ($dc->activeRecord)
-		{
-
-			$GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['isGallery'] = true;
-			$GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['extensions'] = Config::get('validImageTypes');
-
-		}
-
-		return $varValue;
-	}
-
-
 }

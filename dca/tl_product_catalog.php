@@ -105,7 +105,7 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('protected'),
-		'default'                     => '{title_legend},title,language,master;{redirect_legend},jumpTo;{protected_legend:hide},protected;'
+		'default'                     => '{title_legend},title;{redirect_legend},jumpTo;{protected_legend:hide},protected;'
 	),
 
 	// Subpalettes
@@ -133,25 +133,6 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>128),
 			'sql'                     => "varchar(255) NOT NULL default ''"
-		),
-		'language' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_product_catalog']['language'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'filter'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>32, 'tl_class'=>'w50'),
-			'sql'                     => "varchar(32) NOT NULL default ''"
-		),
-		'master' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_product_catalog']['master'],
-			'exclude'                 => true,
-			'inputType'               => 'select',
-			'options_callback'        => array('tl_product_catalog', 'getCategories'),
-			'eval'                    => array('includeBlankOption'=>true, 'blankOptionLabel'=>&$GLOBALS['TL_LANG']['tl_product_catalog']['isMaster']),
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'jumpTo' => array
 		(
@@ -373,26 +354,5 @@ class tl_product_catalog extends Backend
 	public function deleteCategory($row, $href, $label, $title, $icon, $attributes)
 	{
 		return $this->User->hasAccess('delete', 'catalogp') ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
-	}
-
-
-	/**
-	 * Get an array of possible catalog categories
-	 *
-	 * @param	DataContainer
-	 * @return	array
-	 * @link	http://www.contao.org/callbacks.html#options_callback
-	 */
-	public function getCategories(DataContainer $dc)
-	{
-		$arrCategories = array();
-		$objCategories = $this->Database->prepare("SELECT * FROM tl_product_catalog WHERE language!=? AND id!=? AND master=0 ORDER BY title")->execute($dc->activeRecord->language, $dc->id);
-
-		while( $objCategories->next() )
-		{
-			$arrCategories[$objCategories->id] = sprintf($GLOBALS['TL_LANG']['tl_product_catalog']['isSlave'], $objCategories->title);
-		}
-
-		return $arrCategories;
 	}
 }
