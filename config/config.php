@@ -59,7 +59,17 @@ $GLOBALS['TL_HOOKS']['getSearchablePages'][]     = array('Product', 'getSearchab
 /**
  * Hooks
  */
-$GLOBALS['TL_HOOKS']['translateUrlParameters'][] = array('Product', 'translateUrlParameters');
+
+
+$GLOBALS['TL_HOOKS']['loadDataContainer'][] = [
+	'Respinar\Products\EventListener\CallbackSetupListener',
+	'onLoadDataContainer'
+];
+
+$GLOBALS['TL_HOOKS']['changelanguageNavigation'][] = [
+    'Respinar\Products\EventListener\Navigation\ProductNavigationListener',
+    'onChangelanguageNavigation'
+];
 
 /**
  * Add permissions

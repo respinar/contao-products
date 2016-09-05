@@ -35,6 +35,11 @@ ClassLoader::addClasses(array
 
 	// Classes
 	'Respinar\Products\Product'             => 'system/modules/products/library/Respinar/Products/Product.php',
+
+	// Change Language Classes
+	'Respinar\Products\EventListener\CallbackSetupListener' => 'system/modules/products/library/Respinar/Products/EventListener/CallbackSetupListener.php',
+	'Respinar\Products\EventListener\Navigation\ProductNavigationListener' => 'system/modules/products/library/Respinar/Products/EventListener/Navigation/ProductNavigationListener.php',
+	'Respinar\Products\EventListener\DataContainer\ProductListener' => 'system/modules/products/library/Respinar/Products/EventListener/DataContainer/ProductListener.php'
 ));
 
 
