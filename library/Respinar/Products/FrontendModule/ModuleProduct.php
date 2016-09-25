@@ -97,9 +97,7 @@ abstract class ModuleProduct extends \Module
 
 		if (time() - $objProduct->date < 2592000) {
 			$objTemplate->new_product = true;
-		}
-
-		$objTemplate->link        = $this->generateProductUrl($objProduct, $blnAddCategory);
+		}		
 
 		$objTemplate->category    = $objProduct->getRelated('pid');
 
@@ -165,6 +163,8 @@ abstract class ModuleProduct extends \Module
 			{
 				$objTemplate->text .= $this->getContentElement($objElement->current());
 			}
+
+			$objTemplate->link        = $this->generateProductUrl($objProduct, $blnAddCategory);
 		}
 
 		$objTemplate->enclosure = array();
