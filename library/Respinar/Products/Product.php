@@ -107,7 +107,13 @@ class Product extends \Frontend
 				{
 					while ($objProduct->next())
 					{
-						$arrPages[] = $this->getLink($objProduct, $strUrl);
+                        $objElement = \ContentModel::findPublishedByPidAndTable($objProduct->id, 'tl_product');
+
+						if ($objElement !== null)
+						{
+							$arrPages[] = $this->getLink($objProduct, $strUrl);
+						}
+						
 					}
 				}
 			}
