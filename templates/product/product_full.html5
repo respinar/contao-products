@@ -15,7 +15,7 @@
       <?php if($this->meta_sku): ?><span class="sku"><?= $this->meta_sku; ?></span><?php endif; ?>
       <?php if($this->meta_buy): ?>
         <span class="buy">
-          <a href="<?= $this->url ?>" class="hyperlink_txt" title="<?= $this->linkTitle ?>" <?php if($this->target): ?> target="_blank" <?php endif; ?> >
+          <a href="<?= $this->url ?>" class="hyperlink_txt" title="<?= $this->linkTitle ?>" <?php if($this->target): ?> target="_blank" rel="nofollow" <?php endif; ?> >
           <?php if($this->titleText): ?>
             <?= $this->titleText ?>
           <?php else: ?>

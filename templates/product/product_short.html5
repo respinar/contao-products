@@ -44,7 +44,7 @@
 
     <?php if($this->meta_buy): ?>
         <div class="buy">
-          <a href="<?= $this->url ?>" class="hyperlink_txt" title="<?= $this->linkTitle ?>" <?php if($this->target): ?> target="_blank" <?php endif; ?> >
+          <a href="<?= $this->url ?>" class="hyperlink_txt" title="<?= $this->linkTitle ?>" <?php if($this->target): ?> target="_blank" rel="nofollow" <?php endif; ?> >
           <?php if($this->titleText): ?>
             <?= $this->titleText ?>
           <?php else: ?>
