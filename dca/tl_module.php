@@ -16,13 +16,13 @@
  */
 
 $GLOBALS['TL_DCA']['tl_module']['palettes']['product_list']    = '{title_legend},name,headline,type;
-                                                                  {catalog_legend},catalogs,product_featured,product_detailModule,product_sortBy,numberOfItems,perPage,skipFirst;
+                                                                  {catalog_legend},product_catalogs,product_categories,product_featured,product_detailModule,product_sortBy,numberOfItems,perPage,skipFirst;
                                                                   {template_legend},product_metaFields,customTpl;
                                                                   {product_legend},product_template,imgSize,product_perRow,product_Class;
                                                                   {protected_legend:hide},protected;
                                                                   {expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['product_detail']  = '{title_legend},name,headline,type;
-                                                                  {catalog_legend},catalogs;
+                                                                  {catalog_legend},product_catalogs;
                                                                   {template_legend},product_metaFields,customTpl;
                                                                   {product_legend},product_template;
                                                                   {related_legend},related_show,related_template,related_imgSize,related_perRow,related_Class;
@@ -32,14 +32,23 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['product_detail']  = '{title_legend}
 /**
  * Add fields to tl_module
  */
-$GLOBALS['TL_DCA']['tl_module']['fields']['catalogs'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_catalogs'] = array
 (
-	'label'                => &$GLOBALS['TL_LANG']['tl_module']['catalogs'],
+	'label'                => &$GLOBALS['TL_LANG']['tl_module']['product_catalogs'],
 	'exclude'              => true,
 	'inputType'            => 'checkbox',
 	'options_callback'     => array('tl_module_product', 'getCatalogs'),
 	'eval'                 => array('multiple'=>true, 'mandatory'=>true),
     'sql'                  => "blob NULL"
+);
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_categories'] = array
+(
+    'label'                   => &$GLOBALS['TL_LANG']['tl_module']['product_categories'],
+    'exclude'                 => true,
+    'inputType'               => 'treePicker',
+    'foreignKey'              => 'tl_product_category.title',
+    'eval'                    => array('mandatory'=>true, 'multiple'=>true, 'fieldType'=>'checkbox', 'foreignTable'=>'tl_product_category', 'titleField'=>'title', 'searchField'=>'title', 'managerHref'=>'table=tl_product_category'),
+    'sql'                     => "blob NULL"
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['product_featured'] = array
 (

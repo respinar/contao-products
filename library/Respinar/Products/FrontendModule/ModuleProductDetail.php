@@ -59,7 +59,7 @@ class ModuleProductDetail extends \ModuleProduct
 			\Input::setGet('items', \Input::get('auto_item'));
 		}
 
-		$this->catalogs = $this->sortOutProtected(deserialize($this->catalogs));
+		$this->product_catalogs = $this->sortOutProtected(deserialize($this->product_catalogs));
 
 		return parent::generate();
 	}
@@ -73,12 +73,12 @@ class ModuleProductDetail extends \ModuleProduct
 
 		global $objPage;
 
-		$this->Template->products = '';
-		$this->Template->referer = 'javascript:history.go(-1)';
+		$this->Template->products          = '';
+		$this->Template->referer           = 'javascript:history.go(-1)';
 		$this->Template->back              = $GLOBALS['TL_LANG']['MSC']['goBack'];
 		$this->Template->relateds_headline = $GLOBALS['TL_LANG']['MSC']['relateds_headline'];
 
-		$objProduct = \ProductModel::findPublishedByParentAndIdOrAlias(\Input::get('items'),$this->catalogs);
+		$objProduct = \ProductModel::findPublishedByParentAndIdOrAlias(\Input::get('items'),$this->product_catalogs);
 
 		if (null === $objProduct)
 		{

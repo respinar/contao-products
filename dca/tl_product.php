@@ -121,6 +121,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 	(
 		'__selector__'                => array('addEnclosure','published'),
 		'default'                     => '{title_legend},title,alias;
+		                                  {category_legend},categories;
 		                                  {config_legend:hide},date,featured;
 		                                  {product_legend},brand,model,code,sku;
 										  {link_legend},url,target,titleText,linkTitle;
@@ -180,6 +181,16 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 				array('tl_product', 'generateAlias')
 			),
 			'sql'                     => "varchar(128) NOT NULL default ''"
+		),
+		'categories' => array
+		(
+            'label'                   => &$GLOBALS['TL_LANG']['tl_product']['categories'],
+			'exclude'                 => true,
+			'filter'                  => true,
+			'inputType'               => 'treePicker',
+			'foreignKey'              => 'tl_product_category.title',
+			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'foreignTable'=>'tl_product_category', 'titleField'=>'title', 'searchField'=>'title', 'managerHref'=>'table=tl_product_category'),
+			'sql'                     => "blob NULL"
 		),
 		'brand' => array
 		(

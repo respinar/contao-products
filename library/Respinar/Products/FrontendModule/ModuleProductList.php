@@ -53,10 +53,10 @@ class ModuleProductList extends \ModuleProduct
 			return $objTemplate->parse();
 		}
 
-		$this->catalogs = $this->sortOutProtected(deserialize($this->catalogs));
+		$this->product_catalogs = $this->sortOutProtected(deserialize($this->product_catalogs));
 
 		// No catalog available
-		if (!is_array($this->catalogs) || empty($this->catalogs))
+		if (!is_array($this->product_catalogs) || empty($this->product_catalogs))
 		{
 			return '';
 		}
@@ -103,7 +103,7 @@ class ModuleProductList extends \ModuleProduct
 		$this->Template->products = array();
 		$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['emptyCatalog'];
 
-		$intTotal = \ProductModel::countPublishedByPids($this->catalogs,$blnFeatured);
+		$intTotal = \ProductModel::countPublishedByPids($this->product_catalogs,$blnFeatured);
 
 		if ($intTotal < 1)
 		{
@@ -180,11 +180,11 @@ class ModuleProductList extends \ModuleProduct
 		// Get the items
 		if (isset($limit))
 		{
-			$objProducts = \ProductModel::findPublishedByPids($this->catalogs, $blnFeatured, $limit, $offset, $arrOptions);
+			$objProducts = \ProductModel::findPublishedByPids($this->product_catalogs, $blnFeatured, $limit, $offset, $arrOptions);
 		}
 		else
 		{
-			$objProducts = \ProductModel::findPublishedByPids($this->catalogs, $blnFeatured, 0, $offset, $arrOptions);
+			$objProducts = \ProductModel::findPublishedByPids($this->product_catalogs, $blnFeatured, 0, $offset, $arrOptions);
 		}
 
 
@@ -194,7 +194,7 @@ class ModuleProductList extends \ModuleProduct
 			$this->Template->products = $this->parseProducts($objProducts);
 		}
 
-		$this->Template->categories = $this->catalogs;
+		$this->Template->categories = $this->product_catalogs;
 
 	}
 }
