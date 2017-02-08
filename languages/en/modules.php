@@ -26,3 +26,4 @@ $GLOBALS['TL_LANG']['MOD']['prices']        = array('Prices','Price management')
 $GLOBALS['TL_LANG']['FMD']['products']       = 'Products';
 $GLOBALS['TL_LANG']['FMD']['product_list']   = array('Product list','Product list');
 $GLOBALS['TL_LANG']['FMD']['product_detail'] = array('Product detail','Product detail');
+$GLOBALS['TL_LANG']['FMD']['product']        = array('Product','');

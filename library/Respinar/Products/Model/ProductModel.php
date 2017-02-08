@@ -33,6 +33,32 @@ class ProductModel extends \Model
 	 */
 	protected static $strTable = 'tl_product';
 
+
+	/**
+	 * Find published news items by their parent ID and ID or alias
+	 *
+	 * @param mixed $varId      The numeric ID or alias name
+	 * @param array $arrPids    An array of parent IDs
+	 * @param array $arrOptions An optional options array
+	 *
+	 * @return \Model|null The NewsModel or null if there are no news
+	 */
+	public static function findPublishedByIdOrAlias($varId, array $arrOptions=array())
+	{
+		
+		$t = static::$strTable;
+		$arrColumns = array("($t.id=? OR $t.alias=?)");
+
+		if (!BE_USER_LOGGED_IN)
+		{
+			$time = time();
+			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+		}
+
+		return static::findBy($arrColumns, array((is_numeric($varId) ? $varId : 0), $varId), $arrOptions);
+	}
+		
+
 	/**
 	 * Find published news items by their parent ID and ID or alias
 	 *

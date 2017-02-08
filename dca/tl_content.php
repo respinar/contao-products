@@ -12,149 +12,80 @@
  */
 
 
+$GLOBALS['TL_DCA']['tl_content']['palettes']['product']  = '{type_legend},name,headline,type;
+                                                            {product_legend},product;
+                                                            {template_legend},product_metaFields,customTpl,size;
+                                                            {protected_legend:hide},protected;
+                                                            {expert_legend:hide},guests,cssID,space';
+
 /**
- * Dynamically add the permission check and parent table
+ * Add fields to tl_content
  */
-if (Input::get('do') == 'catalogs')
-{
-	$GLOBALS['TL_DCA']['tl_content']['config']['ptable'] = 'tl_product';
-	$GLOBALS['TL_DCA']['tl_content']['list']['sorting']['headerFields'] = array('title', 'brand','model','code','sku', 'published');
-}
-
+$GLOBALS['TL_DCA']['tl_content']['fields']['product'] = array
+(
+	'label'                => &$GLOBALS['TL_LANG']['tl_content']['product'],
+	'exclude'              => true,
+	'inputType'            => 'select',
+	'options_callback'     => array('tl_content_product', 'getProducts'),
+	'eval'                 => array('helpwizard'=>true, 'chosen'=>true, 'mandatory'=>true),
+    'sql'                  => "varchar(64) NOT NULL default ''"
+);
+$GLOBALS['TL_DCA']['tl_content']['fields']['product_metaFields'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['product_metaFields'],
+	'default'                 => array(''),
+	'exclude'                 => true,
+	'inputType'               => 'checkbox',
+	'options'                 => array('date','code','brand','model','sku','buy'),
+	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
+	'eval'                    => array('multiple'=>true),
+	'sql'                     => "varchar(255) NOT NULL default ''"
+);
 
 /**
- * Class tl_content_news
+ * Class tl_content_product
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    News
+ * @copyright  Hamid Abbaszadeh 2014
+ * @author     Hamid Abbaszadeh <http://respinar.com>
+ * @package    Catalog
  */
 class tl_content_product extends Backend
 {
 
 	/**
-	 * Import the back end user object
+	 * Get all news archives and return them as array
+	 * @return array
 	 */
-	public function __construct()
+	public function getProducts()
 	{
-		parent::__construct();
-		$this->import('BackendUser', 'User');
-	}
+		//if (!$this->User->isAdmin && !is_array($this->User->news))
+		//{
+		//	return array();
+		//}
 
+		$arrProducts = array();
+		$objProducts = $this->Database->execute("SELECT id, title FROM tl_product WHERE published=1 ORDER BY title");
+
+		while ($objProducts->next())
+		{
+			//if ($this->User->hasAccess($objArchives->id, 'news'))
+			//{
+				$arrProducts[$objProducts->id] = $objProducts->title;
+			//}
+		}
+
+		return $arrProducts;
+	}
 
 	/**
-	 * Check permissions to edit table tl_content
+	 * Return all prices templates as array
+	 * @param object
+	 * @return array
 	 */
-	public function checkPermission()
+	public function getProductTemplates(DataContainer $dc)
 	{
-		if ($this->User->isAdmin)
-		{
-			return;
-		}
-
-		// Set the root IDs
-		if (!is_array($this->User->news) || empty($this->User->news))
-		{
-			$root = array(0);
-		}
-		else
-		{
-			$root = $this->User->news;
-		}
-
-		// Check the current action
-		switch (Input::get('act'))
-		{
-			case 'paste':
-				// Allow
-				break;
-
-			case '': // empty
-			case 'create':
-			case 'select':
-				// Check access to the news item
-				if (!$this->checkAccessToElement(CURRENT_ID, $root, true))
-				{
-					$this->redirect('contao/main.php?act=error');
-				}
-				break;
-
-			case 'editAll':
-			case 'deleteAll':
-			case 'overrideAll':
-			case 'cutAll':
-			case 'copyAll':
-				// Check access to the parent element if a content element is moved
-				if ((Input::get('act') == 'cutAll' || Input::get('act') == 'copyAll') && !$this->checkAccessToElement(Input::get('pid'), $root, (Input::get('mode') == 2)))
-				{
-					$this->redirect('contao/main.php?act=error');
-				}
-
-				$objCes = $this->Database->prepare("SELECT id FROM tl_content WHERE ptable='tl_product' AND pid=?")
-										 ->execute(CURRENT_ID);
-
-				$session = $this->Session->getData();
-				$session['CURRENT']['IDS'] = array_intersect($session['CURRENT']['IDS'], $objCes->fetchEach('id'));
-				$this->Session->setData($session);
-				break;
-
-			case 'cut':
-			case 'copy':
-				// Check access to the parent element if a content element is moved
-				if (!$this->checkAccessToElement(Input::get('pid'), $root, (Input::get('mode') == 2)))
-				{
-					$this->redirect('contao/main.php?act=error');
-				}
-				// NO BREAK STATEMENT HERE
-
-			default:
-				// Check access to the content element
-				if (!$this->checkAccessToElement(Input::get('id'), $root))
-				{
-					$this->redirect('contao/main.php?act=error');
-				}
-				break;
-		}
+		return $this->getTemplateGroup('product_', $dc->activeRecord->pid);
 	}
-
-
-	/**
-	 * Check access to a particular content element
-	 * @param integer
-	 * @param array
-	 * @param boolean
-	 * @return boolean
-	 */
-	protected function checkAccessToElement($id, $root, $blnIsPid=false)
-	{
-		if ($blnIsPid)
-		{
-			$objArchive = $this->Database->prepare("SELECT a.id, n.id AS nid FROM tl_product n, tl_product_catalog a WHERE n.id=? AND n.pid=a.id")
-										 ->limit(1)
-										 ->execute($id);
-		}
-		else
-		{
-			$objArchive = $this->Database->prepare("SELECT a.id, n.id AS nid FROM tl_content c, tl_product n, tl_product_catalog a WHERE c.id=? AND c.pid=n.id AND n.pid=a.id")
-										 ->limit(1)
-										 ->execute($id);
-		}
-
-		// Invalid ID
-		if ($objArchive->numRows < 1)
-		{
-			$this->log('Invalid product content element ID ' . $id, __METHOD__, TL_ERROR);
-			return false;
-		}
-
-		// The news archive is not mounted
-		if (!in_array($objArchive->id, $root))
-		{
-			$this->log('Not enough permissions to modify article ID ' . $objArchive->nid . ' in product catalog ID ' . $objArchive->id, __METHOD__, TL_ERROR);
-			return false;
-		}
-
-		return true;
-	}
+    
 }

@@ -52,6 +52,19 @@ array_insert($GLOBALS['FE_MOD'], 2, array
 
 
 /**
+ * Content elements
+ */
+
+array_insert($GLOBALS['TL_CTE'], 2, array
+(
+	'products' => array
+	(
+		'product'    => 'ContentProduct',
+	)
+));
+
+
+/**
  * Register hook to add carpets items to the indexer
  */
 $GLOBALS['TL_HOOKS']['getSearchablePages'][]     = array('Product', 'getSearchablePages');
