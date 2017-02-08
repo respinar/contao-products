@@ -15,7 +15,8 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_module']['catalogs']             = array('Catelogs','Please select one or more catalogs.');
+$GLOBALS['TL_LANG']['tl_module']['product_catalogs']     = array('Product catelogs','Please select one or more catalogs.');
+$GLOBALS['TL_LANG']['tl_module']['product_categories']   = array('Product categories','Please select one or more categories.');
 $GLOBALS['TL_LANG']['tl_module']['product_featured']     = array('Featured product','Here you can choose how featured products are handled.');
 $GLOBALS['TL_LANG']['tl_module']['product_detailModule'] = array('Product detail module','Automatically switch to the product module if an item has been selected.');
 $GLOBALS['TL_LANG']['tl_module']['product_metaFields']   = array('Meta fields','Here you can select the meta fields.');

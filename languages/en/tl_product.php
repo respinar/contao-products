@@ -17,6 +17,7 @@
  */
 $GLOBALS['TL_LANG']['tl_product']['title']        = array('Product title','Please enter the product title.');
 $GLOBALS['TL_LANG']['tl_product']['alias']        = array('Product alias','Please enter the product alias.');
+$GLOBALS['TL_LANG']['tl_product']['categories']   = array('Categories','Here you can select one or more product categories.');
 $GLOBALS['TL_LANG']['tl_product']['brand']        = array('Brand','Please enter the product brand.');
 $GLOBALS['TL_LANG']['tl_product']['model']        = array('Model','Please enter the product model.');
 $GLOBALS['TL_LANG']['tl_product']['code']         = array('Code','Please enter the product code.');
@@ -42,6 +43,7 @@ $GLOBALS['TL_LANG']['tl_product']['related']      = array('Related products','Ch
  * Legends
  */
 $GLOBALS['TL_LANG']['tl_product']['title_legend']       = 'Product title';
+$GLOBALS['TL_LANG']['tl_product']['category_legend']    = 'Product categories';
 $GLOBALS['TL_LANG']['tl_product']['product_legend']     = 'Product';
 $GLOBALS['TL_LANG']['tl_product']['description_legend'] = 'Description and SEO';
 $GLOBALS['TL_LANG']['tl_product']['config_legend']      = 'Date and feature';
