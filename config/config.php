@@ -26,8 +26,8 @@ array_insert($GLOBALS['BE_MOD'], 1, array
 		),
 		//'categories' => array
 		//(
-		//	'tables'     => array('tl_product_categories'),
-		//	'icon'       => 'system/modules/products/assets/icon.png',
+		//	'tables'     => array('tl_product_category'),
+		//	'icon'       => 'system/modules/products/assets/category.png',
 		//),
 		//'prices' => array
 		//(
