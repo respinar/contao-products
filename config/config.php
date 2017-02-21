@@ -24,16 +24,16 @@ array_insert($GLOBALS['BE_MOD'], 1, array
 			'tables'     => array('tl_product_catalog','tl_product','tl_content'),
 			'icon'       => 'system/modules/products/assets/icon.png',
 		),
-		//'categories' => array
-		//(
-		//	'tables'     => array('tl_product_category'),
-		//	'icon'       => 'system/modules/products/assets/category.png',
-		//),
-		//'prices' => array
-		//(
-		//	'tables'     => array('tl_product_price_category','tl_product_price'),
-		//	'icon'       => 'system/modules/products/assets/price.png',
-		//),		
+		'categories' => array
+		(
+			'tables'     => array('tl_product_category'),
+			'icon'       => 'system/modules/products/assets/category.png',
+		),
+		/*'prices' => array
+		(
+			'tables'     => array('tl_product_price_category','tl_product_price'),
+			'icon'       => 'system/modules/products/assets/price.png',
+		),*/
 	),	
 ));
 
