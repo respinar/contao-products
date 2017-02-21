@@ -11,6 +11,16 @@
  * @copyright 2014-2016
  */
 
+ /**
+ * Dynamically add the permission check and parent table
+ */
+if (Input::get('do') == 'catalogs')
+{
+	$GLOBALS['TL_DCA']['tl_content']['config']['ptable'] = 'tl_product';
+	$GLOBALS['TL_DCA']['tl_content']['list']['sorting']['headerFields'] = array('title', 'brand','model','code','sku', 'published');
+
+}
+
 
 $GLOBALS['TL_DCA']['tl_content']['palettes']['product']  = '{type_legend},name,headline,type;
                                                             {product_legend},product;
