@@ -37,7 +37,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_catalogs'] = array
 	'label'                => &$GLOBALS['TL_LANG']['tl_module']['product_catalogs'],
 	'exclude'              => true,
 	'inputType'            => 'checkbox',
-	'options_callback'     => array('tl_module_product', 'getCatalogs'),
+	'foreignKey'              => 'tl_product_catalog.title',
 	'eval'                 => array('multiple'=>true, 'mandatory'=>true),
     'sql'                  => "blob NULL"
 );
@@ -181,32 +181,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['related_imgSize'] = array
  */
 class tl_module_product extends Backend
 {
-
-	/**
-	 * Get all news archives and return them as array
-	 * @return array
-	 */
-	public function getCatalogs()
-	{
-		//if (!$this->User->isAdmin && !is_array($this->User->news))
-		//{
-		//	return array();
-		//}
-
-		$arrCatalogs = array();
-		$objCatalogs = $this->Database->execute("SELECT id, title FROM tl_product_catalog ORDER BY title");
-
-		while ($objCatalogs->next())
-		{
-			//if ($this->User->hasAccess($objArchives->id, 'news'))
-			//{
-				$arrCatalogs[$objCatalogs->id] = $objCatalogs->title;
-			//}
-		}
-
-		return $arrCatalogs;
-	}
-
+	
 	/**
 	 * Return all prices templates as array
 	 * @param object
