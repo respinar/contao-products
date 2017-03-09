@@ -22,7 +22,7 @@ array_insert($GLOBALS['BE_MOD'], 1, array
 		'products' => array
 		(
 			'tables'     => array('tl_product_catalog','tl_product','tl_content'),
-			'icon'       => 'system/modules/products/assets/icon.png',
+			'icon'       => 'system/modules/products/assets/product.png',
 		),
 		'categories' => array
 		(
