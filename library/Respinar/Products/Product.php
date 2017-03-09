@@ -142,7 +142,7 @@ class Product extends \Frontend
         // Parameter abtrennen
         $arrSplit = explode('::', $strTag);
 
-        if ($arrSplit[0] != 'product')
+        if ($arrSplit[0] != 'product_url')
         {
             //nicht unser Insert-Tag
             return false;
