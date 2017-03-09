@@ -166,10 +166,10 @@ class ModuleProductList extends \ModuleProduct
 					$arrOptions['order'] = "title DESC";
 					break;
 				case 'date_asc':
-					$arrOptions['order'] = "date ASC";
+					$arrOptions['order'] = "tstamp ASC";
 					break;
 				case 'date_desc':
-					$arrOptions['order'] = "date DESC";
+					$arrOptions['order'] = "tstamp DESC";
 					break;
 				case 'custom':
 					$arrOptions['order'] = "sorting ASC";
