@@ -45,7 +45,7 @@ class ProductModel extends \Model
 	 */
 	public static function findPublishedByIdOrAlias($varId, array $arrOptions=array())
 	{
-		
+
 		$t = static::$strTable;
 		$arrColumns = array("($t.id=? OR $t.alias=?)");
 
@@ -57,7 +57,7 @@ class ProductModel extends \Model
 
 		return static::findBy($arrColumns, array((is_numeric($varId) ? $varId : 0), $varId), $arrOptions);
 	}
-		
+
 
 	/**
 	 * Find published news items by their parent ID and ID or alias
