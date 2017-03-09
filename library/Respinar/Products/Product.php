@@ -136,4 +136,47 @@ class Product extends \Frontend
 		return sprintf($strUrl, (($objItem->alias != '' && !\Config::get('disableAlias')) ? $objItem->alias : $objItem->id));
 	}
 
+
+	public function productURLInsertTags($strTag)
+    {
+        // Parameter abtrennen
+        $arrSplit = explode('::', $strTag);
+
+        if ($arrSplit[0] != 'product')
+        {
+            //nicht unser Insert-Tag
+            return false;
+        }
+
+        // Parameter angegeben?
+        if (isset($arrSplit[1]))
+        {
+            // Get the items
+			$objProduct = \ProductModel::findPublishedByIdOrAlias($arrSplit[1]);
+
+			$objCatalog  = \ProductCatalogModel::findBy('id',$objProduct->pid);
+
+			$objParent = \PageModel::findWithDetails($objCatalog->jumpTo);				
+
+			// Set the domain (see #6421)
+			$domain = ($objParent->rootUseSSL ? 'https://' : 'http://') . ($objParent->domain ?: \Environment::get('host')) . TL_PATH . '/';
+
+			// Generate the URL
+			$strUrl = $domain . $this->generateFrontendUrl($objParent->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/%s' : '/items/%s'), $objParent->language);	
+	
+			$objElement = \ContentModel::findPublishedByPidAndTable($objProduct->id, 'tl_product');
+
+			if ($objElement !== null)
+			{
+				$link = $this->getLink($objProduct, $strUrl);
+			}				
+
+			return $link;
+        }
+        else
+        {
+            return 'Fehler! foo ohne Parameter!';
+        }
+    }
+
 }

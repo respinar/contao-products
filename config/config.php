@@ -19,7 +19,7 @@ array_insert($GLOBALS['BE_MOD'], 1, array
 (
 	'products' => array	
 	(
-		'catalogs' => array
+		'products' => array
 		(
 			'tables'     => array('tl_product_catalog','tl_product','tl_content'),
 			'icon'       => 'system/modules/products/assets/icon.png',
@@ -67,7 +67,12 @@ array_insert($GLOBALS['TL_CTE'], 2, array
 /**
  * Register hook to add carpets items to the indexer
  */
-$GLOBALS['TL_HOOKS']['getSearchablePages'][]     = array('Product', 'getSearchablePages');
+$GLOBALS['TL_HOOKS']['getSearchablePages'][] = array('Product', 'getSearchablePages');
+
+
+// Registrieren im Hooks replaceInsertTags
+$GLOBALS['TL_HOOKS']['replaceInsertTags'][] = array('Product', 'productURLInsertTags');
+
 
 /**
  * Hooks
