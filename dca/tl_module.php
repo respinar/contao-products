@@ -183,23 +183,23 @@ class tl_module_product extends Backend
 {
 	
 	/**
-	 * Return all prices templates as array
-	 * @param object
+	 * Return all product templates as array
+	 *
 	 * @return array
 	 */
-	public function getProductTemplates(DataContainer $dc)
+	public function getProductTemplates()
 	{
-		return $this->getTemplateGroup('product_', $dc->activeRecord->pid);
+		return $this->getTemplateGroup('product_');
 	}
     
     /**
-	 * Return all prices templates as array
-	 * @param object
+	 * Return all related templates as array
+	 *
 	 * @return array
 	 */
-	public function getRelatedTemplates(DataContainer $dc)
+	public function getRelatedTemplates()
 	{
-		return $this->getTemplateGroup('related_', $dc->activeRecord->pid);
+		return $this->getTemplateGroup('related_');
 	}
 
 	/**
