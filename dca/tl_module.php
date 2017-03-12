@@ -37,7 +37,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_catalogs'] = array
 	'label'                => &$GLOBALS['TL_LANG']['tl_module']['product_catalogs'],
 	'exclude'              => true,
 	'inputType'            => 'checkbox',
-	'foreignKey'              => 'tl_product_catalog.title',
+	'foreignKey'           => 'tl_product_catalog.title',
 	'eval'                 => array('multiple'=>true, 'mandatory'=>true),
     'sql'                  => "blob NULL"
 );
