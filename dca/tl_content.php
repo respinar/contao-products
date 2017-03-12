@@ -24,7 +24,7 @@ if (Input::get('do') == 'products')
 
 $GLOBALS['TL_DCA']['tl_content']['palettes']['product']  = '{type_legend},name,headline,type;
                                                             {product_legend},product;
-                                                            {template_legend},product_metaFields,customTpl,size;
+                                                            {template_legend},product_template,customTpl,product_metaFields,size;
                                                             {protected_legend:hide},protected;
                                                             {expert_legend:hide},guests,cssID,space';
 
@@ -33,23 +33,32 @@ $GLOBALS['TL_DCA']['tl_content']['palettes']['product']  = '{type_legend},name,h
  */
 $GLOBALS['TL_DCA']['tl_content']['fields']['product'] = array
 (
-	'label'                => &$GLOBALS['TL_LANG']['tl_content']['product'],
+	'label'                => &$GLOBALS['TL_LANG']['tl_module']['product'],
 	'exclude'              => true,
 	'inputType'            => 'select',
-	'options_callback'     => array('tl_content_product', 'getProducts'),
+	'foreignKey'           => 'tl_product.title',
 	'eval'                 => array('helpwizard'=>true, 'chosen'=>true, 'mandatory'=>true),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );
 $GLOBALS['TL_DCA']['tl_content']['fields']['product_metaFields'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['product_metaFields'],
-	'default'                 => array(''),
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
 	'options'                 => array('date','code','brand','model','sku','buy'),
 	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
 	'eval'                    => array('multiple'=>true),
 	'sql'                     => "varchar(255) NOT NULL default ''"
+);
+$GLOBALS['TL_DCA']['tl_content']['fields']['product_template'] = array
+(
+	'label'                => &$GLOBALS['TL_LANG']['tl_module']['product_template'],
+	'default'              => 'product_short',
+	'exclude'              => true,
+	'inputType'            => 'select',
+	'options_callback'     => array('tl_content_product', 'getProductTemplates'),
+	'eval'                 => array('tl_class'=>'w50'),
+    'sql'                  => "varchar(64) NOT NULL default ''"
 );
 
 /**
@@ -64,38 +73,13 @@ class tl_content_product extends Backend
 {
 
 	/**
-	 * Get all news archives and return them as array
-	 * @return array
-	 */
-	public function getProducts()
-	{
-		//if (!$this->User->isAdmin && !is_array($this->User->news))
-		//{
-		//	return array();
-		//}
-
-		$arrProducts = array();
-		$objProducts = $this->Database->execute("SELECT id, title FROM tl_product WHERE published=1 ORDER BY title");
-
-		while ($objProducts->next())
-		{
-			//if ($this->User->hasAccess($objArchives->id, 'news'))
-			//{
-				$arrProducts[$objProducts->id] = $objProducts->title;
-			//}
-		}
-
-		return $arrProducts;
-	}
-
-	/**
 	 * Return all prices templates as array
-	 * @param object
+	 *
 	 * @return array
 	 */
-	public function getProductTemplates(DataContainer $dc)
+	public function getProductTemplates()
 	{
-		return $this->getTemplateGroup('product_', $dc->activeRecord->pid);
+		return $this->getTemplateGroup('product_');
 	}
     
 }
