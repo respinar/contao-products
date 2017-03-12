@@ -18,14 +18,14 @@ namespace Respinar\Products;
 
 
 /**
- * Class ModuleProduct
+ * Class ContentProduct
  *
  * Parent class for product modules.
  * @copyright  Hamid Abbaszadeh 2014
  * @author     Hamid Abbaszadeh <https://respinar.com>
  * @package    product
  */
-abstract class ModuleProduct extends \Module
+abstract class ContentProduct extends \ContentElement
 {
 
 	/**

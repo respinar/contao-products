@@ -59,7 +59,7 @@ array_insert($GLOBALS['TL_CTE'], 2, array
 (
 	'products' => array
 	(
-		'product'    => 'ContentProduct',
+		'product'    => 'ContentProductSingle',
 	)
 ));
 

@@ -27,7 +27,10 @@ ClassLoader::addClasses(array
 	'Respinar\Products\ModuleProduct'       => 'system/modules/products/library/Respinar/Products/FrontendModule/ModuleProduct.php',
 	'Respinar\Products\ModuleProductDetail' => 'system/modules/products/library/Respinar/Products/FrontendModule/ModuleProductDetail.php',
 	'Respinar\Products\ModuleProductList'   => 'system/modules/products/library/Respinar/Products/FrontendModule/ModuleProductList.php',
-	'Respinar\Products\ContentProduct'      => 'system/modules/products/library/Respinar/Products/FrontendModule/ContentProduct.php',
+
+	// Elements
+	'Respinar\Products\ContentProduct'      => 'system/modules/products/library/Respinar/Products/FrontendElements/ContentProduct.php',
+	'Respinar\Products\ContentProductSingle'=> 'system/modules/products/library/Respinar/Products/FrontendElements/ContentProductSingle.php',
 
 	// Models
 	'Respinar\Products\ProductPriceModel'   => 'system/modules/products/library/Respinar/Products/Model/ProductPriceModel.php',
@@ -54,5 +57,5 @@ TemplateLoader::addFiles(array
 	'product_short'      => 'system/modules/products/templates/product',
 	'product_full'       => 'system/modules/products/templates/product',
 	'related_short'      => 'system/modules/products/templates/related',
-	'ce_product'         => 'system/modules/products/templates/contents',
+	'ce_product'         => 'system/modules/products/templates/elements',
 ));
