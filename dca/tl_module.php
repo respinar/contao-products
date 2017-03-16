@@ -47,7 +47,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_categories'] = array
     'exclude'                 => true,
     'inputType'               => 'treePicker',
     'foreignKey'              => 'tl_product_category.title',
-    'eval'                    => array('mandatory'=>true, 'multiple'=>true, 'fieldType'=>'checkbox', 'foreignTable'=>'tl_product_category', 'titleField'=>'title', 'searchField'=>'title', 'managerHref'=>'table=tl_product_category'),
+    'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'foreignTable'=>'tl_product_category', 'titleField'=>'title', 'searchField'=>'title', 'managerHref'=>'table=tl_product_category'),
     'sql'                     => "blob NULL"
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['product_featured'] = array
