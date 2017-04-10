@@ -152,7 +152,10 @@ class Product extends \Frontend
         if (isset($arrSplit[1]))
         {
             // Get the items
-			$objProduct = \ProductModel::findPublishedByIdOrAlias($arrSplit[1]);
+			if (($objProduct = \ProductModel::findPublishedByIdOrAlias($arrSplit[1])) === null)
+			{
+				return false;
+			}
 
 			$objCatalog  = \ProductCatalogModel::findBy('id',$objProduct->pid);
 
