@@ -1,5 +1,5 @@
 
-<div class="product_short<?= $this->class; ?>">
+<div itemscope itemtype="http://schema.org/Product" class="product_short<?= $this->class; ?>">
 
   <figure class="image_container<?= $this->floatClass; ?>"<?php if ($this->margin): ?> style="<?= $this->margin; ?>"<?php endif; ?>>
 
@@ -25,8 +25,8 @@
   </figure>
 
 
-  <div class="title"> 
-  <?php if ($this->link): ?> <a href="<?= $this->link; ?>"> <?php endif; ?>
+  <div itemprop="name" class="title"> 
+  <?php if ($this->link): ?> <a itemprop="url" href="<?= $this->link; ?>"> <?php endif; ?>
   <?= $this->title; ?>
   <?php if ($this->link): ?> </a> <?php endif; ?> 
   </div>
@@ -35,16 +35,16 @@
     <div class="info">
 
       <time datetime="<?= $this->datetime; ?>"><?= $this->date; ?></time>
-      <?php if($this->meta_brand): ?><span class="brand"><?= $this->meta_brand; ?></span><?php endif; ?>
+      <?php if($this->meta_brand): ?><span itemprop="brand" class="brand"><?= $this->meta_brand; ?></span><?php endif; ?>
       <?php if($this->meta_model): ?><span class="model"><?= $this->meta_model; ?></span><?php endif; ?>
       <?php if($this->meta_code): ?><span class="code"><?= $this->meta_code; ?></span><?php endif; ?>
-      <?php if($this->meta_sku): ?><span class="sku"><?= $this->meta_sku; ?></span><?php endif; ?>
+      <?php if($this->meta_sku): ?><span itemprop="sku" class="sku"><?= $this->meta_sku; ?></span><?php endif; ?>
 
     </div>
 
     <?php if($this->meta_buy): ?>
-        <div class="buy">
-          <a href="<?= $this->url ?>" class="hyperlink_txt" title="<?= $this->linkTitle ?>" <?php if($this->target): ?> target="_blank" rel="nofollow" <?php endif; ?> >
+        <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="buy">
+          <a itemprop="url" href="<?= $this->url ?>" class="hyperlink_txt" title="<?= $this->linkTitle ?>" <?php if($this->target): ?> target="_blank" rel="nofollow" <?php endif; ?> >
           <?php if($this->titleText): ?>
             <?= $this->titleText ?>
           <?php else: ?>

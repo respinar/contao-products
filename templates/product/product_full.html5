@@ -1,21 +1,20 @@
 
-<div class="product_full<?= $this->class; ?>">
+<div itemscope itemtype="http://schema.org/Product" class="product_full<?= $this->class; ?>">
 
-  <h1><?= $this->title; ?></h1>
-
+  <h1 itemprop="name"><?= $this->title; ?></h1>
 
   <?php if ($this->hasMetaFields): ?>
     <div class="info">
 
       <time datetime="<?= $this->datetime; ?>"><?= $this->date; ?></time>
 
-      <?php if($this->meta_brand): ?><span class="brand"><?= $this->meta_brand; ?></span><?php endif; ?>
+      <?php if($this->meta_brand): ?><span itemprop="brand" class="brand"><?= $this->meta_brand; ?></span><?php endif; ?>
       <?php if($this->meta_model): ?><span class="model"><?= $this->meta_model; ?></span><?php endif; ?>
       <?php if($this->meta_code): ?><span class="code"><?= $this->meta_code; ?></span><?php endif; ?>
-      <?php if($this->meta_sku): ?><span class="sku"><?= $this->meta_sku; ?></span><?php endif; ?>
+      <?php if($this->meta_sku): ?><span itemprop="sku" class="sku"><?= $this->meta_sku; ?></span><?php endif; ?>
       <?php if($this->meta_buy): ?>
-        <span class="buy">
-          <a href="<?= $this->url ?>" class="hyperlink_txt" title="<?= $this->linkTitle ?>" <?php if($this->target): ?> target="_blank" rel="nofollow" <?php endif; ?> >
+        <span itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="buy">
+          <a itemprop="url" href="<?= $this->url ?>" class="hyperlink_txt" title="<?= $this->linkTitle ?>" <?php if($this->target): ?> target="_blank" rel="nofollow" <?php endif; ?> >
           <?php if($this->titleText): ?>
             <?= $this->titleText ?>
           <?php else: ?>
@@ -35,7 +34,9 @@
   <?php endif; ?>
 
   <?php if ($this->text): ?>
+  <div itemprop="description">
     <?= $this->text; ?>
+  </div>
   <?php endif; ?>
   
   <?php if ($this->enclosure): ?>
