@@ -18,14 +18,14 @@
 $GLOBALS['TL_DCA']['tl_module']['palettes']['product_list']    = '{title_legend},name,headline,type;
                                                                   {catalog_legend},product_catalogs,product_categories,product_featured,product_detailModule,product_sortBy,numberOfItems,perPage,skipFirst;
                                                                   {template_legend},product_metaFields,customTpl;
-                                                                  {product_legend},product_template,imgSize,product_perRow,product_Class;
+                                                                  {product_legend},product_template,imgSize,product_list_Class,product_Class;
                                                                   {protected_legend:hide},protected;
                                                                   {expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['product_detail']  = '{title_legend},name,headline,type;
                                                                   {catalog_legend},product_catalogs;
                                                                   {template_legend},product_metaFields,customTpl;
                                                                   {product_legend},product_template;
-                                                                  {related_legend},related_show,related_template,related_imgSize,related_perRow,related_Class;
+                                                                  {related_legend},related_show,related_template,related_imgSize,product_list_Class,related_Class;
                                                                   {protected_legend:hide},protected;
                                                                   {expert_legend:hide},guests,cssID,space';
 
@@ -103,15 +103,13 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_template'] = array
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );
-$GLOBALS['TL_DCA']['tl_module']['fields']['product_perRow'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_list_Class'] = array
 (
-	'label'                => &$GLOBALS['TL_LANG']['tl_module']['product_perRow'],
-	'default'              => '4',
-	'exclude'              => true,
-	'inputType'            => 'select',
-	'options'              => array('1','2','3','4','5','6','7','8','9','10','11','12'),
-	'eval'                 => array('tl_class'=>'w50'),
-    'sql'                  => "varchar(64) NOT NULL default ''"
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['product_list_Class'],
+	'exclude'                 => true,
+	'inputType'               => 'text',
+	'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
+	'sql'                     => "varchar(255) NOT NULL default ''"
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['product_Class'] = array
 (
@@ -147,16 +145,6 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['related_Class'] = array
 	'inputType'               => 'text',
 	'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
 	'sql'                     => "varchar(255) NOT NULL default ''"
-);
-$GLOBALS['TL_DCA']['tl_module']['fields']['related_perRow'] = array
-(
-	'label'                => &$GLOBALS['TL_LANG']['tl_module']['related_perRow'],
-	'default'              => '4',
-	'exclude'              => true,
-	'inputType'            => 'select',
-	'options'              => array('1','2','3','4','5','6','7','8','9','10','11','12'),
-	'eval'                 => array('tl_class'=>'w50'),
-    'sql'                  => "varchar(64) NOT NULL default ''"
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['related_imgSize'] = array
 (
