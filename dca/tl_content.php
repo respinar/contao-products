@@ -22,7 +22,7 @@ if (Input::get('do') == 'products')
 }
 
 
-$GLOBALS['TL_DCA']['tl_content']['palettes']['product']  = '{type_legend},name,headline,type;
+$GLOBALS['TL_DCA']['tl_content']['palettes']['product']  = '{type_legend},type,headline;
                                                             {product_legend},product;
                                                             {template_legend},product_template,customTpl,product_metaFields,size;
                                                             {protected_legend:hide},protected;
@@ -81,5 +81,5 @@ class tl_content_product extends Backend
 	{
 		return $this->getTemplateGroup('product_');
 	}
-    
+
 }
