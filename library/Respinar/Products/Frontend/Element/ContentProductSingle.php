@@ -46,12 +46,12 @@ class ContentProductSingle extends \ContentProduct
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['product'][0]) . ' ###';
 
-			$objProduct = \ProductModel::findPublishedByIdOrAlias($this->product);
+			$objProduct = \ProductModel::findBy('id',$this->product);
 
 			$objTemplate->title = $this->headline;
-			$objTemplate->id = $this->id;
+			$objTemplate->id = $objProduct->id;
 			$objTemplate->link = $objProduct->title;
-			$objTemplate->href = 'contao/main.php?do=catalogs&amp;table=tl_product&amp;act=edit&amp;id=' . $this->id;
+			$objTemplate->href = 'contao/main.php?do=catalogs&amp;table=tl_product&amp;act=edit&amp;id=' . $objProduct->id;
 
 			$objFile = \FilesModel::findByUuid($objProduct->singleSRC);
 
@@ -70,7 +70,7 @@ class ContentProductSingle extends \ContentProduct
 	protected function compile()
 	{
 
-		$objProduct = \ProductModel::findPublishedByIdOrAlias($this->product);
+		$objProduct = \ProductModel::findBy('id',$this->product);
 
 		if (null === $objProduct)
 		{
