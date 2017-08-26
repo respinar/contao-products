@@ -17,7 +17,7 @@
  */
 array_insert($GLOBALS['BE_MOD'], 1, array
 (
-	'products' => array	
+	'products' => array
 	(
 		'products' => array
 		(
@@ -34,7 +34,7 @@ array_insert($GLOBALS['BE_MOD'], 1, array
 			'tables'     => array('tl_product_price_category','tl_product_price'),
 			'icon'       => 'system/modules/products/assets/price.png',
 		),*/
-	),	
+	),
 ));
 
 /**
@@ -54,14 +54,7 @@ array_insert($GLOBALS['FE_MOD'], 2, array
 /**
  * Content elements
  */
-
-array_insert($GLOBALS['TL_CTE'], 2, array
-(
-	'products' => array
-	(
-		'product'    => 'ContentProductSingle',
-	)
-));
+$GLOBALS['TL_CTE']['miscellaneous']['product']   = 'Respinar\Products\ContentProductSingle';
 
 
 /**
