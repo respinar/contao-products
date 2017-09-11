@@ -103,6 +103,17 @@ class ModuleProductDetail extends \ModuleProduct
 
 		$this->Template->product = $arrProduct;
 
+		if ($objProduct->singleSRC != '')
+		{
+			$objModel = \FilesModel::findByUuid($objProduct->singleSRC);
+		}
+
+		$ogTagsURL = self::replaceInsertTags('{{env::path}}{{env::request}}');
+
+		$GLOBALS['TL_HEAD'][] = '<meta property="og:type" content="product" />';
+		$GLOBALS['TL_HEAD'][] = '<meta property="og:title" content="'.$objProduct->title.'" />';
+		$GLOBALS['TL_HEAD'][] = '<meta property="og:url" content="'.$ogTagsURL.'" />';
+		$GLOBALS['TL_HEAD'][] = '<meta property="og:image" content="'.$objModel->path.'" />';
 
 		$objProduct->related = deserialize($objProduct->related);
 
