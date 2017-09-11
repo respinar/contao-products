@@ -109,11 +109,12 @@ class ModuleProductDetail extends \ModuleProduct
 		}
 
 		$ogTagsURL = self::replaceInsertTags('{{env::path}}{{env::request}}');
+		$ogTagsImage = self::replaceInsertTags('{{env::path}}').$objModel->path;
 
 		$GLOBALS['TL_HEAD'][] = '<meta property="og:type" content="product" />';
 		$GLOBALS['TL_HEAD'][] = '<meta property="og:title" content="'.$objProduct->title.'" />';
 		$GLOBALS['TL_HEAD'][] = '<meta property="og:url" content="'.$ogTagsURL.'" />';
-		$GLOBALS['TL_HEAD'][] = '<meta property="og:image" content="'.$objModel->path.'" />';
+		$GLOBALS['TL_HEAD'][] = '<meta property="og:image" content="'.$ogTagsImage.'" />';
 
 		$objProduct->related = deserialize($objProduct->related);
 
