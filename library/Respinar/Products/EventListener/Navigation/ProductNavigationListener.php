@@ -11,8 +11,8 @@
 
 namespace Respinar\Products\EventListener\Navigation;
 
-use Respinar\Products\ProductCatalogModel;
-use Respinar\Products\ProductModel;
+use Respinar\Products\Model\ProductCatalogModel;
+use Respinar\Products\Model\ProductModel;
 use Contao\PageModel;
 use Haste\Input\Input;
 use Terminal42\ChangeLanguage\EventListener\Navigation\AbstractNavigationListener;

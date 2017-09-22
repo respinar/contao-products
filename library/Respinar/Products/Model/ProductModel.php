@@ -15,7 +15,7 @@
 /**
  * Namespace
  */
-namespace Respinar\Products;
+namespace Respinar\Products\Model;
 
 /**
  * Class ProductModel

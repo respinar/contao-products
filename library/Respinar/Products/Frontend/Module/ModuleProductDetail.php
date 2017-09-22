@@ -15,8 +15,10 @@
 /**
  * Namespace
  */
-namespace Respinar\Products;
+namespace Respinar\Products\Frontend\Module;
 
+use Respinar\Products\Model\ProductModel;
+use Respinar\Products\Model\ProductCatalogModel;
 
 /**
  * Class ModuleProductDetail
@@ -25,7 +27,7 @@ namespace Respinar\Products;
  * @author     Hamid Abbaszadeh
  * @package    Devtools
  */
-class ModuleProductDetail extends \ModuleProduct
+class ModuleProductDetail extends ModuleProduct
 {
 
 	/**
@@ -78,7 +80,7 @@ class ModuleProductDetail extends \ModuleProduct
 		$this->Template->back              = $GLOBALS['TL_LANG']['MSC']['goBack'];
 		$this->Template->relateds_headline = $GLOBALS['TL_LANG']['MSC']['relateds_headline'];
 
-		$objProduct = \ProductModel::findPublishedByParentAndIdOrAlias(\Input::get('items'),$this->product_catalogs);
+		$objProduct = ProductModel::findPublishedByParentAndIdOrAlias(\Input::get('items'),$this->product_catalogs);
 
 		if (null === $objProduct)
 		{
@@ -120,7 +122,7 @@ class ModuleProductDetail extends \ModuleProduct
 
 		if (!empty($objProduct->related)) {
 
-			$objProducts = \ProductModel::findPublishedByIds($objProduct->related);
+			$objProducts = ProductModel::findPublishedByIds($objProduct->related);
 
 			$this->Template->relateds = $this->parseRelateds($objProducts);
 		}

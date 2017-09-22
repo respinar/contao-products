@@ -17,6 +17,8 @@
  */
 namespace Respinar\Products;
 
+use Respinar\Products\Model\ProductModel;
+use Respinar\Products\Model\ProductCatalogModel;
 
 /**
  * Class Product
@@ -49,7 +51,7 @@ class Product extends \Frontend
 		$arrProcessed = array();
 
 		// Get all catalog categories
-		$objCatalog = \ProductCatalogModel::findByProtected('');
+		$objCatalog = ProductCatalogModel::findByProtected('');
 
 		// Walk through each archive
 		if ($objCatalog !== null)
@@ -101,7 +103,7 @@ class Product extends \Frontend
 				$strUrl = $arrProcessed[$objCatalog->jumpTo];
 
 				// Get the items
-				$objProduct = \ProductModel::findPublishedByPid($objCatalog->id);
+				$objProduct = ProductModel::findPublishedByPid($objCatalog->id);
 
 				if ($objProduct !== null)
 				{
@@ -152,12 +154,12 @@ class Product extends \Frontend
         if (isset($arrSplit[1]))
         {
             // Get the items
-			if (($objProduct = \ProductModel::findPublishedByIdOrAlias($arrSplit[1])) === null)
+			if (($objProduct = ProductModel::findPublishedByIdOrAlias($arrSplit[1])) === null)
 			{
 				return false;
 			}
 
-			$objCatalog  = \ProductCatalogModel::findBy('id',$objProduct->pid);
+			$objCatalog  = ProductCatalogModel::findBy('id',$objProduct->pid);
 
 			$objParent = \PageModel::findWithDetails($objCatalog->jumpTo);				
 

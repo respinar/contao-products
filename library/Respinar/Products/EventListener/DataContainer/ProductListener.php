@@ -12,7 +12,7 @@ namespace Respinar\Products\EventListener\DataContainer;
 
 use Contao\Date;
 use Contao\Model;
-use Respinar\Products\ProductModel;
+use Respinar\Products\Model\ProductModel;
 use Terminal42\ChangeLanguage\EventListener\DataContainer\AbstractChildTableListener; 
 
 class ProductListener extends AbstractChildTableListener

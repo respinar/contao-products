@@ -14,8 +14,10 @@
 /**
  * Run in a custom namespace, so the class can be replaced
  */
-namespace Respinar\Products;
+namespace Respinar\Products\Frontend\Module;
 
+use Respinar\Products\Model\ProductModel;
+use Respinar\Products\Model\ProductCatalogModel;
 
 /**
  * Class ModuleProduct
@@ -48,7 +50,7 @@ abstract class ModuleProduct extends \Module
 		}
 
 		$this->import('FrontendUser', 'User');
-		$objCatalog = \ProductCatalogModel::findMultipleByIds($arrCatalogs);
+		$objCatalog = ProductCatalogModel::findMultipleByIds($arrCatalogs);
 		$arrCatalogs = array();
 
 		if ($objCatalog !== null)

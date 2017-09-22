@@ -15,8 +15,11 @@
 /**
  * Namespace
  */
-namespace Respinar\Products;
+namespace Respinar\Products\Frontend\Element;
 
+use Respinar\Products\Model\ProductModel;
+use Respinar\Products\Model\ProductCatalogModel;
+use Respinar\Products\Frontend\Element\ContentProduct;
 
 /**
  * Class ContentProduct
@@ -25,7 +28,7 @@ namespace Respinar\Products;
  * @author     Hamid Abbaszadeh
  * @package    Devtools
  */
-class ContentProductSingle extends \ContentProduct
+class ContentProductSingle extends ContentProduct
 {
 
 	/**
@@ -46,7 +49,7 @@ class ContentProductSingle extends \ContentProduct
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['product'][0]) . ' ###';
 
-			$objProduct = \ProductModel::findBy('id',$this->product);
+			$objProduct = ProductModel::findBy('id',$this->product);
 
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $objProduct->id;
@@ -70,7 +73,7 @@ class ContentProductSingle extends \ContentProduct
 	protected function compile()
 	{
 
-		$objProduct = \ProductModel::findBy('id',$this->product);
+		$objProduct = ProductModel::findBy('id',$this->product);
 
 		if (null === $objProduct)
 		{

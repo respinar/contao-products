@@ -15,8 +15,10 @@
 /**
  * Namespace
  */
-namespace Respinar\Products;
+namespace Respinar\Products\Frontend\Module;
 
+use Respinar\Products\Model\ProductModel;
+use Respinar\Products\Model\ProductCatalogModel;
 
 /**
  * Class ModuleCatalogList
@@ -25,7 +27,7 @@ namespace Respinar\Products;
  * @author     Hamid Abbaszadeh
  * @package    Devtools
  */
-class ModuleProductList extends \ModuleProduct
+class ModuleProductList extends ModuleProduct
 {
 
 	/**
@@ -103,7 +105,7 @@ class ModuleProductList extends \ModuleProduct
 		$this->Template->products = array();
 		$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['emptyCatalog'];
 
-		$intTotal = \ProductModel::countPublishedByPids($this->product_catalogs,$blnFeatured);
+		$intTotal = ProductModel::countPublishedByPids($this->product_catalogs,$blnFeatured);
 
 		if ($intTotal < 1)
 		{
@@ -180,11 +182,11 @@ class ModuleProductList extends \ModuleProduct
 		// Get the items
 		if (isset($limit))
 		{
-			$objProducts = \ProductModel::findPublishedByPids($this->product_catalogs, $blnFeatured, $limit, $offset, $arrOptions);
+			$objProducts = ProductModel::findPublishedByPids($this->product_catalogs, $blnFeatured, $limit, $offset, $arrOptions);
 		}
 		else
 		{
-			$objProducts = \ProductModel::findPublishedByPids($this->product_catalogs, $blnFeatured, 0, $offset, $arrOptions);
+			$objProducts = ProductModel::findPublishedByPids($this->product_catalogs, $blnFeatured, 0, $offset, $arrOptions);
 		}
 
 

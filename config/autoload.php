@@ -8,44 +8,12 @@
  * @license LGPL-3.0+
  */
 
-
-/**
- * Register the namespaces
+ /**
+ * Register PSR-0 namespaces
  */
-ClassLoader::addNamespaces(array
-(
-	'Respinar\Products',
-));
-
-
-/**
- * Register the classes
- */
-ClassLoader::addClasses(array
-(
-	// Modules
-	'Respinar\Products\ModuleProduct'       => 'system/modules/products/library/Respinar/Products/Frontend/Module/ModuleProduct.php',
-	'Respinar\Products\ModuleProductDetail' => 'system/modules/products/library/Respinar/Products/Frontend/Module/ModuleProductDetail.php',
-	'Respinar\Products\ModuleProductList'   => 'system/modules/products/library/Respinar/Products/Frontend/Module/ModuleProductList.php',
-
-	// Elements
-	'Respinar\Products\ContentProduct'      => 'system/modules/products/library/Respinar/Products/Frontend/Element/ContentProduct.php',
-	'Respinar\Products\ContentProductSingle'=> 'system/modules/products/library/Respinar/Products/Frontend/Element/ContentProductSingle.php',
-
-	// Models
-	'Respinar\Products\ProductPriceModel'   => 'system/modules/products/library/Respinar/Products/Model/ProductPriceModel.php',
-	'Respinar\Products\ProductModel'        => 'system/modules/products/library/Respinar/Products/Model/ProductModel.php',
-	'Respinar\Products\ProductCatalogModel' => 'system/modules/products/library/Respinar/Products/Model/ProductCatalogModel.php',
-
-	// Classes
-	'Respinar\Products\Product'             => 'system/modules/products/library/Respinar/Products/Product.php',
-
-	// Change Language Classes
-	'Respinar\Products\EventListener\CallbackSetupListener' => 'system/modules/products/library/Respinar/Products/EventListener/CallbackSetupListener.php',
-	'Respinar\Products\EventListener\Navigation\ProductNavigationListener' => 'system/modules/products/library/Respinar/Products/EventListener/Navigation/ProductNavigationListener.php',
-	'Respinar\Products\EventListener\DataContainer\ProductListener' => 'system/modules/products/library/Respinar/Products/EventListener/DataContainer/ProductListener.php'
-));
-
+ if (class_exists('NamespaceClassLoader')) {
+    NamespaceClassLoader::add('Respinar\Products', 'system/modules/products/library');
+}
 
 /**
  * Register the templates

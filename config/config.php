@@ -38,6 +38,14 @@ array_insert($GLOBALS['BE_MOD'], 1, array
 ));
 
 /**
+ * Register models
+ */
+
+ $GLOBALS['TL_MODELS']['tl_product']         = 'Respinar\Products\Model\ProductModel';
+ $GLOBALS['TL_MODELS']['tl_product_catalog'] = 'Respinar\Products\Model\ProductCatalogModel'; 
+ $GLOBALS['TL_MODELS']['tl_product_price']   = 'Respinar\Products\Model\ProductPriceModel'; 
+
+/**
  * Front end modules
  */
 
@@ -45,8 +53,8 @@ array_insert($GLOBALS['FE_MOD'], 2, array
 (
 	'products' => array
 	(
-		'product_list'    => 'ModuleProductList',
-		'product_detail'  => 'ModuleProductDetail',
+		'product_list'    => 'Respinar\Products\Frontend\Module\ModuleProductList',
+		'product_detail'  => 'Respinar\Products\Frontend\Module\ModuleProductDetail',
 	)
 ));
 
@@ -54,17 +62,17 @@ array_insert($GLOBALS['FE_MOD'], 2, array
 /**
  * Content elements
  */
-$GLOBALS['TL_CTE']['miscellaneous']['product']   = 'Respinar\Products\ContentProductSingle';
+$GLOBALS['TL_CTE']['miscellaneous']['product']   = 'Respinar\Products\Frontend\Element\ContentProductSingle';
 
 
 /**
  * Register hook to add carpets items to the indexer
  */
-$GLOBALS['TL_HOOKS']['getSearchablePages'][] = array('Product', 'getSearchablePages');
+$GLOBALS['TL_HOOKS']['getSearchablePages'][] = array('Respinar\Products\Product', 'getSearchablePages');
 
 
 // Registrieren im Hooks replaceInsertTags
-$GLOBALS['TL_HOOKS']['replaceInsertTags'][] = array('Product', 'productURLInsertTags');
+$GLOBALS['TL_HOOKS']['replaceInsertTags'][] = array('Respinar\Products\Product', 'productURLInsertTags');
 
 
 /**
