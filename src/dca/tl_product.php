@@ -647,4 +647,47 @@ class tl_product extends Backend
 
 		return $arrItems;
 	}
+
+	/**
+     * Update the category relations
+     * @param DataContainer
+     */
+    public function updateCategories(DataContainer $dc)
+    {
+        $this->import('BackendUser', 'User');
+        $arrCategories = deserialize($dc->activeRecord->categories);
+
+        // Use the default categories if the user is not allowed to edit the field directly
+        if (!$this->User->isAdmin && !in_array('tl_product::categories', $this->User->alexf)) {
+
+            // Return if the record is not new
+            if ($dc->activeRecord->tstamp) {
+                return;
+            }
+
+            $arrCategories = $this->User->newscategories_default;
+        }
+
+        $this->deleteCategories($dc);
+
+        if (is_array($arrCategories) && !empty($arrCategories)) {
+            foreach ($arrCategories as $intCategory) {
+                $this->Database->prepare("INSERT INTO tl_product_categories (category_id, news_id) VALUES (?, ?)")
+                               ->execute($intCategory, $dc->id);
+            }
+
+            $this->Database->prepare("UPDATE tl_product SET categories=? WHERE id=?")
+                           ->execute(serialize($arrCategories), $dc->id);
+        }
+    }
+
+    /**
+     * Delete the category relations
+     * @param DataContainer
+     */
+    public function deleteCategories(DataContainer $dc)
+    {
+        $this->Database->prepare("DELETE FROM tl_product_categories WHERE news_id=?")
+                       ->execute($dc->id);
+    }
 }
