@@ -8,12 +8,6 @@
  * @license LGPL-3.0+
  */
 
-/**
- * Register PSR-0 namespaces
- */
- if (class_exists('NamespaceClassLoader')) {
-    NamespaceClassLoader::add('Respinar\Products', 'system/modules/products/library');
-}
 
 /**
  * Register the templates
