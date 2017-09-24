@@ -23,14 +23,14 @@
         "terminal42/contao-changelanguage": "~3.0"
     },
     "autoload": {
-        "psr-0": {
-            "Respinar\\Products\\": "library/"
+        "psr-4": {
+            "Respinar\\Products\\": "src/library/"
         }
     },
     "extra": {
         "contao": {
             "sources": {
-                "": "system/modules/products"
+                "src": "system/modules/products"
             },
             "transifex": {
                 "project": "contao-products",
