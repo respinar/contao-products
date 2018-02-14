@@ -4,7 +4,7 @@
     "keywords": ["contao", "product", "catalog"],
     "type": "contao-module",
     "homepage": "https://github.com/respinar/contao-products",
-    "license": "LGPL-3.0+",
+    "license": "LGPL-3.0-or-later",
     "authors": [
         {
             "name": "Hamid Abbaszadeh",
