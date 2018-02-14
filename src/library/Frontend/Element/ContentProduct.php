@@ -140,13 +140,13 @@ abstract class ContentProduct extends \ContentElement
 				$arrProduct = $objProduct->row();
 
 				// Override the default image size
-				if ($this->imgSize != '')
+				if ($this->size != '')
 				{
-					$size = deserialize($this->imgSize);
+					$size = deserialize($this->size);
 
 					if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
 					{
-						$arrProduct['size'] = $this->imgSize;
+						$arrProduct['size'] = $this->size;
 					}
 				}
 
