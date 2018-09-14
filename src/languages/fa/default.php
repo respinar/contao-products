@@ -12,7 +12,7 @@
  */
 
 $GLOBALS['TL_LANG']['MSC']['brand_text']        = 'برند';
-$GLOBALS['TL_LANG']['MSC']['code_text']         = 'کد';
+$GLOBALS['TL_LANG']['MSC']['code_text']         = 'کد محصول';
 $GLOBALS['TL_LANG']['MSC']['emptyCatalog']      = 'محصولی وجود ندارد!';
 $GLOBALS['TL_LANG']['MSC']['features']          = 'ویژگی‌ها';
 $GLOBALS['TL_LANG']['MSC']['model_text']        = 'مدل';
