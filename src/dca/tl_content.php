@@ -47,7 +47,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['product_metaFields'] = array
 	'inputType'               => 'checkbox',
 	'options'                 => array('date','code','brand','model','sku','buy'),
 	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-	'eval'                    => array('multiple'=>true),
+	'eval'                    => array('multiple'=>true,'tl_class'=>'clr'),
 	'sql'                     => "varchar(255) NOT NULL default ''"
 );
 $GLOBALS['TL_DCA']['tl_content']['fields']['product_template'] = array
