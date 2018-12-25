@@ -84,9 +84,7 @@ class ModuleProductDetail extends ModuleProduct
 
 		if (null === $objProduct)
 		{
-			/** @var \PageError404 $objHandler */
-			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
-			$objHandler->generate($objPage->id);
+			throw new PageNotFoundException('Page not found: ' . \Environment::get('uri'));
 		}
 
 		// Overwrite the page title
