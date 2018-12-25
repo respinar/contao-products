@@ -19,6 +19,8 @@ namespace Respinar\Products\Frontend\Module;
 
 use Respinar\Products\Model\ProductModel;
 use Respinar\Products\Model\ProductCatalogModel;
+use Contao\CoreBundle\Exception\PageNotFoundException;
+
 
 /**
  * Class ModuleProductDetail
