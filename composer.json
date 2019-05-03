@@ -35,7 +35,7 @@
             "transifex": {
                 "project": "contao-products",
                 "prefix": "master-",
-                "languages_cto": "languages",
+                "languages_cto": "src/languages",
                 "languages_tx": ".tx"
             }
         }
