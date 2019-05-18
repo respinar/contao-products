@@ -128,14 +128,13 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 		                                  {image_legend},singleSRC,alt;
 										  {description_legend},description;
 		                                  {related_legend},related;{enclosure_legend:hide},addEnclosure;
-		                                  {publish_legend},published',
+		                                  {publish_legend},publishe,start,stop',
 	),
 
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'addEnclosure'                => 'enclosure',
-		'published'                   => 'start,stop'
+		'addEnclosure'                => 'enclosure'
 	),
 
 	// Fields
