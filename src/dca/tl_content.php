@@ -26,6 +26,11 @@ $GLOBALS['TL_DCA']['tl_content']['palettes']['product']  = '{type_legend},type,h
                                                             {product_legend},product;
                                                             {template_legend},product_template,customTpl,product_metaFields,size;
                                                             {protected_legend:hide},protected;
+															{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_content']['palettes']['products'] = '{type_legend},type,headline;
+                                                            {product_legend},products;
+                                                            {template_legend},product_template,customTpl,product_metaFields,size,product_list_Class;
+                                                            {protected_legend:hide},protected;
                                                             {expert_legend:hide},guests,cssID,space';
 
 /**
@@ -39,6 +44,15 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['product'] = array
 	'foreignKey'           => 'tl_product.title',
 	'eval'                 => array('helpwizard'=>true, 'chosen'=>true, 'mandatory'=>true),
     'sql'                  => "varchar(64) NOT NULL default ''"
+);
+$GLOBALS['TL_DCA']['tl_content']['fields']['products'] = array
+(
+	'label'                => &$GLOBALS['TL_LANG']['tl_module']['products'],
+	'exclude'              => true,
+	'inputType'            => 'select',
+	'foreignKey'           => 'tl_product.title',
+	'eval'                 => array('helpwizard'=>true, 'chosen'=>true, 'multiple'=>true, 'mandatory'=>true),
+    'sql'                  => "blob NULL"
 );
 $GLOBALS['TL_DCA']['tl_content']['fields']['product_metaFields'] = array
 (
@@ -59,6 +73,14 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['product_template'] = array
 	'options_callback'     => array('tl_content_product', 'getProductTemplates'),
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
+);
+$GLOBALS['TL_DCA']['tl_content']['fields']['product_list_Class'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['product_list_Class'],
+	'exclude'                 => true,
+	'inputType'               => 'text',
+	'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
+	'sql'                     => "varchar(255) NOT NULL default ''"
 );
 
 /**
