@@ -64,6 +64,7 @@ array_insert($GLOBALS['FE_MOD'], 2, array
  * Content elements
  */
 $GLOBALS['TL_CTE']['miscellaneous']['product']   = 'Respinar\Products\Frontend\Element\ContentProductSingle';
+$GLOBALS['TL_CTE']['miscellaneous']['products']  = 'Respinar\Products\Frontend\Element\ContentProductList';
 
 
 /**
