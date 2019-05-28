@@ -7,18 +7,4 @@
 
   <div class="title"><a href="<?= $this->link; ?>"><?= $this->title; ?></a></div>
 
-  <?php if ($this->hasMetaFields): ?>
-    <div class="info">
-
-      <time datetime="<?= $this->datetime; ?>"><?= $this->date; ?></time>
-      <?php if($this->meta_brand): ?><span class="brand"><?= $this->meta_brand; ?></span><?php endif; ?>
-      <?php if($this->meta_model): ?><span class="model"><?= $this->meta_model; ?></span><?php endif; ?>
-      <?php if($this->meta_code): ?><span class="code"><?= $this->meta_code; ?></span><?php endif; ?>
-      <?php if($this->meta_sku): ?><span class="sku"><?= $this->meta_sku; ?></span><?php endif; ?>   
-    
-    </div>
-
-  <?php endif; ?>
-
-
 </div>
