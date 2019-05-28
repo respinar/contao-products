@@ -149,17 +149,19 @@ abstract class ContentProduct extends \ContentElement
 				$arrProduct = $objProduct->row();
 
 				// Override the default image size
-				if ($this->imgSize != '')
+				if ($this->size != '')
 				{
-					$size = StringUtil::deserialize($this->imgSize);
+					$size = \StringUtil::deserialize($this->size);
 
 					if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
 					{
-						$arrArticle['size'] = $this->imgSize;
+						$arrProduct['size'] = $this->size;
 					}
 				}									
 
 				$arrProduct['singleSRC'] = $objModel->path;				
+
+				$this->addImageToTemplate($objTemplate, $arrProduct, null, null, $objModel);
 
 				// Link to the product detail if no image link has been defined		
 				$picture = $objTemplate->picture;
@@ -168,8 +170,6 @@ abstract class ContentProduct extends \ContentElement
 
 				$objTemplate->href = $objTemplate->link;
 				$objTemplate->linkTitle = \StringUtil::specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['moreDetail'], $objProduct->title), true);
-
-				$this->addImageToTemplate($objTemplate, $arrProduct, null, null, $objModel);
 			}
 		}
 
@@ -276,7 +276,7 @@ abstract class ContentProduct extends \ContentElement
 	}
 
 	/**
-	 * Return the meta fields of a news article as array
+	 * Return the meta fields of a product as array
 	 * @param object
 	 * @return array
 	 */
@@ -379,7 +379,7 @@ abstract class ContentProduct extends \ContentElement
 				// Override the default image size
 				if ($this->related_imgSize != '')
 				{
-					$size = deserialize($this->related_imgSize);
+					$size = \StringUtil::deserialize($this->related_imgSize);
 					if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
 					{
 						$arrProduct['size'] = $this->related_imgSize;
@@ -387,8 +387,10 @@ abstract class ContentProduct extends \ContentElement
 				}		
 
 				$arrProduct['singleSRC'] = $objModel->path;				
+
+				$this->addImageToTemplate($objTemplate, $arrProduct, null, null, $objModel);
 				
-				// Link to the news article if no image link has been defined (see #30)				
+				// Link to the product detail
 				// Unset the image title attribute
 				$picture = $objTemplate->picture;
 				unset($picture['title']);
@@ -397,7 +399,6 @@ abstract class ContentProduct extends \ContentElement
 				$objTemplate->href = $objTemplate->link;
 				$objTemplate->linkTitle = \StringUtil::specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['moreDetail'], $objProduct->title), true);
 
-				$this->addImageToTemplate($objTemplate, $arrProduct, null, null, $objModel);
 			}
 		}
 
