@@ -120,7 +120,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('addEnclosure','published'),
-		'default'                     => '{title_legend},title,featured,alias,date;{product_legend},brand,model,code,sku;{image_legend},singleSRC;{description_legend},description;{related_legend},related;{link_legend:hide},url,target,titleText,linkTitle;{enclosure_legend:hide},addEnclosure;{publish_legend},publishe,start,stop',
+		'default'                     => '{title_legend},title,alias;{config_legend:hide},date,featured;{product_legend},brand,model,code,sku;{image_legend},singleSRC;{description_legend},description;{related_legend},related;{link_legend:hide},url,target,titleText,linkTitle;{enclosure_legend:hide},addEnclosure;{publish_legend},publishe,start,stop',
 	),
 
 	// Subpalettes
@@ -166,7 +166,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'alias','unique'=>true,'maxlength'=>128, 'tl_class'=>'w50'),
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'alias','unique'=>true,'maxlength'=>128, 'tl_class'=>'w50 clr'),
 			'save_callback' => array
 			(
 				array('tl_product', 'generateAlias')
@@ -231,7 +231,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 			'filter'                  => true,
 			'flag'                    => 8,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'date', 'doNotCopy'=>true, 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
+			'eval'                    => array('rgxp'=>'date', 'doNotCopy'=>true, 'datepicker'=>true, 'tl_class'=>'w50 wizard clr'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'url' => array
@@ -423,7 +423,7 @@ class tl_product extends Backend
 			$strImage = \Image::getHtml(\Image::get($objImage->path, '60', '60', 'center_center'));
 		}
 
-		return '<div><div style="float:left; margin-right:10px;">'.$strImage.'</div>'. $arrRow['title'].' <br><br> Model: '. $arrRow['model']. ' <br> Code: '. $arrRow['code'] . '</div>';
+		return '<div><div style="float:left; margin-right:10px;">'.$strImage.'</div><p>'. $arrRow['title'].'</p><p> Brand: '.$arrRow['brand'] .' - Model: '. $arrRow['model']. ' - Code: '. $arrRow['code'] .' - SKU: '. $arrRow['sku'] .'</p></div>';
 	}
 
 	/**
