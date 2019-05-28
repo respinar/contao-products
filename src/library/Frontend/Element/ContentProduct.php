@@ -118,44 +118,6 @@ abstract class ContentProduct extends \ContentElement
 		$objTemplate->hasMetaFields = !empty($arrMeta);
 		$objTemplate->timestamp = $objProduct->date;
 		$objTemplate->datetime = date('Y-m-d\TH:i:sP', $objProduct->date);
-		
-
-		$objTemplate->addImage = false;
-
-		// Add an image
-		if ($objProduct->singleSRC != '')
-		{
-			$objModel = \FilesModel::findByUuid($objProduct->singleSRC);
-
-			if ($objModel === null)
-			{
-				if (!\Validator::isUuid($objProduct->singleSRC))
-				{
-					$objTemplate->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-				}
-			}
-			elseif (is_file(TL_ROOT . '/' . $objModel->path))
-			{
-				// Do not override the field now that we have a model registry (see #6303)
-				$arrProduct = $objProduct->row();
-
-				// Override the default image size
-				if ($this->size != '')
-				{
-					$size = deserialize($this->size);
-
-					if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
-					{
-						$arrProduct['size'] = $this->size;
-					}
-				}
-
-				$arrProduct['singleSRC'] = $objModel->path;
-				$strLightboxId = 'lightbox[lb' . $objProduct->id . ']';
-				$arrProduct['fullsize'] = $this->fullsize;
-				$this->addImageToTemplate($objTemplate, $arrProduct, null, $strLightboxId);
-			}
-		}
 
 		$objElement = \ContentModel::findPublishedByPidAndTable($objProduct->id, 'tl_product');
 
@@ -166,7 +128,44 @@ abstract class ContentProduct extends \ContentElement
 				$objTemplate->text .= $this->getContentElement($objElement->current());
 			}
 
-			$objTemplate->link        = $this->generateProductUrl($objProduct, $blnAddCategory);
+			$objTemplate->link = $this->generateProductUrl($objProduct, $blnAddCategory);
+		}		
+
+		$objTemplate->addImage = false;		
+
+		// Add an image
+		if ($objProduct->singleSRC != '')
+		{
+			$objModel = \FilesModel::findByUuid($objProduct->singleSRC);
+
+			if ($objModel !== null && is_file(System::getContainer()->getParameter('kernel.project_dir') . '/' . $objModel->path))
+			{
+				// Do not override the field now that we have a model registry (see #6303)
+				$arrProduct = $objProduct->row();
+
+				// Override the default image size
+				if ($this->imgSize != '')
+				{
+					$size = StringUtil::deserialize($this->imgSize);
+
+					if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
+					{
+						$arrArticle['size'] = $this->imgSize;
+					}
+				}									
+
+				$arrProduct['singleSRC'] = $objModel->path;				
+
+				// Link to the product detail if no image link has been defined		
+				$picture = $objTemplate->picture;
+				unset($picture['title']);
+				$objTemplate->picture = $picture;
+
+				$objTemplate->href = $objTemplate->link;
+				$objTemplate->linkTitle = StringUtil::specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['moreDetail'], $objProduct->title), true);
+
+				//$this->addImageToTemplate($objTemplate, $arrProduct, null, null, $objModel);
+			}
 		}
 
 		$objTemplate->enclosure = array();
@@ -359,20 +358,17 @@ abstract class ContentProduct extends \ContentElement
 		$objTemplate->hasMetaFields = !empty($arrMeta);
 		$objTemplate->timestamp = $objProduct->date;
 		$objTemplate->datetime = date('Y-m-d\TH:i:sP', $objProduct->date);
+
 		$objTemplate->addImage = false;
-		// Add an image
+
+		// Add an image		
 		if ($objProduct->singleSRC != '')
 		{
 			$objModel = \FilesModel::findByUuid($objProduct->singleSRC);
-			if ($objModel === null)
+
+			if ($objModel !== null && is_file(System::getContainer()->getParameter('kernel.project_dir') . '/' . $objModel->path))
 			{
-				if (!\Validator::isUuid($objProduct->singleSRC))
-				{
-					$objTemplate->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-				}
-			}
-			elseif (is_file(TL_ROOT . '/' . $objModel->path))
-			{
+			
 				// Do not override the field now that we have a model registry (see #6303)
 				$arrProduct = $objProduct->row();
 				// Override the default image size
@@ -383,13 +379,23 @@ abstract class ContentProduct extends \ContentElement
 					{
 						$arrProduct['size'] = $this->related_imgSize;
 					}
-				}
-				$arrProduct['singleSRC'] = $objModel->path;
-				$strLightboxId = 'lightbox[lb' . $objProduct->id . ']';
-				$arrProduct['fullsize'] = false;
-				$this->addImageToTemplate($objTemplate, $arrProduct,null, $strLightboxId);
+				}		
+
+				$arrProduct['singleSRC'] = $objModel->path;				
+				
+				// Link to the news article if no image link has been defined (see #30)				
+				// Unset the image title attribute
+				$picture = $objTemplate->picture;
+				unset($picture['title']);
+				$objTemplate->picture = $picture;
+
+				$objTemplate->href = $objTemplate->link;
+				$objTemplate->linkTitle = StringUtil::specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['moreDetail'], $objProduct->title), true);
+
+				$this->addImageToTemplate($objTemplate, $arrProduct, null, null, $objModel);
 			}
 		}
+
 		return $objTemplate->parse();
 	}
 	/**
