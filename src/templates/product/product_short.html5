@@ -1,7 +1,6 @@
 
 <div class="product_short<?= $this->class; ?>">
 
-
   <?php if ($this->addImage): ?>
     <?php $this->insert('image', $this->arrData); ?>
   <?php endif; ?>
@@ -22,10 +21,10 @@
     <div class="info">
 
       <time datetime="<?= $this->datetime; ?>"><?= $this->date; ?></time>
-      <?php if($this->meta_brand): ?><span class="brand"><?= $this->meta_brand; ?></span><?php endif; ?>
-      <?php if($this->meta_model): ?><span class="model"><?= $this->meta_model; ?></span><?php endif; ?>
-      <?php if($this->meta_code): ?><span class="code"><?= $this->meta_code; ?></span><?php endif; ?>
-      <?php if($this->meta_sku): ?><span class="sku"><?= $this->meta_sku; ?></span><?php endif; ?>
+      <?php if($this->meta_brand): ?><span class="brand"><?= $this->meta_brand_txt; ?><span itemprop="brand"><?= $this->meta_brand; ?></span></span><?php endif; ?>
+      <?php if($this->meta_model): ?><span class="model"><?= $this->meta_model_txt; ?><span><?= $this->meta_model; ?></span></span><?php endif; ?>
+      <?php if($this->meta_code): ?><span class="code"><?= $this->meta_code_txt; ?><span><?= $this->meta_code; ?></span></span><?php endif; ?>
+      <?php if($this->meta_sku): ?><span class="sku"><?= $this->meta_sku_txt; ?> <span itemprop="sku"><?= $this->meta_sku; ?></span></span><?php endif; ?>
 
     </div>
 
