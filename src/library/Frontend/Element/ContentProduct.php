@@ -143,7 +143,7 @@ abstract class ContentProduct extends \ContentElement
 		{
 			$objModel = \FilesModel::findByUuid($objProduct->singleSRC);
 
-			if ($objModel !== null && is_file(System::getContainer()->getParameter('kernel.project_dir') . '/' . $objModel->path))
+			if ($objModel !== null && is_file(\System::getContainer()->getParameter('kernel.project_dir') . '/' . $objModel->path))
 			{
 				// Do not override the field now that we have a model registry (see #6303)
 				$arrProduct = $objProduct->row();
@@ -167,9 +167,9 @@ abstract class ContentProduct extends \ContentElement
 				$objTemplate->picture = $picture;
 
 				$objTemplate->href = $objTemplate->link;
-				$objTemplate->linkTitle = StringUtil::specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['moreDetail'], $objProduct->title), true);
+				$objTemplate->linkTitle = \StringUtil::specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['moreDetail'], $objProduct->title), true);
 
-				//$this->addImageToTemplate($objTemplate, $arrProduct, null, null, $objModel);
+				$this->addImageToTemplate($objTemplate, $arrProduct, null, null, $objModel);
 			}
 		}
 
@@ -371,7 +371,7 @@ abstract class ContentProduct extends \ContentElement
 		{
 			$objModel = \FilesModel::findByUuid($objProduct->singleSRC);
 
-			if ($objModel !== null && is_file(System::getContainer()->getParameter('kernel.project_dir') . '/' . $objModel->path))
+			if ($objModel !== null && is_file(\System::getContainer()->getParameter('kernel.project_dir') . '/' . $objModel->path))
 			{
 			
 				// Do not override the field now that we have a model registry (see #6303)
@@ -395,7 +395,7 @@ abstract class ContentProduct extends \ContentElement
 				$objTemplate->picture = $picture;
 
 				$objTemplate->href = $objTemplate->link;
-				$objTemplate->linkTitle = StringUtil::specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['moreDetail'], $objProduct->title), true);
+				$objTemplate->linkTitle = \StringUtil::specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['moreDetail'], $objProduct->title), true);
 
 				$this->addImageToTemplate($objTemplate, $arrProduct, null, null, $objModel);
 			}
