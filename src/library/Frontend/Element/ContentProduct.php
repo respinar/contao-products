@@ -115,6 +115,11 @@ abstract class ContentProduct extends \ContentElement
 		$objTemplate->meta_sku = $arrMeta['sku'];
 		$objTemplate->meta_buy = $arrMeta['buy'];
 
+		$objTemplate->meta_brand_txt = $GLOBALS['TL_LANG']['MSC']['brand_text'];
+		$objTemplate->meta_model_txt = $GLOBALS['TL_LANG']['MSC']['model_text'];
+		$objTemplate->meta_code_txt  = $GLOBALS['TL_LANG']['MSC']['code_text'];
+		$objTemplate->meta_sku_txt   = $GLOBALS['TL_LANG']['MSC']['sku_text'];
+
 		$objTemplate->hasMetaFields = !empty($arrMeta);
 		$objTemplate->timestamp = $objProduct->date;
 		$objTemplate->datetime = date('Y-m-d\TH:i:sP', $objProduct->date);
@@ -297,22 +302,22 @@ abstract class ContentProduct extends \ContentElement
 
 				case 'code':
 					if ($objProduct->code) 
-						$return['code'] = $GLOBALS['TL_LANG']['MSC']['code_text'] .' '. $objProduct->code;
+						$return['code'] = $objProduct->code;
 					break;
 
 				case 'model':
 					if ($objProduct->model) 
-						$return['model'] = $GLOBALS['TL_LANG']['MSC']['model_text'] .' '. $objProduct->model;
+						$return['model'] = $objProduct->model;
 					break;
 
 				case 'brand':
 					if ($objProduct->brand) 
-						$return['brand'] = $GLOBALS['TL_LANG']['MSC']['brand_text'] .' '. $objProduct->brand;
+						$return['brand'] = $objProduct->brand;
 					break;
 				
 				case 'sku':
 					if ($objProduct->sku) 
-						$return['sku'] = $GLOBALS['TL_LANG']['MSC']['sku_text'] .' '. $objProduct->sku;
+						$return['sku'] = $objProduct->sku;
 					break;
 				
 				case 'buy':
