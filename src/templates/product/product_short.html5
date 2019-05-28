@@ -1,28 +1,15 @@
 
 <div itemscope itemtype="http://schema.org/Product" class="product_short<?= $this->class; ?>">
 
-  <figure class="image_container<?= $this->floatClass; ?>"<?php if ($this->margin): ?> style="<?= $this->margin; ?>"<?php endif; ?>>
 
-      <?php if ($this->link): ?>
-        <a href="<?= $this->link; ?>"<?= $this->attributes; ?> title="<?= $this->alt; ?>">
-      <?php endif; ?>
+  <?php if ($this->addImage): ?>
+    <?php $this->insert('image', $this->arrData); ?>
+  <?php endif; ?>
 
-      <?php $this->insert('picture_default', $this->picture); ?>
-
-      <?php if ($this->link): ?>
-        </a>
-      <?php endif; ?>
-
-      <?php if ($this->caption): ?>
-        <figcaption class="caption" style="width:<?= $this->arrSize[0]; ?>px"><?= $this->caption; ?></figcaption>
-      <?php endif; ?>
-
-      <div class="tag_container">
+  <div class="tag_container">
           <?php if ($this->featured): ?><div class="featured"></div><?php endif; ?>
           <?php if ($this->new_product): ?><div class="new"></div><?php endif; ?>
-      </div>
-
-  </figure>
+  </div>
 
 
   <div itemprop="name" class="title"> 
