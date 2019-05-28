@@ -120,15 +120,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('addEnclosure','published'),
-		'default'                     => '{title_legend},title,alias;
-		                                  {category_legend},categories;
-		                                  {config_legend:hide},date,featured;
-		                                  {product_legend},brand,model,code,sku;
-										  {link_legend},url,target,titleText,linkTitle;
-		                                  {image_legend},singleSRC,alt;
-										  {description_legend},description;
-		                                  {related_legend},related;{enclosure_legend:hide},addEnclosure;
-		                                  {publish_legend},publishe,start,stop',
+		'default'                     => '{title_legend},title,featured,alias,date;{product_legend},brand,model,code,sku;{image_legend},singleSRC;{description_legend},description;{related_legend},related;{link_legend:hide},url,target,titleText,linkTitle;{enclosure_legend:hide},addEnclosure;{publish_legend},publishe,start,stop',
 	),
 
 	// Subpalettes
@@ -165,7 +157,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 			'search'                  => true,
 			'sorting'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>128),
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>128,'tl_class'=>'w50'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'alias' => array
@@ -283,7 +275,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
 			'search'                  => true,
-			'eval'                    => array('style'=>'height:60px', 'decodeEntities'=>true, 'tl_class'=>'clr'),
+			'eval'                    => array('rte'=>'tinyMCE', 'tl_class'=>'clr'),
 			'sql'                     => "text NULL"
 		),
 		'singleSRC' => array
