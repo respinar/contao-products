@@ -16,6 +16,7 @@
  * Miscellaneous
  */
 $GLOBALS['TL_LANG']['MSC']['emptyCatalog'] = 'There is no product!';
+$GLOBALS['TL_LANG']['MSC']['moreDetail']   = '%s more details';
 
 $GLOBALS['TL_LANG']['MSC']['model']        = 'Model';
 $GLOBALS['TL_LANG']['MSC']['code']         = 'Code';
