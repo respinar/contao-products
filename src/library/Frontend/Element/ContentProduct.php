@@ -115,47 +115,14 @@ abstract class ContentProduct extends \ContentElement
 		$objTemplate->meta_sku = $arrMeta['sku'];
 		$objTemplate->meta_buy = $arrMeta['buy'];
 
+		$objTemplate->meta_brand_txt = $GLOBALS['TL_LANG']['MSC']['brand_text'];
+		$objTemplate->meta_model_txt = $GLOBALS['TL_LANG']['MSC']['model_text'];
+		$objTemplate->meta_code_txt  = $GLOBALS['TL_LANG']['MSC']['code_text'];
+		$objTemplate->meta_sku_txt   = $GLOBALS['TL_LANG']['MSC']['sku_text'];
+
 		$objTemplate->hasMetaFields = !empty($arrMeta);
 		$objTemplate->timestamp = $objProduct->date;
 		$objTemplate->datetime = date('Y-m-d\TH:i:sP', $objProduct->date);
-		
-
-		$objTemplate->addImage = false;
-
-		// Add an image
-		if ($objProduct->singleSRC != '')
-		{
-			$objModel = \FilesModel::findByUuid($objProduct->singleSRC);
-
-			if ($objModel === null)
-			{
-				if (!\Validator::isUuid($objProduct->singleSRC))
-				{
-					$objTemplate->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-				}
-			}
-			elseif (is_file(TL_ROOT . '/' . $objModel->path))
-			{
-				// Do not override the field now that we have a model registry (see #6303)
-				$arrProduct = $objProduct->row();
-
-				// Override the default image size
-				if ($this->size != '')
-				{
-					$size = deserialize($this->size);
-
-					if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
-					{
-						$arrProduct['size'] = $this->size;
-					}
-				}
-
-				$arrProduct['singleSRC'] = $objModel->path;
-				$strLightboxId = 'lightbox[lb' . $objProduct->id . ']';
-				$arrProduct['fullsize'] = $this->fullsize;
-				$this->addImageToTemplate($objTemplate, $arrProduct, null, $strLightboxId);
-			}
-		}
 
 		$objElement = \ContentModel::findPublishedByPidAndTable($objProduct->id, 'tl_product');
 
@@ -166,7 +133,44 @@ abstract class ContentProduct extends \ContentElement
 				$objTemplate->text .= $this->getContentElement($objElement->current());
 			}
 
-			$objTemplate->link        = $this->generateProductUrl($objProduct, $blnAddCategory);
+			$objTemplate->link = $this->generateProductUrl($objProduct, $blnAddCategory);
+		}		
+
+		$objTemplate->addImage = false;		
+
+		// Add an image
+		if ($objProduct->singleSRC != '')
+		{
+			$objModel = \FilesModel::findByUuid($objProduct->singleSRC);
+
+			if ($objModel !== null && is_file(\System::getContainer()->getParameter('kernel.project_dir') . '/' . $objModel->path))
+			{
+				// Do not override the field now that we have a model registry (see #6303)
+				$arrProduct = $objProduct->row();
+
+				// Override the default image size
+				if ($this->size != '')
+				{
+					$size = \StringUtil::deserialize($this->size);
+
+					if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
+					{
+						$arrProduct['size'] = $this->size;
+					}
+				}									
+
+				$arrProduct['singleSRC'] = $objModel->path;				
+
+				$this->addImageToTemplate($objTemplate, $arrProduct, null, null, $objModel);
+
+				// Link to the product detail if no image link has been defined		
+				$picture = $objTemplate->picture;
+				unset($picture['title']);
+				$objTemplate->picture = $picture;
+
+				$objTemplate->href = $objTemplate->link;
+				$objTemplate->linkTitle = \StringUtil::specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['moreDetail'], $objProduct->title), true);
+			}
 		}
 
 		$objTemplate->enclosure = array();
@@ -272,7 +276,7 @@ abstract class ContentProduct extends \ContentElement
 	}
 
 	/**
-	 * Return the meta fields of a news article as array
+	 * Return the meta fields of a product as array
 	 * @param object
 	 * @return array
 	 */
@@ -298,22 +302,22 @@ abstract class ContentProduct extends \ContentElement
 
 				case 'code':
 					if ($objProduct->code) 
-						$return['code'] = $GLOBALS['TL_LANG']['MSC']['code_text'] .' '. $objProduct->code;
+						$return['code'] = $objProduct->code;
 					break;
 
 				case 'model':
 					if ($objProduct->model) 
-						$return['model'] = $GLOBALS['TL_LANG']['MSC']['model_text'] .' '. $objProduct->model;
+						$return['model'] = $objProduct->model;
 					break;
 
 				case 'brand':
 					if ($objProduct->brand) 
-						$return['brand'] = $GLOBALS['TL_LANG']['MSC']['brand_text'] .' '. $objProduct->brand;
+						$return['brand'] = $objProduct->brand;
 					break;
 				
 				case 'sku':
 					if ($objProduct->sku) 
-						$return['sku'] = $GLOBALS['TL_LANG']['MSC']['sku_text'] .' '. $objProduct->sku;
+						$return['sku'] = $objProduct->sku;
 					break;
 				
 				case 'buy':
@@ -359,37 +363,45 @@ abstract class ContentProduct extends \ContentElement
 		$objTemplate->hasMetaFields = !empty($arrMeta);
 		$objTemplate->timestamp = $objProduct->date;
 		$objTemplate->datetime = date('Y-m-d\TH:i:sP', $objProduct->date);
+
 		$objTemplate->addImage = false;
-		// Add an image
+
+		// Add an image		
 		if ($objProduct->singleSRC != '')
 		{
 			$objModel = \FilesModel::findByUuid($objProduct->singleSRC);
-			if ($objModel === null)
+
+			if ($objModel !== null && is_file(\System::getContainer()->getParameter('kernel.project_dir') . '/' . $objModel->path))
 			{
-				if (!\Validator::isUuid($objProduct->singleSRC))
-				{
-					$objTemplate->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-				}
-			}
-			elseif (is_file(TL_ROOT . '/' . $objModel->path))
-			{
+			
 				// Do not override the field now that we have a model registry (see #6303)
 				$arrProduct = $objProduct->row();
 				// Override the default image size
 				if ($this->related_imgSize != '')
 				{
-					$size = deserialize($this->related_imgSize);
+					$size = \StringUtil::deserialize($this->related_imgSize);
 					if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
 					{
 						$arrProduct['size'] = $this->related_imgSize;
 					}
-				}
-				$arrProduct['singleSRC'] = $objModel->path;
-				$strLightboxId = 'lightbox[lb' . $objProduct->id . ']';
-				$arrProduct['fullsize'] = false;
-				$this->addImageToTemplate($objTemplate, $arrProduct,null, $strLightboxId);
+				}		
+
+				$arrProduct['singleSRC'] = $objModel->path;				
+
+				$this->addImageToTemplate($objTemplate, $arrProduct, null, null, $objModel);
+				
+				// Link to the product detail
+				// Unset the image title attribute
+				$picture = $objTemplate->picture;
+				unset($picture['title']);
+				$objTemplate->picture = $picture;
+
+				$objTemplate->href = $objTemplate->link;
+				$objTemplate->linkTitle = \StringUtil::specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['moreDetail'], $objProduct->title), true);
+
 			}
 		}
+
 		return $objTemplate->parse();
 	}
 	/**

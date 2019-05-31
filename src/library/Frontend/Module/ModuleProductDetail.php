@@ -90,13 +90,13 @@ class ModuleProductDetail extends ModuleProduct
 		}
 
 		// Overwrite the page title
-		if ($objProduct->title != '')
+		if ($objProduct->title)
 		{
 			$objPage->pageTitle = strip_tags(strip_insert_tags($objProduct->title));
 		}
 
 		// Overwrite the page description
-		if ($objProduct->description != '')
+		if ($objProduct->description)
 		{
 			$objPage->description = $this->prepareMetaDescription($objProduct->description);
 		}
@@ -120,7 +120,7 @@ class ModuleProductDetail extends ModuleProduct
 
 		$objProduct->related = deserialize($objProduct->related);
 
-		if (!empty($objProduct->related)) {
+		if ($objProduct->related && $this->related_show) {
 
 			$objProducts = ProductModel::findPublishedByIds($objProduct->related);
 

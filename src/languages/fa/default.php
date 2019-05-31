@@ -22,4 +22,5 @@ $GLOBALS['TL_LANG']['MSC']['relateds_headline'] = 'محصولات مرتبط';
 $GLOBALS['TL_LANG']['MSC']['sku_text']          = '‌اس‌کی‌یو';
 $GLOBALS['TL_LANG']['MSC']['specs']             = 'مشخصات';
 $GLOBALS['TL_LANG']['MSC']['types_headline']    = 'نوع‌ها';
+$GLOBALS['TL_LANG']['MSC']['moreDetail']        = 'جزئیات بیشتر %s';
 

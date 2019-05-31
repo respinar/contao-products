@@ -8,10 +8,10 @@
 
       <time datetime="<?= $this->datetime; ?>"><?= $this->date; ?></time>
 
-      <?php if($this->meta_brand): ?><span itemprop="brand" class="brand"><?= $this->meta_brand; ?></span><?php endif; ?>
-      <?php if($this->meta_model): ?><span class="model"><?= $this->meta_model; ?></span><?php endif; ?>
-      <?php if($this->meta_code): ?><span class="code"><?= $this->meta_code; ?></span><?php endif; ?>
-      <?php if($this->meta_sku): ?><span itemprop="sku" class="sku"><?= $this->meta_sku; ?></span><?php endif; ?>
+      <?php if($this->meta_brand): ?><span class="brand"><?= $this->meta_brand_txt; ?>: <span itemprop="brand"><?= $this->meta_brand; ?></span></span><?php endif; ?>
+      <?php if($this->meta_model): ?><span class="model"><?= $this->meta_model_txt; ?>: <span><?= $this->meta_model; ?></span></span><?php endif; ?>
+      <?php if($this->meta_code): ?><span class="code"><?= $this->meta_code_txt; ?>: <span><?= $this->meta_code; ?></span></span><?php endif; ?>
+      <?php if($this->meta_sku): ?><span class="sku"><?= $this->meta_sku_txt; ?>: <span itemprop="sku"><?= $this->meta_sku; ?></span></span><?php endif; ?>
       <?php if($this->meta_buy): ?>
         <span itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="buy">
           <a itemprop="url" href="<?= $this->url ?>" class="hyperlink_txt" title="<?= $this->linkTitle ?>" <?php if($this->target): ?> target="_blank" rel="nofollow" <?php endif; ?> >
