@@ -119,14 +119,15 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('addEnclosure','published'),
-		'default'                     => '{title_legend},title,alias;{config_legend:hide},date,featured;{product_legend},brand,model,code,sku;{image_legend},singleSRC;{description_legend},description;{related_legend},related;{link_legend:hide},url,target,titleText,linkTitle;{enclosure_legend:hide},addEnclosure;{publish_legend},published,start,stop',
+		'__selector__'                => array('addEnclosure','overwriteMeta'),
+		'default'                     => '{title_legend},title,alias,date;{config_legend:hide},availability,featured;{meta_legend},pageTitle,description;{product_legend},brand,model,sku,code;{image_legend},singleSRC,overwriteMeta;{related_legend},related;{link_legend:hide},url,target,titleText,linkTitle;{enclosure_legend:hide},addEnclosure;{publish_legend},published,start,stop',
 	),
 
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'addEnclosure'                => 'enclosure'
+		'addEnclosure'                => 'enclosure',
+		'overwriteMeta'               => 'alt,imageTitle'
 	),
 
 	// Fields
@@ -209,8 +210,9 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'sorting'                 => true,
-			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50 clr'),
+			'options'				  => array('mpn','isbn','gtin8','gtin12','gtin13','gtin14'),
+			'inputType'               => 'inputUnit',
+			'eval'                    => array('includeBlankOption'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
 		'sku' => array
@@ -223,6 +225,14 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 			'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
+		'availability' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_product']['availability'],
+			'inputType'               => 'select',
+			'options'                 => array('Discontinued','InStock','InStoreOnly','LimitedAvailability','OnlineOnly','OutOfStock','PreOrder','PreSale','SoldOut'),
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "varchar(128) NOT NULL default ''"
+		),		
 		'date' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_product']['date'],
@@ -231,7 +241,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 			'filter'                  => true,
 			'flag'                    => 8,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'date', 'doNotCopy'=>true, 'datepicker'=>true, 'tl_class'=>'w50 wizard clr'),
+			'eval'                    => array('rgxp'=>'date', 'doNotCopy'=>true, 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'url' => array
@@ -269,13 +279,22 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
+		'pageTitle' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_product']['pageTitle'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>255, 'decodeEntities'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
+		),
 		'description' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_product']['description'],
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
 			'search'                  => true,
-			'eval'                    => array('style'=>'height:60px', 'decodeEntities'=>true, 'tl_class'=>'clr'),
+			'eval'                    => array('style'=>'height:120px', 'decodeEntities'=>true, 'tl_class'=>'clr'),
 			'sql'                     => "text NULL"
 		),
 		'singleSRC' => array
@@ -286,13 +305,30 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 			'eval'                    => array('mandatory'=>true,'fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes']),
 			'sql'                     => "binary(16) NULL"
 		),
+		'overwriteMeta' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['overwriteMeta'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('submitOnChange'=>true, 'tl_class'=>'w50 clr'),
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
 		'alt' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_product']['alt'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255, 'tl_class'=>'long'),
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
+		),
+		'imageTitle' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['imageTitle'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'addEnclosure' => array
