@@ -12,15 +12,32 @@
  */
 
 $GLOBALS['TL_LANG']['MSC']['brand_text']        = 'برند';
-$GLOBALS['TL_LANG']['MSC']['code_text']         = 'کد محصول';
+$GLOBALS['TL_LANG']['MSC']['status_text']       = 'وضعیت';
+$GLOBALS['TL_LANG']['MSC']['barcode_text']      = 'کد';
 $GLOBALS['TL_LANG']['MSC']['emptyCatalog']      = 'محصولی وجود ندارد!';
 $GLOBALS['TL_LANG']['MSC']['features']          = 'ویژگی‌ها';
 $GLOBALS['TL_LANG']['MSC']['model_text']        = 'مدل';
 $GLOBALS['TL_LANG']['MSC']['price']             = 'قیمت';
 $GLOBALS['TL_LANG']['MSC']['rating']            = 'رتبه';
 $GLOBALS['TL_LANG']['MSC']['relateds_headline'] = 'محصولات مرتبط';
-$GLOBALS['TL_LANG']['MSC']['sku_text']          = '‌اس‌کی‌یو';
+$GLOBALS['TL_LANG']['MSC']['price_text']        = 'قیمت';
+$GLOBALS['TL_LANG']['MSC']['sku_text']          = 'SKU';
 $GLOBALS['TL_LANG']['MSC']['specs']             = 'مشخصات';
-$GLOBALS['TL_LANG']['MSC']['types_headline']    = 'نوع‌ها';
+$GLOBALS['TL_LANG']['MSC']['types_headline']    = 'انواع';
 $GLOBALS['TL_LANG']['MSC']['moreDetail']        = 'جزئیات بیشتر %s';
+
+$GLOBALS['TL_LANG']['MSC']['RLS']      = 'ریال';
+$GLOBALS['TL_LANG']['MSC']['TMN']      = 'تومان';
+$GLOBALS['TL_LANG']['MSC']['USD']      = 'دلار';
+$GLOBALS['TL_LANG']['MSC']['EUR']      = 'یورو';
+
+$GLOBALS['TL_LANG']['MSC']['Discontinued'] = 'عدم تولید';
+$GLOBALS['TL_LANG']['MSC']['InStock']      = 'موجود';
+$GLOBALS['TL_LANG']['MSC']['InStoreOnly']  = 'In Store Only';
+$GLOBALS['TL_LANG']['MSC']['LimitedAvailability'] = 'موجودی محدود';
+$GLOBALS['TL_LANG']['MSC']['OnlineOnly']   = 'OnlineOnly';
+$GLOBALS['TL_LANG']['MSC']['OutOfStock']   = 'عدم موجودی';
+$GLOBALS['TL_LANG']['MSC']['PreOrder']     = 'پیش سفارش';
+$GLOBALS['TL_LANG']['MSC']['PreSale']      = 'پیش فروش';
+$GLOBALS['TL_LANG']['MSC']['SoldOut']      = 'تمام';
 

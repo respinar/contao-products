@@ -108,17 +108,22 @@ abstract class ModuleProduct extends \Module
 		$arrMeta = $this->getMetaFields($objProduct);
 
 		// Add the meta information
-		$objTemplate->date = $arrMeta['date'];
-		$objTemplate->meta_brand = $arrMeta['brand'];
-		$objTemplate->meta_model = $arrMeta['model'];
-		$objTemplate->meta_code = $arrMeta['code'];
-		$objTemplate->meta_sku = $arrMeta['sku'];
-		$objTemplate->meta_buy = $arrMeta['buy'];
+		$objTemplate->date         = $arrMeta['date'];
+		$objTemplate->meta_brand   = $arrMeta['brand'];
+		$objTemplate->meta_price   = $arrMeta['price'];
+		$objTemplate->meta_availability = $arrMeta['availability'];
+		$objTemplate->meta_availability_txt = $GLOBALS['TL_LANG']['MSC'][$objProduct->availability];
+		$objTemplate->meta_model   = $arrMeta['model'];
+		$objTemplate->meta_barcode = $arrMeta['barcode'];
+		$objTemplate->meta_sku     = $arrMeta['sku'];
+		$objTemplate->meta_buy     = $arrMeta['buy'];
 
-		$objTemplate->meta_brand_txt = $GLOBALS['TL_LANG']['MSC']['brand_text'];
-		$objTemplate->meta_model_txt = $GLOBALS['TL_LANG']['MSC']['model_text'];
-		$objTemplate->meta_code_txt  = $GLOBALS['TL_LANG']['MSC']['code_text'];
-		$objTemplate->meta_sku_txt   = $GLOBALS['TL_LANG']['MSC']['sku_text'];
+		$objTemplate->meta_price_txt   = $GLOBALS['TL_LANG']['MSC']['price_text'];
+		$objTemplate->meta_brand_txt   = $GLOBALS['TL_LANG']['MSC']['brand_text'];
+		$objTemplate->meta_model_txt   = $GLOBALS['TL_LANG']['MSC']['model_text'];
+		$objTemplate->meta_barcode_txt = $GLOBALS['TL_LANG']['MSC']['barcode_text'];
+		$objTemplate->meta_sku_txt     = $GLOBALS['TL_LANG']['MSC']['sku_text'];		
+		$objTemplate->meta_status_txt  = $GLOBALS['TL_LANG']['MSC']['status_text'];
 
 		$objTemplate->hasMetaFields = !empty($arrMeta);
 		$objTemplate->timestamp = $objProduct->date;
@@ -301,9 +306,20 @@ abstract class ModuleProduct extends \Module
 					$return['date'] = \Date::parse($objPage->datimFormat, $objProduct->date);
 					break;
 
-				case 'code':
-					if ($objProduct->code) 
-						$return['code'] = $objProduct->code;
+				case 'price':
+					if ($objProduct->price) 
+						$return['price'] = \StringUtil::deserialize($objProduct->price);						
+						$return['price']['symbol'] = $GLOBALS['TL_LANG']['MSC'][$return['price']['unit']];
+					break;
+				
+				case 'availability':
+					if ($objProduct->availability) 
+						$return['availability'] = $objProduct->availability;
+					break;
+
+				case 'barcode':
+					if ($objProduct->barcode) 
+						$return['barcode'] = \StringUtil::deserialize($objProduct->barcode);
 					break;
 
 				case 'model':

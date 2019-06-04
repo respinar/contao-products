@@ -78,7 +78,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_metaFields'] = array
 	'default'                 => array(''),
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'options'                 => array('date','code','brand','model','sku','buy'),
+	'options'                 => array('date','price','availability','brand','model','sku','barcode','buy'),
 	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
 	'eval'                    => array('multiple'=>true),
 	'sql'                     => "varchar(255) NOT NULL default ''"

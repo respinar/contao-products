@@ -4,16 +4,36 @@
   <h1 itemprop="name"><?= $this->title; ?></h1>
 
   <?php if ($this->hasMetaFields): ?>
+
+    <div class="meta">
     <div class="info">
 
       <time datetime="<?= $this->datetime; ?>"><?= $this->date; ?></time>
+      <?php if($this->meta_brand): ?>
+        <span class="brand"><?= $this->meta_brand_txt; ?>: <span itemprop="brand"><?= $this->meta_brand; ?></span></span>
+      <?php endif; ?>
+      <?php if($this->meta_model): ?>
+        <span class="model"><?= $this->meta_model_txt; ?>: <span><?= $this->meta_model; ?></span></span>
+      <?php endif; ?>      
+      <?php if($this->meta_sku): ?>
+        <span class="sku"><?= $this->meta_sku_txt; ?>: <span itemprop="sku"><?= $this->meta_sku; ?></span></span>
+      <?php endif; ?>
+      <?php if($this->meta_barcode): ?>
+        <span class="barcode"><?= $this->meta_barcode_txt; ?>: <span itemprop="<?= $this->meta_barcode[unit]; ?>"><?= $this->meta_barcode[value]; ?></span></span>
+      <?php endif; ?>    
+    </div>
 
-      <?php if($this->meta_brand): ?><span class="brand"><?= $this->meta_brand_txt; ?>: <span itemprop="brand"><?= $this->meta_brand; ?></span></span><?php endif; ?>
-      <?php if($this->meta_model): ?><span class="model"><?= $this->meta_model_txt; ?>: <span><?= $this->meta_model; ?></span></span><?php endif; ?>
-      <?php if($this->meta_code): ?><span class="code"><?= $this->meta_code_txt; ?>: <span><?= $this->meta_code; ?></span></span><?php endif; ?>
-      <?php if($this->meta_sku): ?><span class="sku"><?= $this->meta_sku_txt; ?>: <span itemprop="sku"><?= $this->meta_sku; ?></span></span><?php endif; ?>
-      <?php if($this->meta_buy): ?>
-        <span itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="buy">
+    <div class="offers" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+    <?php if($this->meta_price): ?>
+      <?= $this->meta_price_txt; ?>:    
+      <span itemprop="price" content="<?= $this->meta_price[value]; ?>"><?= number_format($this->meta_price[value]); ?></span>
+      <span itemprop="priceCurrency" content="<?= $this->meta_price[unit]; ?>"><?= $this->meta_price[symbol]; ?></span>      
+    <?php endif; ?>
+    <?php if($this->meta_availability): ?>
+      <span class="availability"> (<link itemprop="availability" href="http://schema.org/<?= $this->meta_availability; ?>"><?= $this->meta_availability_txt; ?>) </span>
+    <?php endif; ?>
+    <?php if($this->meta_buy): ?>
+        <span class="buy">
           <a itemprop="url" href="<?= $this->url ?>" class="hyperlink_txt" title="<?= $this->linkTitle ?>" <?php if($this->target): ?> target="_blank" rel="nofollow" <?php endif; ?> >
           <?php if($this->titleText): ?>
             <?= $this->titleText ?>
@@ -22,8 +42,8 @@
           <?php endif; ?>
           </a>
         </span>
-      <?php endif; ?>
-    
+    <?php endif; ?>
+    </div>
     </div>
     
 

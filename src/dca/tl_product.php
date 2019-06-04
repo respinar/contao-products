@@ -120,7 +120,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('addEnclosure','overwriteMeta'),
-		'default'                     => '{title_legend},title,alias,date;{offer_legend:hide},price,availability,featured;{meta_legend},pageTitle,description;{product_legend},brand,model,sku,code;{image_legend},singleSRC,overwriteMeta;{related_legend},related;{link_legend:hide},url,target,titleText,linkTitle;{enclosure_legend:hide},addEnclosure;{publish_legend},published,start,stop',
+		'default'                     => '{title_legend},title,alias,featured;{meta_legend},pageTitle,date,description;{offer_legend:hide},price,availability;{product_legend},brand,model,sku,barcode;{image_legend},singleSRC,overwriteMeta;{related_legend},related;{link_legend:hide},url,target,titleText,linkTitle;{enclosure_legend:hide},addEnclosure;{publish_legend},published,start,stop',
 	),
 
 	// Subpalettes
@@ -204,14 +204,15 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 			'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
-		'code' => array
+		'barcode' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_product']['code'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_product']['barcode'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'sorting'                 => true,
 			'options'				  => array('mpn','isbn','gtin8','gtin12','gtin13','gtin14'),
 			'inputType'               => 'inputUnit',
+			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
 			'eval'                    => array('includeBlankOption'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
@@ -230,6 +231,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_product']['availability'],
 			'inputType'               => 'select',
 			'options'                 => array('Discontinued','InStock','InStoreOnly','LimitedAvailability','OnlineOnly','OutOfStock','PreOrder','PreSale','SoldOut'),
+			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
 			'eval'                    => array('tl_class'=>'w50'),
 			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
@@ -241,6 +243,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 			'sorting'                 => true,
 			'options'				  => array('RLS','TMN','USD','EUR'),
 			'inputType'               => 'inputUnit',
+			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
 			'eval'                    => array('includeBlankOption'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
