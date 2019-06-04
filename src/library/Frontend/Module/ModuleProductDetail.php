@@ -90,9 +90,13 @@ class ModuleProductDetail extends ModuleProduct
 		}
 
 		// Overwrite the page title
-		if ($objProduct->title)
+		if ($objProduct->pageTitle)
 		{
-			$objPage->pageTitle = strip_tags(strip_insert_tags($objProduct->title));
+			$objPage->pageTitle = $objProduct->pageTitle;
+		}
+		elseif ($objProduct->title)
+		{
+			$objPage->pageTitle = strip_tags(\StringUtil::stripInsertTags($objProduct->title));
 		}
 
 		// Overwrite the page description
@@ -118,14 +122,17 @@ class ModuleProductDetail extends ModuleProduct
 		$GLOBALS['TL_HEAD'][] = '<meta property="og:url" content="'.$ogTagsURL.'" />';
 		$GLOBALS['TL_HEAD'][] = '<meta property="og:image" content="'.$ogTagsImage.'" />';
 
-		$objProduct->related = deserialize($objProduct->related);
+		if ( $this->related_show)
+		{
+			$objProduct->related = deserialize($objProduct->related);
 
-		if ($objProduct->related && $this->related_show) {
+			if ($objProduct->related) {
 
-			$objProducts = ProductModel::findPublishedByIds($objProduct->related);
-
-			$this->Template->relateds = $this->parseRelateds($objProducts);
-		}
+				$objProducts = ProductModel::findPublishedByIds($objProduct->related);
+	
+				$this->Template->relateds = $this->parseRelateds($objProducts);
+			}
+		}	
 
 	}
 }
