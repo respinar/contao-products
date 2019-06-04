@@ -50,10 +50,7 @@
       <meta itemprop="bestRating" content="5">
       <meta itemprop="ratingCount" content="<?= $this->rating_count; ?>">
     </div>    
-  </div>
-
-    </div>
-    
+  </div>    
 
   <?php endif; ?>
 
