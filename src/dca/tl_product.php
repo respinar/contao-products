@@ -120,7 +120,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('addEnclosure','overwriteMeta'),
-		'default'                     => '{title_legend},title,alias,date;{config_legend:hide},availability,featured;{meta_legend},pageTitle,description;{product_legend},brand,model,sku,code;{image_legend},singleSRC,overwriteMeta;{related_legend},related;{link_legend:hide},url,target,titleText,linkTitle;{enclosure_legend:hide},addEnclosure;{publish_legend},published,start,stop',
+		'default'                     => '{title_legend},title,alias,date;{offer_legend:hide},price,availability,featured;{meta_legend},pageTitle,description;{product_legend},brand,model,sku,code;{image_legend},singleSRC,overwriteMeta;{related_legend},related;{link_legend:hide},url,target,titleText,linkTitle;{enclosure_legend:hide},addEnclosure;{publish_legend},published,start,stop',
 	),
 
 	// Subpalettes
@@ -232,7 +232,18 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 			'options'                 => array('Discontinued','InStock','InStoreOnly','LimitedAvailability','OnlineOnly','OutOfStock','PreOrder','PreSale','SoldOut'),
 			'eval'                    => array('tl_class'=>'w50'),
 			'sql'                     => "varchar(128) NOT NULL default ''"
-		),		
+		),
+		'price' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_product']['price'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'sorting'                 => true,
+			'options'				  => array('RLS','TMN','USD','EUR'),
+			'inputType'               => 'inputUnit',
+			'eval'                    => array('includeBlankOption'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(128) NOT NULL default ''"
+		),
 		'date' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_product']['date'],
@@ -294,7 +305,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
 			'search'                  => true,
-			'eval'                    => array('style'=>'height:120px', 'decodeEntities'=>true, 'tl_class'=>'clr'),
+			'eval'                    => array('style'=>'unicode-bidi: plaintext;', 'rows'=>'2', 'decodeEntities'=>true, 'tl_class'=>'clr'),
 			'sql'                     => "text NULL"
 		),
 		'singleSRC' => array
@@ -315,7 +326,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 		),
 		'alt' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_product']['alt'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['alt'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
@@ -459,7 +470,7 @@ class tl_product extends Backend
 			$strImage = \Image::getHtml(\Image::get($objImage->path, '60', '60', 'center_center'));
 		}
 
-		return '<div><div style="float:left; margin-right:10px;">'.$strImage.'</div><p>'. $arrRow['title'].'</p><p> Brand: '.$arrRow['brand'] .' - Model: '. $arrRow['model']. ' - Code: '. $arrRow['code'] .' - SKU: '. $arrRow['sku'] .'</p></div>';
+		return '<div><div style="float:left; margin-right:10px;">'.$strImage.'</div><p><strong>'. $arrRow['title'].'</strong></p><p> Brand: '.$arrRow['brand'] .' &emsp; Model: '. $arrRow['model']. ' &emsp; SKU: '. $arrRow['sku'] .'</p></div>';
 	}
 
 	/**
