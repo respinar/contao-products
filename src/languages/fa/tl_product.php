@@ -18,8 +18,8 @@ $GLOBALS['TL_LANG']['tl_product']['alias']['1']         = 'لطفا اسم مس�
 $GLOBALS['TL_LANG']['tl_product']['alt']['0']           = 'متن جایگزین';
 $GLOBALS['TL_LANG']['tl_product']['brand']['0']         = 'برند';
 $GLOBALS['TL_LANG']['tl_product']['brand']['1']         = 'لطفا برند یا مارک محصول را وارد نمایید.';
-$GLOBALS['TL_LANG']['tl_product']['code']['0']          = 'کد محصول';
-$GLOBALS['TL_LANG']['tl_product']['code']['1']          = 'لطفا کد محصول را وارد نمایید.';
+$GLOBALS['TL_LANG']['tl_product']['global_ID']['0']     = 'کد محصول';
+$GLOBALS['TL_LANG']['tl_product']['global_ID']['1']     = 'لطفا کد محصول را وارد نمایید.';
 $GLOBALS['TL_LANG']['tl_product']['config_legend']      = 'تاریخ و مشخصات';
 $GLOBALS['TL_LANG']['tl_product']['copy']['0']          = 'تکثیر محصول';
 $GLOBALS['TL_LANG']['tl_product']['copy']['1']          = 'تکثیر محصول شناسه‌ی %s';

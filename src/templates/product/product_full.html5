@@ -18,8 +18,8 @@
       <?php if($this->meta_sku): ?>
         <span class="sku"><?= $this->meta_sku_txt; ?>: <span itemprop="sku"><?= $this->meta_sku; ?></span></span>
       <?php endif; ?>
-      <?php if($this->meta_barcode): ?>
-        <span class="barcode"><?= $this->meta_barcode_txt; ?>: <span itemprop="<?= $this->meta_barcode[unit]; ?>"><?= $this->meta_barcode[value]; ?></span></span>
+      <?php if($this->meta_global_ID): ?>
+        <span class="global_ID"><?= $this->meta_global_ID_txt; ?>: <span itemprop="<?= $this->meta_global_ID[unit]; ?>"><?= $this->meta_global_ID[value]; ?></span></span>
       <?php endif; ?>    
     </div>
 

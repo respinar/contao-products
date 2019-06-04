@@ -21,7 +21,7 @@ $GLOBALS['TL_LANG']['MSC']['moreDetail']   = '%s more details';
 $GLOBALS['TL_LANG']['MSC']['price']        = 'Price';
 $GLOBALS['TL_LANG']['MSC']['availability'] = 'Availability';
 $GLOBALS['TL_LANG']['MSC']['model']        = 'Model';
-$GLOBALS['TL_LANG']['MSC']['barcode']      = 'EAN/UPC';
+$GLOBALS['TL_LANG']['MSC']['global_ID']    = 'EAN/UPC';
 $GLOBALS['TL_LANG']['MSC']['brand']        = 'Brand';
 $GLOBALS['TL_LANG']['MSC']['sku']          = 'SKU';
 $GLOBALS['TL_LANG']['MSC']['buy']          = 'Buy link';
@@ -51,7 +51,7 @@ $GLOBALS['TL_LANG']['MSC']['gtin14']   = 'GTIN-14';
 
 $GLOBALS['TL_LANG']['MSC']['price_text']   = 'Price';
 $GLOBALS['TL_LANG']['MSC']['model_text']   = 'Model';
-$GLOBALS['TL_LANG']['MSC']['barcode_text'] = 'EAN/UPC';
+$GLOBALS['TL_LANG']['MSC']['global_ID_text'] = 'EAN/UPC';
 $GLOBALS['TL_LANG']['MSC']['brand_text']   = 'Brand';
 $GLOBALS['TL_LANG']['MSC']['sku_text']     = 'SKU';
 $GLOBALS['TL_LANG']['MSC']['status_text']  = 'Status';

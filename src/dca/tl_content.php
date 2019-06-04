@@ -17,7 +17,7 @@
 if (Input::get('do') == 'products')
 {
 	$GLOBALS['TL_DCA']['tl_content']['config']['ptable'] = 'tl_product';
-	$GLOBALS['TL_DCA']['tl_content']['list']['sorting']['headerFields'] = array('title', 'brand','model','code','sku', 'published');
+	$GLOBALS['TL_DCA']['tl_content']['list']['sorting']['headerFields'] = array('title', 'brand','model','global_ID','sku', 'published');
 
 }
 
@@ -59,7 +59,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['product_metaFields'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['product_metaFields'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'options'                 => array('date','code','brand','model','sku','buy'),
+	'options'                 => array('date','global_ID','brand','model','sku','buy'),
 	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
 	'eval'                    => array('multiple'=>true,'tl_class'=>'clr'),
 	'sql'                     => "varchar(255) NOT NULL default ''"

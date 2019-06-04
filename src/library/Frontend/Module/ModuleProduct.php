@@ -114,14 +114,14 @@ abstract class ModuleProduct extends \Module
 		$objTemplate->meta_availability = $arrMeta['availability'];
 		$objTemplate->meta_availability_txt = $GLOBALS['TL_LANG']['MSC'][$objProduct->availability];
 		$objTemplate->meta_model   = $arrMeta['model'];
-		$objTemplate->meta_barcode = $arrMeta['barcode'];
+		$objTemplate->meta_global_ID = $arrMeta['global_ID'];
 		$objTemplate->meta_sku     = $arrMeta['sku'];
 		$objTemplate->meta_buy     = $arrMeta['buy'];
 
 		$objTemplate->meta_price_txt   = $GLOBALS['TL_LANG']['MSC']['price_text'];
 		$objTemplate->meta_brand_txt   = $GLOBALS['TL_LANG']['MSC']['brand_text'];
 		$objTemplate->meta_model_txt   = $GLOBALS['TL_LANG']['MSC']['model_text'];
-		$objTemplate->meta_barcode_txt = $GLOBALS['TL_LANG']['MSC']['barcode_text'];
+		$objTemplate->meta_global_ID_txt = $GLOBALS['TL_LANG']['MSC']['global_ID_text'];
 		$objTemplate->meta_sku_txt     = $GLOBALS['TL_LANG']['MSC']['sku_text'];		
 		$objTemplate->meta_status_txt  = $GLOBALS['TL_LANG']['MSC']['status_text'];
 
@@ -317,9 +317,9 @@ abstract class ModuleProduct extends \Module
 						$return['availability'] = $objProduct->availability;
 					break;
 
-				case 'barcode':
-					if ($objProduct->barcode) 
-						$return['barcode'] = \StringUtil::deserialize($objProduct->barcode);
+				case 'global_ID':
+					if ($objProduct->global_ID) 
+						$return['global_ID'] = \StringUtil::deserialize($objProduct->global_ID);
 					break;
 
 				case 'model':
@@ -373,13 +373,13 @@ abstract class ModuleProduct extends \Module
 		$objTemplate->date = $arrMeta['date'];
 		$objTemplate->meta_brand = $arrMeta['brand'];
 		$objTemplate->meta_model = $arrMeta['model'];
-		$objTemplate->meta_code = $arrMeta['code'];
+		$objTemplate->meta_global_ID = $arrMeta['global_ID'];
 		$objTemplate->meta_sku = $arrMeta['sku'];
 		$objTemplate->meta_buy = $arrMeta['buy'];
 
 		$objTemplate->meta_brand_txt = $GLOBALS['TL_LANG']['MSC']['brand_text'];
 		$objTemplate->meta_model_txt = $GLOBALS['TL_LANG']['MSC']['model_text'];
-		$objTemplate->meta_code_txt  = $GLOBALS['TL_LANG']['MSC']['code_text'];
+		$objTemplate->meta_global_ID_txt  = $GLOBALS['TL_LANG']['MSC']['global_ID_text'];
 		$objTemplate->meta_sku_txt   = $GLOBALS['TL_LANG']['MSC']['sku_text'];
 
 		$objTemplate->hasMetaFields = !empty($arrMeta);

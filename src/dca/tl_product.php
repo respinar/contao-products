@@ -120,7 +120,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('addEnclosure','overwriteMeta'),
-		'default'                     => '{title_legend},title,alias,featured;{meta_legend},pageTitle,date,description;{offer_legend:hide},price,availability;{rating_legend},rating_value,rating_count;{product_legend},brand,model,sku,barcode;{image_legend},singleSRC,overwriteMeta;{related_legend},related;{link_legend:hide},url,target,titleText,linkTitle;{enclosure_legend:hide},addEnclosure;{publish_legend},published,start,stop',
+		'default'                     => '{title_legend},title,alias,featured;{meta_legend},pageTitle,date,description;{offer_legend:hide},price,availability;{rating_legend},rating_value,rating_count;{product_legend},brand,model,sku,global_ID;{image_legend},singleSRC,overwriteMeta;{related_legend},related;{link_legend:hide},url,target,titleText,linkTitle;{enclosure_legend:hide},addEnclosure;{publish_legend},published,start,stop',
 	),
 
 	// Subpalettes
@@ -204,9 +204,9 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 			'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
-		'barcode' => array
+		'global_ID' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_product']['barcode'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_product']['global_ID'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'sorting'                 => true,
@@ -695,8 +695,8 @@ class tl_product extends Backend
 					$arrItems[$objItems->id] .= ' [model: ' . $objItems->model .']';
 				}
 
-				if ($objItems->code) {
-					$arrItems[$objItems->id] .= ' (code: ' . $objItems->code .')';
+				if ($objItems->sku) {
+					$arrItems[$objItems->id] .= ' (sku: ' . $objItems->sku .')';
 				} 				
 				
 			}
