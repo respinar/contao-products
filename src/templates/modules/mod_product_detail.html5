@@ -18,4 +18,14 @@
   <p class="back"><a href="<?= $this->referer; ?>" title="<?= $this->back; ?>"><?= $this->back; ?></a></p>
   <!-- indexer::continue -->
 
+  <?php if ($this->allowComments): ?>
+    <div class="ce_comments block">
+      <<?= $this->hlc ?>><?= $this->hlcText ?></<?= $this->hlc ?>>
+      <?= implode('', $this->comments) ?>
+      <?= $this->pagination ?>
+      <<?= $this->hlc ?>><?= $this->addComment ?></<?= $this->hlc ?>>
+      <?php $this->insert('mod_comment_form', $this->arrData); ?>
+    </div>
+  <?php endif; ?>
+
 <?php $this->endblock(); ?>

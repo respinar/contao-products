@@ -138,7 +138,62 @@ class ModuleProductDetail extends ModuleProduct
 	
 				$this->Template->relateds = $this->parseRelateds($objProducts);
 			}
-		}	
+		}
+
+			$bundles = \System::getContainer()->getParameter('kernel.bundles');
+
+		// HOOK: comments extension required
+		if ($objProduct->noComments || !isset($bundles['ContaoCommentsBundle']))
+		{
+			$this->Template->allowComments = false;
+
+			return;
+		}
+
+		/** @var NewsArchiveModel $objCatalog */
+		$objCatalog = $objProduct->getRelated('pid');
+		$this->Template->allowComments = $objCatalog->allowComments;
+
+		// Comments are not allowed
+		if (!$objCatalog->allowComments)
+		{
+			return;
+		}
+
+		// Adjust the comments headline level
+		$intHl = min((int) str_replace('h', '', $this->hl), 5);
+		$this->Template->hlc = 'h' . ($intHl + 1);
+
+		$this->import(\Comments::class, 'Comments');
+		$arrNotifies = array();
+
+		// Notify the system administrator
+		if ($objCatalog->notify != 'notify_author')
+		{
+			$arrNotifies[] = $GLOBALS['TL_ADMIN_EMAIL'];
+		}
+
+		// Notify the author
+		if ($objCatalog->notify != 'notify_admin')
+		{
+			/** @var UserModel $objAuthor */
+			if (($objAuthor = $objProduct->getRelated('author')) instanceof UserModel && $objAuthor->email != '')
+			{
+				$arrNotifies[] = $objAuthor->email;
+			}
+		}
+
+		$objConfig = new \stdClass();
+
+		$objConfig->perPage = $objCatalog->perPage;
+		$objConfig->order = $objCatalog->sortOrder;
+		$objConfig->template = $this->com_template;
+		$objConfig->requireLogin = $objCatalog->requireLogin;
+		$objConfig->disableCaptcha = $objCatalog->disableCaptcha;
+		$objConfig->bbcode = $objCatalog->bbcode;
+		$objConfig->moderate = $objCatalog->moderate;
+
+		$this->Comments->addCommentsToTemplate($this->Template, $objConfig, 'tl_news', $objProduct->id, $arrNotifies);
 
 	}
 }

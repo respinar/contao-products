@@ -104,14 +104,15 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('protected'),
-		'default'                     => '{title_legend},title;{redirect_legend},jumpTo;{protected_legend:hide},protected;'
+		'__selector__'                => array('protected', 'allowComments'),
+		'default'                     => '{title_legend},title;{redirect_legend},jumpTo;{protected_legend:hide},protected;{comments_legend:hide},allowComments'
 	),
 
 	// Subpalettes
 	'subpalettes' => array
 	(
 		'protected'                   => 'groups',
+		'allowComments'               => 'notify,sortOrder,perPage,moderate,bbcode,requireLogin,disableCaptcha'
 	),
 
 	// Fields
@@ -161,6 +162,77 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 			'eval'                    => array('mandatory'=>true, 'multiple'=>true),
 			'sql'                     => "blob NULL",
 			'relation'                => array('type'=>'hasMany', 'load'=>'lazy')
+		),
+		'allowComments' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_product_catalog']['allowComments'],
+			'exclude'                 => true,
+			'filter'                  => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'notify' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_product_catalog']['notify'],
+			'default'                 => 'notify_admin',
+			'exclude'                 => true,
+			'inputType'               => 'select',
+			'options'                 => array('notify_admin', 'notify_author', 'notify_both'),
+			'eval'                    => array('tl_class'=>'w50'),
+			'reference'               => &$GLOBALS['TL_LANG']['tl_product_catalog'],
+			'sql'                     => "varchar(16) NOT NULL default ''"
+		),
+		'sortOrder' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_product_catalog']['sortOrder'],
+			'default'                 => 'ascending',
+			'exclude'                 => true,
+			'inputType'               => 'select',
+			'options'                 => array('ascending', 'descending'),
+			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
+			'eval'                    => array('tl_class'=>'w50 clr'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
+		),
+		'perPage' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_product_catalog']['perPage'],
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'natural', 'tl_class'=>'w50'),
+			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
+		),
+		'moderate' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_product_catalog']['moderate'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'bbcode' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_product_catalog']['bbcode'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'requireLogin' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_product_catalog']['requireLogin'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'disableCaptcha' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_product_catalog']['disableCaptcha'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		)
 	)
 );
@@ -179,7 +251,7 @@ class tl_product_catalog extends Backend
 	}
 
 	/**
-	* Check permissions to edit table tl_news_archive
+	* Check permissions to edit table tl_product_catalog
 	*/
 	public function checkPermission()
 	{

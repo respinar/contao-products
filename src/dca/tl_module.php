@@ -157,6 +157,14 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['related_imgSize'] = array
 	'sql'                     => "varchar(64) NOT NULL default ''"
 );
 
+$bundles = Contao\System::getContainer()->getParameter('kernel.bundles');
+
+// Add the comments template drop-down menu
+if (isset($bundles['ContaoCommentsBundle']))
+{
+	$GLOBALS['TL_DCA']['tl_module']['palettes']['product_detail'] = str_replace('{protected_legend:hide}', '{comment_legend:hide},com_template;{protected_legend:hide}', $GLOBALS['TL_DCA']['tl_module']['palettes']['product_detail']);
+}
+
 
 
 /**
