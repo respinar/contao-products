@@ -65,6 +65,12 @@ class ModuleProductDetail extends ModuleProduct
 
 		$this->product_catalogs = $this->sortOutProtected(deserialize($this->product_catalogs));
 
+		if (TL_MODE == 'FE')
+		{
+            $GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/products/assets/vendor/rateit/jquery.rateit.min.js|static';
+            $GLOBALS['TL_CSS'][] = 'system/modules/products/assets/vendor/rateit/rateit.css|static';
+        }
+
 		return parent::generate();
 	}
 

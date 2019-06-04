@@ -120,7 +120,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('addEnclosure','overwriteMeta'),
-		'default'                     => '{title_legend},title,alias,featured;{meta_legend},pageTitle,date,description;{offer_legend:hide},price,availability;{product_legend},brand,model,sku,barcode;{image_legend},singleSRC,overwriteMeta;{related_legend},related;{link_legend:hide},url,target,titleText,linkTitle;{enclosure_legend:hide},addEnclosure;{publish_legend},published,start,stop',
+		'default'                     => '{title_legend},title,alias,featured;{meta_legend},pageTitle,date,description;{offer_legend:hide},price,availability;{rating_legend},rating_value,rating_count;{product_legend},brand,model,sku,barcode;{image_legend},singleSRC,overwriteMeta;{related_legend},related;{link_legend:hide},url,target,titleText,linkTitle;{enclosure_legend:hide},addEnclosure;{publish_legend},published,start,stop',
 	),
 
 	// Subpalettes
@@ -246,6 +246,22 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
 			'eval'                    => array('includeBlankOption'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(128) NOT NULL default ''"
+		),
+		'rating_value' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_product']['rating_value'],
+			'sorting'                 => true,			
+			'inputType'               => 'text',
+			'eval'                    => array('disabled'=>true,'tl_class'=>'w50'),
+			'sql'                     => "varchar(10) NOT NULL default '0'"
+		),
+		'rating_count' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_product']['rating_count'],
+			'sorting'                 => true,			
+			'inputType'               => 'text',
+			'eval'                    => array('disabled'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "int(10) NOT NULL default '0'"
 		),
 		'date' => array
 		(

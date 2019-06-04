@@ -20,6 +20,8 @@ $GLOBALS['TL_LANG']['tl_product']['alias']        = array('Product alias','Pleas
 $GLOBALS['TL_LANG']['tl_product']['categories']   = array('Categories','Here you can select one or more product categories.');
 $GLOBALS['TL_LANG']['tl_product']['price']        = array('Price','Please enter the price and select Curreny.');
 $GLOBALS['TL_LANG']['tl_product']['availability'] = array('Product availability','Please select availability.');
+$GLOBALS['TL_LANG']['tl_product']['rating_value'] = array('Rating value','');
+$GLOBALS['TL_LANG']['tl_product']['rating_count'] = array('Rating count','');
 $GLOBALS['TL_LANG']['tl_product']['brand']        = array('Brand','Please enter the product brand.');
 $GLOBALS['TL_LANG']['tl_product']['model']        = array('Model','Please enter the product model.');
 $GLOBALS['TL_LANG']['tl_product']['barcode']      = array('EAN/UPC','Please enter the product EAN/UPC.');
@@ -56,6 +58,7 @@ $GLOBALS['TL_LANG']['tl_product']['image_legend']       = 'Image settings';
 $GLOBALS['TL_LANG']['tl_product']['related_legend']     = 'Related products';
 $GLOBALS['TL_LANG']['tl_product']['protected_legend']   = 'Access protection';
 $GLOBALS['TL_LANG']['tl_product']['publish_legend']     = 'Publish setting';
+$GLOBALS['TL_LANG']['tl_product']['rating_legend']      = 'Rating';
 
 
 /**

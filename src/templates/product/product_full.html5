@@ -44,6 +44,14 @@
         </span>
     <?php endif; ?>
     </div>
+
+    <div class="rating" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+      <span class="rateit ltr" itemprop="ratingValue" content="<?= $this->rating_value; ?>" data-rateit-value="<?= $this->rating_value; ?>" data-rateit-ispreset="true" data-rateit-readonly="true"></span>      
+      <meta itemprop="bestRating" content="5">
+      <meta itemprop="ratingCount" content="<?= $this->rating_count; ?>">
+    </div>    
+  </div>
+
     </div>
     
 
