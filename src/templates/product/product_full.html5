@@ -54,9 +54,19 @@
   </div>    
 
   <?php endif; ?>
+  
+  <div class="column_2">
+    <div class="description" itemprop="description">
+     <?= $this->summary; ?>
+    </div>
+    <?php if ($this->addImage): ?>
+      <?php $this->insert('image', $this->arrData); ?>
+    <?php endif; ?>  
+  </div>
+
 
   <?php if ($this->text): ?>
-    <div itemprop="description">
+    <div class="more_descripyion">
       <?= $this->text; ?>
     </div>
   <?php endif; ?>
