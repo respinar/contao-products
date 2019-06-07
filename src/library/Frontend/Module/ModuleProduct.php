@@ -125,6 +125,8 @@ abstract class ModuleProduct extends \Module
 		$objTemplate->meta_sku_txt     = $GLOBALS['TL_LANG']['MSC']['sku_text'];		
 		$objTemplate->meta_status_txt  = $GLOBALS['TL_LANG']['MSC']['status_text'];
 
+		$objTemplate->meta_vote_txt    = $GLOBALS['TL_LANG']['MSC']['vote_text'];
+
 		$objTemplate->hasMetaFields = !empty($arrMeta);
 		$objTemplate->timestamp = $objProduct->date;
 		$objTemplate->datetime = date('Y-m-d\TH:i:sP', $objProduct->date);

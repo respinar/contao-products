@@ -41,3 +41,6 @@ $GLOBALS['TL_LANG']['MSC']['PreOrder']     = 'پیش سفارش';
 $GLOBALS['TL_LANG']['MSC']['PreSale']      = 'پیش فروش';
 $GLOBALS['TL_LANG']['MSC']['SoldOut']      = 'تمام';
 
+$GLOBALS['TL_LANG']['MSC']['vote_text']    = 'رای';
+
+

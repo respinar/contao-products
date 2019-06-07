@@ -55,5 +55,6 @@ $GLOBALS['TL_LANG']['MSC']['global_ID_text'] = 'EAN/UPC';
 $GLOBALS['TL_LANG']['MSC']['brand_text']   = 'Brand';
 $GLOBALS['TL_LANG']['MSC']['sku_text']     = 'SKU';
 $GLOBALS['TL_LANG']['MSC']['status_text']  = 'Status';
+$GLOBALS['TL_LANG']['MSC']['vote_text']     = 'vote';
 
 $GLOBALS['TL_LANG']['MSC']['relateds_headline'] = 'Related products';
