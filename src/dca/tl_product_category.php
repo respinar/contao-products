@@ -183,7 +183,7 @@ class tl_product_category extends Backend
 	}
 
 	/**
-	* Check permissions to edit table tl_news_archive
+	* Check permissions to edit table tl_product_category
 	*/
 	public function checkPermission()
 	{

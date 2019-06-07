@@ -23,7 +23,7 @@ use Respinar\Products\Model\ProductCatalogModel;
 /**
  * Class Product
  *
- * Provide methods regarding news archives.
+ * Provide methods regarding product catalogs.
  * @copyright  Hamid Abbaszadeh 2005-2014
  * @author     Hamid Abbaszadeh <https://contao.org>
  * @package    Catalog
@@ -53,7 +53,7 @@ class Product extends \Frontend
 		// Get all catalog categories
 		$objCatalog = ProductCatalogModel::findByProtected('');
 
-		// Walk through each archive
+		// Walk through each catalog
 		if ($objCatalog !== null)
 		{
 			while ($objCatalog->next())

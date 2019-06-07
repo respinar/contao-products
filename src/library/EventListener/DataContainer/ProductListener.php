@@ -36,8 +36,8 @@ class ProductListener extends AbstractChildTableListener
     /**
      * @inheritdoc
      *
-     * @param NewsModel   $current
-     * @param NewsModel[] $models
+     * @param ProductModel   $current
+     * @param ProductModel[] $models
      */
     protected function formatOptions(Model $current, Model\Collection $models)
     {

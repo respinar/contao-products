@@ -150,7 +150,7 @@ class ModuleProductDetail extends ModuleProduct
 			return;
 		}
 
-		/** @var NewsArchiveModel $objCatalog */
+		/** @var ProductCatalogModel $objCatalog */
 		$objCatalog = $objProduct->getRelated('pid');
 		$this->Template->allowComments = $objCatalog->allowComments;
 
@@ -193,7 +193,7 @@ class ModuleProductDetail extends ModuleProduct
 		$objConfig->bbcode = $objCatalog->bbcode;
 		$objConfig->moderate = $objCatalog->moderate;
 
-		$this->Comments->addCommentsToTemplate($this->Template, $objConfig, 'tl_news', $objProduct->id, $arrNotifies);
+		$this->Comments->addCommentsToTemplate($this->Template, $objConfig, 'tl_products', $objProduct->id, $arrNotifies);
 
 	}
 }

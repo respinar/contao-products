@@ -88,7 +88,7 @@ class ModuleProductList extends ModuleProduct
 			$limit = $this->numberOfItems;
 		}
 
-		// Handle featured news
+		// Handle featured product
 		if ($this->product_featured == 'featured_product')
 		{
 			$blnFeatured = true;

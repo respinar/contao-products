@@ -5,7 +5,7 @@
  *
  * Copyright (c) 2005-2014 Leo Feyer
  *
- * @package News
+ * @package Products
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
@@ -38,7 +38,7 @@ abstract class ContentProduct extends \ContentElement
 
 
 	/**
-	 * Sort out protected archives
+	 * Sort out protected catalogs
 	 * @param array
 	 * @return array
 	 */

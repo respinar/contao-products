@@ -18,7 +18,7 @@ use Haste\Input\Input;
 use Terminal42\ChangeLanguage\EventListener\Navigation\AbstractNavigationListener;
 
 /**
- * Translate URL parameters for news items
+ * Translate URL parameters for product items
  */
 class ProductNavigationListener extends AbstractNavigationListener
 {

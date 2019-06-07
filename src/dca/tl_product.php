@@ -460,7 +460,7 @@ class tl_product extends Backend
 		$objAlias = $this->Database->prepare("SELECT id FROM tl_product WHERE alias=?")
 								   ->execute($varValue);
 
-		// Check whether the news alias exists
+		// Check whether the product alias exists
 		if ($objAlias->numRows > 1 && !$autoAlias)
 		{
 			throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
@@ -722,14 +722,14 @@ class tl_product extends Backend
                 return;
             }
 
-            $arrCategories = $this->User->newscategories_default;
+            $arrCategories = $this->User->productcategories_default;
         }
 
         $this->deleteCategories($dc);
 
         if (is_array($arrCategories) && !empty($arrCategories)) {
             foreach ($arrCategories as $intCategory) {
-                $this->Database->prepare("INSERT INTO tl_product_categories (category_id, news_id) VALUES (?, ?)")
+                $this->Database->prepare("INSERT INTO tl_product_categories (category_id, product_id) VALUES (?, ?)")
                                ->execute($intCategory, $dc->id);
             }
 
@@ -744,7 +744,7 @@ class tl_product extends Backend
      */
     public function deleteCategories(DataContainer $dc)
     {
-        $this->Database->prepare("DELETE FROM tl_product_categories WHERE news_id=?")
+        $this->Database->prepare("DELETE FROM tl_product_categories WHERE product_id=?")
                        ->execute($dc->id);
     }
 }

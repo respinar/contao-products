@@ -35,13 +35,13 @@ class ProductModel extends \Model
 
 
 	/**
-	 * Find published news items by their parent ID and ID or alias
+	 * Find published product items by their parent ID and ID or alias
 	 *
 	 * @param mixed $varId      The numeric ID or alias name
 	 * @param array $arrPids    An array of parent IDs
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return \Model|null The NewsModel or null if there are no news
+	 * @return \Model|null The productModel or null if there are no product
 	 */
 	public static function findPublishedByIdOrAlias($varId, array $arrOptions=array())
 	{
@@ -60,13 +60,13 @@ class ProductModel extends \Model
 
 
 	/**
-	 * Find published news items by their parent ID and ID or alias
+	 * Find published product items by their parent ID and ID or alias
 	 *
 	 * @param mixed $varId      The numeric ID or alias name
 	 * @param array $arrPids    An array of parent IDs
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return \Model|null The NewsModel or null if there are no news
+	 * @return \Model|null The productModel or null if there are no product
 	 */
 	public static function findPublishedByParentAndIdOrAlias($varId, $arrPids, array $arrOptions=array())
 	{
@@ -89,15 +89,15 @@ class ProductModel extends \Model
 
 
 	/**
-	 * Find published news items by their parent ID
+	 * Find published product items by their parent ID
 	 *
-	 * @param array   $arrPids     An array of news archive IDs
-	 * @param boolean $blnFeatured If true, return only featured news, if false, return only unfeatured news
+	 * @param array   $arrPids     An array of product catalogs IDs
+	 * @param boolean $blnFeatured If true, return only featured product, if false, return only unfeatured product
 	 * @param integer $intLimit    An optional limit
 	 * @param integer $intOffset   An optional offset
 	 * @param array   $arrOptions  An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no news
+	 * @return \Model\Collection|null A collection of models or null if there are no product
 	 */
 	public static function findPublishedByIds($arrIds, $blnFeatured=null, $intLimit=0, $intOffset=0, array $arrOptions=array())
 	{
@@ -137,15 +137,15 @@ class ProductModel extends \Model
 	}
 
 	/**
-	 * Find published news items by their parent ID
+	 * Find published product items by their parent ID
 	 *
-	 * @param array   $arrPids     An array of news archive IDs
-	 * @param boolean $blnFeatured If true, return only featured news, if false, return only unfeatured news
+	 * @param array   $arrPids     An array of product catalogs IDs
+	 * @param boolean $blnFeatured If true, return only featured product, if false, return only unfeatured product
 	 * @param integer $intLimit    An optional limit
 	 * @param integer $intOffset   An optional offset
 	 * @param array   $arrOptions  An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no news
+	 * @return \Model\Collection|null A collection of models or null if there are no product
 	 */
 	public static function findPublishedByPids($arrPids, $blnFeatured=null, $intLimit=0, $intOffset=0, array $arrOptions=array())
 	{
@@ -186,13 +186,13 @@ class ProductModel extends \Model
 
 
 	/**
-	 * Count published news items by their parent ID
+	 * Count published product items by their parent ID
 	 *
-	 * @param array   $arrPids     An array of news archive IDs
-	 * @param boolean $blnFeatured If true, return only featured news, if false, return only unfeatured news
+	 * @param array   $arrPids     An array of product catalogs IDs
+	 * @param boolean $blnFeatured If true, return only featured product, if false, return only unfeatured product
 	 * @param array   $arrOptions  An optional options array
 	 *
-	 * @return integer The number of news items
+	 * @return integer The number of product items
 	 */
 	public static function countPublishedByPids($arrPids, $blnFeatured=null, array $arrOptions=array())
 	{
@@ -224,12 +224,12 @@ class ProductModel extends \Model
 
 
 	/**
-	 * Find published news items with the default redirect target by their parent ID
+	 * Find published product items with the default redirect target by their parent ID
 	 *
-	 * @param integer $intPid     The news archive ID
+	 * @param integer $intPid     The product catalogs ID
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no news
+	 * @return \Model\Collection|null A collection of models or null if there are no product
 	 */
 	public static function findPublishedDefaultByPid($intPid, array $arrOptions=array())
 	{
@@ -252,13 +252,13 @@ class ProductModel extends \Model
 
 
 	/**
-	 * Find published news items by their parent ID
+	 * Find published product items by their parent ID
 	 *
-	 * @param integer $intId      The news archive ID
+	 * @param integer $intId      The product catalogs ID
 	 * @param integer $intLimit   An optional limit
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no news
+	 * @return \Model\Collection|null A collection of models or null if there are no product
 	 */
 	public static function findPublishedByPid($intId, $intLimit=0, array $arrOptions=array())
 	{
@@ -282,16 +282,16 @@ class ProductModel extends \Model
 
 
 	/**
-	 * Find all published news items of a certain period of time by their parent ID
+	 * Find all published product items of a certain period of time by their parent ID
 	 *
 	 * @param integer $intFrom    The start date as Unix timestamp
 	 * @param integer $intTo      The end date as Unix timestamp
-	 * @param array   $arrPids    An array of news archive IDs
+	 * @param array   $arrPids    An array of product catalogs IDs
 	 * @param integer $intLimit   An optional limit
 	 * @param integer $intOffset  An optional offset
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no news
+	 * @return \Model\Collection|null A collection of models or null if there are no product
 	 */
 	public static function findPublishedFromToByPids($intFrom, $intTo, $arrPids, $intLimit=0, $intOffset=0, array $arrOptions=array())
 	{
@@ -322,14 +322,14 @@ class ProductModel extends \Model
 
 
 	/**
-	 * Count all published news items of a certain period of time by their parent ID
+	 * Count all published product items of a certain period of time by their parent ID
 	 *
 	 * @param integer $intFrom    The start date as Unix timestamp
 	 * @param integer $intTo      The end date as Unix timestamp
-	 * @param array   $arrPids    An array of news archive IDs
+	 * @param array   $arrPids    An array of product catalogs IDs
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return integer The number of news items
+	 * @return integer The number of product items
 	 */
 	public static function countPublishedFromToByPids($intFrom, $intTo, $arrPids, array $arrOptions=array())
 	{
