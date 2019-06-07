@@ -165,11 +165,9 @@ abstract class ModuleProduct extends \Module
 						$arrProduct['size'] = $this->imgSize;
 					}
 				}
-
-				$arrProduct['singleSRC'] = $objModel->path;
-
-				$this->addImageToTemplate($objTemplate, $arrProduct, null, null, $objModel);
-
+				
+				$arrProduct['singleSRC'] = $objModel->path;		
+				
 				// Link to the product detail if no image link has been defined		
 				$picture = $objTemplate->picture;
 				unset($picture['title']);
@@ -178,6 +176,8 @@ abstract class ModuleProduct extends \Module
 				$objTemplate->href = $objTemplate->link;
 				$objTemplate->linkTitle = \StringUtil::specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['moreDetail'], $objProduct->title), true);
 				
+				$this->addImageToTemplate($objTemplate, $arrProduct, null, null, $objModel);
+
 			}
 		}
 

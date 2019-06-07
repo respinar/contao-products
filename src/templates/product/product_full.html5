@@ -48,8 +48,7 @@
       <div class="rating" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
         <span class="rateit ltr" itemprop="ratingValue" content="<?= $this->rating_value; ?>" data-rateit-value="<?= $this->rating_value; ?>" data-rateit-ispreset="true" data-rateit-readonly="true"></span>      
         <span class="ratingcount" itemprop="ratingCount" content="<?= $this->rating_count; ?>">(<?= $this->rating_count; ?> <?= $this->meta_vote_txt; ?>)</span>
-        <meta itemprop="bestRating" content="5">
-        
+        <meta itemprop="bestRating" content="5">        
       </div>    
   </div>    
 
@@ -57,16 +56,15 @@
   
   <div class="column_2">
     <div class="description" itemprop="description">
-     <?= $this->summary; ?>
+       <?= $this->summary; ?>
     </div>
     <?php if ($this->addImage): ?>
       <?php $this->insert('image', $this->arrData); ?>
-    <?php endif; ?>  
+    <?php endif; ?>
   </div>
 
-
   <?php if ($this->text): ?>
-    <div class="more_descripyion">
+    <div class="more_description">
       <?= $this->text; ?>
     </div>
   <?php endif; ?>
