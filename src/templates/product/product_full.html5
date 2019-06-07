@@ -54,9 +54,11 @@
 
   <?php endif; ?>
 
-  <div class="summary" itemprop="description">
-    <?= $this->summary; ?>
-  </div>
+  <?php if ($this->summary): ?>
+    <div class="summary" itemprop="description">
+      <?= $this->summary; ?>
+    </div>
+  <?php endif; ?>
 
   <?php if ($this->text): ?>
     <div class="description">
