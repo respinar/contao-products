@@ -24,13 +24,14 @@ $GLOBALS['TL_LANG']['tl_product']['rating_value'] = array('Rating value','');
 $GLOBALS['TL_LANG']['tl_product']['rating_count'] = array('Rating count','');
 $GLOBALS['TL_LANG']['tl_product']['brand']        = array('Brand','Please enter the product brand.');
 $GLOBALS['TL_LANG']['tl_product']['model']        = array('Model','Please enter the product model.');
-$GLOBALS['TL_LANG']['tl_product']['global_ID']    = array('EAN/UPC','Please enter the product EAN/UPC.');
+$GLOBALS['TL_LANG']['tl_product']['global_ID']    = array('Global ID (EAN/UPC)','Please enter the product global ID such as EAN/UPC.');
 $GLOBALS['TL_LANG']['tl_product']['sku']          = array('SKU','Please enter the product SKU (Stock Keeping Unit).');
 $GLOBALS['TL_LANG']['tl_product']['date']         = array('Date','Please enter the date according to the global date format.');
 $GLOBALS['TL_LANG']['tl_product']['url']          = array('Link target','Please enter a web address (http://…), an e-mail address (mailto:…) or an insert tag.');
 $GLOBALS['TL_LANG']['tl_product']['target']       = array('Open in new window','Open the link in a new browser window.');
 $GLOBALS['TL_LANG']['tl_product']['titleText']    = array('Link text','The link text will be displayed instead of the target URL.');
 $GLOBALS['TL_LANG']['tl_product']['linkTitle']    = array('Link title','The link title is added as title attribute in the HTML markup.');
+$GLOBALS['TL_LANG']['tl_product']['summary']      = array('Product summary','Here you can add a product summary.');
 $GLOBALS['TL_LANG']['tl_product']['pageTitle']    = array('Meta title','Here you can add a custom meta title to overwrite the default page title.');
 $GLOBALS['TL_LANG']['tl_product']['description']  = array('Meta description','Here you can add a custom meta description to overwrite the default page description.');
 $GLOBALS['TL_LANG']['tl_product']['singleSRC']    = array('Source file','Please select an image.');
@@ -59,6 +60,8 @@ $GLOBALS['TL_LANG']['tl_product']['related_legend']     = 'Related products';
 $GLOBALS['TL_LANG']['tl_product']['protected_legend']   = 'Access protection';
 $GLOBALS['TL_LANG']['tl_product']['publish_legend']     = 'Publish setting';
 $GLOBALS['TL_LANG']['tl_product']['rating_legend']      = 'Rating';
+$GLOBALS['TL_LANG']['tl_product']['summary_legend']     = 'Summary';
+
 
 
 /**
