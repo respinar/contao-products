@@ -53,18 +53,13 @@
   </div>    
 
   <?php endif; ?>
-  
-  <div class="column_2">
-    <div class="description" itemprop="description">
-       <?= $this->summary; ?>
-    </div>
-    <?php if ($this->addImage): ?>
-      <?php $this->insert('image', $this->arrData); ?>
-    <?php endif; ?>
+
+  <div class="summary" itemprop="description">
+    <?= $this->summary; ?>
   </div>
 
   <?php if ($this->text): ?>
-    <div class="more_description">
+    <div class="description">
       <?= $this->text; ?>
     </div>
   <?php endif; ?>
