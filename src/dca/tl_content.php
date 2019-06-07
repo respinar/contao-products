@@ -17,7 +17,7 @@
 if (Input::get('do') == 'products')
 {
 	$GLOBALS['TL_DCA']['tl_content']['config']['ptable'] = 'tl_product';
-	$GLOBALS['TL_DCA']['tl_content']['list']['sorting']['headerFields'] = array('title', 'brand','model','global_ID','sku', 'published');
+	$GLOBALS['TL_DCA']['tl_content']['list']['sorting']['headerFields'] = array('title', 'brand','model','sku', 'published');
 
 }
 
