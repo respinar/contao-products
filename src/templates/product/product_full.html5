@@ -19,15 +19,15 @@
           <span class="sku"><?= $this->meta_sku_txt; ?>: <span itemprop="sku"><?= $this->meta_sku; ?></span></span>
         <?php endif; ?>
         <?php if($this->meta_global_ID): ?>
-          <span class="global_ID"><?= $this->meta_global_ID_txt; ?>: <span itemprop="<?= $this->meta_global_ID[unit]; ?>"><?= $this->meta_global_ID[value]; ?></span></span>
+          <span class="global_ID"><?= $this->meta_global_ID_txt; ?>: <span itemprop="<?= $this->meta_global_ID['unit']; ?>"><?= $this->meta_global_ID['value']; ?></span></span>
         <?php endif; ?>    
       </div>
 
       <div class="offers" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
         <?php if($this->meta_price): ?>
           <?= $this->meta_price_txt; ?>:    
-          <span itemprop="price" content="<?= $this->meta_price[value]; ?>"><?= number_format($this->meta_price[value]); ?></span>
-          <span itemprop="priceCurrency" content="<?= $this->meta_price[unit]; ?>"><?= $this->meta_price[symbol]; ?></span>      
+          <span itemprop="price" content="<?= $this->meta_price['value']; ?>"><?= number_format($this->meta_price['value']); ?></span>
+          <span itemprop="priceCurrency" content="<?= $this->meta_price['unit']; ?>"><?= $this->meta_price['symbol']; ?></span>      
         <?php endif; ?>
         <?php if($this->meta_availability): ?>
           <span class="availability"> (<link itemprop="availability" href="http://schema.org/<?= $this->meta_availability; ?>"><?= $this->meta_availability_txt; ?>) </span>
