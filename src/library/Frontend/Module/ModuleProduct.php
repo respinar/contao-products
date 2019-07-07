@@ -312,6 +312,8 @@ abstract class ModuleProduct extends \Module
 					if ($objProduct->price) 
 						$return['price'] = \StringUtil::deserialize($objProduct->price);						
 						$return['price']['symbol'] = $GLOBALS['TL_LANG']['MSC'][$return['price']['unit']];
+						$return['price']['priceValidUntil'] = date('Y-m-d\TH:i:sP', $objProduct->priceValidUntil);
+						$return['price']['url'] = $objProduct->url;
 					break;
 				
 				case 'availability':

@@ -20,6 +20,7 @@ $GLOBALS['TL_LANG']['tl_product']['alias']        = array('Product alias','Pleas
 $GLOBALS['TL_LANG']['tl_product']['categories']   = array('Categories','Here you can select one or more product categories.');
 $GLOBALS['TL_LANG']['tl_product']['price']        = array('Price','Please enter the price and select Curreny.');
 $GLOBALS['TL_LANG']['tl_product']['availability'] = array('Product availability','Please select availability.');
+$GLOBALS['TL_LANG']['tl_product']['priceValidUntil'] = array('Price valid until','Please enter the date according to the global date format.');
 $GLOBALS['TL_LANG']['tl_product']['rating_value'] = array('Rating value','');
 $GLOBALS['TL_LANG']['tl_product']['rating_count'] = array('Rating count','');
 $GLOBALS['TL_LANG']['tl_product']['brand']        = array('Brand','Please enter the product brand.');

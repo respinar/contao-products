@@ -27,7 +27,8 @@
         <?php if($this->meta_price): ?>
           <?= $this->meta_price_txt; ?>:    
           <span itemprop="price" content="<?= $this->meta_price['value']; ?>"><?= number_format($this->meta_price['value']); ?></span>
-          <span itemprop="priceCurrency" content="<?= $this->meta_price['unit']; ?>"><?= $this->meta_price['symbol']; ?></span>      
+          <span itemprop="priceCurrency" content="<?= $this->meta_price['unit']; ?>"><?= $this->meta_price['symbol']; ?></span>
+          <meta itemprop="priceValidUntil" content="<?= $this->meta_price['priceValidUntil']; ?>">         
         <?php endif; ?>
         <?php if($this->meta_availability): ?>
           <span class="availability"> (<link itemprop="availability" href="http://schema.org/<?= $this->meta_availability; ?>"><?= $this->meta_availability_txt; ?>) </span>
