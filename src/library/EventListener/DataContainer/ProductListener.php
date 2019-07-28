@@ -49,12 +49,7 @@ class ProductListener extends AbstractChildTableListener
         foreach ($models as $model) {
             $group = strtotime('0:00', $model->date) === $dayBegin ? $sameDay : $otherDay;
 
-            $options[$group][$model->id] = sprintf(
-                '%s - %s',
-                $model->sku,                
-                $model->title,
-                //Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $model->date)
-            );
+            $options[$group][$model->id] = sprintf('%s - %s', $model->sku, $model->title);
         }
 
         return $options;
