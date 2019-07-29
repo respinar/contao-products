@@ -95,6 +95,10 @@ class ModuleProductDetail extends ModuleProduct
 			throw new PageNotFoundException('Page not found: ' . \Environment::get('uri'));
 		}
 
+		// Update the database
+		$this->Database->prepare("UPDATE tl_product SET `visit`=`visit`+1 WHERE id=?")
+					   ->execute($objProduct->id);
+
 		// Overwrite the page title
 		if ($objProduct->pageTitle)
 		{
