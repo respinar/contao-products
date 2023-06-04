@@ -1,0 +1,31 @@
+<?php $this->extend('block_searchable'); ?>
+
+<?php $this->block('content'); ?>
+
+  <?= $this->product; ?> 
+
+  <?php if (!empty($this->relateds)): ?>
+    <div class="relateds_list">
+      <h3><?= $this->relateds_headline; ?></h3>
+      <div class="related_list <?= $this->product_list_Class ?>">
+      <?= implode('', $this->relateds) ?>
+      </div>
+    </div>
+  <?php endif; ?>
+
+
+  <!-- indexer::stop -->
+  <p class="back"><a href="<?= $this->referer; ?>" title="<?= $this->back; ?>"><?= $this->back; ?></a></p>
+  <!-- indexer::continue -->
+
+  <?php if ($this->allowComments): ?>
+    <div class="ce_comments block">
+      <<?= $this->hlc ?>><?= $this->hlcText ?></<?= $this->hlc ?>>
+      <?= implode('', $this->comments) ?>
+      <?= $this->pagination ?>
+      <<?= $this->hlc ?>><?= $this->addComment ?></<?= $this->hlc ?>>
+      <?php $this->insert('mod_comment_form', $this->arrData); ?>
+    </div>
+  <?php endif; ?>
+
+<?php $this->endblock(); ?>

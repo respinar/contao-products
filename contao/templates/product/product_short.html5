@@ -1,0 +1,45 @@
+
+<div class="product_short<?= $this->class; ?>">
+
+  <?php if ($this->addImage): ?>
+    <?php $this->insert('image', $this->arrData); ?>
+  <?php endif; ?>
+
+  <div class="tag_container">
+          <?php if ($this->featured): ?><div class="featured"></div><?php endif; ?>
+          <?php if ($this->new_product): ?><div class="new"></div><?php endif; ?>
+  </div>
+
+
+  <div class="title"> 
+  <?php if ($this->link): ?> <a href="<?= $this->link; ?>"> <?php endif; ?>
+  <?= $this->title; ?>
+  <?php if ($this->link): ?> </a> <?php endif; ?> 
+  </div>
+
+  <?php if ($this->hasMetaFields): ?>
+    <div class="info">
+
+      <time datetime="<?= $this->datetime; ?>"><?= $this->date; ?></time>
+      <?php if($this->meta_brand): ?><span class="brand"><?= $this->meta_brand_txt; ?>: <span itemprop="brand"><?= $this->meta_brand; ?></span></span><?php endif; ?>
+      <?php if($this->meta_model): ?><span class="model"><?= $this->meta_model_txt; ?>: <span><?= $this->meta_model; ?></span></span><?php endif; ?>
+      <?php if($this->meta_global_ID): ?><span class="global_ID"><?= $this->meta_global_ID_txt; ?>: <span><?= $this->meta_global_ID; ?></span></span><?php endif; ?>
+      <?php if($this->meta_sku): ?><span class="sku"><?= $this->meta_sku_txt; ?>: <span itemprop="sku"><?= $this->meta_sku; ?></span></span><?php endif; ?>
+
+    </div>
+
+    <?php if($this->meta_buy): ?>
+        <div class="buy">
+          <a href="<?= $this->url ?>" class="hyperlink_txt" title="<?= $this->linkTitle ?>" <?php if($this->target): ?> target="_blank" rel="nofollow" <?php endif; ?> >
+          <?php if($this->titleText): ?>
+            <?= $this->titleText ?>
+          <?php else: ?>
+            <?= $this->url ?>
+          <?php endif; ?>
+          </a>
+        </div>
+      <?php endif; ?>
+
+  <?php endif; ?>
+
+</div>
