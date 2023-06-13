@@ -21,21 +21,9 @@ array_insert($GLOBALS['BE_MOD'], 1, array
 	(
 		'products' => array
 		(
-			'tables'     => array('tl_product_catalog','tl_product','tl_content'),
-			'icon'       => 'system/modules/products/assets/product.png',
-		),
-		/*
-		'categories' => array
-		(
-			'tables'     => array('tl_product_category'),
-			'icon'       => 'system/modules/products/assets/category.png',
-		),
-		'prices' => array
-		(
-			'tables'     => array('tl_product_price_category','tl_product_price'),
-			'icon'       => 'system/modules/products/assets/price.png',
-		),*/
-	),
+			'tables'     => array('tl_product_catalog','tl_product','tl_content')
+		)
+	)
 ));
 
 /**
@@ -75,22 +63,6 @@ $GLOBALS['TL_HOOKS']['getSearchablePages'][] = array('Respinar\Products\Product'
 
 // Registrieren im Hooks replaceInsertTags
 $GLOBALS['TL_HOOKS']['replaceInsertTags'][] = array('Respinar\Products\Product', 'productURLInsertTags');
-
-
-/**
- * Hooks
- */
-
-
-$GLOBALS['TL_HOOKS']['loadDataContainer'][] = [
-	'Respinar\Products\EventListener\CallbackSetupListener',
-	'onLoadDataContainer'
-];
-
-$GLOBALS['TL_HOOKS']['changelanguageNavigation'][] = [
-    'Respinar\Products\EventListener\Navigation\ProductNavigationListener',
-    'onChangelanguageNavigation'
-];
 
 /**
  * Add permissions
