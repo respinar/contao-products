@@ -1,0 +1,10 @@
+
+<div class="related_product<?= $this->class; ?>">
+
+  <?php if ($this->addImage): ?>
+    <?php $this->insert('image', $this->arrData); ?>
+  <?php endif; ?>
+
+  <div class="title"><a href="<?= $this->link; ?>"><?= $this->title; ?></a></div>
+
+</div>
