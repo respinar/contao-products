@@ -15,10 +15,15 @@
 /**
  * Run in a custom namespace, so the class can be replaced
  */
-namespace Respinar\Products;
+namespace Respinar\ProductsBundle\EventListener;
 
-use Respinar\Products\Model\ProductModel;
-use Respinar\Products\Model\ProductCatalogModel;
+use Contao\PageModel;
+use Contao\ContentModel;
+use Contao\Frontend;
+use Contao\Config;
+use Contao\Environment;
+use Respinar\ProductsBundle\Model\ProductModel;
+use Respinar\ProductsBundle\Model\ProductCatalogModel;
 
 /**
  * Class Product
@@ -28,7 +33,7 @@ use Respinar\Products\Model\ProductCatalogModel;
  * @author     Hamid Abbaszadeh <https://contao.org>
  * @package    Catalog
  */
-class Product extends \Frontend
+class Product extends Frontend
 {
 
 	/**
@@ -73,7 +78,7 @@ class Product extends \Frontend
 				// Get the URL of the jumpTo page
 				if (!isset($arrProcessed[$objCatalog->jumpTo]))
 				{
-					$objParent = \PageModel::findWithDetails($objCatalog->jumpTo);
+					$objParent = PageModel::findWithDetails($objCatalog->jumpTo);
 
 					// The target page does not exist
 					if ($objParent === null)
@@ -94,10 +99,10 @@ class Product extends \Frontend
 					}
 
 					// Set the domain (see #6421)
-					$domain = ($objParent->rootUseSSL ? 'https://' : 'http://') . ($objParent->domain ?: \Environment::get('host')) . TL_PATH . '/';
+					$domain = ($objParent->rootUseSSL ? 'https://' : 'http://') . ($objParent->domain ?: Environment::get('host')) . TL_PATH . '/';
 
 					// Generate the URL
-					$arrProcessed[$objCatalog->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/%s' : '/items/%s'), $objParent->language);
+					$arrProcessed[$objCatalog->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ((Config::get('useAutoItem') && !Config::get('disableAlias')) ?  '/%s' : '/items/%s'), $objParent->language);
 				}
 
 				$strUrl = $arrProcessed[$objCatalog->jumpTo];
@@ -109,7 +114,7 @@ class Product extends \Frontend
 				{
 					while ($objProduct->next())
 					{
-                        $objElement = \ContentModel::findPublishedByPidAndTable($objProduct->id, 'tl_product');
+                        $objElement = ContentModel::findPublishedByPidAndTable($objProduct->id, 'tl_product');
 
 						if ($objElement !== null)
 						{
@@ -135,7 +140,7 @@ class Product extends \Frontend
 	protected function getLink($objItem, $strUrl)
 	{
 		// Link to the default page
-		return sprintf($strUrl, (($objItem->alias != '' && !\Config::get('disableAlias')) ? $objItem->alias : $objItem->id));
+		return sprintf($strUrl, (($objItem->alias != '' && !Config::get('disableAlias')) ? $objItem->alias : $objItem->id));
 	}
 
 
@@ -161,15 +166,15 @@ class Product extends \Frontend
 
 			$objCatalog  = ProductCatalogModel::findBy('id',$objProduct->pid);
 
-			$objParent = \PageModel::findWithDetails($objCatalog->jumpTo);				
+			$objParent = PageModel::findWithDetails($objCatalog->jumpTo);				
 
 			// Set the domain (see #6421)
-			$domain = ($objParent->rootUseSSL ? 'https://' : 'http://') . ($objParent->domain ?: \Environment::get('host')) . TL_PATH . '/';
+			$domain = ($objParent->rootUseSSL ? 'https://' : 'http://') . ($objParent->domain ?: Environment::get('host')) . TL_PATH . '/';
 
 			// Generate the URL
-			$strUrl = $domain . $this->generateFrontendUrl($objParent->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/%s' : '/items/%s'), $objParent->language);	
+			$strUrl = $domain . $this->generateFrontendUrl($objParent->row(), ((Config::get('useAutoItem') && !Config::get('disableAlias')) ?  '/%s' : '/items/%s'), $objParent->language);	
 	
-			$objElement = \ContentModel::findPublishedByPidAndTable($objProduct->id, 'tl_product');
+			$objElement = ContentModel::findPublishedByPidAndTable($objProduct->id, 'tl_product');
 
 			if ($objElement !== null)
 			{
