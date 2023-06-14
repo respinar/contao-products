@@ -13,10 +13,9 @@ use Contao\Controller;
 use Respinar\ProductsBundle\Model\ProductModel;
 use Respinar\ProductsBundle\Model\ProductCatalogModel;
 use Respinar\ProductsBundle\Helper\ProductHelper;
-use Respinar\ProductsBundle\Controller\Product;
 
 #[AsHook('replaceInsertTags')]
-class insertTagsListener
+class InsertTagsListener
 {
     public const TAG = 'product_url';
 
@@ -27,38 +26,33 @@ class insertTagsListener
         if (self::TAG !== $chunks[0]) {
             return false;
         }
-        
+
         // Parameter angegeben?
-        if (isset($chunks[1]))
-        {
+        if (isset($chunks[1])) {
             // Get the items
-			if (($objProduct = ProductModel::findPublishedByIdOrAlias($chunks[1])) === null)
-			{
-				return false;
-			}
+            if (($objProduct = ProductModel::findPublishedByIdOrAlias($chunks[1])) === null) {
+                return false;
+            }
 
-			$objCatalog  = ProductCatalogModel::findBy('id',$objProduct->pid);
+            $objCatalog  = ProductCatalogModel::findBy('id', $objProduct->pid);
 
-			$objParent = PageModel::findWithDetails($objCatalog->jumpTo);				
+            $objParent = PageModel::findWithDetails($objCatalog->jumpTo);
 
-			// Set the domain (see #6421)
-			$domain = ($objParent->rootUseSSL ? 'https://' : 'http://') . ($objParent->domain ?: Environment::get('host')) . TL_PATH . '/';
+            // Set the domain (see #6421)
+            $domain = ($objParent->rootUseSSL ? 'https://' : 'http://') . ($objParent->domain ?: Environment::get('host')) . TL_PATH . '/';
 
-			// Generate the URL
-			$strUrl = $domain . Controller::generateFrontendUrl($objParent->row(), ((Config::get('useAutoItem') && !Config::get('disableAlias')) ?  '/%s' : '/items/%s'), $objParent->language);	
-	
-			$objElement = ContentModel::findPublishedByPidAndTable($objProduct->id, 'tl_product');
+            // Generate the URL
+            $strUrl = $domain . Controller::generateFrontendUrl($objParent->row(), ((Config::get('useAutoItem') && !Config::get('disableAlias')) ?  '/%s' : '/items/%s'), $objParent->language);
 
-			if ($objElement !== null)
-			{
-				$link = ProductHelper::getLink($objProduct, $strUrl);
-			}				
+            $objElement = ContentModel::findPublishedByPidAndTable($objProduct->id, 'tl_product');
 
-			return $link;
-        }
-        else
-        {
-            return 'Fehler! foo ohne Parameter!';
+            if ($objElement !== null) {
+                $link = ProductHelper::getLink($objProduct, $strUrl);
+            }
+
+            return $link;
+        } else {
+            return '';
         }
     }
 }
