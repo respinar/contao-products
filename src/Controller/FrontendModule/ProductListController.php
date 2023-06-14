@@ -23,10 +23,12 @@ use Contao\CoreBundle\Controller\FrontendModule\AbstractFrontendModuleController
 use Contao\CoreBundle\DependencyInjection\Attribute\AsFrontendModule;
 use Contao\ModuleModel;
 use Contao\Template;
+use Contao\StringUtil;
 use Contao\Input;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+use Respinar\ProductsBundle\Controller\Product;
 use Respinar\ProductsBundle\Model\ProductModel;
 use Respinar\ProductsBundle\Model\ProductCatalogModel;
 
@@ -37,8 +39,13 @@ class ProductListController extends AbstractFrontendModuleController
 
     protected function getResponse(Template $template, ModuleModel $model, Request $request): Response
     {        
-		//
-		return $template->getResponse();
+		$objCatalog = ProductCatalogModel::findOneBy('id', StringUtil::deserialize($model->catalog)[0]);
+                
+        $objProducts = ProductModel::findBy('pid', $objCatalog->id);
+      
+        $template->arrProducts = Product::parseProducts($objProducts, $model);
+
+        return $template->getResponse();
 	}
 
 	// /**

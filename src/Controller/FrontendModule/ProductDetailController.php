@@ -27,6 +27,7 @@ use Contao\Input;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+use Respinar\ProductsBundle\Controller\Product;
 use Respinar\ProductsBundle\Model\ProductModel;
 use Respinar\ProductsBundle\Model\ProductCatalogModel;
 use Contao\CoreBundle\Exception\PageNotFoundException;
@@ -39,8 +40,19 @@ class ProductDetailController extends AbstractFrontendModuleController
 
     protected function getResponse(Template $template, ModuleModel $model, Request $request): Response
     {        
-		//
-		return $template->getResponse();
+		// Set the item from the auto_item parameter
+		if (!isset($_GET['items']) && $GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))
+		{
+			Input::setGet('items', Input::get('auto_item'));
+		}
+         
+        $objProduct = ProductModel::findOneByAlias(Input::get('items'));
+
+        //$objCatalog = ProductCatalogModel::findByIdOrAlias($objProduct->pid);
+      
+        $template->product = Product::parseProduct($objProduct, $model);        
+
+        return $template->getResponse();
 	}
 
 	/**
