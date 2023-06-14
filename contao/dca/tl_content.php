@@ -22,7 +22,7 @@ if (Input::get('do') == 'products')
 }
 
 
-$GLOBALS['TL_DCA']['tl_content']['palettes']['product']  = '{type_legend},type,headline;
+$GLOBALS['TL_DCA']['tl_content']['palettes']['product_single']  = '{type_legend},type,headline;
                                                             {product_legend},product;
                                                             {template_legend},product_template,customTpl,product_metaFields,size;
                                                             {protected_legend:hide},protected;
