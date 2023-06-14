@@ -39,8 +39,15 @@ class ProductSingleController extends AbstractContentElementController
 
 	protected function getResponse(Template $template, ContentModel $model, Request $request): Response
     {
-		//
-		return $template->getResponse();
+		$objProduct = ProductModel::findOneByID($model->product);
+
+        //$objPodcast = ProductCatalogModel::findByIdOrAlias($objProduct->pid);
+
+        $model->imgSize = $model->size;
+      
+        $template->product = Product::parseProduct($objProduct, $model);        
+
+        return $template->getResponse();
 	}
 
 	/**
