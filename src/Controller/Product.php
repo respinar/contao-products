@@ -251,7 +251,7 @@ abstract class Product
 	 * @param boolean
 	 * @return string
 	 */
-	protected function generateProductUrl($objItem, $blnAddCategory=false)
+	protected static function generateProductUrl($objItem, $blnAddCategory=false)
 	{
 		$strCacheKey = 'id_' . $objItem->id;
 
@@ -292,7 +292,7 @@ abstract class Product
 	 * @param boolean
 	 * @return string
 	 */
-	protected function generateLink($strLink, $objProduct, $blnAddCategory=false, $blnIsReadMore=false)
+	protected static function generateLink($strLink, $objProduct, $blnAddCategory=false, $blnIsReadMore=false)
 	{
 
 		return sprintf('<a href="%s" title="%s">%s%s</a>',
@@ -308,7 +308,7 @@ abstract class Product
 	 * @param object
 	 * @return array
 	 */
-	protected function getMetaFields($objProduct, $model)
+	protected static function getMetaFields($objProduct, $model)
 	{
 		$meta = StringUtil::deserialize($model->product_metaFields);
 
