@@ -38,12 +38,13 @@ class ProductListController extends AbstractFrontendModuleController
 	public const TYPE = 'products_list';
 
     protected function getResponse(Template $template, ModuleModel $model, Request $request): Response
-    {        
-		$objCatalog = ProductCatalogModel::findOneBy('id', StringUtil::deserialize($model->catalog)[0]);
-                
-        $objProducts = ProductModel::findBy('pid', $objCatalog->id);
-      
-        $template->arrProducts = Product::parseProducts($objProducts, $model);
+    {
+
+		//$objCatalog = ProductCatalogModel::findMultipleByIds(StringUtil::deserialize($model->product_catalogs));
+		
+        $objProducts = ProductModel::findPublishedByPids(StringUtil::deserialize($model->product_catalogs));
+		
+        $template->products = Product::parseProducts($objProducts, $model);
 
         return $template->getResponse();
 	}
