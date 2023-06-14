@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\EventListener;
+namespace Respinar\ProductsBundle\EventListener;
 
 use Contao\CoreBundle\DependencyInjection\Attribute\AsHook;
 use Contao\Config;
