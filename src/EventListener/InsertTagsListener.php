@@ -5,54 +5,51 @@ declare(strict_types=1);
 namespace Respinar\ProductsBundle\EventListener;
 
 use Contao\CoreBundle\DependencyInjection\Attribute\AsHook;
-use Contao\Config;
-use Contao\PageModel;
-use Contao\ContentModel;
-use Contao\Environment;
-use Contao\Controller;
+use Contao\CoreBundle\Framework\ContaoFramework;
+use Psr\Log\LoggerInterface;
+use Contao\StringUtil;
+
 use Respinar\ProductsBundle\Model\ProductModel;
-use Respinar\ProductsBundle\Model\ProductCatalogModel;
-use Respinar\ProductsBundle\Helper\ProductHelper;
+use Respinar\ProductsBundle\Controller\Product;
 
 #[AsHook('replaceInsertTags')]
 class InsertTagsListener
 {
-    public const TAG = 'product_url';
+    public const SUPPORTED_TAGS = [
+        'product_url'
+    ];
 
-    public function __invoke(string $insertTag, bool $useCache, string $cachedValue, array $flags, array $tags, array $cache, int $_rit, int $_cnt)
+    public function __construct(private readonly ContaoFramework $framework, private readonly LoggerInterface $logger)
+    {        
+    }
+
+    public function __invoke(string $tag, bool $useCache, $cacheValue, array $flags): string|false
     {
-        $chunks = explode('::', $insertTag);
+        $elements = explode('::', $tag);
+        $key = strtolower($elements[0]);
 
-        if (self::TAG !== $chunks[0]) {
-            return false;
+        if (\in_array($key, self::SUPPORTED_TAGS, true)) {
+            return $this->replaceProductInsertTags($key, $elements[1], [...$flags, ...\array_slice($elements, 2)]);
         }
 
-        // Parameter angegeben?
-        if (isset($chunks[1])) {
-            // Get the items
-            if (($objProduct = ProductModel::findPublishedByIdOrAlias($chunks[1])) === null) {
-                return false;
-            }
+        return false;
+    }
 
-            $objCatalog  = ProductCatalogModel::findBy('id', $objProduct->pid);
+    private function replaceProductInsertTags (string $insertTag, string $idOrAlias, array $arguments): string
+    {
+        $this->framework->initialize();
 
-            $objParent = PageModel::findWithDetails($objCatalog->jumpTo);
+        $adapter = $this->framework->getAdapter(ProductModel::class);
 
-            // Set the domain (see #6421)
-            $domain = ($objParent->rootUseSSL ? 'https://' : 'http://') . ($objParent->domain ?: Environment::get('host')) . TL_PATH . '/';
-
-            // Generate the URL
-            $strUrl = $domain . Controller::generateFrontendUrl($objParent->row(), ((Config::get('useAutoItem') && !Config::get('disableAlias')) ?  '/%s' : '/items/%s'), $objParent->language);
-
-            $objElement = ContentModel::findPublishedByPidAndTable($objProduct->id, 'tl_product');
-
-            if ($objElement !== null) {
-                $link = ProductHelper::getLink($objProduct, $strUrl);
-            }
-
-            return $link;
-        } else {
+        if (!$model = $adapter->findByIdOrAlias($idOrAlias)) {
             return '';
         }
+
+        $product = $this->framework->getAdapter(Product::class);
+
+        return match ($insertTag) {            
+            'product_url' => $product->generateProductUrl($model, false, \in_array('absolute', $arguments, true)) ?: './',
+            default => '',
+        };
     }
 }
