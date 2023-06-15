@@ -1,42 +1,45 @@
 {
     "name": "respinar/contao-products",
-    "description": "Products catalog for Contao",
-    "keywords": ["contao", "product", "catalog"],
-    "type": "contao-module",
-    "homepage": "https://github.com/respinar/contao-products",
-    "license": "LGPL-3.0-or-later",
+    "description": "Products Bundle for Contao",
+    "keywords": ["contao", "product", "bundle"],
+    "type": "contao-bundle",    
+    "license": "MIT",
     "authors": [
         {
             "name": "Hamid Abbaszadeh",
             "email": "info@respinar.com",
-            "homepage": "http://respinar.com",
+            "homepage": "https://respinar.com",
             "role": "Developer"
         }
     ],
     "support": {
-        "issues": "https://github.com/respinar/contao-products/issues"
+        "issues": "https://github.com/respinar/contao-products/issues",
+        "source": "https://github.com/respinar/contao-podcast"
     },
     "require": {
-        "php": ">=5.4",
-        "contao/core-bundle":"~3.5 || ~4.4",
-        "contao-community-alliance/composer-plugin":"^2.4.1 || ~3.0"
+        "php": "^8.1",
+        "contao/core-bundle":"^4.13 || ^5.0"        
+    },
+    "require-dev": {
+        "contao/manager-plugin": "^2.12"
     },
     "autoload": {
         "psr-4": {
-            "Respinar\\Products\\": "src/library/"
+            "Respinar\\ProductsBundle\\": "src/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "contao-components/installer": false,
+            "contao/manager-plugin": false,
+            "contao-community-alliance/composer-plugin": true
         }
     },
     "extra": {
-        "contao": {
-            "sources": {
-                "src": "system/modules/products"
-            },
-            "transifex": {
-                "project": "contao-products",
-                "prefix": "master-",
-                "languages_cto": "src/languages",
-                "languages_tx": ".tx"
-            }
-        }
+        "contao-manager-plugin": "Respinar\\ProductsBundle\\ContaoManager\\Plugin"
+    },
+    "scripts": {
+        "cs-fixer": "@php tools/ecs/vendor/bin/ecs check config/ contao/ src/ templates/ tests/ --config tools/ecs/config.php --fix --ansi",
+        "unit-tests": "@php tools/phpunit/vendor/bin/phpunit -c tools/phpunit/phpunit.xml.dist"
     }
 }

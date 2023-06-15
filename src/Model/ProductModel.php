@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Contao Open Source CMS
  *
@@ -11,26 +13,13 @@
  * @copyright 2014-2016
  */
 
+namespace Respinar\ProductsBundle\Model;
 
-/**
- * Namespace
- */
-namespace Respinar\Products\Model;
+use Contao\Model;
 
-/**
- * Class ProductModel
- *
- * @copyright  2014
- * @author     Hamid Abbaszadeh
- * @package    Devtools
- */
-class ProductModel extends \Model
+class ProductModel extends Model
 {
 
-	/**
-	 * Name of the table
-	 * @var string
-	 */
 	protected static $strTable = 'tl_product';
 
 
