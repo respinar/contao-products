@@ -251,7 +251,7 @@ abstract class Product
 	 * @param boolean
 	 * @return string
 	 */
-	protected static function generateProductUrl($objItem, $blnAddCategory=false)
+	public static function generateProductUrl($objItem, $blnAddCategory=false)
 	{
 		$strCacheKey = 'id_' . $objItem->id;
 
