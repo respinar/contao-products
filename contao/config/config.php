@@ -11,31 +11,26 @@
  * @copyright 2014-2016
  */
 
+use Contao\ArrayUtil;
 use Respinar\ProductsBundle\Model\ProductModel;
 use Respinar\ProductsBundle\Model\ProductCatalogModel;
 
 /**
  * Back end modules
  */
-$GLOBALS['BE_MOD']['products'] = array(
-		'products' => array(
-			'tables' => array('tl_product_catalog', 'tl_product', 'tl_content')
-			)
-		);
+ArrayUtil::arrayInsert($GLOBALS['BE_MOD'], 1, [
+    'products' => [
+        'products' => [
+            'tables' => ['tl_product_catalog', 'tl_product', 'tl_content'],
+        ],
+    ],
+]);
 
 /**
  * Register models
  */
  $GLOBALS['TL_MODELS']['tl_product']         = ProductModel::class;
  $GLOBALS['TL_MODELS']['tl_product_catalog'] = ProductCatalogModel::class; 
-
-/**
- * Register hook to add carpets items to the indexer
- */
-//$GLOBALS['TL_HOOKS']['getSearchablePages'][] = array('Respinar\Products\Product', 'getSearchablePages');
-
-// Registrieren im Hooks replaceInsertTags
-//$GLOBALS['TL_HOOKS']['replaceInsertTags'][] = array('Respinar\Products\Product', 'productURLInsertTags');
 
 /**
  * Add permissions
