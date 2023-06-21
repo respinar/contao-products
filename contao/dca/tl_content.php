@@ -30,7 +30,7 @@ $GLOBALS['TL_DCA']['tl_content']['palettes']['product_single']  = '
 	{template_legend},product_template,customTpl,product_metaFields,size;
 	{protected_legend:hide},protected;
 	{expert_legend:hide},guests,cssID,space';
-$GLOBALS['TL_DCA']['tl_content']['palettes']['products'] = '
+$GLOBALS['TL_DCA']['tl_content']['palettes']['product_list'] = '
 	{type_legend},type,headline;
 	{product_legend},products;
 	{template_legend},product_template,customTpl,product_metaFields,size,product_list_Class;
