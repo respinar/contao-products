@@ -90,15 +90,13 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 			),
 			'toggle' => array
 			(
+				'href'                => 'act=toggle&amp;field=published',
 				'icon'                => 'visible.svg',
-				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
-				'button_callback'     => array('tl_product', 'toggleIcon')
 			),
 			'feature' => array
 			(
+				'href'                => 'act=toggle&amp;field=featured',
 				'icon'                => 'featured.svg',
-				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleFeatured(this,%s)"',
-				'button_callback'     => array('tl_product', 'iconFeatured')
 			),
 			'show' => array
 			(
@@ -383,6 +381,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 		'published' => array
 		(
 			'exclude'                 => true,
+			'toggle'                  => true,
 			'filter'                  => true,
 			'flag'                    => 1,
 			'inputType'               => 'checkbox',
@@ -392,6 +391,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 		'featured' => array
 		(
 			'exclude'                 => true,
+			'toggle'                  => true,
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50 m12'),
@@ -481,187 +481,6 @@ class tl_product extends Backend
 		}
 
 		return '<div><div style="float:left; margin-right:10px;">'.$strImage.'</div><p><strong>'. $arrRow['title'].'</strong></p><p> Brand: '.$arrRow['brand'] .' &emsp; Model: '. $arrRow['model']. ' &emsp; SKU: '. $arrRow['sku'] . ' &emsp; Visit: '. $arrRow['visit'] .'</p></div>';
-	}
-
-	/**
-	 * Return the "toggle visibility" button
-	 *
-	 * @param array  $row
-	 * @param string $href
-	 * @param string $label
-	 * @param string $title
-	 * @param string $icon
-	 * @param string $attributes
-	 *
-	 * @return string
-	 */
-	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
-	{
-
-		if (strlen(Input::get('tid')))
-		{
-			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1), (@func_get_arg(12) ?: null));
-			$this->redirect($this->getReferer());
-		}
-
-		// Check permissions AFTER checking the tid, so hacking attempts are logged
-		if (!$this->User->hasAccess('tl_product::published', 'alexf'))
-		{
-			return '';
-		}
-
-		$href .= '&amp;tid='.$row['id'].'&amp;state='.($row['published'] ? '' : 1);
-
-		if (!$row['published'])
-		{
-			$icon = 'invisible.svg';
-		}
-
-		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label, 'data-state="' . ($row['published'] ? 1 : 0) . '"').'</a> ';
-	}
-
-
-	/**
-	 * Disable/enable a user group
-	 *
-	 * @param integer       $intId
-	 * @param boolean       $blnVisible
-	 * @param DataContainer $dc
-	 */
-	public function toggleVisibility($intId, $blnVisible, DataContainer $dc=null)
-	{
-
-		// Set the ID and action
-		Input::setGet('id', $intId);
-		Input::setGet('act', 'toggle');
-
-		if ($dc)
-		{
-			$dc->id = $intId; // see #8043
-		}
-
-		//$this->checkPermission();
-
-		// Check the field access
-		if (!$this->User->hasAccess('tl_product::published', 'alexf'))
-		{
-			$this->log('Not enough permissions to publish/unpublish product item ID "'.$intId.'"', __METHOD__, TL_ERROR);
-			$this->redirect('contao/main.php?act=error');
-		}
-
-		$objVersions = new Versions('tl_product', $intId);
-		$objVersions->initialize();
-
-		// Trigger the save_callback
-		if (is_array($GLOBALS['TL_DCA']['tl_product']['fields']['published']['save_callback']))
-		{
-			foreach ($GLOBALS['TL_DCA']['tl_product']['fields']['published']['save_callback'] as $callback)
-			{
-				if (is_array($callback))
-				{
-					$this->import($callback[0]);
-					$blnVisible = $this->{$callback[0]}->{$callback[1]}($blnVisible, ($dc ?: $this));
-				}
-				elseif (is_callable($callback))
-				{
-					$blnVisible = $callback($blnVisible, ($dc ?: $this));
-				}
-			}
-		}
-
-		// Update the database
-		$this->Database->prepare("UPDATE tl_product SET tstamp=". time() .", published='" . ($blnVisible ? '1' : '') . "' WHERE id=?")
-					   ->execute($intId);
-
-		$objVersions->create();
-
-	}
-
-	/**
-	 * Return the "feature/unfeature element" button
-	 *
-	 * @param array  $row
-	 * @param string $href
-	 * @param string $label
-	 * @param string $title
-	 * @param string $icon
-	 * @param string $attributes
-	 *
-	 * @return string
-	 */
-	public function iconFeatured($row, $href, $label, $title, $icon, $attributes)
-	{
-		if (strlen(Input::get('fid')))
-		{
-			$this->toggleFeatured(Input::get('fid'), (Input::get('state') == 1), (@func_get_arg(12) ?: null));
-			$this->redirect($this->getReferer());
-		}
-
-		// Check permissions AFTER checking the fid, so hacking attempts are logged
-		if (!$this->User->hasAccess('tl_product::featured', 'alexf'))
-		{
-			return '';
-		}
-
-		$href .= '&amp;fid='.$row['id'].'&amp;state='.($row['featured'] ? '' : 1);
-
-		if (!$row['featured'])
-		{
-			$icon = 'featured_.svg';
-		}
-
-		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label, 'data-state="' . ($row['featured'] ? 1 : 0) . '"').'</a> ';
-	}
-
-
-	/**
-	 * Feature/unfeature a product item
-	 *
-	 * @param integer       $intId
-	 * @param boolean       $blnVisible
-	 * @param DataContainer $dc
-	 *
-	 * @return string
-	 */
-	public function toggleFeatured($intId, $blnVisible, DataContainer $dc=null)
-	{
-		// Check permissions to edit
-		Input::setGet('id', $intId);
-		Input::setGet('act', 'feature');
-		//$this->checkPermission();
-
-		// Check permissions to feature
-		if (!$this->User->hasAccess('tl_product::featured', 'alexf'))
-		{
-			$this->log('Not enough permissions to feature/unfeature product item ID "'.$intId.'"', __METHOD__, TL_ERROR);
-			$this->redirect('contao/main.php?act=error');
-		}
-
-		$objVersions = new Versions('tl_product', $intId);
-		$objVersions->initialize();
-
-		// Trigger the save_callback
-		if (is_array($GLOBALS['TL_DCA']['tl_product']['fields']['featured']['save_callback']))
-		{
-			foreach ($GLOBALS['TL_DCA']['tl_product']['fields']['featured']['save_callback'] as $callback)
-			{
-				if (is_array($callback))
-				{
-					$this->import($callback[0]);
-					$blnVisible = $this->{$callback[0]}->{$callback[1]}($blnVisible, ($dc ?: $this));
-				}
-				elseif (is_callable($callback))
-				{
-					$blnVisible = $callback($blnVisible, $this);
-				}
-			}
-		}
-
-		// Update the database
-		$this->Database->prepare("UPDATE tl_product SET tstamp=". time() .", featured='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
-					   ->execute($intId);
-
-		$objVersions->create();
 	}
 
 	/**
