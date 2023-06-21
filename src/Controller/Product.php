@@ -60,13 +60,13 @@ abstract class Product
 		global $objPage;
 
 		$objTemplate = new FrontendTemplate($model->product_template);
-		$objTemplate->setData($objProduct->row());	
+		$objTemplate->setData($objProduct->row());
 
 		$objTemplate->class = (($model->product_Class != '') ? ' ' . $model->product_Class : '') . $strClass;
 
 		if (time() - $objProduct->date < 2592000) {
 			$objTemplate->new_product = true;
-		}		
+		}
 
 		$objTemplate->category    = $objProduct->getRelated('pid');
 
@@ -89,7 +89,7 @@ abstract class Product
 		$objTemplate->meta_brand_txt   = $GLOBALS['TL_LANG']['MSC']['brand_text'];
 		$objTemplate->meta_model_txt   = $GLOBALS['TL_LANG']['MSC']['model_text'];
 		$objTemplate->meta_global_ID_txt = $GLOBALS['TL_LANG']['MSC']['global_ID_text'];
-		$objTemplate->meta_sku_txt     = $GLOBALS['TL_LANG']['MSC']['sku_text'];		
+		$objTemplate->meta_sku_txt     = $GLOBALS['TL_LANG']['MSC']['sku_text'];
 		$objTemplate->meta_status_txt  = $GLOBALS['TL_LANG']['MSC']['status_text'];
 
 		$objTemplate->meta_vote_txt    = $GLOBALS['TL_LANG']['MSC']['vote_text'];
@@ -108,7 +108,7 @@ abstract class Product
 			}
 
 			$objTemplate->link = Product::generateProductUrl($objProduct, $blnAddCategory);
-		}		
+		}
 
 		$objTemplate->addImage = false;
 
@@ -130,16 +130,16 @@ abstract class Product
 				->createFigureBuilder()
 				->from($objProduct->singleSRC)
 				->setSize($imgSize);
-			
+
 			if (null !== ($figure = $figureBuilder->buildIfResourceExists()))
 			{
 				$figure->applyLegacyTemplateData($objTemplate);
 			}
-				
+
 
 			// $objModel = FilesModel::findByUuid($objProduct->singleSRC);
 
-			// if ($objModel !== null && is_file(System::getContainer()->getParameter('kernel.project_dir') . '/' . $objModel->path))			
+			// if ($objModel !== null && is_file(System::getContainer()->getParameter('kernel.project_dir') . '/' . $objModel->path))
 			// {
 			// 	// Do not override the field now that we have a model registry (see #6303)
 			// 	$arrProduct = $objProduct->row();
@@ -154,17 +154,17 @@ abstract class Product
 			// 			$arrProduct['size'] = $model->imgSize;
 			// 		}
 			// 	}
-				
-			// 	$arrProduct['singleSRC'] = $objModel->path;		
-				
-			// 	// Link to the product detail if no image link has been defined		
+
+			// 	$arrProduct['singleSRC'] = $objModel->path;
+
+			// 	// Link to the product detail if no image link has been defined
 			// 	$picture = $objTemplate->picture;
 			// 	unset($picture['title']);
 			// 	$objTemplate->picture = $picture;
 
 			// 	$objTemplate->href = $objTemplate->link;
 			// 	$objTemplate->linkTitle = StringUtil::specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['moreDetail'], $objProduct->title), true);
-				
+
 			// 	$this->addImageToTemplate($objTemplate, $arrProduct, null, null, $objModel);
 
 			// }
@@ -176,10 +176,10 @@ abstract class Product
 		if ($objProduct->addEnclosure)
 		{
 			Controller::addEnclosuresToTemplate($objTemplate, $objProduct->row());
-		}		
-		
+		}
+
 		$objTemplate->featured_text = "Featured";
-		$objTemplate->new_text      = "New";
+		$objTemplate->new_text = "New";
 
 
 		return $objTemplate->parse();
@@ -222,7 +222,7 @@ abstract class Product
 	 */
 	protected function parseRelateds($objProducts, $model, $blnAddCategory=false)
 	{
-		
+
 		$model->product_template = $model->related_template;
 		$model->imgSize = $model->related_imgSize;
 		$model->product_list_Class = $model->related_list_Class;
@@ -271,11 +271,11 @@ abstract class Product
 
 			if ($objPage === null)
 			{
-				self::$arrUrlCache[$strCacheKey] = ampersand(Environment::get('request'), true);
+				self::$arrUrlCache[$strCacheKey] = StringUtil::ampersand(Environment::get('request'), true);
 			}
 			else
 			{
-				self::$arrUrlCache[$strCacheKey] = ampersand(Controller::generateFrontendUrl($objPage->row(), ((Config::get('useAutoItem') && !Config::get('disableAlias')) ?  '/' : '/items/') . ((!Config::get('disableAlias') && $objItem->alias != '') ? $objItem->alias : $objItem->id)));
+				self::$arrUrlCache[$strCacheKey] = StringUtil::ampersand(Controller::generateFrontendUrl($objPage->row(), ((Config::get('useAutoItem') && !Config::get('disableAlias')) ?  '/' : '/items/') . ((!Config::get('disableAlias') && $objItem->alias != '') ? $objItem->alias : $objItem->id)));
 			}
 
 		}
@@ -296,8 +296,8 @@ abstract class Product
 	{
 
 		return sprintf('<a href="%s" title="%s">%s%s</a>',
-						$this->generateProductUrl($objProduct, $blnAddCategory),
-						specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $objProduct->title), true),
+						Product::generateProductUrl($objProduct, $blnAddCategory),
+						StringUtil::specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $objProduct->title), true),
 						$strLink,
 						($blnIsReadMore ? ' <span class="invisible">'.$objProduct->title.'</span>' : ''));
 
@@ -329,40 +329,40 @@ abstract class Product
 					break;
 
 				case 'price':
-					if ($objProduct->price) 
-						$return['price'] = StringUtil::deserialize($objProduct->price);						
+					if ($objProduct->price)
+						$return['price'] = StringUtil::deserialize($objProduct->price);
 						$return['price']['symbol'] = $GLOBALS['TL_LANG']['MSC'][$return['price']['unit']];
 						$return['price']['priceValidUntil'] = date('Y-m-d\TH:i:sP', $objProduct->priceValidUntil);
 						$return['price']['url'] = $objProduct->url;
 					break;
-				
+
 				case 'availability':
-					if ($objProduct->availability) 
+					if ($objProduct->availability)
 						$return['availability'] = $objProduct->availability;
 					break;
 
 				case 'global_ID':
-					if ($objProduct->global_ID) 
+					if ($objProduct->global_ID)
 						$return['global_ID'] = StringUtil::deserialize($objProduct->global_ID);
 					break;
 
 				case 'model':
-					if ($objProduct->model) 
+					if ($objProduct->model)
 						$return['model'] = $objProduct->model;
 					break;
 
 				case 'brand':
-					if ($objProduct->brand) 
+					if ($objProduct->brand)
 						$return['brand'] = $objProduct->brand;
 					break;
-				
+
 				case 'sku':
-					if ($objProduct->sku) 
+					if ($objProduct->sku)
 						$return['sku'] = $objProduct->sku;
 					break;
-				
+
 				case 'buy':
-					if ($objProduct->url) 
+					if ($objProduct->url)
 						$return['buy'] = $objProduct->url;
 					break;
 			}
