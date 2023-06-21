@@ -44,7 +44,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 	(
 		'sorting' => array
 		(
-			'mode'                    => 4,
+			'mode'                    => DataContainer::MODE_PARENT,
 			'fields'                  => array('sorting'),
 			'headerFields'            => array('title','jumpTo','language','protected'),
 			'panelLayout'             => 'filter;sort,search,limit',
@@ -154,7 +154,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 		'visit' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_carpets']['visit'],
-			'sorting'                 => true,		
+			'sorting'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('disabled'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
@@ -269,7 +269,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 		'rating_value' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_product']['rating_value'],
-			'sorting'                 => true,			
+			'sorting'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('disabled'=>true,'tl_class'=>'w50'),
 			'sql'                     => "varchar(10) NOT NULL default '0'"
@@ -277,7 +277,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 		'rating_count' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_product']['rating_count'],
-			'sorting'                 => true,			
+			'sorting'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('disabled'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "int(10) NOT NULL default '0'"
@@ -534,7 +534,7 @@ class tl_product extends Backend
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
-		
+
 		if (strlen(Input::get('tid')))
 		{
 			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1), (@func_get_arg(12) ?: null));
@@ -611,7 +611,7 @@ class tl_product extends Backend
 					   ->execute($intId);
 
 		$objVersions->create();
-		
+
 	}
 
 	/**
@@ -725,8 +725,8 @@ class tl_product extends Backend
 
 				if ($objItems->sku) {
 					$arrItems[$objItems->id] .= ' (sku: ' . $objItems->sku .')';
-				} 				
-				
+				}
+
 			}
 		}
 
