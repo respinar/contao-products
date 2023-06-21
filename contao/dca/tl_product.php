@@ -16,6 +16,7 @@ use Contao\DataContainer;
 use Contao\Backend;
 use Contao\FilesModel;
 use Contao\Image;
+use Contao\StringUtil;
 
 System::loadLanguageFile('tl_content');
 
@@ -451,7 +452,7 @@ class tl_product extends Backend
 		if ($varValue == '')
 		{
 			$autoAlias = true;
-			$varValue = standardize(String::restoreBasicEntities($dc->activeRecord->title));
+			$varValue = StringUtil::standardize(String::restoreBasicEntities($dc->activeRecord->title));
 		}
 
 		$objAlias = $this->Database->prepare("SELECT id FROM tl_product WHERE alias=?")
@@ -528,7 +529,7 @@ class tl_product extends Backend
     public function updateCategories(DataContainer $dc)
     {
         $this->import('BackendUser', 'User');
-        $arrCategories = deserialize($dc->activeRecord->categories);
+        $arrCategories = StringUtil::deserialize($dc->activeRecord->categories);
 
         // Use the default categories if the user is not allowed to edit the field directly
         if (!$this->User->isAdmin && !in_array('tl_product::categories', $this->User->alexf)) {
