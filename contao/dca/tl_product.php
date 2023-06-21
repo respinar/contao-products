@@ -11,7 +11,13 @@
  * @copyright 2014-2016
  */
 
- System::loadLanguageFile('tl_content');
+use Contao\System;
+use Contao\DataContainer;
+use Contao\Backend;
+use Contao\FilesModel;
+use Contao\Image;
+
+System::loadLanguageFile('tl_content');
 
 
 /**
@@ -433,9 +439,9 @@ class tl_product extends Backend
 	/**
 	 * Auto-generate the product alias if it has not been set yet
 	 * @param mixed
-	 * @param \DataContainer
+	 * @param DataContainer
 	 * @return string
-	 * @throws \Exception
+	 * @throws Exception
 	 */
 	public function generateAlias($varValue, DataContainer $dc)
 	{
@@ -473,11 +479,11 @@ class tl_product extends Backend
 	 */
 	public function generateProductsRow($arrRow)
 	{
-		$objImage = \FilesModel::findByPk($arrRow['singleSRC']);
+		$objImage = FilesModel::findByPk($arrRow['singleSRC']);
 
 		if ($objImage !== null)
 		{
-			$strImage = \Image::getHtml(\Image::get($objImage->path, '60', '60', 'center_center'));
+			$strImage = Image::getHtml(Image::get($objImage->path, '60', '60', 'center_center'));
 		}
 
 		return '<div><div style="float:left; margin-right:10px;">'.$strImage.'</div><p><strong>'. $arrRow['title'].'</strong></p><p> Brand: '.$arrRow['brand'] .' &emsp; Model: '. $arrRow['model']. ' &emsp; SKU: '. $arrRow['sku'] . ' &emsp; Visit: '. $arrRow['visit'] .'</p></div>';
