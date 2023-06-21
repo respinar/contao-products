@@ -11,6 +11,9 @@
  * @copyright 2014-2016
  */
 
+use Contao\Input;
+use Respinar\ProductsBundle\EventListener\DataContainer\ContentDcaListener;
+
  /**
  * Dynamically add the permission check and parent table
  */
@@ -70,7 +73,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['product_template'] = array
 	'default'              => 'product_short',
 	'exclude'              => true,
 	'inputType'            => 'select',
-	'options_callback'     => array('tl_content_product', 'getProductTemplates'),
+	'options_callback'     => array(ContentDcaListener::class, 'getProductTemplates'),
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );
@@ -82,26 +85,3 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['product_list_Class'] = array
 	'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
 	'sql'                     => "varchar(255) NOT NULL default ''"
 );
-
-/**
- * Class tl_content_product
- *
- * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Hamid Abbaszadeh 2014
- * @author     Hamid Abbaszadeh <http://respinar.com>
- * @package    Catalog
- */
-class tl_content_product extends Backend
-{
-
-	/**
-	 * Return all prices templates as array
-	 *
-	 * @return array
-	 */
-	public function getProductTemplates()
-	{
-		return $this->getTemplateGroup('product_');
-	}
-
-}
