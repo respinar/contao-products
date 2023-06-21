@@ -11,6 +11,8 @@
  * @copyright 2014-2016
  */
 
+use Contao\Backend;
+use Contao\Image;
 
 /**
  * Table tl_product_catalog
@@ -244,118 +246,6 @@ class tl_product_catalog extends Backend
 			return;
 		}
 
-		// Set root IDs
-		if (!is_array($this->User->catalogs) || empty($this->User->catalogs))
-		{
-			$root = array(0);
-		}
-		else
-		{
-			$root = $this->User->catalogs;
-		}
-
-		$GLOBALS['TL_DCA']['tl_product_catalog']['list']['sorting']['root'] = $root;
-
-		// Check permissions to add Catalog categories
-		if (!$this->User->hasAccess('create', 'catalogp'))
-		{
-			$GLOBALS['TL_DCA']['tl_product_catalog']['config']['closed'] = true;
-		}
-
-		// Check current action
-		switch (Input::get('act'))
-		{
-			case 'create':
-			case 'select':
-				// Allow
-				break;
-
-			case 'edit':
-				// Dynamically add the record to the user profile
-				if (!in_array(Input::get('id'), $root))
-				{
-					$arrNew = $this->Session->get('new_records');
-
-					if (is_array($arrNew['tl_product_catalog']) && in_array(Input::get('id'), $arrNew['tl_product_catalog']))
-					{
-						// Add permissions on user level
-						if ($this->User->inherit == 'custom' || !$this->User->groups[0])
-						{
-							$objUser = $this->Database->prepare("SELECT catalogs, catalogp FROM tl_user WHERE id=?")
-													->limit(1)
-													->execute($this->User->id);
-
-							$arrCatalogp = deserialize($objUser->catalogp);
-
-							if (is_array($arrCatalogp) && in_array('create', $arrCatalogp))
-							{
-								$arrCatalogs = deserialize($objUser->catalogs);
-								$arrCatalogs[] = Input::get('id');
-
-								$this->Database->prepare("UPDATE tl_user SET catalogs=? WHERE id=?")
-											->execute(serialize($arrCatalogs), $this->User->id);
-							}
-						}
-
-						// Add permissions on group level
-						elseif ($this->User->groups[0] > 0)
-						{
-							$objGroup = $this->Database->prepare("SELECT catalogs, catalogp FROM tl_user_group WHERE id=?")
-													->limit(1)
-													->execute($this->User->groups[0]);
-
-							$arrCatalogp = deserialize($objGroup->catalogp);
-
-							if (is_array($arrCatalogp) && in_array('create', $arrCatalogp))
-							{
-								$arrCatalogs = deserialize($objGroup->catalogs);
-								$arrCatalogs[] = Input::get('id');
-
-								$this->Database->prepare("UPDATE tl_user_group SET catalogs=? WHERE id=?")
-											->execute(serialize($arrCatalogs), $this->User->groups[0]);
-							}
-						}
-
-						// Add new element to the user object
-						$root[] = Input::get('id');
-						$this->User->catalogs = $root;
-					}
-				}
-				// No break;
-
-			case 'copy':
-			case 'delete':
-			case 'show':
-				if (!in_array(Input::get('id'), $root) || (Input::get('act') == 'delete' && !$this->User->hasAccess('delete', 'catalogp')))
-				{
-					$this->log('Not enough permissions to '.Input::get('act').' Catalog category ID "'.Input::get('id').'"', __METHOD__, TL_ERROR);
-					$this->redirect('contao/main.php?act=error');
-				}
-				break;
-
-			case 'editAll':
-			case 'deleteAll':
-			case 'overrideAll':
-				$session = $this->Session->getData();
-				if (Input::get('act') == 'deleteAll' && !$this->User->hasAccess('delete', 'catalogp'))
-				{
-					$session['CURRENT']['IDS'] = array();
-				}
-				else
-				{
-					$session['CURRENT']['IDS'] = array_intersect($session['CURRENT']['IDS'], $root);
-				}
-				$this->Session->setData($session);
-				break;
-
-			default:
-				if (strlen(Input::get('act')))
-				{
-					$this->log('Not enough permissions to '.Input::get('act').' Catalog categories', __METHOD__, TL_ERROR);
-					$this->redirect('contao/main.php?act=error');
-				}
-				break;
-		}
 	}
 
 	/**
