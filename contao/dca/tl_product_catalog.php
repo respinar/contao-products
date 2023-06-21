@@ -66,27 +66,23 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 		(
 			'edit' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_product_catalog']['edit'],
 				'href'                => 'table=tl_product',
 				'icon'                => 'edit.svg'
 			),
 			'editheader' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_product_catalog']['editheader'],
 				'href'                => 'act=edit',
 				'icon'                => 'header.svg',
 				'button_callback'     => array('tl_product_catalog', 'editHeader')
 			),
 			'copy' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_product_catalog']['copy'],
 				'href'                => 'act=copy',
 				'icon'                => 'copy.svg',
 				'button_callback'     => array('tl_product_catalog', 'copyCategory')
 			),
 			'delete' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_product_catalog']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.svg',
 				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"',
@@ -94,7 +90,6 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 			),
 			'show' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_product_catalog']['show'],
 				'href'                => 'act=show',
 				'icon'                => 'show.svg'
 			)
@@ -128,7 +123,6 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 		),
 		'title' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_product_catalog']['title'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
@@ -137,7 +131,6 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 		),
 		'jumpTo' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_product_catalog']['jumpTo'],
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
 			'foreignKey'              => 'tl_page.title',
@@ -147,7 +140,6 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 		),
 		'protected' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_product_catalog']['protected'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('submitOnChange'=>true),
@@ -155,7 +147,6 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 		),
 		'groups' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_product_catalog']['groups'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'foreignKey'              => 'tl_member_group.name',
@@ -165,7 +156,6 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 		),
 		'allowComments' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_product_catalog']['allowComments'],
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
@@ -174,7 +164,6 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 		),
 		'notify' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_product_catalog']['notify'],
 			'default'                 => 'notify_admin',
 			'exclude'                 => true,
 			'inputType'               => 'select',
@@ -185,7 +174,6 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 		),
 		'sortOrder' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_product_catalog']['sortOrder'],
 			'default'                 => 'ascending',
 			'exclude'                 => true,
 			'inputType'               => 'select',
@@ -196,7 +184,6 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 		),
 		'perPage' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_product_catalog']['perPage'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'natural', 'tl_class'=>'w50'),
@@ -204,7 +191,6 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 		),
 		'moderate' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_product_catalog']['moderate'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50'),
@@ -212,7 +198,6 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 		),
 		'bbcode' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_product_catalog']['bbcode'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50'),
@@ -220,7 +205,6 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 		),
 		'requireLogin' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_product_catalog']['requireLogin'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50'),
@@ -228,7 +212,6 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 		),
 		'disableCaptcha' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_product_catalog']['disableCaptcha'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50'),
