@@ -28,7 +28,7 @@ use Contao\Controller;
 use Contao\Config;
 
 use Respinar\ProductsBundle\Model\ProductModel;
-use Respinar\ProductsBundle\Model\ProductCatalogModel;
+use Respinar\ProductsBundle\Model\CatalogModel;
 
 /**
  * Class ModuleProduct

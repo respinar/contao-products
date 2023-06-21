@@ -28,7 +28,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 use Respinar\ProductsBundle\Controller\Product;
 use Respinar\ProductsBundle\Model\ProductModel;
-use Respinar\ProductsBundle\Model\ProductCatalogModel;
+use Respinar\ProductsBundle\Model\CatalogModel;
 
 
 #[AsContentElement(category: "products")]
@@ -41,11 +41,11 @@ class ProductSingleController extends AbstractContentElementController
     {
 		$objProduct = ProductModel::findOneByID($model->product);
 
-        //$objPodcast = ProductCatalogModel::findByIdOrAlias($objProduct->pid);
+        //$objPodcast = CatalogModel::findByIdOrAlias($objProduct->pid);
 
         $model->imgSize = $model->size;
-      
-        $template->product = Product::parseProduct($objProduct, $model);        
+
+        $template->product = Product::parseProduct($objProduct, $model);
 
         return $template->getResponse();
 	}
