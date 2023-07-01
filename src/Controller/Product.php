@@ -75,15 +75,15 @@ abstract class Product
 		$arrMeta = Product::getMetaFields($objProduct, $model);
 
 		// Add the meta information
-		$objTemplate->date         = $arrMeta['date'];
-		$objTemplate->meta_brand   = $arrMeta['brand'];
-		$objTemplate->meta_price   = $arrMeta['price'];
-		$objTemplate->meta_availability = $arrMeta['availability'];
-		$objTemplate->meta_availability_txt = $GLOBALS['TL_LANG']['MSC'][$objProduct->availability];
-		$objTemplate->meta_model   = $arrMeta['model'];
-		$objTemplate->meta_global_ID = $arrMeta['global_ID'];
-		$objTemplate->meta_sku     = $arrMeta['sku'];
-		$objTemplate->meta_buy     = $arrMeta['buy'];
+		$objTemplate->date         = $arrMeta['date'] ?? '';
+		$objTemplate->meta_brand   = $arrMeta['brand'] ?? '';
+		$objTemplate->meta_price   = $arrMeta['price'] ?? '';
+		$objTemplate->meta_availability = $arrMeta['availability'] ?? '';
+		$objTemplate->meta_availability_txt = $GLOBALS['TL_LANG']['MSC'][$objProduct->availability] ?? '';
+		$objTemplate->meta_model   = $arrMeta['model'] ?? '';
+		$objTemplate->meta_global_ID = $arrMeta['global_ID'] ?? '';
+		$objTemplate->meta_sku     = $arrMeta['sku'] ?? '';
+		$objTemplate->meta_buy     = $arrMeta['buy'] ?? '';
 
 		$objTemplate->meta_price_txt   = $GLOBALS['TL_LANG']['MSC']['price_text'];
 		$objTemplate->meta_brand_txt   = $GLOBALS['TL_LANG']['MSC']['brand_text'];
