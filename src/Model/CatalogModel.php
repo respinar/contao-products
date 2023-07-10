@@ -12,11 +12,11 @@ declare(strict_types=1);
  * @copyright 2014-2016
  */
 
-namespace Respinar\ProductsBUndle\Model;
+namespace Respinar\ProductsBundle\Model;
 
 use Contao\Model;
 
-class ProductCatalogModel extends Model
+class CatalogModel extends Model
 {
 
 	protected static $strTable = 'tl_product_catalog';

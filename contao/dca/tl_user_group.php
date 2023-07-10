@@ -23,7 +23,6 @@ $GLOBALS['TL_DCA']['tl_user_group']['palettes']['default'] = str_replace('formp;
  */
 $GLOBALS['TL_DCA']['tl_user_group']['fields']['products'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_user']['products'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
 	'foreignKey'              => 'tl_product_catalog.title',
@@ -33,7 +32,6 @@ $GLOBALS['TL_DCA']['tl_user_group']['fields']['products'] = array
 
 $GLOBALS['TL_DCA']['tl_user_group']['fields']['productp'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_user']['productp'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
 	'options'                 => array('create', 'delete'),

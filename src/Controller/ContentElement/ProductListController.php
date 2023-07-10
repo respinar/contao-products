@@ -20,30 +20,37 @@ declare(strict_types=1);
 namespace Respinar\ProductsBundle\Controller\ContentElement;
 
 use Contao\ContentModel;
+use Contao\StringUtil;
+use Contao\Template;
 use Contao\CoreBundle\Controller\ContentElement\AbstractContentElementController;
 use Contao\CoreBundle\DependencyInjection\Attribute\AsContentElement;
-use Contao\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 use Respinar\ProductsBundle\Controller\Product;
 use Respinar\ProductsBundle\Model\ProductModel;
-use Respinar\ProductsBundle\Model\CatalogModel;
 
 
 #[AsContentElement(category: "products")]
-class ProductSingleController extends AbstractContentElementController
+class ProductListController extends AbstractContentElementController
 {
 
-	public const TYPE = 'product_single';
+	public const TYPE = 'product_list';
 
 	protected function getResponse(Template $template, ContentModel $model, Request $request): Response
     {
-		$objProduct = ProductModel::findOneByID($model->product);
+
+		$objProducts = ProductModel::findMultipleByIds(StringUtil::deserialize($model->products));
 
         $model->imgSize = $model->size;
 
-        $template->product = Product::parseProduct($objProduct, $model);
+		$arrProducts = [];
+
+		foreach($objProducts as $objProduct) {
+			$arrProducts[] = Product::parseProduct($objProduct, $model);
+		}
+
+		$template->products = $arrProducts;
 
         return $template->getResponse();
 	}

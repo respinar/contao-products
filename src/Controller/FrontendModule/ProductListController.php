@@ -30,7 +30,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 use Respinar\ProductsBundle\Controller\Product;
 use Respinar\ProductsBundle\Model\ProductModel;
-use Respinar\ProductsBundle\Model\ProductCatalogModel;
+use Respinar\ProductsBundle\Model\CatalogModel;
 
 #[AsFrontendModule(category: "products")]
 class ProductListController extends AbstractFrontendModuleController
@@ -40,10 +40,10 @@ class ProductListController extends AbstractFrontendModuleController
     protected function getResponse(Template $template, ModuleModel $model, Request $request): Response
     {
 
-		//$objCatalog = ProductCatalogModel::findMultipleByIds(StringUtil::deserialize($model->product_catalogs));
-		
+		//$objCatalog = CatalogModel::findMultipleByIds(StringUtil::deserialize($model->product_catalogs));
+
         $objProducts = ProductModel::findPublishedByPids(StringUtil::deserialize($model->product_catalogs));
-		
+
         $template->products = Product::parseProducts($objProducts, $model);
 
         return $template->getResponse();

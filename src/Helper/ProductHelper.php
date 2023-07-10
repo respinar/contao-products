@@ -21,7 +21,7 @@ use Contao\Config;
 use Contao\System;
 use Contao\StringUtil;
 use Contao\CoreBundle\Security\ContaoCorePermissions;
-use Respinar\ProductsBUndle\Model\ProductCatalogModel;
+use Respinar\ProductsBUndle\Model\CatalogModel;
 
 /**
  * Class Product
@@ -45,7 +45,7 @@ class ProductHelper
 			return $arrCatalogs;
 		}
 
-		$objCatalog = ProductCatalogModel::findMultipleByIds($arrCatalogs);
+		$objCatalog = CatalogModel::findMultipleByIds($arrCatalogs);
 		$arrCatalogs = array();
 
 		if ($objCatalog !== null)

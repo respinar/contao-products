@@ -12,14 +12,14 @@ use Contao\PageModel;
 use Contao\Database;
 use Contao\CoreBundle\Framework\ContaoFramework;
 use Respinar\ProductsBundle\Model\ProductModel;
-use Respinar\ProductsBundle\Model\ProductCatalogModel;
+use Respinar\ProductsBundle\Model\CatalogModel;
 
 /**
  * @ServiceTag("kernel.event_listener", event=ContaoCoreEvents::SITEMAP)
  */
 class SitemapListener
 {
-	public function __construct(private readonly ContaoFramework $framework)	
+	public function __construct(private readonly ContaoFramework $framework)
     {
     }
 
@@ -37,14 +37,14 @@ class SitemapListener
         $time = time();
 
 		// Get all catalog categories
-		$objCatalogs = $this->framework->getAdapter(ProductCatalogModel::class)->findByProtected('');
-		//ProductCatalogModel::findByProtected('');
+		$objCatalogs = $this->framework->getAdapter(CatalogModel::class)->findByProtected('');
+		//CatalogModel::findByProtected('');
 
 		if (null === $objCatalogs) {
             return;
         }
 
-		// Walk through each catalog		
+		// Walk through each catalog
 		foreach ($objCatalogs as $objCatalog)
 		{
 			// Skip catalog without target page
@@ -93,7 +93,7 @@ class SitemapListener
 
                 $arrPages[] = $objParent->getAbsoluteUrl('/'.($objProduct->alias ?: $objProduct->id));
             }
-			
+
 		}
 
 		$sitemap = $event->getDocument();
@@ -105,8 +105,8 @@ class SitemapListener
 			$loc = $sitemap->createElement('loc', $strUrl);
 			$urlEl = $sitemap->createElement('url');
 			$urlEl->appendChild($loc);
-			$urlSet->appendChild($urlEl);            
+			$urlSet->appendChild($urlEl);
         }
-		
+
     }
 }

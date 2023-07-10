@@ -11,6 +11,8 @@
  * @copyright 2014-2016
  */
 
+use Contao\Backend;
+use Contao\Image;
 
 /**
  * Table tl_product_catalog
@@ -66,27 +68,23 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 		(
 			'edit' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_product_catalog']['edit'],
 				'href'                => 'table=tl_product',
 				'icon'                => 'edit.svg'
 			),
 			'editheader' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_product_catalog']['editheader'],
 				'href'                => 'act=edit',
 				'icon'                => 'header.svg',
 				'button_callback'     => array('tl_product_catalog', 'editHeader')
 			),
 			'copy' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_product_catalog']['copy'],
 				'href'                => 'act=copy',
 				'icon'                => 'copy.svg',
 				'button_callback'     => array('tl_product_catalog', 'copyCategory')
 			),
 			'delete' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_product_catalog']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.svg',
 				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"',
@@ -94,7 +92,6 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 			),
 			'show' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_product_catalog']['show'],
 				'href'                => 'act=show',
 				'icon'                => 'show.svg'
 			)
@@ -128,7 +125,6 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 		),
 		'title' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_product_catalog']['title'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
@@ -137,7 +133,6 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 		),
 		'jumpTo' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_product_catalog']['jumpTo'],
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
 			'foreignKey'              => 'tl_page.title',
@@ -147,7 +142,6 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 		),
 		'protected' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_product_catalog']['protected'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('submitOnChange'=>true),
@@ -155,7 +149,6 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 		),
 		'groups' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_product_catalog']['groups'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'foreignKey'              => 'tl_member_group.name',
@@ -165,7 +158,6 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 		),
 		'allowComments' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_product_catalog']['allowComments'],
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
@@ -174,7 +166,6 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 		),
 		'notify' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_product_catalog']['notify'],
 			'default'                 => 'notify_admin',
 			'exclude'                 => true,
 			'inputType'               => 'select',
@@ -185,7 +176,6 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 		),
 		'sortOrder' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_product_catalog']['sortOrder'],
 			'default'                 => 'ascending',
 			'exclude'                 => true,
 			'inputType'               => 'select',
@@ -196,7 +186,6 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 		),
 		'perPage' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_product_catalog']['perPage'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'natural', 'tl_class'=>'w50'),
@@ -204,7 +193,6 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 		),
 		'moderate' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_product_catalog']['moderate'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50'),
@@ -212,7 +200,6 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 		),
 		'bbcode' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_product_catalog']['bbcode'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50'),
@@ -220,7 +207,6 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 		),
 		'requireLogin' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_product_catalog']['requireLogin'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50'),
@@ -228,7 +214,6 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 		),
 		'disableCaptcha' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_product_catalog']['disableCaptcha'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50'),
@@ -261,118 +246,6 @@ class tl_product_catalog extends Backend
 			return;
 		}
 
-		// Set root IDs
-		if (!is_array($this->User->catalogs) || empty($this->User->catalogs))
-		{
-			$root = array(0);
-		}
-		else
-		{
-			$root = $this->User->catalogs;
-		}
-
-		$GLOBALS['TL_DCA']['tl_product_catalog']['list']['sorting']['root'] = $root;
-
-		// Check permissions to add Catalog categories
-		if (!$this->User->hasAccess('create', 'catalogp'))
-		{
-			$GLOBALS['TL_DCA']['tl_product_catalog']['config']['closed'] = true;
-		}
-
-		// Check current action
-		switch (Input::get('act'))
-		{
-			case 'create':
-			case 'select':
-				// Allow
-				break;
-
-			case 'edit':
-				// Dynamically add the record to the user profile
-				if (!in_array(Input::get('id'), $root))
-				{
-					$arrNew = $this->Session->get('new_records');
-
-					if (is_array($arrNew['tl_product_catalog']) && in_array(Input::get('id'), $arrNew['tl_product_catalog']))
-					{
-						// Add permissions on user level
-						if ($this->User->inherit == 'custom' || !$this->User->groups[0])
-						{
-							$objUser = $this->Database->prepare("SELECT catalogs, catalogp FROM tl_user WHERE id=?")
-													->limit(1)
-													->execute($this->User->id);
-
-							$arrCatalogp = deserialize($objUser->catalogp);
-
-							if (is_array($arrCatalogp) && in_array('create', $arrCatalogp))
-							{
-								$arrCatalogs = deserialize($objUser->catalogs);
-								$arrCatalogs[] = Input::get('id');
-
-								$this->Database->prepare("UPDATE tl_user SET catalogs=? WHERE id=?")
-											->execute(serialize($arrCatalogs), $this->User->id);
-							}
-						}
-
-						// Add permissions on group level
-						elseif ($this->User->groups[0] > 0)
-						{
-							$objGroup = $this->Database->prepare("SELECT catalogs, catalogp FROM tl_user_group WHERE id=?")
-													->limit(1)
-													->execute($this->User->groups[0]);
-
-							$arrCatalogp = deserialize($objGroup->catalogp);
-
-							if (is_array($arrCatalogp) && in_array('create', $arrCatalogp))
-							{
-								$arrCatalogs = deserialize($objGroup->catalogs);
-								$arrCatalogs[] = Input::get('id');
-
-								$this->Database->prepare("UPDATE tl_user_group SET catalogs=? WHERE id=?")
-											->execute(serialize($arrCatalogs), $this->User->groups[0]);
-							}
-						}
-
-						// Add new element to the user object
-						$root[] = Input::get('id');
-						$this->User->catalogs = $root;
-					}
-				}
-				// No break;
-
-			case 'copy':
-			case 'delete':
-			case 'show':
-				if (!in_array(Input::get('id'), $root) || (Input::get('act') == 'delete' && !$this->User->hasAccess('delete', 'catalogp')))
-				{
-					$this->log('Not enough permissions to '.Input::get('act').' Catalog category ID "'.Input::get('id').'"', __METHOD__, TL_ERROR);
-					$this->redirect('contao/main.php?act=error');
-				}
-				break;
-
-			case 'editAll':
-			case 'deleteAll':
-			case 'overrideAll':
-				$session = $this->Session->getData();
-				if (Input::get('act') == 'deleteAll' && !$this->User->hasAccess('delete', 'catalogp'))
-				{
-					$session['CURRENT']['IDS'] = array();
-				}
-				else
-				{
-					$session['CURRENT']['IDS'] = array_intersect($session['CURRENT']['IDS'], $root);
-				}
-				$this->Session->setData($session);
-				break;
-
-			default:
-				if (strlen(Input::get('act')))
-				{
-					$this->log('Not enough permissions to '.Input::get('act').' Catalog categories', __METHOD__, TL_ERROR);
-					$this->redirect('contao/main.php?act=error');
-				}
-				break;
-		}
 	}
 
 	/**

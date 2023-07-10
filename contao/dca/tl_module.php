@@ -11,19 +11,32 @@
  * @copyright 2014-2016
  */
 
+use Contao\System;
+
 /**
  * Add palettes to tl_module
  */
-
-$GLOBALS['TL_DCA']['tl_module']['palettes']['product_list']    = '{title_legend},name,headline,type;{catalog_legend},product_catalogs,product_categories,product_featured,product_detailModule,product_sortBy,numberOfItems,perPage,skipFirst;{template_legend},product_metaFields,customTpl;{product_legend},product_template,imgSize,product_list_Class,product_Class;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['product_detail']  = '{title_legend},name,headline,type;{catalog_legend},product_catalogs;{template_legend},product_metaFields,customTpl;{product_legend},product_template,imgSize;{related_legend},related_show,related_template,related_imgSize,product_list_Class,related_Class;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['product_list']    = '
+	{title_legend},name,headline,type;
+	{catalog_legend},product_catalogs,product_categories,product_featured,product_detailModule,product_sortBy,numberOfItems,perPage,skipFirst;
+	{template_legend},product_metaFields,customTpl;
+	{product_legend},product_template,imgSize,product_list_Class,product_Class;
+	{protected_legend:hide},protected;
+	{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['product_detail']  = '
+	{title_legend},name,headline,type;
+	{catalog_legend},product_catalogs;
+	{template_legend},product_metaFields,customTpl;
+	{product_legend},product_template,imgSize;
+	{related_legend},related_show,related_template,related_imgSize,product_list_Class,related_Class;
+	{protected_legend:hide},protected;
+	{expert_legend:hide},guests,cssID,space';
 
 /**
  * Add fields to tl_module
  */
 $GLOBALS['TL_DCA']['tl_module']['fields']['product_catalogs'] = array
 (
-	'label'                => &$GLOBALS['TL_LANG']['tl_module']['product_catalogs'],
 	'exclude'              => true,
 	'inputType'            => 'checkbox',
 	'foreignKey'           => 'tl_product_catalog.title',
@@ -32,7 +45,6 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_catalogs'] = array
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['product_categories'] = array
 (
-    'label'                   => &$GLOBALS['TL_LANG']['tl_module']['product_categories'],
     'exclude'                 => true,
     'inputType'               => 'treePicker',
     'foreignKey'              => 'tl_product_category.title',
@@ -41,7 +53,6 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_categories'] = array
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['product_featured'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['product_featured'],
 	'default'                 => 'all_product',
 	'exclude'                 => true,
 	'inputType'               => 'select',
@@ -52,7 +63,6 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_featured'] = array
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['product_sortBy'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['product_sortBy'],
 	'default'                 => 'custom',
 	'exclude'                 => true,
 	'inputType'               => 'select',
@@ -63,7 +73,6 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_sortBy'] = array
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['product_metaFields'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['product_metaFields'],
 	'default'                 => array(''),
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
@@ -74,27 +83,22 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_metaFields'] = array
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['product_detailModule'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['product_detailModule'],
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options_callback'        => array('tl_module_product', 'getDetailModules'),
 	'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
 	'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
 	'sql'                     => "int(10) unsigned NOT NULL default '0'"
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['product_template'] = array
 (
-	'label'                => &$GLOBALS['TL_LANG']['tl_module']['product_template'],
 	'default'              => 'product_short',
 	'exclude'              => true,
 	'inputType'            => 'select',
-	'options_callback'     => array('tl_module_product', 'getProductTemplates'),
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['product_list_Class'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['product_list_Class'],
 	'exclude'                 => true,
 	'inputType'               => 'text',
 	'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
@@ -102,7 +106,6 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_list_Class'] = array
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['product_Class'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['product_Class'],
 	'exclude'                 => true,
 	'inputType'               => 'text',
 	'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
@@ -110,7 +113,6 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_Class'] = array
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['related_show'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['related_show'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
 	'eval'                    => array(),
@@ -118,18 +120,15 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['related_show'] = array
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['related_template'] = array
 (
-	'label'                => &$GLOBALS['TL_LANG']['tl_module']['related_template'],
 	'default'              => 'product_related',
 	'exclude'              => true,
 	'inputType'            => 'select',
-	'options_callback'     => array('tl_module_product', 'getRelatedTemplates'),
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['related_Class'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['related_Class'],
 	'exclude'                 => true,
 	'inputType'               => 'text',
 	'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
@@ -137,70 +136,17 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['related_Class'] = array
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['related_imgSize'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['related_imgSize'],
 	'exclude'                 => true,
 	'inputType'               => 'imageSize',
-	'options'                 => System::getImageSizes(),
 	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-	'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
-	'sql'                     => "varchar(64) NOT NULL default ''"
+	'eval'                    => array('rgxp'=>'natural', 'includeBlankOption'=>true, 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
+	'sql'                     => "varchar(128) COLLATE ascii_bin NOT NULL default ''"
 );
 
-$bundles = Contao\System::getContainer()->getParameter('kernel.bundles');
+$bundles = System::getContainer()->getParameter('kernel.bundles');
 
 // Add the comments template drop-down menu
 if (isset($bundles['ContaoCommentsBundle']))
 {
 	$GLOBALS['TL_DCA']['tl_module']['palettes']['product_detail'] = str_replace('{protected_legend:hide}', '{comment_legend:hide},com_template;{protected_legend:hide}', $GLOBALS['TL_DCA']['tl_module']['palettes']['product_detail']);
-}
-
-
-
-/**
- * Class tl_module_product
- *
- * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Hamid Abbaszadeh 2014
- * @author     Hamid Abbaszadeh <http://respinar.com>
- * @package    Catalog
- */
-class tl_module_product extends Backend
-{
-	
-	/**
-	 * Return all product templates as array
-	 *
-	 * @return array
-	 */
-	public function getProductTemplates()
-	{
-		return $this->getTemplateGroup('product_');
-	}
-    
-    /**
-	 * Return all related templates as array
-	 *
-	 * @return array
-	 */
-	public function getRelatedTemplates()
-	{
-		return $this->getTemplateGroup('related_');
-	}
-
-	/**
-	 * Get all product detail modules and return them as array
-	 * @return array
-	 */
-	public function getDetailModules()
-	{
-		$arrModules = array();
-		$objModules = $this->Database->execute("SELECT m.id, m.name, t.name AS theme FROM tl_module m LEFT JOIN tl_theme t ON m.pid=t.id WHERE m.type='product_detail' ORDER BY t.name, m.name");
-
-		while ($objModules->next())
-		{
-			$arrModules[$objModules->theme][$objModules->id] = $objModules->name . ' (ID ' . $objModules->id . ')';
-		}
-
-		return $arrModules;
-	}
 }
