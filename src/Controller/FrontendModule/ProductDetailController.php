@@ -24,6 +24,7 @@ use Contao\CoreBundle\DependencyInjection\Attribute\AsFrontendModule;
 use Contao\ModuleModel;
 use Contao\Template;
 use Contao\Input;
+use Contao\System;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -31,6 +32,7 @@ use Respinar\ProductsBundle\Controller\Product;
 use Respinar\ProductsBundle\Model\ProductModel;
 use Respinar\ProductsBundle\Model\CatalogModel;
 use Contao\CoreBundle\Exception\PageNotFoundException;
+use Contao\CoreBundle\Routing\ResponseContext\HtmlHeadBag\HtmlHeadBag;
 
 
 #[AsFrontendModule(category: "products")]
@@ -47,6 +49,32 @@ class ProductDetailController extends AbstractFrontendModuleController
 		}
 
         $objProduct = ProductModel::findOneByAlias(Input::get('items'));
+
+		$responseContext = System::getContainer()->get('contao.routing.response_context_accessor')->getResponseContext();
+
+		
+		if ($responseContext && $responseContext->has(HtmlHeadBag::class))
+		{		
+			
+			/** @var HtmlHeadBag $htmlHeadBag */
+			$htmlHeadBag = $responseContext->get(HtmlHeadBag::class);
+			$htmlDecoder = System::getContainer()->get('contao.string.html_decoder');
+
+			if ($objProduct->pageTitle)
+			{
+				$htmlHeadBag->setTitle($objProduct->pageTitle); // Already stored decoded
+			}
+			elseif ($objProduct->title)
+			{
+				$htmlHeadBag->setTitle($objProduct->title);
+			}	
+
+			if ($objProduct->description)
+			{
+				$htmlHeadBag->setMetaDescription($htmlDecoder->inputEncodedToPlainText($objProduct->description));
+			}
+
+		}
 
         //$objCatalog = CatalogModel::findByIdOrAlias($objProduct->pid);
 
