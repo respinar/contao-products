@@ -236,7 +236,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'sorting'                 => true,
-			'options'				  => array('RLS','TMN','USD','EUR'),
+			'options'				  => array('IRR','TMN','USD','EUR'),
 			'inputType'               => 'inputUnit',
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
 			'eval'                    => array('includeBlankOption'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),

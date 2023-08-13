@@ -26,16 +26,16 @@ $GLOBALS['TL_LANG']['MSC']['specs']             = 'مشخصات';
 $GLOBALS['TL_LANG']['MSC']['types_headline']    = 'انواع';
 $GLOBALS['TL_LANG']['MSC']['moreDetail']        = 'جزئیات بیشتر %s';
 
-$GLOBALS['TL_LANG']['MSC']['RLS']      = 'ریال';
+$GLOBALS['TL_LANG']['MSC']['IRR']      = 'ریال';
 $GLOBALS['TL_LANG']['MSC']['TMN']      = 'تومان';
 $GLOBALS['TL_LANG']['MSC']['USD']      = 'دلار';
 $GLOBALS['TL_LANG']['MSC']['EUR']      = 'یورو';
 
 $GLOBALS['TL_LANG']['MSC']['Discontinued'] = 'عدم تولید';
 $GLOBALS['TL_LANG']['MSC']['InStock']      = 'موجود';
-$GLOBALS['TL_LANG']['MSC']['InStoreOnly']  = 'In Store Only';
+$GLOBALS['TL_LANG']['MSC']['InStoreOnly']  = 'فقط در فروشگاه';
 $GLOBALS['TL_LANG']['MSC']['LimitedAvailability'] = 'موجودی محدود';
-$GLOBALS['TL_LANG']['MSC']['OnlineOnly']   = 'OnlineOnly';
+$GLOBALS['TL_LANG']['MSC']['OnlineOnly']   = 'فقط آنلاین';
 $GLOBALS['TL_LANG']['MSC']['OutOfStock']   = 'عدم موجودی';
 $GLOBALS['TL_LANG']['MSC']['PreOrder']     = 'پیش سفارش';
 $GLOBALS['TL_LANG']['MSC']['PreSale']      = 'پیش فروش';
