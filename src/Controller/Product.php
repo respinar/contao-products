@@ -115,6 +115,8 @@ abstract class Product
 		// Add an image
 		if ($objProduct->singleSRC)
 		{
+			$imgSize = null;
+			
 			if ($model->imgSize)
 			{
 				$size = StringUtil::deserialize($model->imgSize);

@@ -37,7 +37,7 @@ $GLOBALS['TL_LANG']['MSC']['PreOrder']     = 'Pre Order';
 $GLOBALS['TL_LANG']['MSC']['PreSale']      = 'Pre Sale';
 $GLOBALS['TL_LANG']['MSC']['SoldOut']      = 'Sold Out';
 
-$GLOBALS['TL_LANG']['MSC']['RLS']      = 'Iranian Rial';
+$GLOBALS['TL_LANG']['MSC']['IRR']      = 'Iranian Rial';
 $GLOBALS['TL_LANG']['MSC']['TMN']      = 'Iranian Toman';
 $GLOBALS['TL_LANG']['MSC']['USD']      = 'US Dollar';
 $GLOBALS['TL_LANG']['MSC']['EUR']      = 'Euro';
