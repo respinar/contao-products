@@ -173,15 +173,15 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 			),
 			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
-		'categories' => array
-		(
-			'exclude'                 => true,
-			'filter'                  => true,
-			'inputType'               => 'treePicker',
-			'foreignKey'              => 'tl_product_category.title',
-			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'foreignTable'=>'tl_product_category', 'titleField'=>'title', 'searchField'=>'title', 'managerHref'=>'table=tl_product_category'),
-			'sql'                     => "blob NULL"
-		),
+		// 'categories' => array
+		// (
+		// 	'exclude'                 => true,
+		// 	'filter'                  => true,
+		// 	'inputType'               => 'treePicker',
+		// 	'foreignKey'              => 'tl_product_category.title',
+		// 	'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'foreignTable'=>'tl_product_category', 'titleField'=>'title', 'searchField'=>'title', 'managerHref'=>'table=tl_product_category'),
+		// 	'sql'                     => "blob NULL"
+		// ),
 		'brand' => array
 		(
 			'exclude'                 => true,
@@ -523,42 +523,42 @@ class tl_product extends Backend
      * Update the category relations
      * @param DataContainer
      */
-    public function updateCategories(DataContainer $dc)
-    {
-        $this->import('BackendUser', 'User');
-        $arrCategories = StringUtil::deserialize($dc->activeRecord->categories);
+    // public function updateCategories(DataContainer $dc)
+    // {
+    //     $this->import('BackendUser', 'User');
+    //     $arrCategories = StringUtil::deserialize($dc->activeRecord->categories);
 
-        // Use the default categories if the user is not allowed to edit the field directly
-        if (!$this->User->isAdmin && !in_array('tl_product::categories', $this->User->alexf)) {
+    //     // Use the default categories if the user is not allowed to edit the field directly
+    //     if (!$this->User->isAdmin && !in_array('tl_product::categories', $this->User->alexf)) {
 
-            // Return if the record is not new
-            if ($dc->activeRecord->tstamp) {
-                return;
-            }
+    //         // Return if the record is not new
+    //         if ($dc->activeRecord->tstamp) {
+    //             return;
+    //         }
 
-            $arrCategories = $this->User->productcategories_default;
-        }
+    //         $arrCategories = $this->User->productcategories_default;
+    //     }
 
-        $this->deleteCategories($dc);
+    //     $this->deleteCategories($dc);
 
-        if (is_array($arrCategories) && !empty($arrCategories)) {
-            foreach ($arrCategories as $intCategory) {
-                $this->Database->prepare("INSERT INTO tl_product_categories (category_id, product_id) VALUES (?, ?)")
-                               ->execute($intCategory, $dc->id);
-            }
+    //     if (is_array($arrCategories) && !empty($arrCategories)) {
+    //         foreach ($arrCategories as $intCategory) {
+    //             $this->Database->prepare("INSERT INTO tl_product_categories (category_id, product_id) VALUES (?, ?)")
+    //                            ->execute($intCategory, $dc->id);
+    //         }
 
-            $this->Database->prepare("UPDATE tl_product SET categories=? WHERE id=?")
-                           ->execute(serialize($arrCategories), $dc->id);
-        }
-    }
+    //         $this->Database->prepare("UPDATE tl_product SET categories=? WHERE id=?")
+    //                        ->execute(serialize($arrCategories), $dc->id);
+    //     }
+    // }
 
     /**
      * Delete the category relations
      * @param DataContainer
      */
-    public function deleteCategories(DataContainer $dc)
-    {
-        $this->Database->prepare("DELETE FROM tl_product_categories WHERE product_id=?")
-                       ->execute($dc->id);
-    }
+    // public function deleteCategories(DataContainer $dc)
+    // {
+    //     $this->Database->prepare("DELETE FROM tl_product_categories WHERE product_id=?")
+    //                    ->execute($dc->id);
+    // }
 }
