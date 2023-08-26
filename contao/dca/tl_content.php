@@ -1,14 +1,11 @@
 <?php
 
-/**
- * Contao Open Source CMS
+/*
+ * This file is part of Contao Products Bundle.
  *
- * Copyright (c) 2005-2016 Leo Feyer
+ * (c) Hamid Peywasti 2023 <hamid.peywasti@gmail.com>
  *
- * @package   product
- * @author    Hamid Abbaszadeh
- * @license   LGPL-3.0+
- * @copyright 2014-2016
+ * @license MIT
  */
 
 use Contao\Input;

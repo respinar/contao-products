@@ -2,6 +2,14 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of Contao Products Bundle.
+ *
+ * (c) Hamid Peywasti 2023 <hamid.peywasti@gmail.com>
+ *
+ * @license MIT
+ */
+
 namespace Respinar\ProductsBundle\EventListener;
 
 use Contao\CoreBundle\DependencyInjection\Attribute\AsHook;
@@ -20,7 +28,7 @@ class InsertTagsListener
     ];
 
     public function __construct(private readonly ContaoFramework $framework, private readonly LoggerInterface $logger)
-    {        
+    {
     }
 
     public function __invoke(string $tag, bool $useCache, $cacheValue, array $flags): string|false
@@ -47,7 +55,7 @@ class InsertTagsListener
 
         $product = $this->framework->getAdapter(Product::class);
 
-        return match ($insertTag) {            
+        return match ($insertTag) {
             'product_url' => $product->generateProductUrl($model, false, \in_array('absolute', $arguments, true)) ?: './',
             default => '',
         };

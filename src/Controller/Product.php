@@ -1,13 +1,11 @@
 <?php
 
-/**
- * Contao Open Source CMS
+/*
+ * This file is part of Contao Products Bundle.
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * (c) Hamid Peywasti 2023 <hamid.peywasti@gmail.com>
  *
- * @package Products
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license MIT
  */
 
 
@@ -116,7 +114,7 @@ abstract class Product
 		if ($objProduct->singleSRC)
 		{
 			$imgSize = null;
-			
+
 			if ($model->imgSize)
 			{
 				$size = StringUtil::deserialize($model->imgSize);

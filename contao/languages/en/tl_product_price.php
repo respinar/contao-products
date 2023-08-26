@@ -1,14 +1,11 @@
 <?php
 
-/**
- * Contao Open Source CMS
+/*
+ * This file is part of Contao Products Bundle.
  *
- * Copyright (c 2005-2014 Leo Feyer
+ * (c) Hamid Peywasti 2023 <hamid.peywasti@gmail.com>
  *
- * @package   ProductList
- * @author    Hamid Abbaszadeh
- * @license   GNU/LGPL
- * @copyright 2014
+ * @license MIT
  */
 
 

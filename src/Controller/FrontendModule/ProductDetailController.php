@@ -2,15 +2,12 @@
 
 declare(strict_types=1);
 
-/**
- * Contao Open Source CMS
+/*
+ * This file is part of Contao Products Bundle.
  *
- * Copyright (c) 2005-2016 Leo Feyer
+ * (c) Hamid Peywasti 2023 <hamid.peywasti@gmail.com>
  *
- * @package   product
- * @author    Hamid Abbaszadeh
- * @license   LGPL-3.0+
- * @copyright 2014-2016
+ * @license MIT
  */
 
 
@@ -52,10 +49,10 @@ class ProductDetailController extends AbstractFrontendModuleController
 
 		$responseContext = System::getContainer()->get('contao.routing.response_context_accessor')->getResponseContext();
 
-		
+
 		if ($responseContext && $responseContext->has(HtmlHeadBag::class))
-		{		
-			
+		{
+
 			/** @var HtmlHeadBag $htmlHeadBag */
 			$htmlHeadBag = $responseContext->get(HtmlHeadBag::class);
 			$htmlDecoder = System::getContainer()->get('contao.string.html_decoder');
@@ -67,7 +64,7 @@ class ProductDetailController extends AbstractFrontendModuleController
 			elseif ($objProduct->title)
 			{
 				$htmlHeadBag->setTitle($objProduct->title);
-			}	
+			}
 
 			if ($objProduct->description)
 			{
