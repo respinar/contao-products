@@ -417,9 +417,7 @@ abstract class Product
 				"seller" => array(
 					"@type" => "Organization",
 					"name" => $objProduct->brand
-				),
-				"ratingValue" => $objProduct->rating_value,
-   				"reviewCount" => $objProduct->rating_count
+				)
 			);
 		}
 
