@@ -139,40 +139,6 @@ abstract class Product
 			{
 				$figure->applyLegacyTemplateData($objTemplate);
 			}
-
-
-			// $objModel = FilesModel::findByUuid($objProduct->singleSRC);
-
-			// if ($objModel !== null && is_file(System::getContainer()->getParameter('kernel.project_dir') . '/' . $objModel->path))
-			// {
-			// 	// Do not override the field now that we have a model registry (see #6303)
-			// 	$arrProduct = $objProduct->row();
-
-			// 	// Override the default image size
-			// 	if ($model->imgSize != '')
-			// 	{
-			// 		$size = StringUtil::deserialize($model->imgSize);
-
-			// 		if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
-			// 		{
-			// 			$arrProduct['size'] = $model->imgSize;
-			// 		}
-			// 	}
-
-			// 	$arrProduct['singleSRC'] = $objModel->path;
-
-			// 	// Link to the product detail if no image link has been defined
-			// 	$picture = $objTemplate->picture;
-			// 	unset($picture['title']);
-			// 	$objTemplate->picture = $picture;
-
-			// 	$objTemplate->href = $objTemplate->link;
-			// 	$objTemplate->linkTitle = StringUtil::specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['moreDetail'], $objProduct->title), true);
-
-			// 	$this->addImageToTemplate($objTemplate, $arrProduct, null, null, $objModel);
-
-			// }
-
 		}
 
 		$objTemplate->enclosure = array();
