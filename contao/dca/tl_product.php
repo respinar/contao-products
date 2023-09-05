@@ -134,23 +134,23 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 		'pid' => array
 		(
 			'foreignKey'              => 'tl_product_catalog.title',
-			'sql'                     => "int(10) unsigned NOT NULL default '0'",
-			'relation'                => array('type'=>'belongsTo', 'load'=>'eager')
+			'sql'                     => "int(10) unsigned NOT NULL default 0",
+			'relation'                => array('type'=>'belongsTo', 'load'=>'lazy')
 		),
 		'sorting' => array
 		(
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+			'sql'                     => "int(10) unsigned NOT NULL default 0"
 		),
 		'tstamp' => array
 		(
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+			'sql'                     => "int(10) unsigned NOT NULL default 0"
 		),
 		'visit' => array
 		(
 			'sorting'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('disabled'=>true, 'tl_class'=>'w50'),
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+			'sql'                     => "int(10) unsigned NOT NULL default 0"
 		),
 		'title' => array
 		(
@@ -247,21 +247,21 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 			'flag'                    => 8,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'date', 'doNotCopy'=>true, 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+			'sql'                     => "int(10) unsigned NOT NULL default 0"
 		),
 		'rating_value' => array
 		(
 			'sorting'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('disabled'=>true,'tl_class'=>'w50'),
-			'sql'                     => "varchar(10) NOT NULL default '0'"
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "varchar(10) NOT NULL default 0"
 		),
 		'rating_count' => array
 		(
 			'sorting'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('disabled'=>true, 'tl_class'=>'w50'),
-			'sql'                     => "int(10) NOT NULL default '0'"
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "int(10) NOT NULL default 0"
 		),
 		'date' => array
 		(
@@ -271,7 +271,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 			'flag'                    => 8,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'date', 'doNotCopy'=>true, 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+			'sql'                     => "int(10) unsigned NOT NULL default 0"
 		),
 		'url' => array
 		(
@@ -286,7 +286,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50 m12'),
-			'sql'                     => "char(1) NOT NULL default ''"
+			'sql'                     => array('type' => 'boolean', 'default' => false)
 		),
 		'titleText' => array
 		(
@@ -341,7 +341,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('submitOnChange'=>true, 'tl_class'=>'w50 clr'),
-			'sql'                     => "char(1) NOT NULL default ''"
+			'sql'                     => array('type' => 'boolean', 'default' => false)
 		),
 		'alt' => array
 		(
@@ -366,7 +366,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('submitOnChange'=>true),
-			'sql'                     => "char(1) NOT NULL default ''"
+			'sql'                     => array('type' => 'boolean', 'default' => false)
 		),
 		'enclosure' => array
 		(
@@ -390,7 +390,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 			'flag'                    => 1,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('doNotCopy'=>true),
-			'sql'                     => "char(1) NOT NULL default ''"
+			'sql'                     => array('type' => 'boolean', 'default' => false)
 		),
 		'featured' => array
 		(
@@ -399,7 +399,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50 m12'),
-			'sql'                     => "char(1) NOT NULL default ''"
+			'sql'                     => array('type' => 'boolean', 'default' => false)
 		),
 		'start' => array
 		(

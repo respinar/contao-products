@@ -14,7 +14,7 @@ namespace Respinar\ProductsBundle\EventListener;
 
 use Contao\CoreBundle\Event\ContaoCoreEvents;
 use Contao\CoreBundle\Event\SitemapEvent;
-use Terminal42\ServiceAnnotationBundle\Annotation\ServiceTag;
+use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 
 use Contao\PageModel;
 use Contao\Database;
@@ -22,9 +22,7 @@ use Contao\CoreBundle\Framework\ContaoFramework;
 use Respinar\ProductsBundle\Model\ProductModel;
 use Respinar\ProductsBundle\Model\CatalogModel;
 
-/**
- * @ServiceTag("kernel.event_listener", event=ContaoCoreEvents::SITEMAP)
- */
+#[AsEventListener(ContaoCoreEvents::SITEMAP)]
 class SitemapListener
 {
 	public function __construct(private readonly ContaoFramework $framework)
@@ -35,6 +33,7 @@ class SitemapListener
     {
 
         $arrRoot = $this->framework->createInstance(Database::class)->getChildRecords($event->getRootPageIds(), 'tl_page');
+        echo $arrRoot;
 
         // Early return here in the unlikely case that there are no pages
         if (empty($arrRoot)) {
@@ -95,13 +94,8 @@ class SitemapListener
             }
 
 			foreach ($objProducts as $objProduct) {
-                // if ('noindex,nofollow' === $objNews->robots) {
-                //     continue;
-                // }
-
                 $arrPages[] = $objParent->getAbsoluteUrl('/'.($objProduct->alias ?: $objProduct->id));
             }
-
 		}
 
 		$sitemap = $event->getDocument();
@@ -115,6 +109,5 @@ class SitemapListener
 			$urlEl->appendChild($loc);
 			$urlSet->appendChild($urlEl);
         }
-
     }
 }
