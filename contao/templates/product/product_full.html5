@@ -1,41 +1,39 @@
 
-<div itemscope itemtype="http://schema.org/Product" class="product_full<?= $this->class; ?>">
+<div class="product_full<?= $this->class; ?>">
 
-  <h1 itemprop="name"><?= $this->title; ?></h1>
+  <h1><?= $this->title; ?></h1>
 
   <?php if ($this->hasMetaFields): ?>
 
     <div class="meta">
       <div class="info">
-
-        <time datetime="<?= $this->datetime; ?>"><?= $this->date; ?></time>
+        <time datetime="<?= $this->datetime; ?>"><?= $this->meta_date; ?></time>
         <?php if($this->meta_brand): ?>
-          <span class="brand"><?= $this->meta_brand_txt; ?>: <span itemprop="brand"><?= $this->meta_brand; ?></span></span>
+          <span class="brand"><?= $this->meta_brand_txt; ?>: <span><?= $this->meta_brand; ?></span></span>
         <?php endif; ?>
         <?php if($this->meta_model): ?>
           <span class="model"><?= $this->meta_model_txt; ?>: <span><?= $this->meta_model; ?></span></span>
-        <?php endif; ?>      
+        <?php endif; ?>
         <?php if($this->meta_sku): ?>
-          <span class="sku"><?= $this->meta_sku_txt; ?>: <span itemprop="sku"><?= $this->meta_sku; ?></span></span>
+          <span class="sku"><?= $this->meta_sku_txt; ?>: <span><?= $this->meta_sku; ?></span></span>
         <?php endif; ?>
         <?php if($this->meta_global_ID): ?>
-          <span class="global_ID"><?= $this->meta_global_ID_txt; ?>: <span itemprop="<?= $this->meta_global_ID['unit']; ?>"><?= $this->meta_global_ID['value']; ?></span></span>
-        <?php endif; ?>    
+          <span class="global_ID"><?= $this->meta_global_ID_txt; ?>: <span><?= $this->meta_global_ID['value']; ?></span></span>
+        <?php endif; ?>
       </div>
 
-      <div class="offers" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+      <div class="offers">
         <?php if($this->meta_price): ?>
-          <?= $this->meta_price_txt; ?>:    
-          <span itemprop="price" content="<?= $this->meta_price['value']; ?>"><?= number_format($this->meta_price['value']); ?></span>
-          <span itemprop="priceCurrency" content="<?= $this->meta_price['unit']; ?>"><?= $this->meta_price['symbol']; ?></span>
-          <meta itemprop="priceValidUntil" content="<?= $this->meta_price['priceValidUntil']; ?>">         
+          <?= $this->meta_price_txt; ?>:
+          <span><?= number_format($this->meta_price['value']); ?></span>
+          <span><?= $this->meta_price['symbol']; ?></span>
         <?php endif; ?>
         <?php if($this->meta_availability): ?>
-          <span class="availability"> (<link itemprop="availability" href="http://schema.org/<?= $this->meta_availability; ?>"><?= $this->meta_availability_txt; ?>) </span>
+          <span class="availability"> (<?= $this->meta_availability_txt; ?>) </span>
         <?php endif; ?>
         <?php if($this->meta_buy): ?>
             <span class="buy">
-              <a itemprop="url" href="<?= $this->url ?>" class="hyperlink_txt" title="<?= $this->linkTitle ?>" <?php if($this->target): ?> target="_blank" rel="nofollow" <?php endif; ?> >
+              <a href="<?= $this->url ?>" class="hyperlink_txt" title="<?= $this->linkTitle ?>" <?php if($this->target): ?> target="_blank" rel="nofollow" <?php endif; ?> >
               <?php if($this->titleText): ?>
                 <?= $this->titleText ?>
               <?php else: ?>
@@ -46,17 +44,12 @@
         <?php endif; ?>
       </div>
 
-      <div class="rating" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
-        <span class="rateit ltr" itemprop="ratingValue" content="<?= $this->rating_value; ?>" data-rateit-value="<?= $this->rating_value; ?>" data-rateit-ispreset="true" data-rateit-readonly="true"></span>      
-        <span class="ratingcount" itemprop="ratingCount" content="<?= $this->rating_count; ?>">(<?= $this->rating_count; ?> <?= $this->meta_vote_txt; ?>)</span>
-        <meta itemprop="bestRating" content="5">        
-      </div>    
-  </div>    
+  </div>
 
   <?php endif; ?>
 
   <?php if ($this->summary): ?>
-    <div class="summary" itemprop="description">
+    <div class="summary">
       <?= $this->summary; ?>
     </div>
   <?php endif; ?>
@@ -66,13 +59,23 @@
       <?= $this->text; ?>
     </div>
   <?php endif; ?>
-  
+
   <?php if ($this->enclosure): ?>
     <div class="enclosure">
       <?php foreach ($this->enclosure as $enclosure): ?>
-        <p><img src="<?= $enclosure['icon']; ?>" width="18" height="18" alt="<?= $enclosure['mime']; ?>" class="mime_icon"> <a href="<?= $enclosure['href']; ?>" title="<?= $enclosure['title']; ?>"><?= $enclosure['link']; ?> <span class="size">(<?= $enclosure['filesize']; ?>)</span></a></p>
+        <p>
+          <img src="<?= $enclosure['icon']; ?>" width="18" height="18" alt="<?= $enclosure['mime']; ?>" class="mime_icon">
+          <a href="<?= $enclosure['href']; ?>" title="<?= $enclosure['title']; ?>"><?= $enclosure['link']; ?>
+            <span class="size">(<?= $enclosure['filesize']; ?>)</span>
+          </a>
+        </p>
       <?php endforeach; ?>
     </div>
   <?php endif; ?>
 
 </div>
+
+<?php
+
+$schemaOrg = $this->getSchemaOrgData();
+$this->addSchemaOrg($schemaOrg);
