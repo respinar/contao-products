@@ -72,8 +72,12 @@ abstract class Product
 
 		$arrMeta = Product::getMetaFields($objProduct, $model);
 
+		// print_r($model->product_metaFields);
+		// print_r($arrMeta);
+		// exit('STOP');
+
 		// Add the meta information
-		$objTemplate->date         = $arrMeta['date'] ?? '';
+		$objTemplate->meta_date    = $arrMeta['date'] ?? '';
 		$objTemplate->meta_brand   = $arrMeta['brand'] ?? '';
 		$objTemplate->meta_price   = $arrMeta['price'] ?? '';
 		$objTemplate->meta_availability = $arrMeta['availability'] ?? '';
@@ -168,6 +172,7 @@ abstract class Product
 			// 	$this->addImageToTemplate($objTemplate, $arrProduct, null, null, $objModel);
 
 			// }
+
 		}
 
 		$objTemplate->enclosure = array();
@@ -181,6 +186,17 @@ abstract class Product
 		$objTemplate->featured_text = "Featured";
 		$objTemplate->new_text = "New";
 
+		// schema.org information
+		$objTemplate->getSchemaOrgData = static function () use ($objTemplate, $objProduct): array {
+			$jsonLd = Product::getSchemaOrgData($objProduct);
+
+			if ($objTemplate->figure)
+			{
+				$jsonLd['image'] = $objTemplate->figure->getSchemaOrgData();
+			}
+
+			return $jsonLd;
+		};
 
 		return $objTemplate->parse();
 	}
@@ -312,7 +328,7 @@ abstract class Product
 	{
 		$meta = StringUtil::deserialize($model->product_metaFields);
 
-		if (!is_array($meta))
+		if (!\is_array($meta))
 		{
 			return array();
 		}
@@ -320,55 +336,94 @@ abstract class Product
 		global $objPage;
 		$return = array();
 
-		foreach ($meta as $field)
-		{
-			switch ($field)
-			{
-				case 'date':
-					$return['date'] = Date::parse($objPage->datimFormat, $objProduct->date);
-					break;
+		if (\in_array("date", $meta)){
+			$return['date'] = Date::parse($objPage->datimFormat, $objProduct->date);
+		}
 
-				case 'price':
-					if ($objProduct->price)
-						$return['price'] = StringUtil::deserialize($objProduct->price);
-						$return['price']['symbol'] = $GLOBALS['TL_LANG']['MSC'][$return['price']['unit']];
-						$return['price']['priceValidUntil'] = date('Y-m-d\TH:i:sP', $objProduct->priceValidUntil);
-						$return['price']['url'] = $objProduct->url;
-					break;
+		if (\in_array("price", $meta) && isset($objProduct->price)){
+			$return['price'] = StringUtil::deserialize($objProduct->price);
+			$return['price']['symbol'] = $GLOBALS['TL_LANG']['MSC'][$return['price']['unit']];
+			$return['price']['priceValidUntil'] = date('Y-m-d\TH:i:sP', $objProduct->priceValidUntil);
+			$return['price']['url'] = $objProduct->url ?? '';
+		}
 
-				case 'availability':
-					if ($objProduct->availability)
-						$return['availability'] = $objProduct->availability;
-					break;
+		if (\in_array("availability", $meta) && isset($objProduct->availability)){
+			$return['availability'] = $objProduct->availability;
+		}
 
-				case 'global_ID':
-					if ($objProduct->global_ID)
-						$return['global_ID'] = StringUtil::deserialize($objProduct->global_ID);
-					break;
+		if (\in_array("global_ID", $meta) && isset($objProduct->global_ID)){
+			$return['global_ID'] = StringUtil::deserialize($objProduct->global_ID);
+		}
 
-				case 'model':
-					if ($objProduct->model)
-						$return['model'] = $objProduct->model;
-					break;
+		if (\in_array("model", $meta) && isset($objProduct->model)){
+			$return['model'] = $objProduct->model;
+		}
 
-				case 'brand':
-					if ($objProduct->brand)
-						$return['brand'] = $objProduct->brand;
-					break;
+		if (\in_array("brand", $meta) && isset($objProduct->brand)){
+			$return['brand'] = $objProduct->brand;
+		}
 
-				case 'sku':
-					if ($objProduct->sku)
-						$return['sku'] = $objProduct->sku;
-					break;
+		if (\in_array("sku", $meta) && isset($objProduct->sku)){
+			$return['sku'] = $objProduct->sku;
+		}
 
-				case 'buy':
-					if ($objProduct->url)
-						$return['buy'] = $objProduct->url;
-					break;
-			}
+		if (\in_array("buy", $meta) && isset($objProduct->url)){
+			$return['buy'] = $objProduct->url;
 		}
 
 		return $return;
+	}
+
+	/**
+	 * Return the schema.org data from a product
+	 *
+	 * @return array
+	 */
+	public static function getSchemaOrgData($objProduct): array
+	{
+		$htmlDecoder = System::getContainer()->get('contao.string.html_decoder');
+		$price = StringUtil::deserialize($objProduct->price);
+		$global_ID = StringUtil::deserialize($objProduct->global_ID);
+
+		$jsonLd = array(
+			"@type" => "Product",
+			"name" => $htmlDecoder->inputEncodedToPlainText($objProduct->title),
+			"description" => $objProduct->description,
+			"sku" => $objProduct->sku,
+			$global_ID['unit'] => $global_ID['value'],
+			"brand" => array(
+				"@type" => "Brand",
+				"name" => $objProduct->brand
+			),
+		);
+
+		if (true)
+		{
+			$jsonLd['aggregateRating'] = array(
+				'@type' => 'AggregateRating',
+				"ratingValue" => $objProduct->rating_value,
+   				"reviewCount" => $objProduct->rating_count
+			);
+		}
+
+		if (true)
+		{
+			$jsonLd['offers'] = array(
+				'@type' => 'Offer',
+				"priceCurrency" => $price['unit'],
+				"price" => $price['value'],
+				"priceValidUntil" => date('Y-m-d\TH:i:sP', $objProduct->priceValidUntil),
+				"availability"=> "http://schema.org/" . $objProduct->availability,
+				"seller" => array(
+					"@type" => "Organization",
+					"name" => $objProduct->brand
+				),
+				"ratingValue" => $objProduct->rating_value,
+   				"reviewCount" => $objProduct->rating_count
+			);
+		}
+
+		return $jsonLd;
 	}
 
 }
