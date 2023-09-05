@@ -253,14 +253,14 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 		(
 			'sorting'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('disabled'=>true,'tl_class'=>'w50'),
+			'eval'                    => array('tl_class'=>'w50'),
 			'sql'                     => "varchar(10) NOT NULL default 0"
 		),
 		'rating_count' => array
 		(
 			'sorting'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('disabled'=>true, 'tl_class'=>'w50'),
+			'eval'                    => array('tl_class'=>'w50'),
 			'sql'                     => "int(10) NOT NULL default 0"
 		),
 		'date' => array
