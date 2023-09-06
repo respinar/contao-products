@@ -139,11 +139,20 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['related_imgSize'] = array
 	'eval'                    => array('rgxp'=>'natural', 'includeBlankOption'=>true, 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
 	'sql'                     => "varchar(128) COLLATE ascii_bin NOT NULL default ''"
 );
+$GLOBALS['TL_DCA']['tl_module']['fields']['com_headline'] = array
+(
+	'exclude'                 => true,
+	'search'                  => true,
+	'inputType'               => 'inputUnit',
+	'options'                 => array('h1', 'h2', 'h3', 'h4', 'h5', 'h6'),
+	'eval'                    => array('maxlength'=>200, 'tl_class'=>'w50 clr'),
+	'sql'                     => "varchar(255) NOT NULL default 'a:2:{s:5:\"value\";s:0:\"\";s:4:\"unit\";s:2:\"h2\";}'"
+);
 
 $bundles = System::getContainer()->getParameter('kernel.bundles');
 
 // Add the comments template drop-down menu
 if (isset($bundles['ContaoCommentsBundle']))
 {
-	$GLOBALS['TL_DCA']['tl_module']['palettes']['product_detail'] = str_replace('{protected_legend:hide}', '{comment_legend:hide},com_template;{protected_legend:hide}', $GLOBALS['TL_DCA']['tl_module']['palettes']['product_detail']);
+	$GLOBALS['TL_DCA']['tl_module']['palettes']['product_detail'] = str_replace('{protected_legend:hide}', '{comment_legend:hide},com_headline,com_template;{protected_legend:hide}', $GLOBALS['TL_DCA']['tl_module']['palettes']['product_detail']);
 }
