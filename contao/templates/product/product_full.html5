@@ -5,33 +5,35 @@
 
   <?php if ($this->hasMetaFields): ?>
 
+    <?php $meta = $this->meta; ?>
+
     <div class="meta">
       <div class="info">
-        <time datetime="<?= $this->datetime; ?>"><?= $this->meta_date; ?></time>
-        <?php if($this->meta_brand): ?>
-          <span class="brand"><?= $this->meta_brand_txt; ?>: <span><?= $this->meta_brand; ?></span></span>
+        <time datetime="<?= $this->datetime ?>"><?= $meta['date'] ?></time>
+        <?php if($meta['brand']): ?>
+          <span class="brand"><?= $meta['brand_text'] ?>: <span><?= $meta['brand'] ?></span></span>
         <?php endif; ?>
-        <?php if($this->meta_model): ?>
-          <span class="model"><?= $this->meta_model_txt; ?>: <span><?= $this->meta_model; ?></span></span>
+        <?php if($meta['model']): ?>
+          <span class="model"><?= $meta['model_text'] ?>: <span><?= $meta['model'] ?></span></span>
         <?php endif; ?>
-        <?php if($this->meta_sku): ?>
-          <span class="sku"><?= $this->meta_sku_txt; ?>: <span><?= $this->meta_sku; ?></span></span>
+        <?php if($meta['sku']): ?>
+          <span class="sku"><?= $meta['sku_text'] ?>: <span><?= $meta['sku'] ?></span></span>
         <?php endif; ?>
-        <?php if($this->meta_global_ID): ?>
-          <span class="global_ID"><?= $this->meta_global_ID_txt; ?>: <span><?= $this->meta_global_ID['value']; ?></span></span>
+        <?php if($meta['global_ID']): ?>
+          <span class="global_ID <?= $meta['global_ID']['unit'] ?>"><?= $meta['global_ID']['name'] ?>: <span><?= $meta['global_ID']['value'] ?></span></span>
         <?php endif; ?>
       </div>
 
-      <div class="offers">
-        <?php if($this->meta_price): ?>
-          <?= $this->meta_price_txt; ?>:
-          <span><?= number_format($this->meta_price['value']); ?></span>
-          <span><?= $this->meta_price['symbol']; ?></span>
+      <div class="offer">
+        <?php if(\is_array($meta['price'])): ?>
+          <?= $meta['price_text'] ?>:
+          <span><?= number_format($meta['price']['value']) ?></span>
+          <span><?= $meta['price']['symbol'] ?></span>
         <?php endif; ?>
-        <?php if($this->meta_availability): ?>
-          <span class="availability"> (<?= $this->meta_availability_txt; ?>) </span>
+        <?php if($meta['availability']): ?>
+          <span class="availability <?= $meta['availability']['class'] ?>"> (<?= $meta['availability']['value']; ?>) </span>
         <?php endif; ?>
-        <?php if($this->meta_buy): ?>
+        <?php if($meta['buy']): ?>
             <span class="buy">
               <a href="<?= $this->url ?>" class="hyperlink_txt" title="<?= $this->linkTitle ?>" <?php if($this->target): ?> target="_blank" rel="nofollow" <?php endif; ?> >
               <?php if($this->titleText): ?>

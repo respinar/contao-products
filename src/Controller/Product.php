@@ -70,33 +70,14 @@ abstract class Product
 
 		$objTemplate->count = $intCount; // see #5708
 
+		/* Generating Meta Information */
 		$arrMeta = Product::getMetaFields($objProduct, $model);
-
-		// print_r($model->product_metaFields);
-		// print_r($arrMeta);
-		// exit('STOP');
-
-		// Add the meta information
-		$objTemplate->meta_date    = $arrMeta['date'] ?? '';
-		$objTemplate->meta_brand   = $arrMeta['brand'] ?? '';
-		$objTemplate->meta_price   = $arrMeta['price'] ?? '';
-		$objTemplate->meta_availability = $arrMeta['availability'] ?? '';
-		$objTemplate->meta_availability_txt = $GLOBALS['TL_LANG']['MSC'][$objProduct->availability] ?? '';
-		$objTemplate->meta_model   = $arrMeta['model'] ?? '';
-		$objTemplate->meta_global_ID = $arrMeta['global_ID'] ?? '';
-		$objTemplate->meta_sku     = $arrMeta['sku'] ?? '';
-		$objTemplate->meta_buy     = $arrMeta['buy'] ?? '';
-
-		$objTemplate->meta_price_txt   = $GLOBALS['TL_LANG']['MSC']['price_text'];
-		$objTemplate->meta_brand_txt   = $GLOBALS['TL_LANG']['MSC']['brand_text'];
-		$objTemplate->meta_model_txt   = $GLOBALS['TL_LANG']['MSC']['model_text'];
-		$objTemplate->meta_global_ID_txt = $GLOBALS['TL_LANG']['MSC']['global_ID_text'];
-		$objTemplate->meta_sku_txt     = $GLOBALS['TL_LANG']['MSC']['sku_text'];
-		$objTemplate->meta_status_txt  = $GLOBALS['TL_LANG']['MSC']['status_text'];
-
-		$objTemplate->meta_vote_txt    = $GLOBALS['TL_LANG']['MSC']['vote_text'];
-
 		$objTemplate->hasMetaFields = !empty($arrMeta);
+
+		if ($objTemplate->hasMetaFields) {
+			$objTemplate->meta = $arrMeta;
+		}
+
 		$objTemplate->timestamp = $objProduct->date;
 		$objTemplate->datetime = date('Y-m-d\TH:i:sP', $objProduct->date);
 
@@ -306,31 +287,44 @@ abstract class Product
 			$return['date'] = Date::parse($objPage->datimFormat, $objProduct->date);
 		}
 
-		if (\in_array("price", $meta) && isset($objProduct->price)){
-			$return['price'] = StringUtil::deserialize($objProduct->price);
-			$return['price']['symbol'] = $GLOBALS['TL_LANG']['MSC'][$return['price']['unit']];
-			$return['price']['priceValidUntil'] = date('Y-m-d\TH:i:sP', $objProduct->priceValidUntil);
-			$return['price']['url'] = $objProduct->url ?? '';
+		if (\in_array("price", $meta)){
+			$price = StringUtil::deserialize($objProduct->price);
+			if ($price['value']) {
+				$return['price']['value'] = $price['value'];
+				$return['price']['unit'] = $price['unit'];
+				$return['price']['symbol'] = $GLOBALS['TL_LANG']['MSC'][$price['unit']];
+				$return['price_text'] = $GLOBALS['TL_LANG']['MSC']['price_text'];
+			}
 		}
 
 		if (\in_array("availability", $meta) && isset($objProduct->availability)){
-			$return['availability'] = $objProduct->availability;
+			$return['availability']['class'] = $objProduct->availability;
+			$return['availability']['value'] = $GLOBALS['TL_LANG']['MSC'][$objProduct->availability];
+			$return['status_text']  = $GLOBALS['TL_LANG']['MSC']['status_text'];
 		}
 
-		if (\in_array("global_ID", $meta) && isset($objProduct->global_ID)){
-			$return['global_ID'] = StringUtil::deserialize($objProduct->global_ID);
+		if (\in_array("global_ID", $meta)){
+			$global_ID = StringUtil::deserialize($objProduct->global_ID);
+
+			if ($global_ID['value']) {
+				$return['global_ID'] = $global_ID;
+				$return['global_ID']['name'] = $GLOBALS['TL_LANG']['MSC'][$global_ID['unit']];
+			}
 		}
 
 		if (\in_array("model", $meta) && isset($objProduct->model)){
 			$return['model'] = $objProduct->model;
+			$return['model_text'] = $GLOBALS['TL_LANG']['MSC']['model_text'];
 		}
 
 		if (\in_array("brand", $meta) && isset($objProduct->brand)){
 			$return['brand'] = $objProduct->brand;
+			$return['brand_text'] = $GLOBALS['TL_LANG']['MSC']['brand_text'];
 		}
 
 		if (\in_array("sku", $meta) && isset($objProduct->sku)){
 			$return['sku'] = $objProduct->sku;
+			$return['sku_text'] = $GLOBALS['TL_LANG']['MSC']['sku_text'];
 		}
 
 		if (\in_array("buy", $meta) && isset($objProduct->url)){
