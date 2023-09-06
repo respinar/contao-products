@@ -22,6 +22,9 @@ use Contao\ModuleModel;
 use Contao\Template;
 use Contao\Input;
 use Contao\System;
+use Contao\UserModel;
+use Contao\Comments;
+use Contao\StringUtil;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -76,6 +79,61 @@ class ProductDetailController extends AbstractFrontendModuleController
         //$objCatalog = CatalogModel::findByIdOrAlias($objProduct->pid);
 
         $template->product = Product::parseProduct($objProduct, $model);
+
+		// Comments
+		$bundles = System::getContainer()->getParameter('kernel.bundles');
+		$objCatalog = $objProduct->getRelated('pid');
+
+		if (isset($bundles['ContaoCommentsBundle']) && $objCatalog->allowComments)
+		{
+
+			$template->allowComments = true;
+
+			// Adjust the comments headline level
+			//$intHl = min((int) str_replace('h', '', $model->hl), 5);
+			//$template->hlc = 'h' . ($intHl + 1);
+
+			$com_headline = StringUtil::deserialize($model->com_headline);	;
+			$template->hlc = $com_headline['unit'];
+			$template->hlcText = $com_headline['value'];
+
+			//$template->import(Comments::class, 'Comments');
+
+			$objComment = new Comments();
+
+			$arrNotifies = array();
+
+			// Notify the system administrator
+			if ($objCatalog->notify != 'notify_author')
+			{
+				$arrNotifies[] = $GLOBALS['TL_ADMIN_EMAIL'];
+			}
+
+			// Notify the author
+			if ($objCatalog->notify != 'notify_admin')
+			{
+				/** @var UserModel $objAuthor */
+				if (($objAuthor = $objProduct->getRelated('author')) instanceof UserModel && $objAuthor->email != '')
+				{
+					$arrNotifies[] = $objAuthor->email;
+				}
+			}
+
+			$objConfig = new \stdClass();
+
+			$objConfig->perPage = $objCatalog->perPage;
+			$objConfig->order = $objCatalog->sortOrder;
+			$objConfig->template = $model->com_template;
+			$objConfig->requireLogin = $objCatalog->requireLogin;
+			$objConfig->disableCaptcha = $objCatalog->disableCaptcha;
+			$objConfig->bbcode = $objCatalog->bbcode;
+			$objConfig->moderate = $objCatalog->moderate;
+
+			$objComment->addCommentsToTemplate($template, $objConfig, 'tl_products', $objProduct->id, $arrNotifies);
+		} else {
+			$template->allowComments = false;
+		}
+
 
         return $template->getResponse();
 	}
@@ -191,61 +249,4 @@ class ProductDetailController extends AbstractFrontendModuleController
 	// 			$this->Template->relateds = $this->parseRelateds($objProducts);
 	// 		}
 	// 	}
-
-	// 		$bundles = \System::getContainer()->getParameter('kernel.bundles');
-
-	// 	// HOOK: comments extension required
-	// 	if ($objProduct->noComments || !isset($bundles['ContaoCommentsBundle']))
-	// 	{
-	// 		$this->Template->allowComments = false;
-
-	// 		return;
-	// 	}
-
-	// 	/** @var CatalogModel $objCatalog */
-	// 	$objCatalog = $objProduct->getRelated('pid');
-	// 	$this->Template->allowComments = $objCatalog->allowComments;
-
-	// 	// Comments are not allowed
-	// 	if (!$objCatalog->allowComments)
-	// 	{
-	// 		return;
-	// 	}
-
-	// 	// Adjust the comments headline level
-	// 	$intHl = min((int) str_replace('h', '', $this->hl), 5);
-	// 	$this->Template->hlc = 'h' . ($intHl + 1);
-
-	// 	$this->import(\Comments::class, 'Comments');
-	// 	$arrNotifies = array();
-
-	// 	// Notify the system administrator
-	// 	if ($objCatalog->notify != 'notify_author')
-	// 	{
-	// 		$arrNotifies[] = $GLOBALS['TL_ADMIN_EMAIL'];
-	// 	}
-
-	// 	// Notify the author
-	// 	if ($objCatalog->notify != 'notify_admin')
-	// 	{
-	// 		/** @var UserModel $objAuthor */
-	// 		if (($objAuthor = $objProduct->getRelated('author')) instanceof UserModel && $objAuthor->email != '')
-	// 		{
-	// 			$arrNotifies[] = $objAuthor->email;
-	// 		}
-	// 	}
-
-	// 	$objConfig = new \stdClass();
-
-	// 	$objConfig->perPage = $objCatalog->perPage;
-	// 	$objConfig->order = $objCatalog->sortOrder;
-	// 	$objConfig->template = $this->com_template;
-	// 	$objConfig->requireLogin = $objCatalog->requireLogin;
-	// 	$objConfig->disableCaptcha = $objCatalog->disableCaptcha;
-	// 	$objConfig->bbcode = $objCatalog->bbcode;
-	// 	$objConfig->moderate = $objCatalog->moderate;
-
-	// 	$this->Comments->addCommentsToTemplate($this->Template, $objConfig, 'tl_products', $objProduct->id, $arrNotifies);
-
-	// }
 }
