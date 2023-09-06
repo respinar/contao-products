@@ -11,34 +11,42 @@
   </div>
 
 
-  <div class="title"> 
+  <div class="title">
   <?php if ($this->link): ?> <a href="<?= $this->link; ?>"> <?php endif; ?>
   <?= $this->title; ?>
-  <?php if ($this->link): ?> </a> <?php endif; ?> 
+  <?php if ($this->link): ?> </a> <?php endif; ?>
   </div>
+
+  <?php $meta = $this->meta; ?>
 
   <?php if ($this->hasMetaFields): ?>
     <div class="info">
-
-      <time datetime="<?= $this->datetime; ?>"><?= $this->date; ?></time>
-      <?php if($this->meta_brand): ?><span class="brand"><?= $this->meta_brand_txt; ?>: <span itemprop="brand"><?= $this->meta_brand; ?></span></span><?php endif; ?>
-      <?php if($this->meta_model): ?><span class="model"><?= $this->meta_model_txt; ?>: <span><?= $this->meta_model; ?></span></span><?php endif; ?>
-      <?php if($this->meta_global_ID): ?><span class="global_ID"><?= $this->meta_global_ID_txt; ?>: <span><?= $this->meta_global_ID; ?></span></span><?php endif; ?>
-      <?php if($this->meta_sku): ?><span class="sku"><?= $this->meta_sku_txt; ?>: <span itemprop="sku"><?= $this->meta_sku; ?></span></span><?php endif; ?>
-
+      <time datetime="<?= $this->datetime ?>"><?= $meta['date'] ?></time>
+      <?php if($meta['brand']): ?>
+        <span class="brand"><?= $meta['brand_text'] ?>: <span><?= $meta['brand'] ?></span></span>
+      <?php endif; ?>
+      <?php if($meta['model']): ?>
+        <span class="model"><?= $meta['model_text'] ?>: <span><?= $meta['model'] ?></span></span>
+      <?php endif; ?>
+      <?php if($meta['sku']): ?>
+        <span class="sku"><?= $meta['sku_text'] ?>: <span><?= $meta['sku'] ?></span></span>
+      <?php endif; ?>
+      <?php if($meta['global_ID']): ?>
+        <span class="global_ID <?= $meta['global_ID']['unit'] ?>"><?= $meta['global_ID']['name'] ?>: <span><?= $meta['global_ID']['value'] ?></span></span>
+      <?php endif; ?>
     </div>
 
-    <?php if($this->meta_buy): ?>
-        <div class="buy">
-          <a href="<?= $this->url ?>" class="hyperlink_txt" title="<?= $this->linkTitle ?>" <?php if($this->target): ?> target="_blank" rel="nofollow" <?php endif; ?> >
-          <?php if($this->titleText): ?>
-            <?= $this->titleText ?>
-          <?php else: ?>
-            <?= $this->url ?>
-          <?php endif; ?>
-          </a>
+    <?php if($meta['buy']): ?>
+      <div class="buy">
+        <a href="<?= $this->url ?>" class="hyperlink_txt" title="<?= $this->linkTitle ?>" <?php if($this->target): ?> target="_blank" rel="nofollow" <?php endif; ?> >
+        <?php if($this->titleText): ?>
+          <?= $this->titleText ?>
+        <?php else: ?>
+          <?= $this->url ?>
+        <?php endif; ?>
+        </a>
         </div>
-      <?php endif; ?>
+    <?php endif; ?>
 
   <?php endif; ?>
 
