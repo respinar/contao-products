@@ -10,16 +10,16 @@
     <div class="meta">
       <div class="info">
         <time datetime="<?= $this->datetime ?>"><?= $meta['date'] ?></time>
-        <?php if($meta['brand']): ?>
+        <?php if(isset($meta['brand'])): ?>
           <span class="brand"><?= $meta['brand_text'] ?>: <span><?= $meta['brand'] ?></span></span>
         <?php endif; ?>
-        <?php if($meta['model']): ?>
+        <?php if(isset($meta['model'])): ?>
           <span class="model"><?= $meta['model_text'] ?>: <span><?= $meta['model'] ?></span></span>
         <?php endif; ?>
-        <?php if($meta['sku']): ?>
+        <?php if(isset($meta['sku'])): ?>
           <span class="sku"><?= $meta['sku_text'] ?>: <span><?= $meta['sku'] ?></span></span>
         <?php endif; ?>
-        <?php if($meta['global_ID']): ?>
+        <?php if(isset($meta['global_ID'])): ?>
           <span class="global_ID <?= $meta['global_ID']['unit'] ?>"><?= $meta['global_ID']['name'] ?>: <span><?= $meta['global_ID']['value'] ?></span></span>
         <?php endif; ?>
       </div>
@@ -30,10 +30,10 @@
           <span><?= number_format($meta['price']['value']) ?></span>
           <span><?= $meta['price']['symbol'] ?></span>
         <?php endif; ?>
-        <?php if($meta['availability']): ?>
+        <?php if(isset($meta['availability'])): ?>
           <span class="availability <?= $meta['availability']['class'] ?>"> (<?= $meta['availability']['value']; ?>) </span>
         <?php endif; ?>
-        <?php if($meta['buy']): ?>
+        <?php if(isset($meta['buy'])): ?>
             <span class="buy">
               <a href="<?= $this->url ?>" class="hyperlink_txt" title="<?= $this->linkTitle ?>" <?php if($this->target): ?> target="_blank" rel="nofollow" <?php endif; ?> >
               <?php if($this->titleText): ?>
@@ -50,19 +50,19 @@
 
   <?php endif; ?>
 
-  <?php if ($this->summary): ?>
+  <?php if (isset($this->summary)): ?>
     <div class="summary">
       <?= $this->summary; ?>
     </div>
   <?php endif; ?>
 
-  <?php if ($this->text): ?>
+  <?php if (isset($this->text)): ?>
     <div class="description">
       <?= $this->text; ?>
     </div>
   <?php endif; ?>
 
-  <?php if ($this->enclosure): ?>
+  <?php if (isset($this->enclosure)): ?>
     <div class="enclosure">
       <?php foreach ($this->enclosure as $enclosure): ?>
         <p>
