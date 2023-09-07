@@ -183,7 +183,7 @@ abstract class Product
 	 * @param boolean
 	 * @return array
 	 */
-	protected function parseRelateds($objProducts, $model, $blnAddCategory=false)
+	static public function parseRelateds($objProducts, $model, $blnAddCategory=false)
 	{
 
 		$model->product_template = $model->related_template;
@@ -202,7 +202,7 @@ abstract class Product
 		{
 			$objProduct = $objProducts->current();
 
-			$arrRelatedes[] = $this->parseProduct($objProduct, $model, $blnAddCategory, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : ''), $count);
+			$arrRelatedes[] = Product::parseProduct($objProduct, $model, $blnAddCategory, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : ''), $count);
 		}
 
 		return $arrRelatedes;
