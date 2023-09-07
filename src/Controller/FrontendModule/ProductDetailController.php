@@ -60,7 +60,9 @@ class ProductDetailController extends AbstractFrontendModuleController
 			Input::setGet('items', Input::get('auto_item'));
 		}
 
-        $objProduct = ProductModel::findOneByAlias(Input::get('items'));
+        //$objProduct = ProductModel::findOneByAlias(Input::get('items'));
+		$model->product_catalogs = StringUtil::deserialize($model->product_catalogs);
+		$objProduct = ProductModel::findPublishedByParentAndIdOrAlias(Input::get('items'), $model->product_catalogs);
 
 		if (null === $objProduct)
 		{
