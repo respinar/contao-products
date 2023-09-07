@@ -23,6 +23,7 @@ use Contao\Template;
 use Contao\Input;
 use Contao\System;
 use Contao\UserModel;
+use Contao\PageModel;
 use Contao\Comments;
 use Contao\StringUtil;
 use Contao\Environment;
@@ -44,11 +45,13 @@ class ProductDetailController extends AbstractFrontendModuleController
     protected function getResponse(Template $template, ModuleModel $model, Request $request): Response
     {
 
-	// 	global $objPage;
+		// 	global $objPage;
 
-	// 	$this->Template->products          = '';
-	// 	$this->Template->referer           = 'javascript:history.go(-1)';
-	// 	$this->Template->back              = $GLOBALS['TL_LANG']['MSC']['goBack'];
+		if ($model->overviewPage)
+		{
+			$template->referer = PageModel::findById($model->overviewPage)->getFrontendUrl();
+			$template->back = $model->customLabel ?: $GLOBALS['TL_LANG']['MSC']['newsOverview'];
+		}
 		$template->relateds_headline = $GLOBALS['TL_LANG']['MSC']['relateds_headline'];
 
 		// Set the item from the auto_item parameter
