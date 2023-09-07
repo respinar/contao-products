@@ -214,9 +214,9 @@ abstract class Product
 	 * @param boolean
 	 * @return string
 	 */
-	public static function generateProductUrl($objItem, $blnAddCategory=false)
+	public static function generateProductUrl($objItem, $blnAddCategory=false, $blnAbsolute=false)
 	{
-		$strCacheKey = 'id_' . $objItem->id;
+		$strCacheKey = 'id_' . $objItem->id . ($blnAbsolute ? '_absolute' : '');
 
 		// Load the URL from cache
 		if (isset(self::$arrUrlCache[$strCacheKey]))
@@ -232,13 +232,17 @@ abstract class Product
 		{
 			$objPage = PageModel::findByPk($objItem->getRelated('pid')->jumpTo);
 
-			if ($objPage === null)
+			if (!$objPage instanceof PageModel)
 			{
-				self::$arrUrlCache[$strCacheKey] = StringUtil::ampersand(Environment::get('request'), true);
+				self::$arrUrlCache[$strCacheKey] = StringUtil::ampersand(Environment::get('requestUri'));
 			}
 			else
 			{
-				self::$arrUrlCache[$strCacheKey] = StringUtil::ampersand(Controller::generateFrontendUrl($objPage->row(), ((Config::get('useAutoItem') && !Config::get('disableAlias')) ?  '/' : '/items/') . ((!Config::get('disableAlias') && $objItem->alias != '') ? $objItem->alias : $objItem->id)));
+				$params = '/' . ($objItem->alias ?: $objItem->id);
+
+				self::$arrUrlCache[$strCacheKey] = StringUtil::ampersand($blnAbsolute ? $objPage->getAbsoluteUrl($params) : $objPage->getFrontendUrl($params));
+
+				//self::$arrUrlCache[$strCacheKey] = StringUtil::ampersand(Controller::generateFrontendUrl($objPage->row(), ((Config::get('useAutoItem') && !Config::get('disableAlias')) ?  '/' : '/items/') . ((!Config::get('disableAlias') && $objItem->alias != '') ? $objItem->alias : $objItem->id)));
 			}
 
 		}
