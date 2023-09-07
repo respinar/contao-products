@@ -43,6 +43,14 @@ class ProductDetailController extends AbstractFrontendModuleController
 
     protected function getResponse(Template $template, ModuleModel $model, Request $request): Response
     {
+
+	// 	global $objPage;
+
+	// 	$this->Template->products          = '';
+	// 	$this->Template->referer           = 'javascript:history.go(-1)';
+	// 	$this->Template->back              = $GLOBALS['TL_LANG']['MSC']['goBack'];
+		$template->relateds_headline = $GLOBALS['TL_LANG']['MSC']['relateds_headline'];
+
 		// Set the item from the auto_item parameter
 		if (!isset($_GET['items']) && $GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))
 		{
@@ -85,6 +93,23 @@ class ProductDetailController extends AbstractFrontendModuleController
         //$objCatalog = CatalogModel::findByIdOrAlias($objProduct->pid);
 
         $template->product = Product::parseProduct($objProduct, $model);
+
+
+		// Rerlated products
+		if ($model->related_show)
+		{
+			$relateds = StringUtil::deserialize($objProduct->related);
+
+			// print_r($relateds);
+			// exit('STOP');
+
+			if ($relateds) {
+
+				$objProducts = ProductModel::findPublishedByIds($relateds);
+
+				$template->relateds = Product::parseRelateds($objProducts, $model);
+			}
+		}
 
 		// Comments
 		$bundles = System::getContainer()->getParameter('kernel.bundles');
@@ -192,13 +217,6 @@ class ProductDetailController extends AbstractFrontendModuleController
 	 */
 	// protected function compile()
 	// {
-
-	// 	global $objPage;
-
-	// 	$this->Template->products          = '';
-	// 	$this->Template->referer           = 'javascript:history.go(-1)';
-	// 	$this->Template->back              = $GLOBALS['TL_LANG']['MSC']['goBack'];
-	// 	$this->Template->relateds_headline = $GLOBALS['TL_LANG']['MSC']['relateds_headline'];
 
 	// 	$objProduct = ProductModel::findPublishedByParentAndIdOrAlias(\Input::get('items'),$this->product_catalogs);
 
