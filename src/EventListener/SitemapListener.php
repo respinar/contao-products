@@ -59,7 +59,8 @@ class SitemapListener
 			}
 
 			// Skip catalog categories outside the root nodes
-			if (!\in_array($objCatalog->jumpTo, $arrRoot, true)) {
+            // Changes to non-stick because of vatan.bio
+			if (!\in_array($objCatalog->jumpTo, $arrRoot, false)) {
 				continue;
 			}
 
