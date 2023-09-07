@@ -25,6 +25,7 @@ use Contao\System;
 use Contao\UserModel;
 use Contao\Comments;
 use Contao\StringUtil;
+use Contao\Environment;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -49,6 +50,11 @@ class ProductDetailController extends AbstractFrontendModuleController
 		}
 
         $objProduct = ProductModel::findOneByAlias(Input::get('items'));
+
+		if (null === $objProduct)
+		{
+			throw new PageNotFoundException('Page not found: ' . Environment::get('uri'));
+		}
 
 		$responseContext = System::getContainer()->get('contao.routing.response_context_accessor')->getResponseContext();
 
