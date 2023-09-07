@@ -1,10 +1,10 @@
 
 <div class="related_product<?= $this->class; ?>">
+  <a href="<?= $this->link ?>">
+    <?php if ($this->addImage): ?>
+      <?php $this->insert('image', $this->arrData); ?>
+    <?php endif; ?>
 
-  <?php if ($this->addImage): ?>
-    <?php $this->insert('image', $this->arrData); ?>
-  <?php endif; ?>
-
-  <div class="title"><a href="<?= $this->link; ?>"><?= $this->title; ?></a></div>
-
+    <div class="title"><?= $this->title ?></div>
+  </a>
 </div>
