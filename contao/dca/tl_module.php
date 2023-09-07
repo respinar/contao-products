@@ -16,14 +16,14 @@ use Contao\BackendUser;
  */
 $GLOBALS['TL_DCA']['tl_module']['palettes']['product_list']    = '
 	{title_legend},name,headline,type;
-	{catalog_legend},product_catalogs,product_categories,product_featured,product_detailModule,product_sortBy,numberOfItems,perPage,skipFirst;
+	{catalog_legend},product_catalogs,product_featured,product_detailModule,product_sortBy,numberOfItems,perPage,skipFirst;
 	{template_legend},product_metaFields,customTpl;
 	{product_legend},product_template,imgSize,product_list_Class,product_Class;
 	{protected_legend:hide},protected;
 	{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['product_detail']  = '
 	{title_legend},name,headline,type;
-	{catalog_legend},product_catalogs;
+	{catalog_legend},product_catalogs,overviewPage,customLabel;
 	{template_legend},product_metaFields,customTpl;
 	{product_legend},product_template,imgSize;
 	{related_legend},related_show,related_template,related_imgSize,product_list_Class,related_Class;
