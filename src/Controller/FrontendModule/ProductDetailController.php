@@ -40,12 +40,10 @@ use Contao\CoreBundle\Routing\ResponseContext\HtmlHeadBag\HtmlHeadBag;
 #[AsFrontendModule(category: "products")]
 class ProductDetailController extends AbstractFrontendModuleController
 {
-	public const TYPE = 'products_detail';
+	public const TYPE = 'product_detail';
 
     protected function getResponse(Template $template, ModuleModel $model, Request $request): Response
     {
-
-		// 	global $objPage;
 
 		if ($model->overviewPage)
 		{
@@ -68,6 +66,11 @@ class ProductDetailController extends AbstractFrontendModuleController
 		{
 			throw new PageNotFoundException('Page not found: ' . Environment::get('uri'));
 		}
+
+		// 	Update the database
+		// 	$this->Database->prepare("UPDATE tl_product SET `visit`=`visit`+1 WHERE id=?")
+		// 				   ->execute($objProduct->id);
+
 
 		$responseContext = System::getContainer()->get('contao.routing.response_context_accessor')->getResponseContext();
 
@@ -174,11 +177,6 @@ class ProductDetailController extends AbstractFrontendModuleController
         return $template->getResponse();
 	}
 
-	/**
-	 * Template
-	 * @var string
-	 */
-	//protected $strTemplate = 'mod_product_detail';
 
 	/**
 	 * Display a wildcard in the back end
@@ -223,37 +221,6 @@ class ProductDetailController extends AbstractFrontendModuleController
 	// protected function compile()
 	// {
 
-	// 	$objProduct = ProductModel::findPublishedByParentAndIdOrAlias(\Input::get('items'),$this->product_catalogs);
-
-	// 	if (null === $objProduct)
-	// 	{
-	// 		throw new PageNotFoundException('Page not found: ' . \Environment::get('uri'));
-	// 	}
-
-	// 	// Update the database
-	// 	$this->Database->prepare("UPDATE tl_product SET `visit`=`visit`+1 WHERE id=?")
-	// 				   ->execute($objProduct->id);
-
-	// 	// Overwrite the page title
-	// 	if ($objProduct->pageTitle)
-	// 	{
-	// 		$objPage->pageTitle = $objProduct->pageTitle;
-	// 	}
-	// 	elseif ($objProduct->title)
-	// 	{
-	// 		$objPage->pageTitle = strip_tags(\StringUtil::stripInsertTags($objProduct->title));
-	// 	}
-
-	// 	// Overwrite the page description
-	// 	if ($objProduct->description)
-	// 	{
-	// 		$objPage->description = $this->prepareMetaDescription($objProduct->description);
-	// 	}
-
-	// 	$arrProduct = $this->parseProduct($objProduct);
-
-	// 	$this->Template->product = $arrProduct;
-
 	// 	if ($objProduct->singleSRC != '')
 	// 	{
 	// 		$objModel = \FilesModel::findByUuid($objProduct->singleSRC);
@@ -266,16 +233,4 @@ class ProductDetailController extends AbstractFrontendModuleController
 	// 	$GLOBALS['TL_HEAD'][] = '<meta property="og:title" content="'.$objProduct->title.'" />';
 	// 	$GLOBALS['TL_HEAD'][] = '<meta property="og:url" content="'.$ogTagsURL.'" />';
 	// 	$GLOBALS['TL_HEAD'][] = '<meta property="og:image" content="'.$ogTagsImage.'" />';
-
-	// 	if ( $this->related_show)
-	// 	{
-	// 		$objProduct->related = deserialize($objProduct->related);
-
-	// 		if ($objProduct->related) {
-
-	// 			$objProducts = ProductModel::findPublishedByIds($objProduct->related);
-
-	// 			$this->Template->relateds = $this->parseRelateds($objProducts);
-	// 		}
-	// 	}
 }
