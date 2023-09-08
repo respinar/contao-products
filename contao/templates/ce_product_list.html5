@@ -2,7 +2,7 @@
 
 <?php $this->block('content'); ?>
 
-  <div class="product_list <?= $this->product_list_Class ?>">
+  <div class="product_list <?= $this->product_listClass ?>">
     <?= implode('', $this->products) ?>
   </div>
 
