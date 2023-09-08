@@ -18,15 +18,15 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['product_list']    = '
 	{title_legend},name,headline,type;
 	{catalog_legend},product_catalogs,product_featured,product_detailModule,product_sortBy,numberOfItems,perPage,skipFirst;
 	{template_legend},product_metaFields,customTpl;
-	{product_legend},product_template,imgSize,product_list_Class,product_Class;
+	{product_legend},product_template,imgSize,product_listClass,product_singleClass;
 	{protected_legend:hide},protected;
 	{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['product_detail']  = '
 	{title_legend},name,headline,type;
 	{catalog_legend},product_catalogs,overviewPage,customLabel;
-	{template_legend},product_metaFields,customTpl;
-	{product_legend},product_template,imgSize;
-	{related_legend},related_show,related_template,related_imgSize,product_list_Class,related_Class;
+	{meta_legend},product_metaFields;
+	{template_legend},customTpl,product_template,product_summary,imgSize;
+	{related_legend},product_related,product_relatedTpl,product_relatedImgSize,product_listClass,product_singleClass;
 	{protected_legend:hide},protected;
 	{expert_legend:hide},guests,cssID,space';
 
@@ -95,28 +95,35 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_template'] = array
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );
-$GLOBALS['TL_DCA']['tl_module']['fields']['product_list_Class'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_listClass'] = array
 (
 	'exclude'                 => true,
 	'inputType'               => 'text',
 	'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
 	'sql'                     => "varchar(255) NOT NULL default ''"
 );
-$GLOBALS['TL_DCA']['tl_module']['fields']['product_Class'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_singleClass'] = array
 (
 	'exclude'                 => true,
 	'inputType'               => 'text',
 	'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
 	'sql'                     => "varchar(255) NOT NULL default ''"
 );
-$GLOBALS['TL_DCA']['tl_module']['fields']['related_show'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_related'] = array
 (
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
 	'eval'                    => array(),
-	'sql'                     => "char(1) NOT NULL default ''"
+	'sql'                     => array('type' => 'boolean', 'default' => false)
 );
-$GLOBALS['TL_DCA']['tl_module']['fields']['related_template'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_summary'] = array
+(
+	'exclude'                 => true,
+	'inputType'               => 'checkbox',
+	'eval'                    => array('tl_class'=>'w50 m12'),
+	'sql'                     => array('type' => 'boolean', 'default' => false)
+);
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_relatedTpl'] = array
 (
 	'default'              => 'product_related',
 	'exclude'              => true,
@@ -124,15 +131,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['related_template'] = array
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );
-
-$GLOBALS['TL_DCA']['tl_module']['fields']['related_Class'] = array
-(
-	'exclude'                 => true,
-	'inputType'               => 'text',
-	'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
-	'sql'                     => "varchar(255) NOT NULL default ''"
-);
-$GLOBALS['TL_DCA']['tl_module']['fields']['related_imgSize'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_relatedImgSize'] = array
 (
 	'exclude'                 => true,
 	'inputType'               => 'imageSize',
@@ -143,7 +142,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['related_imgSize'] = array
 	'eval'                    => array('rgxp'=>'natural', 'includeBlankOption'=>true, 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
 	'sql'                     => "varchar(128) COLLATE ascii_bin NOT NULL default ''"
 );
-$GLOBALS['TL_DCA']['tl_module']['fields']['com_headline'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_comHeadline'] = array
 (
 	'exclude'                 => true,
 	'search'                  => true,
@@ -158,5 +157,5 @@ $bundles = System::getContainer()->getParameter('kernel.bundles');
 // Add the comments template drop-down menu
 if (isset($bundles['ContaoCommentsBundle']))
 {
-	$GLOBALS['TL_DCA']['tl_module']['palettes']['product_detail'] = str_replace('{protected_legend:hide}', '{comment_legend:hide},com_headline,com_template;{protected_legend:hide}', $GLOBALS['TL_DCA']['tl_module']['palettes']['product_detail']);
+	$GLOBALS['TL_DCA']['tl_module']['palettes']['product_detail'] = str_replace('{protected_legend:hide}', '{comment_legend:hide},product_comHeadline,com_template;{protected_legend:hide}', $GLOBALS['TL_DCA']['tl_module']['palettes']['product_detail']);
 }
