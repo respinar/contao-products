@@ -44,7 +44,7 @@ class ModuleListener
 	#[AsCallback(table: 'tl_module', target: 'fields.related_template.options')]
 	public function getRelatedTemplates(): array
 	{
-		return Backend::getTemplateGroup('related_');
+		return Backend::getTemplateGroup('product_');
 	}
 
 	/**
