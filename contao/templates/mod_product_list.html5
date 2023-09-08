@@ -5,7 +5,7 @@
   <?php if (empty($this->products)): ?>
     <p class="empty"><?= $this->empty; ?></p>
   <?php else: ?>
-  <div class="product_list <?= $this->product_list_Class ?>">
+  <div class="product_list <?= $this->product_listClass ?>">
     <?= implode('', $this->products) ?>
   </div>
     <?= $this->pagination; ?>
