@@ -62,7 +62,7 @@
     </div>
   <?php endif; ?>
 
-  <?php if (isset($this->enclosure)): ?>
+  <?php if ($this->enclosure): ?>
     <div class="enclosure">
       <?php foreach ($this->enclosure as $enclosure): ?>
         <p>
