@@ -60,13 +60,17 @@ abstract class Product
 		$objTemplate = new FrontendTemplate($model->product_template);
 		$objTemplate->setData($objProduct->row());
 
-		$objTemplate->class = (($model->product_Class != '') ? ' ' . $model->product_Class : '') . $strClass;
+		$objTemplate->hasSummary = false;
+		$objTemplate->hasText = false;
+		$objTemplate->hasEnclosure = false;
+
+		$objTemplate->class = (($model->product_singleClass != '') ? ' ' . $model->product_singleClass : '') . $strClass;
 
 		if (time() - $objProduct->date < 2592000) {
 			$objTemplate->new_product = true;
 		}
 
-		$objTemplate->category    = $objProduct->getRelated('pid');
+		$objTemplate->category = $objProduct->getRelated('pid');
 
 		$objTemplate->count = $intCount; // see #5708
 
@@ -81,10 +85,20 @@ abstract class Product
 		$objTemplate->timestamp = $objProduct->date;
 		$objTemplate->datetime = date('Y-m-d\TH:i:sP', $objProduct->date);
 
+		// Clean the RTE output
+		if ($model->product_summary)
+		{
+			$objTemplate->hasSummary = true;
+			$objTemplate->summary = $objProduct->summary;
+			$objTemplate->summary = StringUtil::encodeEmail($objTemplate->summary);
+		}
+
 		$objElement = ContentModel::findPublishedByPidAndTable($objProduct->id, 'tl_product');
 
 		if ($objElement !== null)
 		{
+			$objTemplate->hasText = true;
+
 			while ($objElement->next())
 			{
 				$objTemplate->text .= Controller::getContentElement($objElement->current());
@@ -127,6 +141,7 @@ abstract class Product
 		// Add enclosures
 		if ($objProduct->addEnclosure)
 		{
+			$objTemplate->hasEnclosure = true;
 			Controller::addEnclosuresToTemplate($objTemplate, $objProduct->row());
 		}
 
@@ -171,7 +186,7 @@ abstract class Product
 		{
 			$objProduct = $objProducts->current();
 
-			$arrProducts[] = Product::parseProduct($objProduct, $model, $blnAddCategory, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : ''), $count);
+			$arrProducts[] = Product::parseProduct($objProduct, $model, $blnAddCategory, '', $count);
 		}
 
 		return $arrProducts;
@@ -186,10 +201,8 @@ abstract class Product
 	static public function parseRelateds($objProducts, $model, $blnAddCategory=false)
 	{
 
-		$model->product_template = $model->related_template;
-		$model->imgSize = $model->related_imgSize;
-		$model->product_list_Class = $model->related_list_Class;
-		$model->product_Class = $model->related_Class;
+		$model->product_template = $model->product_relatedTpl;
+		$model->imgSize = $model->product_relatedImgSize;
 
 		$limit = $objProducts->count();
 		if ($limit < 1)
@@ -202,7 +215,7 @@ abstract class Product
 		{
 			$objProduct = $objProducts->current();
 
-			$arrRelatedes[] = Product::parseProduct($objProduct, $model, $blnAddCategory, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : ''), $count);
+			$arrRelatedes[] = Product::parseProduct($objProduct, $model, $blnAddCategory, '', $count);
 		}
 
 		return $arrRelatedes;
