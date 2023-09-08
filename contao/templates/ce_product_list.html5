@@ -2,8 +2,6 @@
 
 <?php $this->block('content'); ?>
 
-  <?= $this->product; ?>
-
   <div class="product_list <?= $this->product_list_Class ?>">
     <?= implode('', $this->products) ?>
   </div>
