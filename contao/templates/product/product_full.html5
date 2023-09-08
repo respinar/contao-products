@@ -50,19 +50,23 @@
 
   <?php endif; ?>
 
-  <?php if (isset($this->summary)): ?>
+  <?php if ($this->hasSummary): ?>
     <div class="summary">
       <?= $this->summary; ?>
+
+      <?php if ($this->addImage): ?>
+        <?php if ($this->link): ?> <a href="<?= $this->link ?>"> <?php endif; ?>
+          <?php $this->insert('image', $this->arrData); ?>
+        <?php if ($this->link): ?> </a> <?php endif; ?>
+      <?php endif; ?>
     </div>
   <?php endif; ?>
 
-  <?php if (isset($this->text)): ?>
-    <div class="description">
-      <?= $this->text; ?>
-    </div>
+  <?php if ($this->hasText): ?>
+    <?= $this->text; ?>
   <?php endif; ?>
 
-  <?php if ($this->enclosure): ?>
+  <?php if ($this->hasEnclosure): ?>
     <div class="enclosure">
       <?php foreach ($this->enclosure as $enclosure): ?>
         <p>
