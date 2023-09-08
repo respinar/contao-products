@@ -30,7 +30,7 @@ $GLOBALS['TL_DCA']['tl_content']['palettes']['product_single']  = '
 $GLOBALS['TL_DCA']['tl_content']['palettes']['product_list'] = '
 	{type_legend},type,headline;
 	{product_legend},products;
-	{template_legend},product_template,customTpl,product_metaFields,size,product_list_Class;
+	{template_legend},product_template,customTpl,product_metaFields,size,product_listClass;
 	{protected_legend:hide},protected;
 	{expert_legend:hide},guests,cssID,space';
 
@@ -70,7 +70,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['product_template'] = array
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );
-$GLOBALS['TL_DCA']['tl_content']['fields']['product_list_Class'] = array
+$GLOBALS['TL_DCA']['tl_content']['fields']['product_listClass'] = array
 (
 	'exclude'                 => true,
 	'inputType'               => 'text',
