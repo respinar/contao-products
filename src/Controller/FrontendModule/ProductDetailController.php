@@ -104,12 +104,9 @@ class ProductDetailController extends AbstractFrontendModuleController
 
 
 		// Rerlated products
-		if ($model->related_show)
+		if ($model->product_related)
 		{
 			$relateds = StringUtil::deserialize($objProduct->related);
-
-			// print_r($relateds);
-			// exit('STOP');
 
 			if ($relateds) {
 
@@ -132,7 +129,7 @@ class ProductDetailController extends AbstractFrontendModuleController
 			//$intHl = min((int) str_replace('h', '', $model->hl), 5);
 			//$template->hlc = 'h' . ($intHl + 1);
 
-			$com_headline = StringUtil::deserialize($model->com_headline);	;
+			$com_headline = StringUtil::deserialize($model->product_comHeadline);	;
 			$template->hlc = $com_headline['unit'];
 			$template->hlcText = $com_headline['value'];
 
