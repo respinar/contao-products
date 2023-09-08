@@ -2,12 +2,12 @@
 
 <?php $this->block('content'); ?>
 
-  <?= $this->product; ?> 
+  <?= $this->product; ?>
 
   <?php if (!empty($this->relateds)): ?>
     <div class="relateds_list">
       <h3><?= $this->relateds_headline; ?></h3>
-      <div class="related_list <?= $this->product_list_Class ?>">
+      <div class="related_list <?= $this->product_listClass ?>">
       <?= implode('', $this->relateds) ?>
       </div>
     </div>
