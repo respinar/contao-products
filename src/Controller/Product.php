@@ -24,6 +24,7 @@ use Contao\Environment;
 use Contao\StringUtil;
 use Contao\Controller;
 use Contao\Config;
+use Contao\CoreBundle\Security\ContaoCorePermissions;
 
 use Respinar\ProductsBundle\Model\ProductModel;
 use Respinar\ProductsBundle\Model\CatalogModel;
@@ -399,6 +400,41 @@ abstract class Product
 		}
 
 		return $jsonLd;
+	}
+
+	/**
+	 * Sort out protected catalogs
+	 *
+	 * @param array $arrCatalogs
+	 *
+	 * @return array
+	 */
+	public static function sortOutProtected($arrCatalogs)
+	{
+		if (empty($arrCatalogs) || !\is_array($arrCatalogs))
+		{
+			return $arrCatalogs;
+		}
+
+		$objArchive = CatalogModel::findMultipleByIds($arrCatalogs);
+		$arrCatalogs = array();
+
+		if ($objArchive !== null)
+		{
+			$security = System::getContainer()->get('security.helper');
+
+			while ($objArchive->next())
+			{
+				if ($objArchive->protected && !$security->isGranted(ContaoCorePermissions::MEMBER_IN_GROUPS, StringUtil::deserialize($objArchive->groups, true)))
+				{
+					continue;
+				}
+
+				$arrCatalogs[] = $objArchive->id;
+			}
+		}
+
+		return $arrCatalogs;
 	}
 
 }
