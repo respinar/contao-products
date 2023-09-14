@@ -41,9 +41,7 @@ class ProductListController extends AbstractFrontendModuleController
 
 		$template->empty = $GLOBALS['TL_LANG']['MSC']['emptyCatalog'];
 
-		//$model->product_catalogs = $this->sortOutProtected(StringUtil::deserialize($model->product_catalogs));
-		$model->product_catalogs = StringUtil::deserialize($model->product_catalogs);
-
+		$model->product_catalogs = Product::sortOutProtected(StringUtil::deserialize($model->product_catalogs));
 
 		$objCatalogs = CatalogModel::findMultipleByIds($model->product_catalogs);
 
