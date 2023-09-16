@@ -416,21 +416,21 @@ abstract class Product
 			return $arrCatalogs;
 		}
 
-		$objArchive = CatalogModel::findMultipleByIds($arrCatalogs);
+		$objCatalog = CatalogModel::findMultipleByIds($arrCatalogs);
 		$arrCatalogs = array();
 
-		if ($objArchive !== null)
+		if ($objCatalog !== null)
 		{
 			$security = System::getContainer()->get('security.helper');
 
-			while ($objArchive->next())
+			while ($objCatalog->next())
 			{
-				if ($objArchive->protected && !$security->isGranted(ContaoCorePermissions::MEMBER_IN_GROUPS, StringUtil::deserialize($objArchive->groups, true)))
+				if ($objCatalog->protected && !$security->isGranted(ContaoCorePermissions::MEMBER_IN_GROUPS, StringUtil::deserialize($objCatalog->groups, true)))
 				{
 					continue;
 				}
 
-				$arrCatalogs[] = $objArchive->id;
+				$arrCatalogs[] = $objCatalog->id;
 			}
 		}
 
