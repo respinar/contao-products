@@ -99,7 +99,7 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('protected', 'allowComments'),
-		'default'                     => '{title_legend},title;{redirect_legend},jumpTo;{protected_legend:hide},protected;{comments_legend:hide},allowComments'
+		'default'                     => '{title_legend},title;{redirect_legend},overviewPage,jumpTo;{protected_legend:hide},protected;{comments_legend:hide},allowComments'
 	),
 
 	// Subpalettes
@@ -127,6 +127,15 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>128),
 			'sql'                     => "varchar(255) NOT NULL default ''"
+		),
+		'overviewPage' => array
+		(
+
+			'inputType'               => 'pageTree',
+			'foreignKey'              => 'tl_page.title',
+			'eval'                    => array('mandatory'=>false, 'fieldType'=>'radio'),
+			'sql'                     => "int(10) unsigned NOT NULL default 0",
+			'relation'                => array('type'=>'hasOne', 'load'=>'lazy')
 		),
 		'jumpTo' => array
 		(
