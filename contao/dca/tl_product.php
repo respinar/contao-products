@@ -50,7 +50,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 		(
 			'mode'                    => DataContainer::MODE_PARENT,
 			'fields'                  => array('sorting'),
-			'headerFields'            => array('title','jumpTo','language','protected'),
+			'headerFields'            => array('title','overviewPage','jumpTo','language','protected'),
 			'panelLayout'             => 'filter;sort,search,limit',
 			'child_record_callback'   => array('tl_product', 'generateProductsRow')
 		),
