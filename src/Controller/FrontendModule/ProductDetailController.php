@@ -45,13 +45,6 @@ class ProductDetailController extends AbstractFrontendModuleController
     protected function getResponse(Template $template, ModuleModel $model, Request $request): Response
     {
 
-		if ($model->overviewPage)
-		{
-			$template->referer = PageModel::findById($model->overviewPage)->getFrontendUrl();
-			$template->back = $model->customLabel ?: $GLOBALS['TL_LANG']['MSC']['newsOverview'];
-		}
-		$template->relateds_headline = $GLOBALS['TL_LANG']['MSC']['relateds_headline'];
-
 		// Set the item from the auto_item parameter
 		if (!isset($_GET['items']) && $GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))
 		{
@@ -66,6 +59,17 @@ class ProductDetailController extends AbstractFrontendModuleController
 		{
 			throw new PageNotFoundException('Page not found: ' . Environment::get('uri'));
 		}
+
+
+		$template->referer = PageModel::findById($objProduct->getRelated('pid')->overviewPage)->getFrontendUrl();
+
+		if ($model->overviewPage)
+		{
+			$template->referer = PageModel::findById($model->overviewPage)->getFrontendUrl();
+		}
+
+		$template->back = $model->customLabel ?: $GLOBALS['TL_LANG']['MSC']['newsOverview'];
+		$template->relateds_headline = $GLOBALS['TL_LANG']['MSC']['relateds_headline'];
 
 		// 	Update the database
 		// 	$this->Database->prepare("UPDATE tl_product SET `visit`=`visit`+1 WHERE id=?")
