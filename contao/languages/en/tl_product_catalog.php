@@ -13,6 +13,7 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_product_catalog']['title']     = array('Catalog Title', 'Please enter the catalog title.');
+$GLOBALS['TL_LANG']['tl_product_catalog']['overviewPage']= array('Overview page','Please choose the page to which there will be all products.');
 $GLOBALS['TL_LANG']['tl_product_catalog']['jumpTo']    = array('Redirect page','Please choose the list page to which visitors will be redirected when clicking a menu.');
 $GLOBALS['TL_LANG']['tl_product_catalog']['protected'] = array('Protect catalog','Show catalog items to certain member groups only.');
 $GLOBALS['TL_LANG']['tl_product_catalog']['groups']    = array('Allowed member groups','These groups will be able to see the menu items in this catalog.');
