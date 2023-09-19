@@ -35,7 +35,7 @@ class ProductSingleController extends AbstractContentElementController
 	public const TYPE = 'product_single';
 
 	protected function getResponse(Template $template, ContentModel $model, Request $request): Response
-    {
+  {
 		$objProduct = ProductModel::findOneByID($model->product);
 
         $model->imgSize = $model->size;
