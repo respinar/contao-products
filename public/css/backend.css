@@ -1,3 +1,18 @@
 #tl_navigation .group-products {
     background: url(../svg/icon.svg) 3px 2px no-repeat;
 }
+
+.ce_product_single img {
+    width: 100px;
+    height: 100px;
+}
+
+.ce_product_list .product_list {
+    display: flex;
+    gap: 10px;
+}
+
+.ce_product_list img {
+    width: 100px;
+    height: 100px;
+}
