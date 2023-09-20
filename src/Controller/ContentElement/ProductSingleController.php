@@ -19,6 +19,7 @@ namespace Respinar\ProductsBundle\Controller\ContentElement;
 use Contao\ContentModel;
 use Contao\CoreBundle\Controller\ContentElement\AbstractContentElementController;
 use Contao\CoreBundle\DependencyInjection\Attribute\AsContentElement;
+use Contao\System;
 use Contao\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,7 +39,13 @@ class ProductSingleController extends AbstractContentElementController
   {
 		$objProduct = ProductModel::findOneByID($model->product);
 
+
         $model->imgSize = $model->size;
+
+        if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create('')))
+        {
+          $model->imgSize = 'a:3:{i:0;s:3:"100";i:1;s:3:"100";i:2;s:13:"center_center";}';
+        }
 
         $template->product = Product::parseProduct($objProduct, $model);
 
