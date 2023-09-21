@@ -45,6 +45,7 @@ class ProductListController extends AbstractContentElementController
 		if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create('')))
         {
           $model->imgSize = 'a:3:{i:0;s:3:"100";i:1;s:3:"100";i:2;s:13:"center_center";}';
+		  $model->product_template = 'product_simple';
         }
 
 		$arrProducts = [];
