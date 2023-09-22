@@ -58,7 +58,7 @@ abstract class Product
 	{
 		global $objPage;
 
-		$objTemplate = new FrontendTemplate($model->product_template);
+		$objTemplate = new FrontendTemplate($model->product_template ?: 'product_short');
 		$objTemplate->setData($objProduct->row());
 
 		$objTemplate->hasSummary = false;
