@@ -74,6 +74,11 @@ abstract class Product
 			$strClass .= ' new';
 		}
 
+		if ($objProduct->featured)
+		{
+			$strClass .= ' featured';
+		}
+
 		$objTemplate->class = $strClass;
 
 		$objTemplate->category = $objProduct->getRelated('pid');
