@@ -65,11 +65,15 @@ abstract class Product
 		$objTemplate->hasText = false;
 		$objTemplate->hasEnclosure = false;
 
-		$objTemplate->class = (($model->product_singleClass != '') ? ' ' . $model->product_singleClass : '') . $strClass;
+		if ($model->product_singleClass) {
+			$strClass .= ' ' . $model->product_singleClass;
+		}
 
 		if (time() - $objProduct->date < 2592000) {
 			$objTemplate->new_product = true;
 		}
+
+		$objTemplate->class = $strClass;
 
 		$objTemplate->category = $objProduct->getRelated('pid');
 
