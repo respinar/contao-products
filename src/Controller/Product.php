@@ -71,6 +71,7 @@ abstract class Product
 
 		if (time() - $objProduct->date < 2592000) {
 			$objTemplate->new_product = true;
+			$strClass .= ' new';
 		}
 
 		$objTemplate->class = $strClass;
