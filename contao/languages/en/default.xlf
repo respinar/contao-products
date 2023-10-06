@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="vendor/respinar/contao-products/contao/languages/en/default.php" source-language="en">
+    <body>
+      <trans-unit id="MSC.emptyCatalog">
+        <source>There is no product!</source>
+      </trans-unit>
+      <trans-unit id="MSC.moreDetail">
+        <source>%s more details</source>
+      </trans-unit>
+      <trans-unit id="MSC.price">
+        <source>Price</source>
+      </trans-unit>
+      <trans-unit id="MSC.availability">
+        <source>Availability</source>
+      </trans-unit>
+      <trans-unit id="MSC.model">
+        <source>Model</source>
+      </trans-unit>
+      <trans-unit id="MSC.global_ID">
+        <source>EAN/UPC</source>
+      </trans-unit>
+      <trans-unit id="MSC.brand">
+        <source>Brand</source>
+      </trans-unit>
+      <trans-unit id="MSC.sku">
+        <source>SKU</source>
+      </trans-unit>
+      <trans-unit id="MSC.buy">
+        <source>Buy link</source>
+      </trans-unit>
+      <trans-unit id="MSC.Discontinued">
+        <source>Discontinued</source>
+      </trans-unit>
+      <trans-unit id="MSC.InStock">
+        <source>In Stock</source>
+      </trans-unit>
+      <trans-unit id="MSC.InStoreOnly">
+        <source>In Store Only</source>
+      </trans-unit>
+      <trans-unit id="MSC.LimitedAvailability">
+        <source>Limited Availability</source>
+      </trans-unit>
+      <trans-unit id="MSC.OnlineOnly">
+        <source>OnlineOnly</source>
+      </trans-unit>
+      <trans-unit id="MSC.OutOfStock">
+        <source>Out Of Stock</source>
+      </trans-unit>
+      <trans-unit id="MSC.PreOrder">
+        <source>Pre Order</source>
+      </trans-unit>
+      <trans-unit id="MSC.PreSale">
+        <source>Pre Sale</source>
+      </trans-unit>
+      <trans-unit id="MSC.SoldOut">
+        <source>Sold Out</source>
+      </trans-unit>
+      <trans-unit id="MSC.IRR">
+        <source>Iranian Rial</source>
+      </trans-unit>
+      <trans-unit id="MSC.TMN">
+        <source>Iranian Toman</source>
+      </trans-unit>
+      <trans-unit id="MSC.USD">
+        <source>US Dollar</source>
+      </trans-unit>
+      <trans-unit id="MSC.EUR">
+        <source>Euro</source>
+      </trans-unit>
+      <trans-unit id="MSC.mpn">
+        <source>MPN</source>
+      </trans-unit>
+      <trans-unit id="MSC.isbn">
+        <source>ISBN</source>
+      </trans-unit>
+      <trans-unit id="MSC.gtin8">
+        <source>GTIN-8</source>
+      </trans-unit>
+      <trans-unit id="MSC.gtin12">
+        <source>GTIN-12</source>
+      </trans-unit>
+      <trans-unit id="MSC.gtin13">
+        <source>GTIN-13</source>
+      </trans-unit>
+      <trans-unit id="MSC.gtin14">
+        <source>GTIN-14</source>
+      </trans-unit>
+      <trans-unit id="MSC.price_text">
+        <source>Price</source>
+      </trans-unit>
+      <trans-unit id="MSC.model_text">
+        <source>Model</source>
+      </trans-unit>
+      <trans-unit id="MSC.global_ID_text">
+        <source>EAN/UPC</source>
+      </trans-unit>
+      <trans-unit id="MSC.brand_text">
+        <source>Brand</source>
+      </trans-unit>
+      <trans-unit id="MSC.sku_text">
+        <source>SKU</source>
+      </trans-unit>
+      <trans-unit id="MSC.status_text">
+        <source>Status</source>
+      </trans-unit>
+      <trans-unit id="MSC.vote_text">
+        <source>vote</source>
+      </trans-unit>
+      <trans-unit id="MSC.relateds_headline">
+        <source>Related products</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
