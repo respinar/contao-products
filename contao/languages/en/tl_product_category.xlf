@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="vendor/respinar/contao-products/contao/languages/en/tl_product_category.php" source-language="en">
+    <body>
+      <trans-unit id="tl_product_category.title.0">
+        <source>Category Title</source>
+      </trans-unit>
+      <trans-unit id="tl_product_category.title.1">
+        <source>Please enter the category title.</source>
+      </trans-unit>
+      <trans-unit id="tl_product_category.jumpTo.0">
+        <source>Redirect page</source>
+      </trans-unit>
+      <trans-unit id="tl_product_category.jumpTo.1">
+        <source>Please choose the list page to which visitors will be redirected when clicking a menu.</source>
+      </trans-unit>
+      <trans-unit id="tl_product_category.protected.0">
+        <source>Protect category</source>
+      </trans-unit>
+      <trans-unit id="tl_product_category.protected.1">
+        <source>Show category items to certain member groups only.</source>
+      </trans-unit>
+      <trans-unit id="tl_product_category.groups.0">
+        <source>Allowed member groups</source>
+      </trans-unit>
+      <trans-unit id="tl_product_category.groups.1">
+        <source>These groups will be able to see the menu items in this category.</source>
+      </trans-unit>
+      <trans-unit id="tl_product_category.categories.0">
+        <source>Categories</source>
+      </trans-unit>
+      <trans-unit id="tl_product_category.title_legend">
+        <source>Category Title</source>
+      </trans-unit>
+      <trans-unit id="tl_product_category.redirect_legend">
+        <source>Redirect</source>
+      </trans-unit>
+      <trans-unit id="tl_product_category.protected_legend">
+        <source>Access protection</source>
+      </trans-unit>
+      <trans-unit id="tl_product_category.new.0">
+        <source>New category</source>
+      </trans-unit>
+      <trans-unit id="tl_product_category.new.1">
+        <source>Create a new category</source>
+      </trans-unit>
+      <trans-unit id="tl_product_category.show.0">
+        <source>Category details</source>
+      </trans-unit>
+      <trans-unit id="tl_product_category.show.1">
+        <source>Show the details of category ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_product_category.edit.0">
+        <source>Edit category</source>
+      </trans-unit>
+      <trans-unit id="tl_product_category.edit.1">
+        <source>Edit category ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_product_category.copy.0">
+        <source>Duplicate category</source>
+      </trans-unit>
+      <trans-unit id="tl_product_category.copy.1">
+        <source>Duplicate category ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_product_category.delete.0">
+        <source>Delete category</source>
+      </trans-unit>
+      <trans-unit id="tl_product_category.delete.1">
+        <source>Delete category ID %s</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
