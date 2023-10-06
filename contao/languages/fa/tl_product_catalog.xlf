@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="vendor/respinar/contao-products/contao/languages/en/tl_product_catalog.php" source-language="en" target-language="fa">
+    <body>
+      <trans-unit id="tl_product_catalog.title.0">
+        <source>Catalog Title</source>
+        <target>عنوان کاتالوگ</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.title.1">
+        <source>Please enter the catalog title.</source>
+        <target>لطفا عنوان کاتالوگ را وارد نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.overviewPage.0">
+        <source>Overview page</source>
+        <target>Overview page</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.overviewPage.1">
+        <source>Please choose the page to which there will be all products.</source>
+        <target>Please choose the page to which there will be all products.</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.jumpTo.0">
+        <source>Redirect page</source>
+        <target>برگه بازگردانی</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.jumpTo.1">
+        <source>Please choose the list page to which visitors will be redirected when clicking a menu.</source>
+        <target>Please choose the list page to which visitors will be redirected when clicking a menu.</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.protected.0">
+        <source>Protect catalog</source>
+        <target>حفاظت کاتالوگ</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.protected.1">
+        <source>Show catalog items to certain member groups only.</source>
+        <target>آیتم‌های کاتالوگ را فقط برای برخی گروه‌های اعضاء نمایش می‌دهد.</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.groups.0">
+        <source>Allowed member groups</source>
+        <target>گروه‌های اعضاء مجاز</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.groups.1">
+        <source>These groups will be able to see the menu items in this catalog.</source>
+        <target>این گروه‌ها قادر به دیدن آیتم‌های منو در این کاتالوگ خواهند بود.</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.master.0">
+        <source>Master catalog</source>
+        <target>کاتالوگ اصلی</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.master.1">
+        <source>Please define the master catalog to allow language switching.</source>
+        <target>لطفا کاتالوگ اصلی برای اجازه دادن به تعویض زبان تعریف نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.language.0">
+        <source>Language</source>
+        <target>زبان</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.language.1">
+        <source>Please enter the language according to the RFC3066 format (e.g. en, en-us or en-cockney).</source>
+        <target>لطفا زبان را بر اساس قالب RFC3066 (مانند fa، fa-ir یا fa-iran) وارد نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.isMaster">
+        <source>This is a master catalog</source>
+        <target>این کاتالوگ اصلی است</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.isSlave">
+        <source>Master catalog is "%s"</source>
+        <target>کاتالوگ "%s" اصلی است</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.title_legend">
+        <source>Catalog Title</source>
+        <target>عنوان کاتالوگ</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.redirect_legend">
+        <source>Redirect</source>
+        <target>بازگردانی</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.protected_legend">
+        <source>Access protection</source>
+        <target>حفاظت دسترسی</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.language_legend">
+        <source>Language settings</source>
+        <target>Language settings</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.new.0">
+        <source>New catalog</source>
+        <target>کاتالوگ جدید</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.new.1">
+        <source>Create a new catalog</source>
+        <target>ایجاد کاتالوگ جدید</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.show.0">
+        <source>Catalog details</source>
+        <target>جزئیات کاتالوگ</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.show.1">
+        <source>Show the details of catalog ID %s</source>
+        <target>نمایش جزئیات کاتالوگ شناسه‌ی %s</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.edit.0">
+        <source>Edit catalog</source>
+        <target>ویرایش کاتالوگ</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.edit.1">
+        <source>Edit catalog ID %s</source>
+        <target>ویرایش کاتالوگ شناسه‌ی %s</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.copy.0">
+        <source>Duplicate catalog</source>
+        <target>تکثیر کاتالوگ</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.copy.1">
+        <source>Duplicate catalog ID %s</source>
+        <target>تکثیر کاتالوگ شناسه‌ی %s</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.delete.0">
+        <source>Delete catalog</source>
+        <target>حذف کاتالوگ</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.delete.1">
+        <source>Delete catalog ID %s</source>
+        <target>حذف کاتالوگ کاتالوگ شناسه‌ی %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
