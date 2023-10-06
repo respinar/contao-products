@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="vendor/respinar/contao-products/contao/languages/en/tl_module.php" source-language="en" target-language="fa">
+    <body>
+      <trans-unit id="tl_module.product_catalogs.0">
+        <source>Product catelogs</source>
+        <target>Product catelogs</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_catalogs.1">
+        <source>Please select one or more catalogs.</source>
+        <target>Please select one or more catalogs.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_categories.0">
+        <source>Product categories</source>
+        <target>Product categories</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_categories.1">
+        <source>Please select one or more categories.</source>
+        <target>Please select one or more categories.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_featured.0">
+        <source>Featured product</source>
+        <target>محصول ویژه</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_featured.1">
+        <source>Here you can choose how featured products are handled.</source>
+        <target>Here you can choose how featured products are handled.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_detailModule.0">
+        <source>Product detail module</source>
+        <target>ماژول جزئیات محصول</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_detailModule.1">
+        <source>Automatically switch to the product module if an item has been selected.</source>
+        <target>Automatically switch to the product module if an item has been selected.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_metaFields.0">
+        <source>Meta fields</source>
+        <target>Meta fields</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_metaFields.1">
+        <source>Here you can select the meta fields.</source>
+        <target>Here you can select the meta fields.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_sortBy.0">
+        <source>Sort by</source>
+        <target>مرتب‌سازی</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_sortBy.1">
+        <source>Here you can select the sorting fields.</source>
+        <target>Here you can select the sorting fields.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_template.0">
+        <source>Product template</source>
+        <target>قالب محصول</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_template.1">
+        <source>Here you can select the product template.</source>
+        <target>اینجا می‌توانید قالب محصول را انتخاب نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_Class.0">
+        <source>Product CSS class</source>
+        <target>کلاس سی‌اس‌اس محصول</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_Class.1">
+        <source>Here you can set one or more classes for products.</source>
+        <target>اینجا می‌توانید یک یا چند کلاس به محصولات تنظیم کنید.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_list_Class.0">
+        <source>Product list class</source>
+        <target>Product list class</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_list_Class.1">
+        <source>Here you can set one or more classes for products list.</source>
+        <target>Here you can set one or more classes for products list.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.related_show.0">
+        <source>Show related product</source>
+        <target>نمایش محصولات مرتبط</target>
+      </trans-unit>
+      <trans-unit id="tl_module.related_show.1">
+        <source>Here you can set one or more classes for types.</source>
+        <target>اینجا می‌توانید یک یا چند کلاس برای محصول مرتبط انتخاب نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.related_template.0">
+        <source>Related product template</source>
+        <target>قالب محصولات مرتبط</target>
+      </trans-unit>
+      <trans-unit id="tl_module.related_template.1">
+        <source>Here you can select the related product template.</source>
+        <target>اینجا می‌توانید قالب محصول مرتبط را انتخاب نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.related_Class.0">
+        <source>Related product CSS class</source>
+        <target>کلاس سی‌اس‌اس محصول مرتبط</target>
+      </trans-unit>
+      <trans-unit id="tl_module.related_Class.1">
+        <source>Here you can set one or more classes for related products.</source>
+        <target>اینجا می‌توانید یک یا چند کلاس برای محصول مرتبط انتخاب نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.related_imgSize.0">
+        <source>Related product image width and height</source>
+        <target>عرض و ارتفاع تصویر محصول مرتبط</target>
+      </trans-unit>
+      <trans-unit id="tl_module.related_imgSize.1">
+        <source>Here you can set the image dimensions and the resize mode.</source>
+        <target>اینجا می‌توانید ابعاد و حالت تغییر اندازه تصویر را تنظیم نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.catalog_legend">
+        <source>Catalog</source>
+        <target>کاتالوگ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_legend">
+        <source>Product setting</source>
+        <target>تنظیمات محصول</target>
+      </trans-unit>
+      <trans-unit id="tl_module.related_legend">
+        <source>Related products settings</source>
+        <target>تنظیمات محصولات مرتبط</target>
+      </trans-unit>
+      <trans-unit id="tl_module.protected_legend">
+        <source>Access protection</source>
+        <target>حفاظت دسترسی</target>
+      </trans-unit>
+      <trans-unit id="tl_module.all_product">
+        <source>All products</source>
+        <target>همه محصولات</target>
+      </trans-unit>
+      <trans-unit id="tl_module.featured_product">
+        <source>Featured products</source>
+        <target>محصولات ویژه</target>
+      </trans-unit>
+      <trans-unit id="tl_module.unfeatured_product">
+        <source>Unfeatured products</source>
+        <target>محصولات غیرویژه</target>
+      </trans-unit>
+      <trans-unit id="tl_module.custom">
+        <source>Custom order</source>
+        <target>ترتیب اختصاصی</target>
+      </trans-unit>
+      <trans-unit id="tl_module.title_asc">
+        <source>Title (A-Z)</source>
+        <target>عنوان (الف-ی)</target>
+      </trans-unit>
+      <trans-unit id="tl_module.title_desc">
+        <source>Title (Z-A)</source>
+        <target>عنوان (ی-الف)</target>
+      </trans-unit>
+      <trans-unit id="tl_module.date_asc">
+        <source>Date (Older)</source>
+        <target>تاریخ (جدیدتر)</target>
+      </trans-unit>
+      <trans-unit id="tl_module.date_desc">
+        <source>Date (Newer)</source>
+        <target>تاریخ (قدیمی‌تر)</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
