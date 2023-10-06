@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="vendor/respinar/contao-products/contao/languages/en/modules.php" source-language="en">
+    <body>
+      <trans-unit id="MOD.products.0">
+        <source>Products</source>
+      </trans-unit>
+      <trans-unit id="MOD.products.1">
+        <source>Catalog and products management</source>
+      </trans-unit>
+      <trans-unit id="MOD.prices.0">
+        <source>Prices</source>
+      </trans-unit>
+      <trans-unit id="MOD.prices.1">
+        <source>Price management</source>
+      </trans-unit>
+      <trans-unit id="FMD.products">
+        <source>Products</source>
+      </trans-unit>
+      <trans-unit id="FMD.product_list.0">
+        <source>Product list</source>
+      </trans-unit>
+      <trans-unit id="FMD.product_list.1">
+        <source>Product list</source>
+      </trans-unit>
+      <trans-unit id="FMD.product_detail.0">
+        <source>Product detail</source>
+      </trans-unit>
+      <trans-unit id="FMD.product_detail.1">
+        <source>Product detail</source>
+      </trans-unit>
+      <trans-unit id="FMD.product.0">
+        <source>Product</source>
+      </trans-unit>
+      <trans-unit id="CTE.product.0">
+        <source>Product</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
