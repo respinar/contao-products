@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="vendor/respinar/contao-products/contao/languages/en/tl_product_price.php" source-language="en" target-language="fa">
+    <body>
+      <trans-unit id="tl_product_price.price.0">
+        <source>Price</source>
+        <target>قیمت</target>
+      </trans-unit>
+      <trans-unit id="tl_product_price.price.1">
+        <source>Please enter the price.</source>
+        <target>لطفا قیمت را وارد نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_product_price.date.0">
+        <source>Date</source>
+        <target>تاریخ</target>
+      </trans-unit>
+      <trans-unit id="tl_product_price.date.1">
+        <source>Please enter the date .</source>
+        <target>لطفا تاریخ را وارد نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_product_price.published.0">
+        <source>Publish price</source>
+        <target>انتشار قیمت</target>
+      </trans-unit>
+      <trans-unit id="tl_product_price.published.1">
+        <source>Please enter the .</source>
+        <target>لطفا تاریخ را وارد نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_product_price.price_legend">
+        <source>Price</source>
+        <target>قیمت</target>
+      </trans-unit>
+      <trans-unit id="tl_product_price.publish_legend">
+        <source>Publish settings</source>
+        <target>تنظیمات انتشار</target>
+      </trans-unit>
+      <trans-unit id="tl_product_price.new.0">
+        <source>Add Price</source>
+        <target>Add Price</target>
+      </trans-unit>
+      <trans-unit id="tl_product_price.new.1">
+        <source>Add a new price</source>
+        <target>افزودن قیمت جدید</target>
+      </trans-unit>
+      <trans-unit id="tl_product_price.show.0">
+        <source>Price details</source>
+        <target>جزئیات قیمت</target>
+      </trans-unit>
+      <trans-unit id="tl_product_price.show.1">
+        <source>Show the details of price ID %s</source>
+        <target>نمایش جزئیات قیمت شناسه‌ی %s</target>
+      </trans-unit>
+      <trans-unit id="tl_product_price.edit.0">
+        <source>Edit price</source>
+        <target>ویرایش قیمت</target>
+      </trans-unit>
+      <trans-unit id="tl_product_price.edit.1">
+        <source>Edit price ID %s</source>
+        <target>ویرایش قیمت شناسه‌ی %s</target>
+      </trans-unit>
+      <trans-unit id="tl_product_price.delete.0">
+        <source>Delete price</source>
+        <target>حذف قیمت</target>
+      </trans-unit>
+      <trans-unit id="tl_product_price.delete.1">
+        <source>Delete price ID %s</source>
+        <target>حذف قیمت %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
