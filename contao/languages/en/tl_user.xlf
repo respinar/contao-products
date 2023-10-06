@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="vendor/respinar/contao-products/contao/languages/en/tl_user.php" source-language="en">
+    <body>
+      <trans-unit id="tl_user.products.0">
+        <source>Allowed product catalogs</source>
+      </trans-unit>
+      <trans-unit id="tl_user.products.1">
+        <source>Here you can grant access to one or more product Catalogs.</source>
+      </trans-unit>
+      <trans-unit id="tl_user.productp.0">
+        <source>Product catalog permissions</source>
+      </trans-unit>
+      <trans-unit id="tl_user.productp.1">
+        <source>Here you can define the product catalog permissions.</source>
+      </trans-unit>
+      <trans-unit id="tl_user.product_legend">
+        <source>Product catalog permissions</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
