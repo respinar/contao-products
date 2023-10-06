@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="vendor/respinar/contao-products/contao/languages/en/tl_content.php" source-language="en">
+    <body>
+      <trans-unit id="tl_content.product.0">
+        <source>Product</source>
+      </trans-unit>
+      <trans-unit id="tl_content.product.1">
+        <source>Please select one product.</source>
+      </trans-unit>
+      <trans-unit id="tl_content.product_legend">
+        <source>Product</source>
+      </trans-unit>
+      <trans-unit id="tl_module.all_product">
+        <source>All products</source>
+      </trans-unit>
+      <trans-unit id="tl_module.featured_product">
+        <source>Featured products</source>
+      </trans-unit>
+      <trans-unit id="tl_module.unfeatured_product">
+        <source>Unfeatured products</source>
+      </trans-unit>
+      <trans-unit id="tl_module.custom">
+        <source>Custom order</source>
+      </trans-unit>
+      <trans-unit id="tl_module.title_asc">
+        <source>Title (A-Z)</source>
+      </trans-unit>
+      <trans-unit id="tl_module.title_desc">
+        <source>Title (Z-A)</source>
+      </trans-unit>
+      <trans-unit id="tl_module.date_asc">
+        <source>Date (Older)</source>
+      </trans-unit>
+      <trans-unit id="tl_module.date_desc">
+        <source>Date (Newer)</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
