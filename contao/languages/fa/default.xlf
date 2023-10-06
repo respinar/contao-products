@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="vendor/respinar/contao-products/contao/languages/en/default.php" source-language="en" target-language="fa">
+    <body>
+      <trans-unit id="MSC.emptyCatalog">
+        <source>There is no product!</source>
+        <target>محصولی وجود ندارد!</target>
+      </trans-unit>
+      <trans-unit id="MSC.moreDetail">
+        <source>%s more details</source>
+        <target>جزئیات بیشتر %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.price">
+        <source>Price</source>
+        <target>قیمت</target>
+      </trans-unit>
+      <trans-unit id="MSC.availability">
+        <source>Availability</source>
+        <target>Availability</target>
+      </trans-unit>
+      <trans-unit id="MSC.model">
+        <source>Model</source>
+        <target>Model</target>
+      </trans-unit>
+      <trans-unit id="MSC.global_ID">
+        <source>EAN/UPC</source>
+        <target>EAN/UPC</target>
+      </trans-unit>
+      <trans-unit id="MSC.brand">
+        <source>Brand</source>
+        <target>Brand</target>
+      </trans-unit>
+      <trans-unit id="MSC.sku">
+        <source>SKU</source>
+        <target>SKU</target>
+      </trans-unit>
+      <trans-unit id="MSC.buy">
+        <source>Buy link</source>
+        <target>Buy link</target>
+      </trans-unit>
+      <trans-unit id="MSC.Discontinued">
+        <source>Discontinued</source>
+        <target>عدم تولید</target>
+      </trans-unit>
+      <trans-unit id="MSC.InStock">
+        <source>In Stock</source>
+        <target>موجود</target>
+      </trans-unit>
+      <trans-unit id="MSC.InStoreOnly">
+        <source>In Store Only</source>
+        <target>فقط در فروشگاه</target>
+      </trans-unit>
+      <trans-unit id="MSC.LimitedAvailability">
+        <source>Limited Availability</source>
+        <target>موجودی محدود</target>
+      </trans-unit>
+      <trans-unit id="MSC.OnlineOnly">
+        <source>OnlineOnly</source>
+        <target>فقط آنلاین</target>
+      </trans-unit>
+      <trans-unit id="MSC.OutOfStock">
+        <source>Out Of Stock</source>
+        <target>عدم موجودی</target>
+      </trans-unit>
+      <trans-unit id="MSC.PreOrder">
+        <source>Pre Order</source>
+        <target>پیش سفارش</target>
+      </trans-unit>
+      <trans-unit id="MSC.PreSale">
+        <source>Pre Sale</source>
+        <target>پیش فروش</target>
+      </trans-unit>
+      <trans-unit id="MSC.SoldOut">
+        <source>Sold Out</source>
+        <target>تمام</target>
+      </trans-unit>
+      <trans-unit id="MSC.IRR">
+        <source>Iranian Rial</source>
+        <target>ریال</target>
+      </trans-unit>
+      <trans-unit id="MSC.TMN">
+        <source>Iranian Toman</source>
+        <target>تومان</target>
+      </trans-unit>
+      <trans-unit id="MSC.USD">
+        <source>US Dollar</source>
+        <target>دلار</target>
+      </trans-unit>
+      <trans-unit id="MSC.EUR">
+        <source>Euro</source>
+        <target>یورو</target>
+      </trans-unit>
+      <trans-unit id="MSC.mpn">
+        <source>MPN</source>
+        <target>MPN</target>
+      </trans-unit>
+      <trans-unit id="MSC.isbn">
+        <source>ISBN</source>
+        <target>ISBN</target>
+      </trans-unit>
+      <trans-unit id="MSC.gtin8">
+        <source>GTIN-8</source>
+        <target>GTIN-8</target>
+      </trans-unit>
+      <trans-unit id="MSC.gtin12">
+        <source>GTIN-12</source>
+        <target>GTIN-12</target>
+      </trans-unit>
+      <trans-unit id="MSC.gtin13">
+        <source>GTIN-13</source>
+        <target>GTIN-13</target>
+      </trans-unit>
+      <trans-unit id="MSC.gtin14">
+        <source>GTIN-14</source>
+        <target>GTIN-14</target>
+      </trans-unit>
+      <trans-unit id="MSC.price_text">
+        <source>Price</source>
+        <target>قیمت</target>
+      </trans-unit>
+      <trans-unit id="MSC.model_text">
+        <source>Model</source>
+        <target>مدل</target>
+      </trans-unit>
+      <trans-unit id="MSC.global_ID_text">
+        <source>EAN/UPC</source>
+        <target>کد</target>
+      </trans-unit>
+      <trans-unit id="MSC.brand_text">
+        <source>Brand</source>
+        <target>برند</target>
+      </trans-unit>
+      <trans-unit id="MSC.sku_text">
+        <source>SKU</source>
+        <target>SKU</target>
+      </trans-unit>
+      <trans-unit id="MSC.status_text">
+        <source>Status</source>
+        <target>وضعیت</target>
+      </trans-unit>
+      <trans-unit id="MSC.vote_text">
+        <source>vote</source>
+        <target>رای</target>
+      </trans-unit>
+      <trans-unit id="MSC.relateds_headline">
+        <source>Related products</source>
+        <target>محصولات مرتبط</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
