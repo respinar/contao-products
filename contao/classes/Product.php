@@ -295,6 +295,19 @@ abstract class Product
 	}
 
 	/**
+	 * Return the link of a product
+	 * @param object
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	static function getLink($objItem, $strUrl)
+	{
+		// Link to the default page
+		return sprintf($strUrl, (($objItem->alias != '' && !Config::get('disableAlias')) ? $objItem->alias : $objItem->id));
+	}
+
+	/**
 	 * Return the meta fields of a product as array
 	 * @param object
 	 * @return array
