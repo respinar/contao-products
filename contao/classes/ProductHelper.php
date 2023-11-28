@@ -12,7 +12,7 @@
 /**
  * Run in a custom namespace, so the class can be replaced
  */
-namespace Respinar\ProductsBundle\Helper;
+namespace Respinar\ProductsBundle;
 
 use Contao\Config;
 use Contao\System;
