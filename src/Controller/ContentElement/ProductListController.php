@@ -25,7 +25,7 @@ use Contao\System;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use Respinar\ProductsBundle\Controller\Product;
+use Respinar\ProductsBundle\Product;
 use Respinar\ProductsBundle\Model\ProductModel;
 
 
