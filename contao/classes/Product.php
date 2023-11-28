@@ -29,13 +29,12 @@ use Contao\CoreBundle\Security\ContaoCorePermissions;
 use Respinar\ProductsBundle\Model\ProductModel;
 use Respinar\ProductsBundle\Model\CatalogModel;
 
-/**
- * Class ModuleProduct
+/*
+ * This file is part of Contao Products Bundle.
  *
- * Parent class for product modules.
- * @copyright  Hamid Abbaszadeh 2014
- * @author     Hamid Abbaszadeh <https://respinar.com>
- * @package    product
+ * (c) Hamid Peywasti 2023 <hamid@respinar.com>
+ *
+ * @license MIT
  */
 abstract class Product
 {
