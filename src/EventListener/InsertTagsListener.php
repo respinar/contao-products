@@ -18,7 +18,7 @@ use Psr\Log\LoggerInterface;
 use Contao\StringUtil;
 
 use Respinar\ProductsBundle\Model\ProductModel;
-use Respinar\ProductsBundle\Controller\Product;
+use Respinar\ProductsBundle\Product;
 
 #[AsHook('replaceInsertTags')]
 class InsertTagsListener
