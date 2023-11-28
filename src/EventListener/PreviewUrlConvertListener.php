@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Respinar\ProductsBundle\Model\ProductModel;
 
-use Respinar\ProductsBundle\Controller\Product;
+use Respinar\ProductsBundle\Product;
 
 
 #[AsEventListener('contao.preview_url_convert')]
