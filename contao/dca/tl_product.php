@@ -334,7 +334,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 		(
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('mandatory'=>true,'fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes']),
+			'eval'                    => array('mandatory'=>true,'fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'extensions'=>'%contao.image.valid_extensions%'),
 			'sql'                     => "binary(16) NULL"
 		),
 		'overwriteMeta' => array
@@ -500,6 +500,7 @@ class tl_product extends Backend
 	 */
 	public function getProducts(DataContainer $dc)
 	{
+		$arrItems = array();
 
 		$objItems = $this->Database->prepare("SELECT * FROM tl_product WHERE pid=? ORDER BY date DESC")->execute($dc->activeRecord->pid);
 
