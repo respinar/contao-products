@@ -11,6 +11,8 @@
 use Contao\System;
 use Contao\DataContainer;
 use Contao\Backend;
+use Contao\BackendUser;
+use Contao\DC_Table;
 use Contao\FilesModel;
 use Contao\Image;
 use Contao\StringUtil;
@@ -27,7 +29,7 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 	// Config
 	'config' => array
 	(
-		'dataContainer'               => 'Table',
+		'dataContainer'               => DC_Table::class,
 		'ptable'                      => 'tl_product_catalog',
 		'ctable'                      => array('tl_content'),
 		'switchToEdit'                => true,
@@ -431,7 +433,7 @@ class tl_product extends Backend
 	public function __construct()
 	{
 		parent::__construct();
-		$this->import('BackendUser', 'User');
+		$this->import(BackendUser::class, 'User');
 	}
 
 	/**
