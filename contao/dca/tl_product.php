@@ -479,14 +479,16 @@ class tl_product extends Backend
 	 */
 	public function generateProductsRow($arrRow)
 	{
-		$objImage = FilesModel::findByPk($arrRow['singleSRC']);
+		// $objImage = FilesModel::findByPk($arrRow['singleSRC']);
 
-		if ($objImage !== null)
-		{
-			$strImage = Image::getHtml(Image::get($objImage->path, '60', '60', 'center_center'));
-		}
+		// if ($objImage !== null)
+		// {
+		// 	$strImage = Image::getHtml(Image::get($objImage->path, '60', '60', 'center_center'));
+		// }
 
-		return '<div><div style="float:left; margin-right:10px;">'.$strImage.'</div><p><strong>'. $arrRow['title'].'</strong></p><p> Brand: '.$arrRow['brand'] .' &emsp; Model: '. $arrRow['model']. ' &emsp; SKU: '. $arrRow['sku'] . ' &emsp; Visit: '. $arrRow['visit'] .'</p></div>';
+		// return '<div><div style="float:left; margin-right:10px;">'.$strImage.'</div><p><strong>'. $arrRow['title'].'</strong></p><p> Brand: '.$arrRow['brand'] .' &emsp; Model: '. $arrRow['model']. ' &emsp; SKU: '. $arrRow['sku'] . ' &emsp; Visit: '. $arrRow['visit'] .'</p></div>';
+
+		return '<div><p><strong>'. $arrRow['title'].'</strong></p><p> Brand: '.$arrRow['brand'] .' &emsp; Model: '. $arrRow['model']. ' &emsp; SKU: '. $arrRow['sku'] . ' &emsp; Visit: '. $arrRow['visit'] .'</p></div>';
 	}
 
 	/**
