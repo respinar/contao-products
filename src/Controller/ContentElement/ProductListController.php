@@ -29,7 +29,7 @@ use Respinar\ProductsBundle\Product;
 use Respinar\ProductsBundle\Model\ProductModel;
 
 
-#[AsContentElement(category: "products")]
+#[AsContentElement(category: "products", template: 'ce_product_list')]
 class ProductListController extends AbstractContentElementController
 {
 
