@@ -37,7 +37,7 @@ use Contao\CoreBundle\Exception\PageNotFoundException;
 use Contao\CoreBundle\Routing\ResponseContext\HtmlHeadBag\HtmlHeadBag;
 
 
-#[AsFrontendModule(category: "products")]
+#[AsFrontendModule(category: "products", template: 'mod_product_detail')]
 class ProductDetailController extends AbstractFrontendModuleController
 {
 	public const TYPE = 'product_detail';
