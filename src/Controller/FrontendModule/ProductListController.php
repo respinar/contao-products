@@ -31,7 +31,7 @@ use Respinar\ProductsBundle\Product;
 use Respinar\ProductsBundle\Model\ProductModel;
 use Respinar\ProductsBundle\Model\CatalogModel;
 
-#[AsFrontendModule(category: "products")]
+#[AsFrontendModule(category: "products", template: 'mod_product_list')]
 class ProductListController extends AbstractFrontendModuleController
 {
 	public const TYPE = 'products_list';
