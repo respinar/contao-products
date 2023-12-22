@@ -16,6 +16,7 @@ namespace Respinar\ProductsBundle;
 
 use Contao\FrontendTemplate;
 use Contao\ContentModel;
+use Contao\FilesModel;
 use Contao\System;
 use Contao\Date;
 use Contao\PageModel;
@@ -24,7 +25,6 @@ use Contao\StringUtil;
 use Contao\Controller;
 use Contao\Config;
 use Contao\CoreBundle\Security\ContaoCorePermissions;
-
 use Respinar\ProductsBundle\Model\CatalogModel;
 
 /*
@@ -53,6 +53,11 @@ abstract class Product
 	 */
 	static public function parseProduct($objProduct, $model, $blnAddCategory=false, $strClass='', $intCount=0)
 	{
+
+		if (!$objProduct) {
+			return;
+		}
+
 		global $objPage;
 
 		$objTemplate = new FrontendTemplate($model->product_template ?: 'product_short');
