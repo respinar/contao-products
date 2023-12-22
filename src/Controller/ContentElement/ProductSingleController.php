@@ -26,7 +26,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 use Respinar\ProductsBundle\Product;
 use Respinar\ProductsBundle\Model\ProductModel;
-use Respinar\ProductsBundle\Model\CatalogModel;
 
 
 #[AsContentElement(category: "products", template: 'ce_product_single')]
