@@ -44,16 +44,16 @@
       <trans-unit id="tl_module.product_template.1">
         <source>Here you can select the product template.</source>
       </trans-unit>
-      <trans-unit id="tl_module.product_Class.0">
-        <source>Product CSS class</source>
+      <trans-unit id="tl_module.product_singleClass.0">
+        <source>Single product class</source>
       </trans-unit>
-      <trans-unit id="tl_module.product_Class.1">
+      <trans-unit id="tl_module.product_singleClass.1">
         <source>Here you can set one or more classes for products.</source>
       </trans-unit>
-      <trans-unit id="tl_module.product_list_Class.0">
+      <trans-unit id="tl_module.product_listClass.0">
         <source>Product list class</source>
       </trans-unit>
-      <trans-unit id="tl_module.product_list_Class.1">
+      <trans-unit id="tl_module.product_listClass.1">
         <source>Here you can set one or more classes for products list.</source>
       </trans-unit>
       <trans-unit id="tl_module.related_show.0">
