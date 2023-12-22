@@ -15,7 +15,6 @@ namespace Respinar\ProductsBundle\EventListener;
 use Contao\CoreBundle\DependencyInjection\Attribute\AsHook;
 use Contao\CoreBundle\Framework\ContaoFramework;
 use Psr\Log\LoggerInterface;
-use Contao\StringUtil;
 
 use Respinar\ProductsBundle\Model\ProductModel;
 use Respinar\ProductsBundle\Product;

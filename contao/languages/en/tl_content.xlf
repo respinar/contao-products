@@ -8,8 +8,38 @@
       <trans-unit id="tl_content.product.1">
         <source>Please select one product.</source>
       </trans-unit>
+      <trans-unit id="tl_content.products.0">
+        <source>Products</source>
+      </trans-unit>
+      <trans-unit id="tl_content.products.1">
+        <source>Please select one or more products.</source>
+      </trans-unit>
+      <trans-unit id="tl_content.product_catalogs.0">
+        <source>Catalogs</source>
+      </trans-unit>
+      <trans-unit id="tl_content.product_catalogs.1">
+        <source>Please select one or more catalogs.</source>
+      </trans-unit>
+      <trans-unit id="tl_content.product_template.0">
+        <source>Product template</source>
+      </trans-unit>
+      <trans-unit id="tl_content.product_template.1">
+        <source>Please select template for single product.</source>
+      </trans-unit>
+      <trans-unit id="tl_content.product_metaFields.0">
+        <source>Meta information</source>
+      </trans-unit>
+      <trans-unit id="tl_content.product_metaFields.1">
+        <source>Please select meta information that must be showed.</source>
+      </trans-unit>
+      <trans-unit id="tl_content.product_listClass.0">
+        <source>Product list class</source>
+      </trans-unit>
+      <trans-unit id="tl_content.product_listClass.1">
+        <source>Please enter a css class for products list.</source>
+      </trans-unit>
       <trans-unit id="tl_content.product_legend">
-        <source>Product</source>
+        <source>Catalogs and Products</source>
       </trans-unit>
       <trans-unit id="tl_module.all_product">
         <source>All products</source>

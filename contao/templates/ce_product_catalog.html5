@@ -1,0 +1,13 @@
+<?php $this->extend('block_unsearchable'); ?>
+
+<?php $this->block('content'); ?>
+
+  <?php if (empty($this->products)): ?>
+    <p class="empty"><?= $this->empty; ?></p>
+  <?php else: ?>
+  <div class="product_list <?= $this->product_listClass ?>">
+    <?= implode('', $this->products) ?>
+  </div>
+  <?php endif; ?>
+
+<?php $this->endblock(); ?>

@@ -32,8 +32,26 @@
       <trans-unit id="FMD.product.0">
         <source>Product</source>
       </trans-unit>
-      <trans-unit id="CTE.product.0">
-        <source>Product</source>
+      <trans-unit id="CTE.products.0">
+        <source>Products</source>
+      </trans-unit>
+      <trans-unit id="CTE.product_single.0">
+        <source>Single Product</source>
+      </trans-unit>
+      <trans-unit id="CTE.product_single.1">
+        <source>Show only one product.</source>
+      </trans-unit>
+      <trans-unit id="CTE.product_list.0">
+        <source>Products List</source>
+      </trans-unit>
+      <trans-unit id="CTE.product_list.1">
+        <source>Show a list of products.</source>
+      </trans-unit>
+       <trans-unit id="CTE.product_catalog.0">
+        <source>Catalog</source>
+      </trans-unit>
+      <trans-unit id="CTE.product_catalog.1">
+        <source>Displays a list of products in a catalog</source>
       </trans-unit>
     </body>
   </file>
