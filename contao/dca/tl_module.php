@@ -137,7 +137,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_relatedImgSize'] = array
 	'inputType'               => 'imageSize',
 	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
 	'options_callback' => function () {
-		return System::getContainer()->get('contao.image.image_sizes')->getOptionsForUser(BackendUser::getInstance());
+		return System::getContainer()->get('contao.image.sizes')->getOptionsForUser(BackendUser::getInstance());
 	},
 	'eval'                    => array('rgxp'=>'natural', 'includeBlankOption'=>true, 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
 	'sql'                     => "varchar(128) COLLATE ascii_bin NOT NULL default ''"
