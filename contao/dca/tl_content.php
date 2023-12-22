@@ -33,6 +33,12 @@ $GLOBALS['TL_DCA']['tl_content']['palettes']['product_list'] = '
 	{template_legend},product_template,customTpl,product_metaFields,size,product_listClass;
 	{protected_legend:hide},protected;
 	{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_content']['palettes']['product_catalog'] = '
+	{type_legend},type,headline;
+	{product_legend},product_catalogs;
+	{template_legend},product_template,customTpl,product_metaFields,size,product_listClass;
+	{protected_legend:hide},protected;
+	{expert_legend:hide},guests,cssID,space';
 
 /**
  * Add fields to tl_content
@@ -50,6 +56,14 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['products'] = array
 	'exclude'              => true,
 	'inputType'            => 'select',
 	'foreignKey'           => 'tl_product.title',
+	'eval'                 => array('helpwizard'=>true, 'chosen'=>true, 'multiple'=>true, 'mandatory'=>true),
+    'sql'                  => "blob NULL"
+);
+$GLOBALS['TL_DCA']['tl_content']['fields']['product_catalogs'] = array
+(
+	'exclude'              => true,
+	'inputType'            => 'checkbox',
+	'foreignKey'           => 'tl_product_catalog.title',
 	'eval'                 => array('helpwizard'=>true, 'chosen'=>true, 'multiple'=>true, 'mandatory'=>true),
     'sql'                  => "blob NULL"
 );
