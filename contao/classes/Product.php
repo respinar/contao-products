@@ -16,7 +16,6 @@ namespace Respinar\ProductsBundle;
 
 use Contao\FrontendTemplate;
 use Contao\ContentModel;
-use Contao\FilesModel;
 use Contao\System;
 use Contao\Date;
 use Contao\PageModel;
@@ -26,7 +25,6 @@ use Contao\Controller;
 use Contao\Config;
 use Contao\CoreBundle\Security\ContaoCorePermissions;
 
-use Respinar\ProductsBundle\Model\ProductModel;
 use Respinar\ProductsBundle\Model\CatalogModel;
 
 /*
