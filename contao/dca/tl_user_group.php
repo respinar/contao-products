@@ -3,7 +3,7 @@
 /*
  * This file is part of Contao Products Bundle.
  *
- * (c) Hamid Peywasti 2023 <hamid@respinar.com>
+ * (c) Hamid Peywasti 2024 <hamid@respinar.com>
  *
  * @license MIT
  */
