@@ -27,13 +27,7 @@ use Contao\Config;
 use Contao\CoreBundle\Security\ContaoCorePermissions;
 use Respinar\ProductsBundle\Model\CatalogModel;
 
-/*
- * This file is part of Contao Products Bundle.
- *
- * (c) Hamid Peywasti 2024 <hamid@respinar.com>
- *
- * @license MIT
- */
+/* */
 abstract class Product
 {
 
