@@ -65,35 +65,11 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = array
 		),
 		'operations' => array
 		(
-			'edit' => array
-			(
-				'href'                => 'table=tl_product',
-				'icon'                => 'edit.svg'
-			),
-			'editheader' => array
-			(
-				'href'                => 'act=edit',
-				'icon'                => 'header.svg',
-				// 'button_callback'     => array('tl_product_catalog', 'editHeader')
-			),
-			'copy' => array
-			(
-				'href'                => 'act=copy',
-				'icon'                => 'copy.svg',
-				// 'button_callback'     => array('tl_product_catalog', 'copyCategory')
-			),
-			'delete' => array
-			(
-				'href'                => 'act=delete',
-				'icon'                => 'delete.svg',
-				'attributes'          => 'onclick="if(!confirm(\'' . ($GLOBALS['TL_LANG']['MSC']['deleteConfirm'] ?? null) . '\'))return false;Backend.getScrollOffset()"',
-				// 'button_callback'     => array('tl_product_catalog', 'deleteCategory')
-			),
-			'show' => array
-			(
-				'href'                => 'act=show',
-				'icon'                => 'show.svg'
-			)
+			'edit',
+			'children' ,
+			'copy',
+			'delete',
+			'show'
 		)
 	),
 
@@ -246,65 +222,53 @@ class tl_product_catalog extends Backend
 	/**
 	* Check permissions to edit table tl_product_catalog
 	*/
-	public function checkPermission()
-	{
-
-		if ($this->User->isAdmin)
-		{
-			return;
-		}
-
-	}
+	public function checkPermission(): void
+    {
+    }
 
 	/**
-	 * Return the edit header button
-	 *
-	 * @param array  $row
-	 * @param string $href
-	 * @param string $label
-	 * @param string $title
-	 * @param string $icon
-	 * @param string $attributes
-	 *
-	 * @return string
-	 */
-	public function editHeader($row, $href, $label, $title, $icon, $attributes)
+     * Return the edit header button
+     *
+     * @param array  $row
+     * @param string $href
+     * @param string $label
+     * @param string $title
+     * @param string $icon
+     * @param string $attributes
+     */
+    public function editHeader($row, $href, $label, $title, $icon, $attributes): void
 	{
 		// return $this->User->canEditFieldsOf('tl_product_catalog') ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.svg$/i', '_.svg', $icon)).' ';
 	}
 
 
 	/**
-	 * Return the copy category button
-	 *
-	 * @param array  $row
-	 * @param string $href
-	 * @param string $label
-	 * @param string $title
-	 * @param string $icon
-	 * @param string $attributes
-	 *
-	 * @return string
-	 */
-	public function copyCategory($row, $href, $label, $title, $icon, $attributes)
+     * Return the copy category button
+     *
+     * @param array  $row
+     * @param string $href
+     * @param string $label
+     * @param string $title
+     * @param string $icon
+     * @param string $attributes
+     */
+    public function copyCategory($row, $href, $label, $title, $icon, $attributes): void
 	{
 		// return $this->User->hasAccess('create', 'catalogp') ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.svg$/i', '_.svg', $icon)).' ';
 	}
 
 
 	/**
-	 * Return the delete category button
-	 *
-	 * @param array  $row
-	 * @param string $href
-	 * @param string $label
-	 * @param string $title
-	 * @param string $icon
-	 * @param string $attributes
-	 *
-	 * @return string
-	 */
-	public function deleteCategory($row, $href, $label, $title, $icon, $attributes)
+     * Return the delete category button
+     *
+     * @param array  $row
+     * @param string $href
+     * @param string $label
+     * @param string $title
+     * @param string $icon
+     * @param string $attributes
+     */
+    public function deleteCategory($row, $href, $label, $title, $icon, $attributes): void
 	{
 		// return $this->User->hasAccess('delete', 'catalogp') ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.svg$/i', '_.svg', $icon)).' ';
 	}
