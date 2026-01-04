@@ -32,10 +32,9 @@ abstract class Product
 {
 
 	/**
-	 * URL cache array
-	 * @var array
-	 */
-	private static $arrUrlCache = array();
+     * URL cache array
+     */
+    private static array $arrUrlCache = array();
 
 	/**
 	 * Parse an item and return it as string
@@ -45,7 +44,7 @@ abstract class Product
 	 * @param integer
 	 * @return string
 	 */
-	static public function parseProduct($objProduct, $model, $blnAddCategory=false, $strClass='', $intCount=0)
+	static public function parseProduct($objProduct, $model, $blnAddCategory=false, string $strClass='', $intCount=0)
 	{
 
 		if (!$objProduct) {
@@ -372,11 +371,9 @@ abstract class Product
 	}
 
 	/**
-	 * Return the schema.org data from a product
-	 *
-	 * @return array
-	 */
-	public static function getSchemaOrgData($objProduct): array
+     * Return the schema.org data from a product
+     */
+    public static function getSchemaOrgData($objProduct): array
 	{
 		$htmlDecoder = System::getContainer()->get('contao.string.html_decoder');
 		$price = StringUtil::deserialize($objProduct->price);
@@ -394,18 +391,13 @@ abstract class Product
 			),
 		);
 
-		if (true)
-		{
-			$jsonLd['aggregateRating'] = array(
+		$jsonLd['aggregateRating'] = array(
 				'@type' => 'AggregateRating',
 				"ratingValue" => $objProduct->rating_value,
    				"reviewCount" => $objProduct->rating_count
 			);
-		}
 
-		if (true)
-		{
-			$jsonLd['offers'] = array(
+		$jsonLd['offers'] = array(
 				'@type' => 'Offer',
 				"priceCurrency" => $price['unit'],
 				"price" => $price['value'],
@@ -416,7 +408,6 @@ abstract class Product
 					"name" => $objProduct->brand
 				)
 			);
-		}
 
 		return $jsonLd;
 	}
