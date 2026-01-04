@@ -68,47 +68,25 @@ $GLOBALS['TL_DCA']['tl_product'] = array
 		),
 		'operations' => array
 		(
-			'edit' => array
-			(
-				'href'                => 'table=tl_content',
-				'icon'                => 'edit.svg'
-			),
-			'editheader' => array
-			(
-				'href'                => 'act=edit',
-				'icon'                => 'header.svg'
-			),
-			'copy' => array
-			(
-				'href'                => 'act=paste&amp;mode=copy',
-				'icon'                => 'copy.svg'
-			),
-			'cut' => array
-			(
-				'href'                => 'act=paste&amp;mode=cut',
-				'icon'                => 'cut.svg'
-			),
-			'delete' => array
-			(
-				'href'                => 'act=delete',
-				'icon'                => 'delete.svg',
-				'attributes'          => 'onclick="if(!confirm(\'' . ($GLOBALS['TL_LANG']['MSC']['deleteConfirm'] ?? null) . '\'))return false;Backend.getScrollOffset()"'
-			),
+			'edit',
+			'children',
+			'copy',
+			'cut' ,
+			'delete',
 			'toggle' => array
 			(
 				'href'                => 'act=toggle&amp;field=published',
 				'icon'                => 'visible.svg',
+				'primary'             => true,
+				'showInHeader'        => true
 			),
 			'feature' => array
 			(
 				'href'                => 'act=toggle&amp;field=featured',
 				'icon'                => 'featured.svg',
+				'primary'             => true				
 			),
-			'show' => array
-			(
-				'href'                => 'act=show',
-				'icon'                => 'show.svg'
-			)
+			'show'
 		)
 	),
 
@@ -473,11 +451,10 @@ class tl_product extends Backend
 	}
 
 	/**
-	 * Generate a song row and return it as HTML string
-	 * @param array
-	 * @return string
-	 */
-	public function generateProductsRow($arrRow)
+     * Generate a song row and return it as HTML string
+     * @param array
+     */
+    public function generateProductsRow(array $arrRow): string
 	{
 		// $objImage = FilesModel::findByPk($arrRow['singleSRC']);
 
@@ -492,13 +469,12 @@ class tl_product extends Backend
 	}
 
 	/**
-	 * Get records from the master category
-	 *
-	 * @param	DataContainer
-	 * @return	array
-	 * @link	http://www.contao.org/callbacks.html#options_callback
-	 */
-	public function getProducts(DataContainer $dc)
+     * Get records from the master category
+     *
+     * @param	DataContainer
+     * @link	http://www.contao.org/callbacks.html#options_callback
+     */
+    public function getProducts(DataContainer $dc): array
 	{
 		$arrItems = array();
 
