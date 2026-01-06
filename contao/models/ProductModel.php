@@ -58,7 +58,7 @@ class ProductModel extends Model
 	 */
 	public static function findPublishedByParentAndIdOrAlias($varId, $arrPids, array $arrOptions=array())
 	{
-		if (!is_array($arrPids) || empty($arrPids))
+		if (!is_array($arrPids) || $arrPids === [])
 		{
 			return null;
 		}
@@ -89,7 +89,7 @@ class ProductModel extends Model
 	 */
 	public static function findPublishedByIds($arrIds, $blnFeatured=null, $intLimit=0, $intOffset=0, array $arrOptions=array())
 	{
-		if (!is_array($arrIds) || empty($arrIds))
+		if (!is_array($arrIds) || $arrIds === [])
 		{
 			return null;
 		}
@@ -137,7 +137,7 @@ class ProductModel extends Model
 	 */
 	public static function findPublishedByPids($arrPids, $blnFeatured=null, $intLimit=0, $intOffset=0, array $arrOptions=array())
 	{
-		if (!is_array($arrPids) || empty($arrPids))
+		if (!is_array($arrPids) || $arrPids === [])
 		{
 			return null;
 		}
@@ -184,7 +184,7 @@ class ProductModel extends Model
 	 */
 	public static function countPublishedByPids($arrPids, $blnFeatured=null, array $arrOptions=array())
 	{
-		if (!is_array($arrPids) || empty($arrPids))
+		if (!is_array($arrPids) || $arrPids === [])
 		{
 			return 0;
 		}
@@ -283,7 +283,7 @@ class ProductModel extends Model
 	 */
 	public static function findPublishedFromToByPids($intFrom, $intTo, $arrPids, $intLimit=0, $intOffset=0, array $arrOptions=array())
 	{
-		if (!is_array($arrPids) || empty($arrPids))
+		if (!is_array($arrPids) || $arrPids === [])
 		{
 			return null;
 		}
@@ -321,7 +321,7 @@ class ProductModel extends Model
 	 */
 	public static function countPublishedFromToByPids($intFrom, $intTo, $arrPids, array $arrOptions=array())
 	{
-		if (!is_array($arrPids) || empty($arrPids))
+		if (!is_array($arrPids) || $arrPids === [])
 		{
 			return null;
 		}
