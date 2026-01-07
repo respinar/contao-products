@@ -38,7 +38,7 @@ class PreviewUrlConvertListener
             return;
         }
 
-        if (null === ($product = $this->getProductModel($event->getRequest()))) {
+        if (!($product = $this->getProductModel($event->getRequest())) instanceof \Respinar\ProductsBundle\Model\ProductModel) {
             return;
         }
 
