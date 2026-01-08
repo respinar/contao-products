@@ -22,36 +22,29 @@ class ModuleListener
     // (
     //     private readonly Database $Datebase
     // ){
-
-	// }
-
+    // }
     /**
      * Return all navigation templates as array.
-     *
-     * @return array
      */
-	#[AsCallback(table: 'tl_module', target: 'fields.product_template.options')]
+    #[AsCallback(table: 'tl_module', target: 'fields.product_template.options')]
     public function getProductTemplates(): array
     {
         return Backend::getTemplateGroup('product_');
     }
 
     /**
-	 * Return all related templates as array
-	 *
-	 * @return array
-	 */
-	#[AsCallback(table: 'tl_module', target: 'fields.product_relatedTpl.options')]
+     * Return all related templates as array
+     */
+    #[AsCallback(table: 'tl_module', target: 'fields.product_relatedTpl.options')]
 	public function getRelatedTemplates(): array
 	{
 		return Backend::getTemplateGroup('product_');
 	}
 
 	/**
-	 * Get all product detail modules and return them as array
-	 * @return array
-	 */
-	#[AsCallback(table: 'tl_module', target: 'fields.product_detailModule.options')]
+     * Get all product detail modules and return them as array
+     */
+    #[AsCallback(table: 'tl_module', target: 'fields.product_detailModule.options')]
 	public function getDetailModules(): array
 	{
 		$arrModules = array();
