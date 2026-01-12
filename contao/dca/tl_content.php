@@ -16,7 +16,7 @@ use Contao\Input;
 if (Input::get('do') == 'products')
 {
 	$GLOBALS['TL_DCA']['tl_content']['config']['ptable'] = 'tl_product';
-	$GLOBALS['TL_DCA']['tl_content']['list']['sorting']['headerFields'] = array('title', 'brand','model','sku', 'published');
+	$GLOBALS['TL_DCA']['tl_content']['list']['sorting']['headerFields'] = ['title', 'brand','model','sku', 'published'];
 
 }
 
@@ -43,51 +43,45 @@ $GLOBALS['TL_DCA']['tl_content']['palettes']['product_catalog'] = '
 /**
  * Add fields to tl_content
  */
-$GLOBALS['TL_DCA']['tl_content']['fields']['product'] = array
-(
+$GLOBALS['TL_DCA']['tl_content']['fields']['product'] = [
 	'exclude'              => true,
 	'inputType'            => 'select',
 	'foreignKey'           => 'tl_product.title',
-	'eval'                 => array('helpwizard'=>true, 'chosen'=>true, 'mandatory'=>true),
+	'eval'                 => ['helpwizard'=>true, 'chosen'=>true, 'mandatory'=>true],
     'sql'                  => "varchar(64) NOT NULL default ''"
-);
-$GLOBALS['TL_DCA']['tl_content']['fields']['products'] = array
-(
+	];
+$GLOBALS['TL_DCA']['tl_content']['fields']['products'] = [
 	'exclude'              => true,
 	'inputType'            => 'select',
 	'foreignKey'           => 'tl_product.title',
-	'eval'                 => array('helpwizard'=>true, 'chosen'=>true, 'multiple'=>true, 'mandatory'=>true),
+	'eval'                 => ['helpwizard'=>true, 'chosen'=>true, 'multiple'=>true, 'mandatory'=>true],
     'sql'                  => "blob NULL"
-);
-$GLOBALS['TL_DCA']['tl_content']['fields']['product_catalogs'] = array
-(
+];
+$GLOBALS['TL_DCA']['tl_content']['fields']['product_catalogs'] = [
 	'exclude'              => true,
 	'inputType'            => 'checkbox',
 	'foreignKey'           => 'tl_product_catalog.title',
-	'eval'                 => array('helpwizard'=>true, 'chosen'=>true, 'multiple'=>true, 'mandatory'=>true),
+	'eval'                 => ['helpwizard'=>true, 'chosen'=>true, 'multiple'=>true, 'mandatory'=>true],
     'sql'                  => "blob NULL"
-);
-$GLOBALS['TL_DCA']['tl_content']['fields']['product_metaFields'] = array
-(
+];
+$GLOBALS['TL_DCA']['tl_content']['fields']['product_metaFields'] = [
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'options'                 => array('date','global_ID','brand','model','sku','buy'),
+	'options'                 => ['date','global_ID','brand','model','sku','buy'],
 	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-	'eval'                    => array('multiple'=>true,'tl_class'=>'clr'),
+	'eval'                    => ['multiple'=>true,'tl_class'=>'clr'],
 	'sql'                     => "varchar(255) NOT NULL default ''"
-);
-$GLOBALS['TL_DCA']['tl_content']['fields']['product_template'] = array
-(
+];
+$GLOBALS['TL_DCA']['tl_content']['fields']['product_template'] = [
 	'default'              => 'product_short',
 	'exclude'              => true,
 	'inputType'            => 'select',
-	'eval'                 => array('tl_class'=>'w50'),
+	'eval'                 => ['tl_class'=>'w50'],
     'sql'                  => "varchar(64) NOT NULL default ''"
-);
-$GLOBALS['TL_DCA']['tl_content']['fields']['product_listClass'] = array
-(
+];
+$GLOBALS['TL_DCA']['tl_content']['fields']['product_listClass'] = [
 	'exclude'                 => true,
 	'inputType'               => 'text',
-	'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
+	'eval'                    => ['maxlength'=>128, 'tl_class'=>'w50'],
 	'sql'                     => "varchar(255) NOT NULL default ''"
-);
+];
