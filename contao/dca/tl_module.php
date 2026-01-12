@@ -33,124 +33,110 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['product_detail']  = '
 /**
  * Add fields to tl_module
  */
-$GLOBALS['TL_DCA']['tl_module']['fields']['product_catalogs'] = array
-(
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_catalogs'] = [
 	'exclude'              => true,
 	'inputType'            => 'checkbox',
 	'foreignKey'           => 'tl_product_catalog.title',
-	'eval'                 => array('multiple'=>true, 'mandatory'=>true),
-    'sql'                  => "blob NULL"
-);
-$GLOBALS['TL_DCA']['tl_module']['fields']['product_categories'] = array
-(
-    'exclude'                 => true,
-    'inputType'               => 'treePicker',
-    'foreignKey'              => 'tl_product_category.title',
-    'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'foreignTable'=>'tl_product_category', 'titleField'=>'title', 'searchField'=>'title', 'managerHref'=>'table=tl_product_category'),
-    'sql'                     => "blob NULL"
-);
-$GLOBALS['TL_DCA']['tl_module']['fields']['product_featured'] = array
-(
+	'eval'                 => ['multiple'=>true, 'mandatory'=>true],
+  'sql'                  => "blob NULL"
+];
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_categories'] = [
+  'exclude'                 => true,
+  'inputType'               => 'treePicker',
+  'foreignKey'              => 'tl_product_category.title',
+  'eval'                    => ['multiple'=>true, 'fieldType'=>'checkbox', 'foreignTable'=>'tl_product_category', 'titleField'=>'title', 'searchField'=>'title', 'managerHref'=>'table=tl_product_category'],
+  'sql'                     => "blob NULL"
+];
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_featured'] = [
 	'default'                 => 'all_product',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options'                 => array('all_product', 'featured_product', 'unfeatured_product'),
+	'options'                 => ['all_product', 'featured_product', 'unfeatured_product'],
 	'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
-	'eval'                    => array('tl_class'=>'w50'),
+	'eval'                    => ['tl_class'=>'w50'],
 	'sql'                     => "varchar(20) NOT NULL default ''"
-);
-$GLOBALS['TL_DCA']['tl_module']['fields']['product_sortBy'] = array
-(
+];
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_sortBy'] = [
 	'default'                 => 'custom',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options'                 => array('custom','date_desc', 'date_asc','title_asc', 'title_desc'),
+	'options'                 => ['custom','date_desc', 'date_asc','title_asc', 'title_desc'],
 	'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
-	'eval'                    => array('tl_class'=>'w50'),
+	'eval'                    => ['tl_class'=>'w50'],
 	'sql'                     => "varchar(16) NOT NULL default ''"
-);
-$GLOBALS['TL_DCA']['tl_module']['fields']['product_metaFields'] = array
-(
-	'default'                 => array(''),
+];
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_metaFields'] = [
+	'default'                 => [''],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'options'                 => array('date','price','availability','brand','model','sku','global_ID','buy'),
+	'options'                 => ['date','price','availability','brand','model','sku','global_ID','buy'],
 	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-	'eval'                    => array('multiple'=>true),
+	'eval'                    => ['multiple'=>true],
 	'sql'                     => "varchar(255) NOT NULL default ''"
-);
-$GLOBALS['TL_DCA']['tl_module']['fields']['product_detailModule'] = array
-(
+];
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_detailModule'] = [
 	'exclude'                 => true,
 	'inputType'               => 'select',
 	'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
-	'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
+	'eval'                    => ['includeBlankOption'=>true, 'tl_class'=>'w50'],
 	'sql'                     => "int(10) unsigned NOT NULL default '0'"
-);
-$GLOBALS['TL_DCA']['tl_module']['fields']['product_template'] = array
-(
+];
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_template'] = [
 	'default'              => 'product_short',
 	'exclude'              => true,
 	'inputType'            => 'select',
-	'eval'                 => array('tl_class'=>'w50'),
-    'sql'                  => "varchar(64) NOT NULL default ''"
-);
-$GLOBALS['TL_DCA']['tl_module']['fields']['product_listClass'] = array
-(
+	'eval'                 => ['tl_class'=>'w50'],
+  'sql'                  => "varchar(64) NOT NULL default ''"
+];
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_listClass'] = [
 	'exclude'                 => true,
 	'inputType'               => 'text',
-	'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
+	'eval'                    => ['maxlength'=>128, 'tl_class'=>'w50'],
 	'sql'                     => "varchar(255) NOT NULL default ''"
-);
-$GLOBALS['TL_DCA']['tl_module']['fields']['product_singleClass'] = array
-(
+];
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_singleClass'] = [
 	'exclude'                 => true,
 	'inputType'               => 'text',
-	'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
+	'eval'                    => ['maxlength'=>128, 'tl_class'=>'w50'],
 	'sql'                     => "varchar(255) NOT NULL default ''"
-);
-$GLOBALS['TL_DCA']['tl_module']['fields']['product_related'] = array
-(
+];
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_related'] = [
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'eval'                    => array(),
-	'sql'                     => array('type' => 'boolean', 'default' => false)
-);
-$GLOBALS['TL_DCA']['tl_module']['fields']['product_summary'] = array
-(
+	'eval'                    => [],
+	'sql'                     => ['type' => 'boolean', 'default' => false]
+];
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_summary'] = [
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'eval'                    => array('tl_class'=>'w50 m12'),
-	'sql'                     => array('type' => 'boolean', 'default' => false)
-);
-$GLOBALS['TL_DCA']['tl_module']['fields']['product_relatedTpl'] = array
-(
+	'eval'                    => ['tl_class'=>'w50 m12'],
+	'sql'                     => ['type' => 'boolean', 'default' => false]
+];
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_relatedTpl'] = [
 	'default'              => 'product_related',
 	'exclude'              => true,
 	'inputType'            => 'select',
-	'eval'                 => array('tl_class'=>'w50'),
-    'sql'                  => "varchar(64) NOT NULL default ''"
-);
-$GLOBALS['TL_DCA']['tl_module']['fields']['product_relatedImgSize'] = array
-(
+	'eval'                 => ['tl_class'=>'w50'],
+  'sql'                  => "varchar(64) NOT NULL default ''"
+];
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_relatedImgSize'] = [
 	'exclude'                 => true,
 	'inputType'               => 'imageSize',
 	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
 	'options_callback' => function () {
 		return System::getContainer()->get('contao.image.sizes')->getOptionsForUser(BackendUser::getInstance());
 	},
-	'eval'                    => array('rgxp'=>'natural', 'includeBlankOption'=>true, 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
+	'eval'                    => ['rgxp'=>'natural', 'includeBlankOption'=>true, 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'],
 	'sql'                     => "varchar(128) COLLATE ascii_bin NOT NULL default ''"
-);
-$GLOBALS['TL_DCA']['tl_module']['fields']['product_comHeadline'] = array
-(
+];
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_comHeadline'] = [
 	'exclude'                 => true,
 	'search'                  => true,
 	'inputType'               => 'inputUnit',
-	'options'                 => array('h1', 'h2', 'h3', 'h4', 'h5', 'h6'),
-	'eval'                    => array('maxlength'=>200, 'tl_class'=>'w50 clr'),
+	'options'                 => ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+	'eval'                    => ['maxlength'=>200, 'tl_class'=>'w50 clr'],
 	'sql'                     => "varchar(255) NOT NULL default 'a:2:{s:5:\"value\";s:0:\"\";s:4:\"unit\";s:2:\"h2\";}'"
-);
+];
 
 $bundles = System::getContainer()->getParameter('kernel.bundles');
 
