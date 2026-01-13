@@ -23,380 +23,331 @@ System::loadLanguageFile('tl_content');
 /**
  * Table tl_product
  */
-$GLOBALS['TL_DCA']['tl_product'] = array
-(
+$GLOBALS['TL_DCA']['tl_product'] = [
 
 	// Config
-	'config' => array
-	(
+	'config' => [
 		'dataContainer'               => DC_Table::class,
 		'ptable'                      => 'tl_product_catalog',
-		'ctable'                      => array('tl_content'),
+		'ctable'                      => ['tl_content'],
 		'switchToEdit'                => true,
 		'enableVersioning'            => true,
-		'sql' => array
-		(
-			'keys' => array
-			(
+		'sql' => [
+			'keys' => [
 				'id' => 'primary',
 				'alias' => 'index',
 				'pid,start,stop,published' => 'index'
-			)
-		)
-	),
+			]
+		]
+		],
 
 	// List
-	'list' => array
-	(
-		'sorting' => array
-		(
+	'list' => [
+		'sorting' => [
 			'mode'                    => DataContainer::MODE_PARENT,
-			'fields'                  => array('sorting'),
-			'headerFields'            => array('title','overviewPage','jumpTo','language','protected'),
+			'fields'                  => ['sorting'],
+			'headerFields'            => ['title','overviewPage','jumpTo','language','protected'],
 			'panelLayout'             => 'filter;sort,search,limit',
-			'child_record_callback'   => array('tl_product', 'generateProductsRow')
-		),
-		'global_operations' => array
-		(
-			'all' => array
-			(
+			'child_record_callback'   => ['tl_product', 'generateProductsRow']
+		],
+		'global_operations' => [
+			'all' => [
 				'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
 				'href'                => 'act=select',
 				'class'               => 'header_edit_all',
 				'attributes'          => 'onclick="Backend.getScrollOffset()" accesskey="e"'
-			)
-		),
-		'operations' => array
-		(
+			]
+		],
+		'operations' => [
 			'edit',
 			'children',
 			'copy',
 			'cut' ,
 			'delete',
-			'toggle' => array
-			(
+			'toggle' => [
 				'href'                => 'act=toggle&amp;field=published',
 				'icon'                => 'visible.svg',
 				'primary'             => true,
 				'showInHeader'        => true
-			),
-			'feature' => array
-			(
+			],
+			'feature' => [
 				'href'                => 'act=toggle&amp;field=featured',
 				'icon'                => 'featured.svg',
 				'primary'             => true				
-			),
+			],
 			'show'
-		)
-	),
+		]
+	],
 
 	// Palettes
-	'palettes' => array
-	(
-		'__selector__'                => array('addEnclosure','overwriteMeta'),
+	'palettes' => [
+		'__selector__'                => ['addEnclosure','overwriteMeta'],
 		'default'                     => '{title_legend},title,alias,featured;{meta_legend},pageTitle,date,description;{summary_legend},summary;{offer_legend:hide},price,availability,priceValidUntil;{rating_legend},rating_value,rating_count,visit;{product_legend},brand,model,sku,global_ID;{image_legend},singleSRC,overwriteMeta;{related_legend},related;{link_legend:hide},url,target,titleText,linkTitle;{enclosure_legend:hide},addEnclosure;{publish_legend},published,start,stop',
-	),
+		],
 
 	// Subpalettes
-	'subpalettes' => array
-	(
+	'subpalettes' => [
 		'addEnclosure'                => 'enclosure',
 		'overwriteMeta'               => 'alt,imageTitle'
-	),
+	],
 
 	// Fields
-	'fields' => array
-	(
-		'id' => array
-		(
+	'fields' => [
+		'id' => [
 			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
-		),
-		'pid' => array
-		(
+		],
+		'pid' => [
 			'foreignKey'              => 'tl_product_catalog.title',
 			'sql'                     => "int(10) unsigned NOT NULL default 0",
-			'relation'                => array('type'=>'belongsTo', 'load'=>'lazy')
-		),
-		'sorting' => array
-		(
+			'relation'                => ['type'=>'belongsTo', 'load'=>'lazy']
+		],
+		'sorting' => [
 			'sql'                     => "int(10) unsigned NOT NULL default 0"
-		),
-		'tstamp' => array
-		(
+		],
+		'tstamp' => [
 			'sql'                     => "int(10) unsigned NOT NULL default 0"
-		),
-		'visit' => array
-		(
+		],
+		'visit' => [
 			'sorting'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('disabled'=>true, 'tl_class'=>'w50'),
+			'eval'                    => ['disabled'=>true, 'tl_class'=>'w50'],
 			'sql'                     => "int(10) unsigned NOT NULL default 0"
-		),
-		'title' => array
-		(
+		],
+		'title' => [
 			'exclude'                 => true,
 			'search'                  => true,
 			'sorting'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>128,'tl_class'=>'w50'),
+			'eval'                    => ['mandatory'=>true, 'maxlength'=>128,'tl_class'=>'w50'],
 			'sql'                     => "varchar(255) NOT NULL default ''"
-		),
-		'alias' => array
-		(
+		],
+		'alias' => [
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'alias','unique'=>true,'maxlength'=>128, 'tl_class'=>'w50 clr'),
-			'save_callback' => array
-			(
-				array('tl_product', 'generateAlias')
-			),
+			'eval'                    => ['mandatory'=>true, 'rgxp'=>'alias','unique'=>true,'maxlength'=>128, 'tl_class'=>'w50 clr'],
+			'save_callback' => [
+				['tl_product', 'generateAlias']
+			],
 			'sql'                     => "varchar(128) NOT NULL default ''"
-		),
+		],
 		// 'categories' => array
 		// (
 		// 	'exclude'                 => true,
 		// 	'filter'                  => true,
 		// 	'inputType'               => 'treePicker',
 		// 	'foreignKey'              => 'tl_product_category.title',
-		// 	'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'foreignTable'=>'tl_product_category', 'titleField'=>'title', 'searchField'=>'title', 'managerHref'=>'table=tl_product_category'),
+		// 	'eval'                    => ['multiple'=>true, 'fieldType'=>'checkbox', 'foreignTable'=>'tl_product_category', 'titleField'=>'title', 'searchField'=>'title', 'managerHref'=>'table=tl_product_category'),
 		// 	'sql'                     => "blob NULL"
 		// ),
-		'brand' => array
-		(
+		'brand' => [
 			'exclude'                 => true,
 			'search'                  => true,
 			'sorting'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
+			'eval'                    => ['maxlength'=>128, 'tl_class'=>'w50'],
 			'sql'                     => "varchar(128) NOT NULL default ''"
-		),
-		'model' => array
-		(
+		],
+		'model' => [
 			'exclude'                 => true,
 			'search'                  => true,
 			'sorting'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
+			'eval'                    => ['maxlength'=>128, 'tl_class'=>'w50'],
 			'sql'                     => "varchar(128) NOT NULL default ''"
-		),
-		'global_ID' => array
-		(
+		],
+		'global_ID' => [
 			'exclude'                 => true,
 			'search'                  => true,
 			'sorting'                 => true,
-			'options'				  => array('mpn','isbn','gtin8','gtin12','gtin13','gtin14'),
+			'options'				  => ['mpn','isbn','gtin8','gtin12','gtin13','gtin14'],
 			'inputType'               => 'inputUnit',
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-			'eval'                    => array('includeBlankOption'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
+			'eval'                    => ['includeBlankOption'=>true, 'maxlength'=>128, 'tl_class'=>'w50'],
 			'sql'                     => "varchar(128) NOT NULL default ''"
-		),
-		'sku' => array
-		(
+		],
+		'sku' => [
 			'exclude'                 => true,
 			'search'                  => true,
 			'sorting'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
+			'eval'                    => ['maxlength'=>128, 'tl_class'=>'w50'],
 			'sql'                     => "varchar(128) NOT NULL default ''"
-		),
-		'availability' => array
-		(
+		],
+		'availability' => [
 			'inputType'               => 'select',
-			'options'                 => array('Discontinued','InStock','InStoreOnly','LimitedAvailability','OnlineOnly','OutOfStock','PreOrder','PreSale','SoldOut'),
+			'options'                 => ['Discontinued','InStock','InStoreOnly','LimitedAvailability','OnlineOnly','OutOfStock','PreOrder','PreSale','SoldOut'],
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-			'eval'                    => array('tl_class'=>'w50'),
+			'eval'                    => ['tl_class'=>'w50'],
 			'sql'                     => "varchar(128) NOT NULL default ''"
-		),
-		'price' => array
-		(
+		],
+		'price' => [
 			'exclude'                 => true,
 			'search'                  => true,
 			'sorting'                 => true,
-			'options'				  => array('IRR','TMN','USD','EUR'),
+			'options'				  => ['IRR','TMN','USD','EUR'],
 			'inputType'               => 'inputUnit',
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-			'eval'                    => array('includeBlankOption'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
+			'eval'                    => ['includeBlankOption'=>true, 'maxlength'=>128, 'tl_class'=>'w50'],
 			'sql'                     => "varchar(128) NOT NULL default ''"
-		),
-		'priceValidUntil' => array
-		(
+		],
+		'priceValidUntil' => [
 			'default'                 => time(),
 			'exclude'                 => true,
 			'filter'                  => true,
 			'flag'                    => 8,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'date', 'doNotCopy'=>true, 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
+			'eval'                    => ['rgxp'=>'date', 'doNotCopy'=>true, 'datepicker'=>true, 'tl_class'=>'w50 wizard'],
 			'sql'                     => "int(10) unsigned NOT NULL default 0"
-		),
-		'rating_value' => array
-		(
+		],
+		'rating_value' => [
 			'sorting'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('tl_class'=>'w50'),
+			'eval'                    => ['tl_class'=>'w50'],
 			'sql'                     => "varchar(10) NOT NULL default 0"
-		),
-		'rating_count' => array
-		(
+		],
+		'rating_count' => [
 			'sorting'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('tl_class'=>'w50'),
+			'eval'                    => ['tl_class'=>'w50'],
 			'sql'                     => "int(10) NOT NULL default 0"
-		),
-		'date' => array
-		(
+		],
+		'date' => [
 			'default'                 => time(),
 			'exclude'                 => true,
 			'filter'                  => true,
 			'flag'                    => 8,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'date', 'doNotCopy'=>true, 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
+			'eval'                    => ['rgxp'=>'date', 'doNotCopy'=>true, 'datepicker'=>true, 'tl_class'=>'w50 wizard'],
 			'sql'                     => "int(10) unsigned NOT NULL default 0"
-		),
-		'url' => array
-		(
+		],
+		'url' => [
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
+			'eval'                    => ['decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50'],
 			'sql'                     => "varchar(255) NOT NULL default ''"
-		),
-		'target' => array
-		(
+		],
+		'target' => [
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50 m12'),
-			'sql'                     => array('type' => 'boolean', 'default' => false)
-		),
-		'titleText' => array
-		(
+			'eval'                    => ['tl_class'=>'w50 m12'],
+			'sql'                     => ['type' => 'boolean', 'default' => false]
+		],
+		'titleText' => [
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50'),
+			'eval'                    => ['maxlength'=>255, 'tl_class'=>'w50'],
 			'sql'                     => "varchar(255) NOT NULL default ''"
-		),
-		'linkTitle' => array
-		(
+		],
+		'linkTitle' => [
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50'),
+			'eval'                    => ['maxlength'=>255, 'tl_class'=>'w50'],
 			'sql'                     => "varchar(255) NOT NULL default ''"
-		),
-		'summary' => array
-		(
+		],
+		'summary' => [
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('rte'=>'tinyMCE', 'tl_class'=>'clr'),
+			'eval'                    => ['rte'=>'tinyMCE', 'tl_class'=>'clr'],
 			'sql'                     => "text NULL"
-		),
-		'pageTitle' => array
-		(
+		],
+		'pageTitle' => [
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255, 'decodeEntities'=>true, 'tl_class'=>'w50'),
+			'eval'                    => ['maxlength'=>255, 'decodeEntities'=>true, 'tl_class'=>'w50'],
 			'sql'                     => "varchar(255) NOT NULL default ''"
-		),
-		'description' => array
-		(
+		],
+		'description' => [
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
 			'search'                  => true,
-			'eval'                    => array('style'=>'unicode-bidi: plaintext;', 'rows'=>'2', 'decodeEntities'=>true, 'tl_class'=>'clr'),
+			'eval'                    => ['style'=>'unicode-bidi: plaintext;', 'rows'=>'2', 'decodeEntities'=>true, 'tl_class'=>'clr'],
 			'sql'                     => "text NULL"
-		),
-		'singleSRC' => array
-		(
+		],
+		'singleSRC' => [
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('mandatory'=>true,'fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'extensions'=>'%contao.image.valid_extensions%'),
+			'eval'                    => ['mandatory'=>true,'fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'extensions'=>'%contao.image.valid_extensions%'],
 			'sql'                     => "binary(16) NULL"
-		),
-		'overwriteMeta' => array
-		(
+		],
+		'overwriteMeta' => [
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['overwriteMeta'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true, 'tl_class'=>'w50 clr'),
-			'sql'                     => array('type' => 'boolean', 'default' => false)
-		),
-		'alt' => array
-		(
+			'eval'                    => ['submitOnChange'=>true, 'tl_class'=>'w50 clr'],
+			'sql'                     => ['type' => 'boolean', 'default' => false]
+		],
+		'alt' => [
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['alt'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50'),
+			'eval'                    => ['maxlength'=>255, 'tl_class'=>'w50'],
 			'sql'                     => "varchar(255) NOT NULL default ''"
-		),
-		'imageTitle' => array
-		(
+		],
+		'imageTitle' => [
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['imageTitle'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50'),
+			'eval'                    => ['maxlength'=>255, 'tl_class'=>'w50'],
 			'sql'                     => "varchar(255) NOT NULL default ''"
-		),
-		'addEnclosure' => array
-		(
+		],
+		'addEnclosure' => [
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true),
-			'sql'                     => array('type' => 'boolean', 'default' => false)
-		),
-		'enclosure' => array
-		(
+			'eval'                    => ['submitOnChange'=>true],
+			'sql'                     => ['type' => 'boolean', 'default' => false]
+		],
+		'enclosure' => [
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'filesOnly'=>true, 'isDownloads'=>true, 'extensions'=>Contao\Config::get('allowedDownload'), 'mandatory'=>true),
+			'eval'                    => ['multiple'=>true, 'fieldType'=>'checkbox', 'filesOnly'=>true, 'isDownloads'=>true, 'extensions'=>Contao\Config::get('allowedDownload'), 'mandatory'=>true],
 			'sql'                     => "blob NULL"
-		),
-		'related' => array(
+		],
+		'related' => [
 			'exclude'                 => false,
 			'inputType'               => 'checkbox',
-			'options_callback'        => array('tl_product', 'getProducts'),
-			'eval'                    => array('includeBlankOption'=>true,'multiple'=>true),
+			'options_callback'        => ['tl_product', 'getProducts'],
+			'eval'                    => ['includeBlankOption'=>true,'multiple'=>true],
 			'sql'                     => "blob NULL"
-		),
-		'published' => array
-		(
+		],
+		'published' => [
 			'exclude'                 => true,
 			'toggle'                  => true,
 			'filter'                  => true,
 			'flag'                    => 1,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('doNotCopy'=>true),
-			'sql'                     => array('type' => 'boolean', 'default' => false)
-		),
-		'featured' => array
-		(
+			'eval'                    => ['doNotCopy'=>true],
+			'sql'                     => ['type' => 'boolean', 'default' => false]
+		],
+		'featured' => [
 			'exclude'                 => true,
 			'toggle'                  => true,
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50 m12'),
-			'sql'                     => array('type' => 'boolean', 'default' => false)
-		),
-		'start' => array
-		(
+			'eval'                    => ['tl_class'=>'w50 m12'],
+			'sql'                     => ['type' => 'boolean', 'default' => false]
+		],
+		'start' => [
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
+			'eval'                    => ['rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'],
 			'sql'                     => "varchar(10) NOT NULL default ''"
-		),
-		'stop' => array
-		(
+		],
+		'stop' => [
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
+			'eval'                    => ['rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'],
 			'sql'                     => "varchar(10) NOT NULL default ''"
-		)
-	)
-);
+		]
+	]
+];
 
 /**
  * Provide miscellaneous methods that are used by the data configuration array
@@ -416,12 +367,8 @@ class tl_product extends Backend
 
 	/**
 	 * Auto-generate the product alias if it has not been set yet
-	 * @param mixed
-	 * @param DataContainer
-	 * @return string
-	 * @throws Exception
 	 */
-	public function generateAlias($varValue, DataContainer $dc)
+	public function generateAlias(string $varValue, DataContainer $dc) : string
 	{
 		$autoAlias = false;
 
@@ -452,7 +399,6 @@ class tl_product extends Backend
 
 	/**
      * Generate a song row and return it as HTML string
-     * @param array
      */
     public function generateProductsRow(array $arrRow): string
 	{
@@ -470,13 +416,10 @@ class tl_product extends Backend
 
 	/**
      * Get records from the master category
-     *
-     * @param	DataContainer
-     * @link	http://www.contao.org/callbacks.html#options_callback
      */
     public function getProducts(DataContainer $dc): array
 	{
-		$arrItems = array();
+		$arrItems = [];
 
 		$objItems = $this->Database->prepare("SELECT * FROM tl_product WHERE pid=? ORDER BY date DESC")->execute($dc->activeRecord->pid);
 
@@ -510,7 +453,7 @@ class tl_product extends Backend
     //     $arrCategories = StringUtil::deserialize($dc->activeRecord->categories);
 
     //     // Use the default categories if the user is not allowed to edit the field directly
-    //     if (!$this->User->isAdmin && !in_array('tl_product::categories', $this->User->alexf)) {
+    //     if (!$this->User->isAdmin && !in_['tl_product::categories', $this->User->alexf)) {
 
     //         // Return if the record is not new
     //         if ($dc->activeRecord->tstamp) {
@@ -522,7 +465,7 @@ class tl_product extends Backend
 
     //     $this->deleteCategories($dc);
 
-    //     if (is_array($arrCategories) && !empty($arrCategories)) {
+    //     if (is_[$arrCategories) && !empty($arrCategories)) {
     //         foreach ($arrCategories as $intCategory) {
     //             $this->Database->prepare("INSERT INTO tl_product_categories (category_id, product_id) VALUES (?, ?)")
     //                            ->execute($intCategory, $dc->id);
