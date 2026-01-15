@@ -20,10 +20,10 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = [
 
 	// Config
 	'config' => [
-		'dataContainer'               => DC_Table::class,
-		'ctable'                      => ['tl_product'],
-		'enableVersioning'            => true,
-		'onload_callback' => [
+		'dataContainer'    => DC_Table::class,
+		'ctable'           => ['tl_product'],
+		'enableVersioning' => true,
+		'onload_callback'  => [
 			['tl_product_catalog', 'checkPermission']
 		],
 		'sql' => [
@@ -36,21 +36,21 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = [
 	// List
 	'list' => [
 		'sorting' => [
-			'mode'                    => 1,
-			'fields'                  => ['title'],
-			'flag'                    => 1,
-			'panelLayout'             => 'filter;search,limit'
+			'mode'        => 1,
+			'fields'      => ['title'],
+			'flag'        => 1,
+			'panelLayout' => 'filter;search,limit'
 		],
 		'label' => [
-			'fields'                  => ['title'],
-			'format'                  => '%s'
+			'fields'     => ['title'],
+			'format'     => '%s'
 		],
 		'global_operations' => [
 			'all' => [
-				'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
-				'href'                => 'act=select',
-				'class'               => 'header_edit_all',
-				'attributes'          => 'onclick="Backend.getScrollOffset()" accesskey="e"'
+				'label'      => &$GLOBALS['TL_LANG']['MSC']['all'],
+				'href'       => 'act=select',
+				'class'      => 'header_edit_all',
+				'attributes' => 'onclick="Backend.getScrollOffset()" accesskey="e"'
 			]
 		],
 		'operations' => [
@@ -64,115 +64,115 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = [
 
 	// Palettes
 	'palettes' => [
-		'__selector__'                => ['protected', 'allowComments'],
-		'default'                     => '{title_legend},title;{redirect_legend},overviewPage,jumpTo;{protected_legend:hide},protected;{comments_legend:hide},allowComments'
+		'__selector__'   => ['protected', 'allowComments'],
+		'default'        => '{title_legend},title;{redirect_legend},overviewPage,jumpTo;{protected_legend:hide},protected;{comments_legend:hide},allowComments'
 	],
 
 	// Subpalettes
 	'subpalettes' => [
-		'protected'                   => 'groups',
-		'allowComments'               => 'notify,sortOrder,perPage,moderate,bbcode,requireLogin,disableCaptcha'
+		'protected'      => 'groups',
+		'allowComments'  => 'notify,sortOrder,perPage,moderate,bbcode,requireLogin,disableCaptcha'
 	],
 
 	// Fields
 	'fields' => [
 		'id' => [
-			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+			'sql'        => "int(10) unsigned NOT NULL auto_increment"
 		],
 		'tstamp' => [
-			'sql'                     => "int(10) unsigned NOT NULL default 0"
+			'sql'        => "int(10) unsigned NOT NULL default 0"
 		],
 		'title' => [
-			'exclude'                 => true,
-			'search'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => ['mandatory'=>true, 'maxlength'=>128],
-			'sql'                     => "varchar(255) NOT NULL default ''"
+			'exclude'    => true,
+			'search'     => true,
+			'inputType'  => 'text',
+			'eval'       => ['mandatory'=>true, 'maxlength'=>128],
+			'sql'        => "varchar(255) NOT NULL default ''"
 		],
 		'overviewPage' => [
 
-			'inputType'               => 'pageTree',
-			'foreignKey'              => 'tl_page.title',
-			'eval'                    => ['mandatory'=>true, 'fieldType'=>'radio'],
-			'sql'                     => "int(10) unsigned NOT NULL default 0",
-			'relation'                => ['type'=>'hasOne', 'load'=>'lazy']
+			'inputType'  => 'pageTree',
+			'foreignKey' => 'tl_page.title',
+			'eval'       => ['mandatory'=>true, 'fieldType'=>'radio'],
+			'sql'        => "int(10) unsigned NOT NULL default 0",
+			'relation'   => ['type'=>'hasOne', 'load'=>'lazy']
 		],
 		'jumpTo' => [
 
-			'inputType'               => 'pageTree',
-			'foreignKey'              => 'tl_page.title',
-			'eval'                    => ['mandatory'=>true, 'fieldType'=>'radio'],
-			'sql'                     => "int(10) unsigned NOT NULL default 0",
-			'relation'                => ['type'=>'hasOne', 'load'=>'lazy']
+			'inputType'  => 'pageTree',
+			'foreignKey' => 'tl_page.title',
+			'eval'       => ['mandatory'=>true, 'fieldType'=>'radio'],
+			'sql'        => "int(10) unsigned NOT NULL default 0",
+			'relation'   => ['type'=>'hasOne', 'load'=>'lazy']
 		],
 		'protected' => [
-			'exclude'                 => true,
-			'inputType'               => 'checkbox',
-			'eval'                    => ['submitOnChange'=>true],
-			'sql'                     => ['type' => 'boolean', 'default' => false]
+			'exclude'    => true,
+			'inputType'  => 'checkbox',
+			'eval'       => ['submitOnChange'=>true],
+			'sql'        => ['type' => 'boolean', 'default' => false]
 		],
 		'groups' => [
-			'exclude'                 => true,
-			'inputType'               => 'checkbox',
-			'foreignKey'              => 'tl_member_group.name',
-			'eval'                    => ['mandatory'=>true, 'multiple'=>true],
-			'sql'                     => "blob NULL",
-			'relation'                => ['type'=>'hasMany', 'load'=>'lazy']
+			'exclude'    => true,
+			'inputType'  => 'checkbox',
+			'foreignKey' => 'tl_member_group.name',
+			'eval'       => ['mandatory'=>true, 'multiple'=>true],
+			'sql'        => "blob NULL",
+			'relation'   => ['type'=>'hasMany', 'load'=>'lazy']
 		],
 		'allowComments' => [
-			'exclude'                 => true,
-			'filter'                  => true,
-			'inputType'               => 'checkbox',
-			'eval'                    => ['submitOnChange'=>true],
-			'sql'                     => ['type' => 'boolean', 'default' => false]
+			'exclude'    => true,
+			'filter'     => true,
+			'inputType'  => 'checkbox',
+			'eval'       => ['submitOnChange'=>true],
+			'sql'        => ['type' => 'boolean', 'default' => false]
 		],
 		'notify' => [
-			'default'                 => 'notify_admin',
-			'exclude'                 => true,
-			'inputType'               => 'select',
-			'options'                 => ['notify_admin', 'notify_author', 'notify_both'],
-			'eval'                    => ['tl_class'=>'w50'],
-			'reference'               => &$GLOBALS['TL_LANG']['tl_product_catalog'],
-			'sql'                     => "varchar(16) NOT NULL default ''"
+			'default'    => 'notify_admin',
+			'exclude'    => true,
+			'inputType'  => 'select',
+			'options'    => ['notify_admin', 'notify_author', 'notify_both'],
+			'eval'       => ['tl_class'=>'w50'],
+			'reference'  => &$GLOBALS['TL_LANG']['tl_product_catalog'],
+			'sql'        => "varchar(16) NOT NULL default ''"
 		],
 		'sortOrder' => [
-			'default'                 => 'ascending',
-			'exclude'                 => true,
-			'inputType'               => 'select',
-			'options'                 => ['ascending', 'descending'],
-			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-			'eval'                    => ['tl_class'=>'w50 clr'],
-			'sql'                     => "varchar(32) NOT NULL default ''"
+			'default'    => 'ascending',
+			'exclude'    => true,
+			'inputType'  => 'select',
+			'options'    => ['ascending', 'descending'],
+			'reference'  => &$GLOBALS['TL_LANG']['MSC'],
+			'eval'       => ['tl_class'=>'w50 clr'],
+			'sql'        => "varchar(32) NOT NULL default ''"
 		],
 		'perPage' => [
-			'exclude'                 => true,
-			'inputType'               => 'text',
-			'eval'                    => ['rgxp'=>'natural', 'tl_class'=>'w50'],
-			'sql'                     => "smallint(5) unsigned NOT NULL default 0"
+			'exclude'    => true,
+			'inputType'  => 'text',
+			'eval'       => ['rgxp'=>'natural', 'tl_class'=>'w50'],
+			'sql'        => "smallint(5) unsigned NOT NULL default 0"
 		],
 		'moderate' => [
-			'exclude'                 => true,
-			'inputType'               => 'checkbox',
-			'eval'                    => ['tl_class'=>'w50'],
-			'sql'                     => ['type' => 'boolean', 'default' => false]
+			'exclude'    => true,
+			'inputType'  => 'checkbox',
+			'eval'       => ['tl_class'=>'w50'],
+			'sql'        => ['type' => 'boolean', 'default' => false]
 		],
 		'bbcode' => [
-			'exclude'                 => true,
-			'inputType'               => 'checkbox',
-			'eval'                    => ['tl_class'=>'w50'],
-			'sql'                     => ['type' => 'boolean', 'default' => false]
+			'exclude'    => true,
+			'inputType'  => 'checkbox',
+			'eval'       => ['tl_class'=>'w50'],
+			'sql'        => ['type' => 'boolean', 'default' => false]
 		],
 		'requireLogin' => [
-			'exclude'                 => true,
-			'inputType'               => 'checkbox',
-			'eval'                    => ['tl_class'=>'w50'],
-			'sql'                     => ['type' => 'boolean', 'default' => false]
+			'exclude'    => true,
+			'inputType'  => 'checkbox',
+			'eval'       => ['tl_class'=>'w50'],
+			'sql'        => ['type' => 'boolean', 'default' => false]
 		],
 		'disableCaptcha' => [
-			'exclude'                 => true,
-			'inputType'               => 'checkbox',
-			'eval'                    => ['tl_class'=>'w50'],
-			'sql'                     => ['type' => 'boolean', 'default' => false]
+			'exclude'    => true,
+			'inputType'  => 'checkbox',
+			'eval'       => ['tl_class'=>'w50'],
+			'sql'        => ['type' => 'boolean', 'default' => false]
 		]
 	]
 ];
