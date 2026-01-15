@@ -19,18 +19,18 @@ $GLOBALS['TL_DCA']['tl_user_group']['palettes']['default'] = str_replace('formp;
  * Add fields to tl_user_group
  */
 $GLOBALS['TL_DCA']['tl_user_group']['fields']['products'] = [
-	'exclude'                 => true,
-	'inputType'               => 'checkbox',
-	'foreignKey'              => 'tl_product_catalog.title',
-	'eval'                    => ['multiple'=>true],
-	'sql'                     => "blob NULL"
+	'exclude'    => true,
+	'inputType'  => 'checkbox',
+	'foreignKey' => 'tl_product_catalog.title',
+	'eval'       => ['multiple'=>true],
+	'sql'        => "blob NULL"
 ];
 
 $GLOBALS['TL_DCA']['tl_user_group']['fields']['productp'] = [
-	'exclude'                 => true,
-	'inputType'               => 'checkbox',
-	'options'                 => ['create', 'delete'],
-	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-	'eval'                    => ['multiple'=>true],
-	'sql'                     => "blob NULL"
+	'exclude'    => true,
+	'inputType'  => 'checkbox',
+	'options'    => ['create', 'delete'],
+	'reference'  => &$GLOBALS['TL_LANG']['MSC'],
+	'eval'       => ['multiple'=>true],
+	'sql'        => "blob NULL"
 ];
