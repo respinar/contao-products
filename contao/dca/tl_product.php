@@ -16,6 +16,7 @@ use Contao\DC_Table;
 use Contao\FilesModel;
 use Contao\Image;
 use Contao\StringUtil;
+use Contao\Config;
 
 System::loadLanguageFile('tl_content');
 
