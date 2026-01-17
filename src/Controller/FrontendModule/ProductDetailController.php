@@ -102,23 +102,9 @@ class ProductDetailController extends AbstractFrontendModuleController
 
 		}
 
-        //$objCatalog = CatalogModel::findByIdOrAlias($objProduct->pid);
+    //$objCatalog = CatalogModel::findByIdOrAlias($objProduct->pid);
 
-        $template->product = Product::parseProduct($objProduct, $model);
-
-
-		// Rerlated products
-		if ($model->product_related)
-		{
-			$relateds = StringUtil::deserialize($objProduct->related);
-
-			if ($relateds) {
-
-				$objProducts = ProductModel::findPublishedByIds($relateds);
-
-				$template->relateds = Product::parseRelateds($objProducts, $model);
-			}
-		}
+    $template->product = Product::parseProduct($objProduct, $model);
 
 		// Comments
 		$bundles = System::getContainer()->getParameter('kernel.bundles');
