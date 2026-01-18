@@ -26,7 +26,12 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['product_detail']  = '
 	{catalog_legend},product_catalogs,overviewPage,customLabel;
 	{meta_legend},product_metaFields;
 	{template_legend},customTpl,product_template,product_summary,imgSize;
-	{related_legend},product_related,product_relatedTpl,product_relatedImgSize,product_listClass,product_singleClass;
+	{protected_legend:hide},protected;
+	{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['product_related']  = '
+	{title_legend},name,headline,type;
+	{related_legend},product_relatedTpl,product_relatedImgSize,product_listClass,product_singleClass;
+	{template_legend},customTpl,product_template,product_summary,imgSize;	
 	{protected_legend:hide},protected;
 	{expert_legend:hide},guests,cssID,space';
 
