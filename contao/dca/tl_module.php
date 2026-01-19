@@ -30,8 +30,7 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['product_detail']  = '
 	{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['product_related']  = '
 	{title_legend},name,headline,type;
-	{related_legend},product_relatedTpl,product_relatedImgSize,product_listClass,product_singleClass;
-	{template_legend},customTpl,product_template,product_summary,imgSize;	
+	{template_legend},customTpl,product_listClass,product_template,imgSize;	
 	{protected_legend:hide},protected;
 	{expert_legend:hide},guests,cssID,space';
 
@@ -105,34 +104,11 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_singleClass'] = [
 	'eval'       => ['maxlength' =>128, 'tl_class'=>'w50'],
 	'sql'        => "varchar(255) NOT NULL default ''"
 ];
-$GLOBALS['TL_DCA']['tl_module']['fields']['product_related'] = [
-	'exclude'    => true,
-	'inputType'  => 'checkbox',
-	'eval'       => [],
-	'sql'        => ['type'  => 'boolean', 'default'  => false]
-];
 $GLOBALS['TL_DCA']['tl_module']['fields']['product_summary'] = [
 	'exclude'    => true,
 	'inputType'  => 'checkbox',
 	'eval'       => ['tl_class'=>'w50 m12'],
 	'sql'        => ['type'  => 'boolean', 'default'  => false]
-];
-$GLOBALS['TL_DCA']['tl_module']['fields']['product_relatedTpl'] = [
-	'default'    => 'product_related',
-	'exclude'    => true,
-	'inputType'  => 'select',
-	'eval'       => ['tl_class'=>'w50'],
-  'sql'        => "varchar(64) NOT NULL default ''"
-];
-$GLOBALS['TL_DCA']['tl_module']['fields']['product_relatedImgSize'] = [
-	'exclude'    => true,
-	'inputType'  => 'imageSize',
-	'reference'  => &$GLOBALS['TL_LANG']['MSC'],
-	'options_callback' => function () {
-		return System::getContainer()->get('contao.image.sizes')->getOptionsForUser(BackendUser::getInstance());
-	},
-	'eval'       => ['rgxp'=>'natural', 'includeBlankOption' =>true, 'nospace' =>true, 'helpwizard' =>true, 'tl_class'=>'w50'],
-	'sql'        => "varchar(128) COLLATE ascii_bin NOT NULL default ''"
 ];
 $GLOBALS['TL_DCA']['tl_module']['fields']['product_comHeadline'] = [
 	'exclude'    => true,
