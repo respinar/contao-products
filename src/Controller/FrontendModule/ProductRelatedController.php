@@ -52,8 +52,6 @@ class ProductRelatedController extends AbstractFrontendModuleController
 
 		$objProduct = ProductModel::findPublishedByIdOrAlias(Input::get('auto_item'));
 
-		dump($objProduct);
-
 		if (null === $objProduct)
 		{
 			return '';
@@ -77,7 +75,7 @@ class ProductRelatedController extends AbstractFrontendModuleController
 
 			if ($objRelated !== null)
 			{
-				$template->relateds = Product::parseRelateds($objRelated, $model);
+				$template->relateds = Product::parseProducts($objRelated, $model);
 			}
 		}
 
