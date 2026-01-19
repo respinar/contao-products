@@ -199,35 +199,6 @@ abstract class Product
 	}
 
 	/**
-	 * Parse one or more items and return them as array
-	 * @param object
-	 * @param boolean
-	 * @return array
-	 */
-	static public function parseRelateds($objProducts, $model, $blnAddCategory=false)
-	{
-
-		$model->product_template = $model->product_relatedTpl;
-		$model->imgSize = $model->product_relatedImgSize;
-
-		$limit = $objProducts->count();
-		if ($limit < 1)
-		{
-			return array();
-		}
-		$count = 0;
-		$arrRelatedes = array();
-		while ($objProducts->next())
-		{
-			$objProduct = $objProducts->current();
-
-			$arrRelatedes[] = Product::parseProduct($objProduct, $model, $blnAddCategory, '', $count);
-		}
-
-		return $arrRelatedes;
-	}
-
-	/**
 	 * Generate a URL and return it as string
 	 * @param object
 	 * @param boolean
