@@ -1,0 +1,74 @@
+<div class="product_short {{ class }}">
+
+    {% if addImage %}
+        {% if link %}<a href="{{ link }}">{% endif %}
+
+        {{ include('@Contao/image.html.twig', arrData|default({})) }}
+
+        {% if link %}</a>{% endif %}
+    {% endif %}
+
+    <div class="tag_container">
+        {% if featured %}
+            <div class="featured"></div>
+        {% endif %}
+
+        {% if new_product %}
+            <div class="new"></div>
+        {% endif %}
+    </div>
+
+    <div class="title">
+        {% if link %}<a href="{{ link }}">{% endif %}
+
+        {{ title }}
+
+        {% if link %}</a>{% endif %}
+    </div>
+
+    {% if hasMetaFields %}
+        <div class="info">
+            <time datetime="{{ datetime }}">{{ meta.date }}</time>
+
+            {% if meta.brand is defined %}
+                <span class="brand">
+                    {{ meta.brand_text }}:
+                    <span>{{ meta.brand }}</span>
+                </span>
+            {% endif %}
+
+            {% if meta.model is defined %}
+                <span class="model">
+                    {{ meta.model_text }}:
+                    <span>{{ meta.model }}</span>
+                </span>
+            {% endif %}
+
+            {% if meta.sku is defined %}
+                <span class="sku">
+                    {{ meta.sku_text }}:
+                    <span>{{ meta.sku }}</span>
+                </span>
+            {% endif %}
+
+            {% if meta.global_ID is defined %}
+                <span class="global_ID {{ meta.global_ID.unit }}">
+                    {{ meta.global_ID.name }}:
+                    <span>{{ meta.global_ID.value }}</span>
+                </span>
+            {% endif %}
+        </div>
+
+        {% if meta.buy is defined %}
+            <div class="buy">
+                <a href="{{ url }}"
+                   class="hyperlink_txt"
+                   title="{{ linkTitle }}"
+                   {% if target %}target="_blank" rel="nofollow"{% endif %}>
+                    {{ titleText ?: url }}
+                </a>
+            </div>
+        {% endif %}
+    {% endif %}
+
+</div>
