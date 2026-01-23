@@ -1,0 +1,11 @@
+{% extends '@Contao/frontend_module/_base.html.twig' %}
+
+{% block content %}
+
+  {% if relateds is not empty %}
+      <div class="relateds_list {{ data.product_listClass }}">
+          {{ relateds|join|raw }}
+      </div>
+  {% endif %}
+
+{% endblock %}
