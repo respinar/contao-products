@@ -1,0 +1,11 @@
+<div class="product_short {{ class }}">
+
+    {% if addImage %}
+        {{ include('@Contao/image.html.twig', arrData|default({})) }}
+    {% endif %}
+
+    <div class="title">
+        {{ title }}
+    </div>
+
+</div>
