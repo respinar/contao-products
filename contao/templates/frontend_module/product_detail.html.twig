@@ -1,0 +1,22 @@
+{% extends '@Contao/frontend_module/_base.html.twig' %}
+
+{% block content %}
+
+  {{ product|raw }}
+
+  {# indexer::stop #}
+  <p class="back">
+      <a href="{{ referer }}" title="{{ back }}">{{ back }}</a>
+  </p>
+  {# indexer::continue #}
+
+    {% if allowComments|default %}
+        <div class="ce_comments block">
+            <{{ hlc }}>{{ hlcText }}</{{ hlc }}>
+            {{ comments|join|raw }}
+            {{ pagination|default|raw }}
+            <{{ hlc }}>{{ addComment }}</{{ hlc }}>
+            {{ include('@Contao/mod_comment_form.html.twig', ignore_missing: true) }}
+        </div>
+    {% endif %}
+{% endblock %}
