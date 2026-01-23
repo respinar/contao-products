@@ -1,0 +1,15 @@
+{% extends '@Contao/frontend_module/_base.html.twig' %}
+
+{% block content %}
+
+    {% if products is empty %}
+        <p class="empty">{{ empty }}</p>
+    {% else %}
+        <div class="product_list {{ data.product_listClass }}">
+            {{ products|join|raw }}
+        </div>
+
+        {{ pagination|raw }}
+    {% endif %}
+
+{% endblock %}
