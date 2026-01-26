@@ -1,0 +1,11 @@
+{% extends "@Contao/content_element/_base.html.twig" %}
+
+{% block content %}
+    {% if products is empty %}
+        <p class="empty">{{ empty }}</p>
+    {% else %}
+        <div class="product_list {{ product_listClass }}">
+            {{ products|join|raw }}
+        </div>
+    {% endif %}
+{% endblock %}
