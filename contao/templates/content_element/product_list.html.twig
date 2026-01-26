@@ -1,0 +1,7 @@
+{% extends "@Contao/content_element/_base.html.twig" %}
+
+{% block content %}
+    <div class="product_list {{ data.product_listClass }}">
+        {{ products|join|raw }}
+    </div>
+{% endblock %}
