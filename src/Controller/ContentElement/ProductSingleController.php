@@ -28,7 +28,7 @@ use Respinar\ProductsBundle\Product;
 use Respinar\ProductsBundle\Model\ProductModel;
 
 
-#[AsContentElement(category: "products", template: 'ce_product_single')]
+#[AsContentElement(category: "products")]
 class ProductSingleController extends AbstractContentElementController
 {
 
