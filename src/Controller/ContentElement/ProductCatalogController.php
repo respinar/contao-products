@@ -33,7 +33,7 @@ use Respinar\ProductsBundle\Product;
 use Respinar\ProductsBundle\Model\ProductModel;
 
 
-#[AsContentElement(category: "products", template: 'ce_product_catalog')]
+#[AsContentElement(category: "products")]
 class ProductCatalogController extends AbstractContentElementController
 {
 
