@@ -83,7 +83,7 @@ $GLOBALS['TL_DCA']['tl_product'] = [
 	// Palettes
 	'palettes' => [
 		'__selector__'     => ['addEnclosure','overwriteMeta'],
-		'default'          => '{title_legend},title,alias,featured;{meta_legend},pageTitle,date,description;{summary_legend},summary;{offer_legend:hide},price,availability,priceValidUntil;{rating_legend},rating_value,rating_count,visit;{product_legend},brand,model,sku,global_ID;{image_legend},singleSRC,overwriteMeta;{related_legend},related;{link_legend:hide},url,target,titleText,linkTitle;{enclosure_legend:hide},addEnclosure;{publish_legend},published,start,stop',
+		'default'          => '{title_legend},title,alias,featured;{meta_legend},pageTitle,date,description;{summary_legend},summary;{offer_legend:hide},price,availability,priceValidUntil;{rating_legend},rating_value,rating_count,visit;{product_legend},brand,model,sku,global_ID;{image_legend},singleSRC,overwriteMeta;{related_legend},related;{link_legend:hide},url,target,titleText,linkTitle;{enclosure_legend:hide},addEnclosure;{expert_legend:hide},cssClass;{publish_legend},published,start,stop',
 		],
 
 	// Subpalettes
@@ -317,6 +317,11 @@ $GLOBALS['TL_DCA']['tl_product'] = [
 			'options_callback' => ['tl_product', 'getProducts'],
 			'eval'         => ['includeBlankOption'=>true,'multiple'=>true],
 			'sql'          => "blob NULL"
+		],
+		'cssClass' => [
+			'inputType'               => 'text',
+			'eval'                    => ['tl_class'=>'w50'],
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		],
 		'published' => [
 			'exclude'      => true,
