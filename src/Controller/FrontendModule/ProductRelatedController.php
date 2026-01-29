@@ -44,11 +44,11 @@ class ProductRelatedController extends AbstractFrontendModuleController
 
 	protected function getResponse(Template $template, ModuleModel $model, Request $request): Response
 	{
-		// Set the item from the auto_item parameter
-		if (!isset($_GET['items']) && $GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))
+		// Return an empty string if "auto_item" is not set to combine list and reader on same page
+		if (Input::get('auto_item') === null)
 		{
-			Input::setGet('items', Input::get('auto_item'));
-		}		
+			return '';
+		}
 
 		$objProduct = ProductModel::findPublishedByIdOrAlias(Input::get('auto_item'));
 
