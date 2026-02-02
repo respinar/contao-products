@@ -30,7 +30,7 @@ use Contao\Environment;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use Respinar\ProductsBundle\Product;
+use Respinar\ProductsBundle\Product\ProductParser;
 use Respinar\ProductsBundle\Model\ProductModel;
 use Respinar\ProductsBundle\Model\CatalogModel;
 use Contao\CoreBundle\Exception\PageNotFoundException;
@@ -75,7 +75,7 @@ class ProductRelatedController extends AbstractFrontendModuleController
 
 			if ($objRelated !== null)
 			{
-				$template->relateds = Product::parseProducts($objRelated, $model);
+				$template->relateds = ProductParser::parseCollection($objRelated, $model);
 			}
 		}
 
