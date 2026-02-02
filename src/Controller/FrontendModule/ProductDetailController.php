@@ -30,7 +30,7 @@ use Contao\Environment;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use Respinar\ProductsBundle\Product;
+use Respinar\ProductsBundle\Product\ProductParser;
 use Respinar\ProductsBundle\Model\ProductModel;
 use Respinar\ProductsBundle\Model\CatalogModel;
 use Contao\CoreBundle\Exception\PageNotFoundException;
@@ -104,7 +104,7 @@ class ProductDetailController extends AbstractFrontendModuleController
 
     //$objCatalog = CatalogModel::findByIdOrAlias($objProduct->pid);
 
-    $template->product = Product::parseProduct($objProduct, $model);
+    $template->product = ProductParser::parse($objProduct, $model);
 
 		// Comments
 		$bundles = System::getContainer()->getParameter('kernel.bundles');
@@ -164,60 +164,4 @@ class ProductDetailController extends AbstractFrontendModuleController
         return $template->getResponse();
 	}
 
-
-	/**
-	 * Display a wildcard in the back end
-	 * @return string
-	 */
-	// public function generate()
-	// {
-	// 	if (TL_MODE == 'BE')
-	// 	{
-	// 		$objTemplate = new \BackendTemplate('be_wildcard');
-
-	// 		$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['product_detail'][0]) . ' ###';
-	// 		$objTemplate->title = $this->headline;
-	// 		$objTemplate->id = $this->id;
-	// 		$objTemplate->link = $this->name;
-	// 		$objTemplate->href = 'contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $this->id;
-
-	// 		return $objTemplate->parse();
-	// 	}
-
-	// 	// Set the item from the auto_item parameter
-	// 	if (!isset($_GET['items']) && $GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))
-	// 	{
-	// 		\Input::setGet('items', \Input::get('auto_item'));
-	// 	}
-
-	// 	$this->product_catalogs = $this->sortOutProtected(deserialize($this->product_catalogs));
-
-	// 	if (TL_MODE == 'FE')
-	// 	{
-    //         $GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/products/assets/vendor/rateit/jquery.rateit.min.js|static';
-    //         $GLOBALS['TL_CSS'][] = 'system/modules/products/assets/vendor/rateit/rateit.css|static';
-    //     }
-
-	// 	return parent::generate();
-	// }
-
-
-	/**
-	 * Generate the module
-	 */
-	// protected function compile()
-	// {
-
-	// 	if ($objProduct->singleSRC != '')
-	// 	{
-	// 		$objModel = \FilesModel::findByUuid($objProduct->singleSRC);
-	// 	}
-
-	// 	$ogTagsURL = self::replaceInsertTags('{{env::path}}{{env::request}}');
-	// 	$ogTagsImage = self::replaceInsertTags('{{env::path}}').$objModel->path;
-
-	// 	$GLOBALS['TL_HEAD'][] = '<meta property="og:type" content="product" />';
-	// 	$GLOBALS['TL_HEAD'][] = '<meta property="og:title" content="'.$objProduct->title.'" />';
-	// 	$GLOBALS['TL_HEAD'][] = '<meta property="og:url" content="'.$ogTagsURL.'" />';
-	// 	$GLOBALS['TL_HEAD'][] = '<meta property="og:image" content="'.$ogTagsImage.'" />';
 }
