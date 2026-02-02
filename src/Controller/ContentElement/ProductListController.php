@@ -25,7 +25,7 @@ use Contao\System;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use Respinar\ProductsBundle\Product;
+use Respinar\ProductsBundle\Product\ProductParser;
 use Respinar\ProductsBundle\Model\ProductModel;
 
 
@@ -51,7 +51,7 @@ class ProductListController extends AbstractContentElementController
 		$arrProducts = [];
 
 		foreach($objProducts as $objProduct) {
-			$arrProducts[] = Product::parseProduct($objProduct, $model);
+			$arrProducts[] = ProductParser::parse($objProduct, $model);
 		}
 
 		$template->products = $arrProducts;
