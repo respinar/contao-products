@@ -29,9 +29,9 @@ use Respinar\ProductsBundle\Model\CatalogModel;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use Respinar\ProductsBundle\Product;
+use Respinar\ProductsBundle\Product\ProductParser;
 use Respinar\ProductsBundle\Model\ProductModel;
-
+use Respinar\ProductsBundle\Product\AccessChecker;
 
 #[AsContentElement(category: "products")]
 class ProductCatalogController extends AbstractContentElementController
@@ -50,7 +50,7 @@ class ProductCatalogController extends AbstractContentElementController
 
 		$template->empty = $GLOBALS['TL_LANG']['MSC']['emptyCatalog'];
 
-		$model->product_catalogs = Product::sortOutProtected(StringUtil::deserialize($model->product_catalogs));
+		$model->product_catalogs = AccessChecker::sortOutProtected(StringUtil::deserialize($model->product_catalogs));
 
 		$objCatalogs = CatalogModel::findMultipleByIds($model->product_catalogs);
 
@@ -171,7 +171,7 @@ class ProductCatalogController extends AbstractContentElementController
 			// Add the Products
 		if ($objProducts !== null)
 		{
-			$template->products = Product::parseProducts($objProducts, $model);
+			$template->products = ProductParser::parseCollection($objProducts, $model);
 		}
 
         return $template->getResponse();
