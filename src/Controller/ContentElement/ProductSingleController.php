@@ -24,7 +24,7 @@ use Contao\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use Respinar\ProductsBundle\Product;
+use Respinar\ProductsBundle\Product\ProductParser;
 use Respinar\ProductsBundle\Model\ProductModel;
 
 
@@ -47,7 +47,7 @@ class ProductSingleController extends AbstractContentElementController
           $model->product_template = 'product_simple';
         }
 
-        $template->product = Product::parseProduct($objProduct, $model);
+        $template->product = ProductParser::parse($objProduct, $model);
 
         return $template->getResponse();
 	}
