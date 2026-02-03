@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Respinar\ProductsBundle\Model\ProductModel;
 
-use Respinar\ProductsBundle\Product;
+use Respinar\ProductsBundle\Product\UrlGenerator;
 
 
 #[AsEventListener('contao.preview_url_convert')]
@@ -42,7 +42,7 @@ class PreviewUrlConvertListener
             return;
         }
 
-        $event->setUrl($this->framework->getAdapter(Product::class)->generateProductUrl($product, false, true));
+        $event->setUrl(UrlGenerator::generate($product, false, true));
 
     }
 
