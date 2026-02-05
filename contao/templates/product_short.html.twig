@@ -1,11 +1,11 @@
+{% use "@Contao/component/_figure.html.twig" %}
+
 <div class="product_short {{ class }}">
 
-    {% if addImage %}
-        {% if link %}<a href="{{ link }}">{% endif %}
-
-        {{ include('@Contao/image.html.twig', arrData|default({})) }}
-
-        {% if link %}</a>{% endif %}
+    {% if figure %}
+        {% with {figure: figure} %}
+            {{ block('figure_component') }}
+        {% endwith %}
     {% endif %}
 
     <div class="tag_container">
