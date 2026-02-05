@@ -34,6 +34,11 @@ class ProductSingleController extends AbstractContentElementController
 
 	public const TYPE = 'product_single';
 
+  public function __construct(
+      private readonly ProductParser $productParser,
+  ) {
+  }
+
 	protected function getResponse(Template $template, ContentModel $model, Request $request): Response
   {
 		$objProduct = ProductModel::findOneByID($model->product);
@@ -47,7 +52,7 @@ class ProductSingleController extends AbstractContentElementController
           $model->product_template = 'product_simple';
         }
 
-        $template->product = ProductParser::parse($objProduct, $model);
+        $template->product = $this->productParser->parse($objProduct, $model);
 
         return $template->getResponse();
 	}
