@@ -35,6 +35,11 @@ class ProductListController extends AbstractContentElementController
 
 	public const TYPE = 'product_list';
 
+	public function __construct(
+      private readonly ProductParser $productParser,
+  ) {
+  }
+
 	protected function getResponse(Template $template, ContentModel $model, Request $request): Response
     {
 
@@ -51,7 +56,7 @@ class ProductListController extends AbstractContentElementController
 		$arrProducts = [];
 
 		foreach($objProducts as $objProduct) {
-			$arrProducts[] = ProductParser::parse($objProduct, $model);
+			$arrProducts[] = $this->productParser->parse($objProduct, $model);
 		}
 
 		$template->products = $arrProducts;
