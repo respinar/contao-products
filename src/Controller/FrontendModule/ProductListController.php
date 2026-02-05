@@ -37,8 +37,13 @@ class ProductListController extends AbstractFrontendModuleController
 {
 	public const TYPE = 'products_list';
 
-    protected function getResponse(Template $template, ModuleModel $model, Request $request): Response
-    {
+	public function __construct(
+      private readonly ProductParser $productParser,
+  ) {
+  }
+
+  protected function getResponse(Template $template, ModuleModel $model, Request $request): Response
+  {
 
 		$template->empty = $GLOBALS['TL_LANG']['MSC']['emptyCatalog'];
 
@@ -160,12 +165,12 @@ class ProductListController extends AbstractFrontendModuleController
 			$objProducts = ProductModel::findPublishedByPids($model->product_catalogs, $blnFeatured, 0, $offset, $arrOptions);
 		}
 
-			// Add the Products
+		// Add the Products
 		if ($objProducts !== null)
 		{
-			$template->products = ProductParser::parseCollection($objProducts, $model);
+			$template->products = $this->productParser->parseCollection($objProducts, $model);
 		}
 
-        return $template->getResponse();
+    return $template->getResponse();
 	}
 }
