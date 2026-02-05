@@ -39,6 +39,11 @@ class ProductCatalogController extends AbstractContentElementController
 
 	public const TYPE = 'product_catalog';
 
+	public function __construct(
+      private readonly ProductParser $productParser,
+  ) {
+  }
+
 	protected function getResponse(Template $template, ContentModel $model, Request $request): Response
     {
 
@@ -171,7 +176,7 @@ class ProductCatalogController extends AbstractContentElementController
 			// Add the Products
 		if ($objProducts !== null)
 		{
-			$template->products = ProductParser::parseCollection($objProducts, $model);
+			$template->products = $this->productParser->parseCollection($objProducts, $model);
 		}
 
         return $template->getResponse();
