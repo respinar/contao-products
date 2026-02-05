@@ -14,16 +14,23 @@ namespace Respinar\ProductsBundle\Product;
 
 use Contao\ContentModel;
 use Contao\Controller;
+use Contao\CoreBundle\Image\Studio\Studio;
 use Contao\FrontendTemplate;
 use Contao\StringUtil;
 use Contao\System;
 
 final class ProductParser
 {
+
+    public function __construct(
+        private readonly Studio $studio,
+    ) {
+    }
+
     /**
      * Parse a product.
      */
-    public static function parse(
+    public function parse(
         object $product,
         object $model,
         bool $addCategory = false,
@@ -114,17 +121,16 @@ final class ProductParser
                 ) {
                     $size = $model->imgSize;
                 }
-            }
+            }            
 
-            $figureBuilder = System::getContainer()
-                ->get('contao.image.studio')
+            $figure = $this->studio
                 ->createFigureBuilder()
+                ->setSize($size)
                 ->from($product->singleSRC)
-                ->setSize($size);
-
-            if (null !== ($figure = $figureBuilder->buildIfResourceExists())) {
-                $figure->applyLegacyTemplateData($template);
-            }
+                ->build();
+            
+            $template->figure = $figure;
+            
         }
 
         $template->enclosure = [];
@@ -157,7 +163,7 @@ final class ProductParser
     /**
      * Parse multiple products.
      */
-    public static function parseCollection(
+    public function parseCollection(
         object $products,
         object $model,
         bool $addCategory = false,
