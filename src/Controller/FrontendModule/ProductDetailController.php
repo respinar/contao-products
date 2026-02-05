@@ -40,10 +40,16 @@ use Contao\CoreBundle\Routing\ResponseContext\HtmlHeadBag\HtmlHeadBag;
 #[AsFrontendModule(category: "products")]
 class ProductDetailController extends AbstractFrontendModuleController
 {
+
 	public const TYPE = 'product_detail';
 
-    protected function getResponse(Template $template, ModuleModel $model, Request $request): Response
-    {
+	public function __construct(
+      private readonly ProductParser $productParser,
+  ) {
+  }
+
+  protected function getResponse(Template $template, ModuleModel $model, Request $request): Response
+  {
 
 		// Return an empty string if "auto_item" is not set to combine list and reader on same page
 		if (Input::get('auto_item') === null)
@@ -104,7 +110,7 @@ class ProductDetailController extends AbstractFrontendModuleController
 
     //$objCatalog = CatalogModel::findByIdOrAlias($objProduct->pid);
 
-    $template->product = ProductParser::parse($objProduct, $model);
+    $template->product = $this->productParser->parse($objProduct, $model);
 
 		// Comments
 		$bundles = System::getContainer()->getParameter('kernel.bundles');
