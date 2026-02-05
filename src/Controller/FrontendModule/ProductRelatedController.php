@@ -42,6 +42,11 @@ class ProductRelatedController extends AbstractFrontendModuleController
 {
 	public const TYPE = 'product_related';
 
+	public function __construct(
+      private readonly ProductParser $productParser,
+  ) {
+  }
+
 	protected function getResponse(Template $template, ModuleModel $model, Request $request): Response
 	{
 		// Return an empty string if "auto_item" is not set to combine list and reader on same page
@@ -75,7 +80,7 @@ class ProductRelatedController extends AbstractFrontendModuleController
 
 			if ($objRelated !== null)
 			{
-				$template->relateds = ProductParser::parseCollection($objRelated, $model);
+				$template->relateds = $this->productParser->parseCollection($objRelated, $model);
 			}
 		}
 
