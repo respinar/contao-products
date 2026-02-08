@@ -69,18 +69,9 @@ final class ProductParser
         $template->category = $product->getRelated('pid');
         $template->count = $count;
 
-        $meta = MetaGenerator::generate($product, $model);
+        $template->meta = MetaGenerator::generate($product);
 
-        $template->hasMetaFields = [] !== $meta;
-
-        if ($template->hasMetaFields) {
-            $template->meta = $meta;
-        }
-
-        $template->timestamp = $product->date;
-        $template->datetime = date('Y-m-d\TH:i:sP', $product->date);
-
-        if ($model->product_summary) {
+        if (null !== $product->summary) {
             $template->hasSummary = true;
             $template->summary = StringUtil::encodeEmail($product->summary);
         }
