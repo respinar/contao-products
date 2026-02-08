@@ -17,20 +17,21 @@ use Contao\BackendUser;
 $GLOBALS['TL_DCA']['tl_module']['palettes']['product_list']    = '
 	{title_legend},name,headline,type;
 	{catalog_legend},product_catalogs,product_featured,product_detailModule,product_sortBy,numberOfItems,perPage,skipFirst;
-	{template_legend},product_metaFields,customTpl;
-	{product_legend},product_template,imgSize,product_listClass,product_singleClass;
+	{template_legend},customTpl,product_listClass,product_template,product_singleClass;
+	{image_legend},imgSize;
 	{protected_legend:hide},protected;
 	{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['product_detail']  = '
 	{title_legend},name,headline,type;
 	{catalog_legend},product_catalogs,overviewPage,customLabel;
-	{meta_legend},product_metaFields;
-	{template_legend},customTpl,product_template,product_summary,imgSize;
+	{template_legend},customTpl,product_template;
+	{image_legend},imgSize;
 	{protected_legend:hide},protected;
 	{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['product_related']  = '
 	{title_legend},name,headline,type;
-	{template_legend},customTpl,product_listClass,product_template,imgSize;	
+	{template_legend},customTpl,product_listClass,product_template;
+	{image_legend},imgSize;	
 	{protected_legend:hide},protected;
 	{expert_legend:hide},guests,cssID,space';
 
@@ -69,15 +70,6 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_sortBy'] = [
 	'eval'       => ['tl_class'=>'w50'],
 	'sql'        => "varchar(16) NOT NULL default ''"
 ];
-$GLOBALS['TL_DCA']['tl_module']['fields']['product_metaFields'] = [
-	'default'    => [''],
-	'exclude'    => true,
-	'inputType'  => 'checkbox',
-	'options'    => ['date','price','availability','brand','model','sku','global_ID','buy'],
-	'reference'  => &$GLOBALS['TL_LANG']['MSC'],
-	'eval'       => ['multiple' =>true],
-	'sql'        => "varchar(255) NOT NULL default ''"
-];
 $GLOBALS['TL_DCA']['tl_module']['fields']['product_detailModule'] = [
 	'exclude'    => true,
 	'inputType'  => 'select',
@@ -89,7 +81,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_template'] = [
 	'default'    => 'product_short',
 	'exclude'    => true,
 	'inputType'  => 'select',
-	'eval'       => ['tl_class'=>'w50'],
+	'eval'       => ['tl_class'=>'w50 clr'],
   'sql'        => "varchar(64) NOT NULL default ''"
 ];
 $GLOBALS['TL_DCA']['tl_module']['fields']['product_listClass'] = [
@@ -103,12 +95,6 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_singleClass'] = [
 	'inputType'  => 'text',
 	'eval'       => ['maxlength' =>128, 'tl_class'=>'w50'],
 	'sql'        => "varchar(255) NOT NULL default ''"
-];
-$GLOBALS['TL_DCA']['tl_module']['fields']['product_summary'] = [
-	'exclude'    => true,
-	'inputType'  => 'checkbox',
-	'eval'       => ['tl_class'=>'w50 m12'],
-	'sql'        => ['type'  => 'boolean', 'default'  => false]
 ];
 $GLOBALS['TL_DCA']['tl_module']['fields']['product_comHeadline'] = [
 	'exclude'    => true,
