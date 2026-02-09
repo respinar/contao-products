@@ -3,9 +3,11 @@
 <div class="product_short {{ class }}">
 
     {% if figure %}
+        {% if link %}<a href="{{ link }}">{% endif %}
         {% with {figure: figure} %}
             {{ block('figure_component') }}
         {% endwith %}
+        {% if link %}</a>{% endif %}
     {% endif %}
 
     <div class="title">
