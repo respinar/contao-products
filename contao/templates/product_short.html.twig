@@ -6,6 +6,7 @@
         {% with {figure: figure} %}
             {{ block('figure_component') }}
         {% endwith %}
+        {% if link %}</a>{% endif %}
     {% endif %}
 
     <div class="tag_container">
