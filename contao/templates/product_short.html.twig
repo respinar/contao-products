@@ -3,6 +3,7 @@
 <div class="product_short {{ class }}">
 
     {% if figure %}
+        {% if link %}<a href="{{ link }}">{% endif %}
         {% with {figure: figure} %}
             {{ block('figure_component') }}
         {% endwith %}
@@ -26,10 +27,10 @@
 
         {% if link %}</a>{% endif %}
     </div>
-
-    {% if hasMetaFields %}
+    
+    <div class="meta">
         <div class="info">
-            <time datetime="{{ datetime }}">{{ meta.date }}</time>
+            <time datetime="{{ meta.datetime }}">{{ meta.date }}</time>
 
             {% if meta.brand is defined %}
                 <span class="brand">
@@ -70,6 +71,5 @@
                 </a>
             </div>
         {% endif %}
-    {% endif %}
-
+    </div>
 </div>
