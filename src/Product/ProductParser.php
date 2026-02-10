@@ -24,6 +24,7 @@ final class ProductParser
 
     public function __construct(
         private readonly Studio $studio,
+        private readonly SchemaGenerator $schema_generator,
     ) {
     }
 
@@ -139,7 +140,7 @@ final class ProductParser
         $template->new_text = 'New';
 
         $template->getSchemaOrgData = static function () use ($template, $product): array {
-            $jsonLd = SchemaGenerator::generate($product);
+            $jsonLd = $this->schema_generatorgenerate($product);
 
             if ($template->figure) {
                 $jsonLd['image'] = $template->figure->getSchemaOrgData();
