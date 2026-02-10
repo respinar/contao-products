@@ -20,7 +20,7 @@ final class SchemaGenerator
     /**
      * Return the schema.org data from a product.
      */
-    public static function generate(
+    public function generate(
         object $product,
     ): array {
         $htmlDecoder = System::getContainer()->get('contao.string.html_decoder');
