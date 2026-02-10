@@ -6,5 +6,3 @@ services:
 
     Respinar\ProductsBundle\:
         resource: ../src/
-        exclude: ../src/DependencyInjection
-
