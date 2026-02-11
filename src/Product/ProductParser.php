@@ -25,6 +25,7 @@ final class ProductParser
     public function __construct(
         private readonly Studio $studio,
         private readonly SchemaGenerator $schema_generator,
+        private readonly MetaGenerator $meta_generator,
     ) {
     }
 
@@ -70,7 +71,7 @@ final class ProductParser
         $template->category = $product->getRelated('pid');
         $template->count = $count;
 
-        $template->meta = MetaGenerator::generate($product);
+        $template->meta = $this->meta_generator->generate($product);
 
         if (null !== $product->summary) {
             $template->hasSummary = true;
