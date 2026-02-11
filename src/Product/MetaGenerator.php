@@ -20,7 +20,7 @@ final class MetaGenerator
     /**
      * Return the meta fields of a product.
      */
-    public static function generate(
+    public function generate(
         object $product,
     ): array {
 
