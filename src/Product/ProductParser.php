@@ -18,6 +18,7 @@ use Contao\CoreBundle\Image\Studio\Studio;
 use Contao\FrontendTemplate;
 use Contao\StringUtil;
 use Contao\System;
+use Respinar\ProductsBundle\Model\ProductModel;
 
 final class ProductParser
 {
@@ -32,13 +33,7 @@ final class ProductParser
     /**
      * Parse a product.
      */
-    public function parse(
-        object $product,
-        object $model,
-        bool $addCategory = false,
-        string $class = '',
-        int $count = 0,
-    ): string {
+    public function parseProduct(ProductModel $product, object $model, bool $addCategory = false, string $class = ''): string {
         $template = new FrontendTemplate(
             $model->product_template ?: 'product_short'
         );
