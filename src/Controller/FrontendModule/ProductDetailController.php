@@ -61,6 +61,8 @@ class ProductDetailController extends AbstractFrontendModuleController
 		$model->product_catalogs = StringUtil::deserialize($model->product_catalogs);
 		$objProduct = ProductModel::findPublishedByParentAndIdOrAlias(Input::get('auto_item'), $model->product_catalogs);
 
+		$objProduct = $objProduct->current();
+
 		if (null === $objProduct)
 		{
 			throw new PageNotFoundException('Page not found: ' . Environment::get('uri'));
