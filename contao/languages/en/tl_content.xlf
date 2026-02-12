@@ -25,13 +25,7 @@
       </trans-unit>
       <trans-unit id="tl_content.product_template.1">
         <source>Please select template for single product.</source>
-      </trans-unit>
-      <trans-unit id="tl_content.product_metaFields.0">
-        <source>Meta information</source>
-      </trans-unit>
-      <trans-unit id="tl_content.product_metaFields.1">
-        <source>Please select meta information that must be showed.</source>
-      </trans-unit>
+      </trans-unit>      
       <trans-unit id="tl_content.product_listClass.0">
         <source>Product list class</source>
       </trans-unit>
