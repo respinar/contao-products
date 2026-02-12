@@ -16,11 +16,11 @@
       </trans-unit>
       <trans-unit id="MSC.availability">
         <source>Availability</source>
-        <target>Availability</target>
+        <target>موجود بوذن</target>
       </trans-unit>
       <trans-unit id="MSC.model">
         <source>Model</source>
-        <target>Model</target>
+        <target>مدل</target>
       </trans-unit>
       <trans-unit id="MSC.global_ID">
         <source>EAN/UPC</source>
@@ -28,7 +28,7 @@
       </trans-unit>
       <trans-unit id="MSC.brand">
         <source>Brand</source>
-        <target>Brand</target>
+        <target>برند</target>
       </trans-unit>
       <trans-unit id="MSC.sku">
         <source>SKU</source>
@@ -36,7 +36,7 @@
       </trans-unit>
       <trans-unit id="MSC.buy">
         <source>Buy link</source>
-        <target>Buy link</target>
+        <target>لینک خرید</target>
       </trans-unit>
       <trans-unit id="MSC.Discontinued">
         <source>Discontinued</source>
