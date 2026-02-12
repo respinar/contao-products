@@ -168,7 +168,7 @@ class ProductListController extends AbstractFrontendModuleController
 		// Add the Products
 		if ($objProducts !== null)
 		{
-			$template->products = $this->productParser->parseCollection($objProducts, $model);
+			$template->products = $this->productParser->parseProducts($objProducts, $model);
 		}
 
     return $template->getResponse();
