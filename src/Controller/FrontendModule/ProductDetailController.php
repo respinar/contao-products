@@ -110,7 +110,7 @@ class ProductDetailController extends AbstractFrontendModuleController
 
     //$objCatalog = CatalogModel::findByIdOrAlias($objProduct->pid);
 
-    $template->product = $this->productParser->parse($objProduct, $model);
+    $template->product = $this->productParser->parseProduct($objProduct, $model);
 
 		// Comments
 		$bundles = System::getContainer()->getParameter('kernel.bundles');
