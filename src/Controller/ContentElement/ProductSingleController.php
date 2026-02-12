@@ -52,7 +52,7 @@ class ProductSingleController extends AbstractContentElementController
           $model->product_template = 'product_simple';
         }
 
-        $template->product = $this->productParser->parse($objProduct, $model);
+        $template->product = $this->productParser->parseProduct($objProduct, $model);
 
         return $template->getResponse();
 	}
