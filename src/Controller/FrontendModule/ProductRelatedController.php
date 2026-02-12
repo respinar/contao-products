@@ -80,7 +80,7 @@ class ProductRelatedController extends AbstractFrontendModuleController
 
 			if ($objRelated !== null)
 			{
-				$template->relateds = $this->productParser->parseCollection($objRelated, $model);
+				$template->relateds = $this->productParser->parseProducts($objRelated, $model);
 			}
 		}
 
