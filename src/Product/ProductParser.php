@@ -154,7 +154,7 @@ final class ProductParser
         object $products,
         object $model,
         bool $addCategory = false,
-    ): array {
+    ): array {       
 
         $items = [];
 
