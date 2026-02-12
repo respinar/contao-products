@@ -150,7 +150,7 @@ final class ProductParser
     /**
      * Parse multiple products.
      */
-    public function parseCollection(
+    public function parseProducts(
         object $products,
         object $model,
         bool $addCategory = false,
