@@ -25,13 +25,7 @@
       </trans-unit>
       <trans-unit id="tl_module.product_detailModule.1">
         <source>Automatically switch to the product module if an item has been selected.</source>
-      </trans-unit>
-      <trans-unit id="tl_module.product_metaFields.0">
-        <source>Meta fields</source>
-      </trans-unit>
-      <trans-unit id="tl_module.product_metaFields.1">
-        <source>Here you can select the meta fields.</source>
-      </trans-unit>
+      </trans-unit>      
       <trans-unit id="tl_module.product_sortBy.0">
         <source>Sort by</source>
       </trans-unit>
