@@ -64,7 +64,6 @@ final class ProductParser
         $template->class = trim($class);
 
         $template->category = $product->getRelated('pid');
-        $template->count = $count;
 
         $template->meta = $this->meta_generator->generate($product);
 
@@ -156,21 +155,11 @@ final class ProductParser
         object $model,
         bool $addCategory = false,
     ): array {
-        if ($products->count() < 1) {
-            return [];
-        }
 
         $items = [];
-        $count = 0;
 
         while ($products->next()) {
-            $items[] = self::parse(
-                $products->current(),
-                $model,
-                $addCategory,
-                '',
-                $count++
-            );
+            $items[] = self::parseProduct($products->current(), $model, $addCategory, '');
         }
 
         return $items;
