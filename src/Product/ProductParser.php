@@ -33,7 +33,7 @@ final class ProductParser
     /**
      * Parse a product.
      */
-    public function parseProduct(ProductModel $product, object $model, bool $addCategory = false, string $class = ''): string {
+    public function parseProduct(ProductModel $product, ModuleModel|ContentModel $model, bool $addCategory = false, string $class = ''): string {
         $template = new FrontendTemplate(
             $model->product_template ?: 'product_short'
         );
