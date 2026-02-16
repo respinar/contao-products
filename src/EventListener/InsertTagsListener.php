@@ -14,9 +14,10 @@ namespace Respinar\ProductsBundle\EventListener;
 
 use Contao\CoreBundle\DependencyInjection\Attribute\AsHook;
 use Contao\CoreBundle\Framework\ContaoFramework;
+use Contao\CoreBundle\Routing\ContentUrlGenerator;
 use Psr\Log\LoggerInterface;
 use Respinar\ProductsBundle\Model\ProductModel;
-use Respinar\ProductsBundle\Product\UrlGenerator;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 #[AsHook('replaceInsertTags')]
 class InsertTagsListener
@@ -28,6 +29,7 @@ class InsertTagsListener
     public function __construct(
         private readonly ContaoFramework $framework,
         private readonly LoggerInterface $logger,
+        private readonly ContentUrlGenerator $contentUrlGenerator,
     ) {
     }
 
@@ -67,11 +69,7 @@ class InsertTagsListener
         }
 
         return match ($insertTag) {
-            'product_url' => UrlGenerator::generate(
-                $productModel,
-                false,
-                \in_array('absolute', $arguments, true),
-            ) ?: './',
+            'product_url' => $this->contentUrlGenerator->generate($productModel,[],UrlGeneratorInterface::ABSOLUTE_PATH) ?: './',            
 
             default => '',
         };
