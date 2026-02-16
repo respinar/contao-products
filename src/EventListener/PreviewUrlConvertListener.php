@@ -14,19 +14,21 @@ namespace Respinar\ProductsBundle\EventListener;
 
 use Contao\CoreBundle\Event\PreviewUrlConvertEvent;
 use Contao\CoreBundle\Framework\ContaoFramework;
+use Contao\CoreBundle\Routing\ContentUrlGenerator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Respinar\ProductsBundle\Model\ProductModel;
-
-use Respinar\ProductsBundle\Product\UrlGenerator;
-
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 #[AsEventListener('contao.preview_url_convert')]
 class PreviewUrlConvertListener
 {
-    private ContaoFramework  $framework;
+    // private ContaoFramework $framework;
 
-    public function __construct(ContaoFramework $framework)
+    public function __construct(
+        private ContaoFramework $framework,
+        private readonly ContentUrlGenerator $contentUrlGenerator,
+    )
     {
         $this->framework = $framework;
     }
@@ -41,8 +43,8 @@ class PreviewUrlConvertListener
         if (!($product = $this->getProductModel($event->getRequest())) instanceof \Respinar\ProductsBundle\Model\ProductModel) {
             return;
         }
-
-        $event->setUrl(UrlGenerator::generate($product, false, true));
+        
+        $event->setUrl($this->contentUrlGenerator->generate($product,[],UrlGeneratorInterface::ABSOLUTE_PATH));
 
     }
 
