@@ -15,7 +15,9 @@ namespace Respinar\ProductsBundle\Product;
 use Contao\ContentModel;
 use Contao\Controller;
 use Contao\CoreBundle\Image\Studio\Studio;
+use Contao\CoreBundle\Routing\ContentUrlGenerator;
 use Contao\FrontendTemplate;
+use Contao\ModuleModel;
 use Contao\StringUtil;
 use Contao\System;
 use Respinar\ProductsBundle\Model\ProductModel;
@@ -25,6 +27,7 @@ final class ProductParser
 
     public function __construct(
         private readonly Studio $studio,
+        private readonly ContentUrlGenerator $contentUrlGenerator,
         private readonly SchemaGenerator $schema_generator,
         private readonly MetaGenerator $meta_generator,
     ) {
@@ -33,7 +36,7 @@ final class ProductParser
     /**
      * Parse a product.
      */
-    public function parseProduct(ProductModel $product, ModuleModel|ContentModel $model, bool $addCategory = false, string $class = ''): string {
+    public function parseProduct(ProductModel $product, ModuleModel|ContentModel $model, bool $addCategory = false): string {
         $template = new FrontendTemplate(
             $model->product_template ?: 'product_short'
         );
@@ -43,6 +46,8 @@ final class ProductParser
         $template->hasSummary = false;
         $template->hasText = false;
         $template->hasEnclosure = false;
+
+        $class = '';
 
         if ($model->product_singleClass) {
             $class .= ' '.$model->product_singleClass;
@@ -86,10 +91,12 @@ final class ProductParser
                 );
             }
 
-            $template->link = UrlGenerator::generate(
-                $product,
-                $addCategory
-            );
+            // $template->link = UrlGenerator::generate(
+            //     $product,
+            //     $addCategory
+            // );
+
+            $template->link = $this->contentUrlGenerator->generate($product);
         }
 
         $template->addImage = false;
@@ -159,7 +166,7 @@ final class ProductParser
         $items = [];
 
         while ($products->next()) {
-            $items[] = self::parseProduct($products->current(), $model, $addCategory, '');
+            $items[] = self::parseProduct($products->current(), $model, $addCategory);
         }
 
         return $items;
