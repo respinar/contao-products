@@ -21,6 +21,7 @@ use Contao\ModuleModel;
 use Contao\StringUtil;
 use Contao\System;
 use Respinar\ProductsBundle\Model\ProductModel;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class ProductParser
 {
@@ -96,7 +97,7 @@ final class ProductParser
             //     $addCategory
             // );
 
-            $template->link = $this->contentUrlGenerator->generate($product);
+            $template->link = $this->contentUrlGenerator->generate($product,[],UrlGeneratorInterface::ABSOLUTE_PATH);
         }
 
         $template->addImage = false;
@@ -141,15 +142,7 @@ final class ProductParser
         $template->featured_text = 'Featured';
         $template->new_text = 'New';
 
-        $template->getSchemaOrgData = static function () use ($template, $product): array {
-            $jsonLd = $this->schema_generatorgenerate($product);
-
-            if ($template->figure) {
-                $jsonLd['image'] = $template->figure->getSchemaOrgData();
-            }
-
-            return $jsonLd;
-        };
+        $template->schemaOrgData = $this->schema_generator->generate($product);
 
         return $template->parse();
     }
