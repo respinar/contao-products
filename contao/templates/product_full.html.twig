@@ -52,7 +52,7 @@
                 </span>
             {% endif %}
         </div>
-    </div> 
+    </div>
 
     {% if hasSummary %}
         <div class="summary">
@@ -94,3 +94,5 @@
     {% endif %}
 
 </div>
+
+{% do add_schema_org(schemaOrgData) %}
