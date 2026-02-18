@@ -226,7 +226,7 @@ $GLOBALS['TL_DCA']['tl_product'] = [
 			'exclude'      => true,
 			'search'       => true,
 			'inputType'    => 'text',
-			'eval'         => ['decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50'],
+			'eval'         => ['rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255, 'dcaPicker'=>true, 'tl_class'=>'w50'],
 			'sql'          => "varchar(255) NOT NULL default ''"
 		],
 		'target' => [
