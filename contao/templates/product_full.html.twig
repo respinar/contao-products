@@ -47,7 +47,7 @@
                         class="hyperlink_txt"
                         title="{{ linkTitle }}"
                         {% if target %}target="_blank" rel="nofollow"{% endif %}>
-                        {{ titleText ?: url }}
+                        {{ titleText ?: url|insert_tag }}
                     </a>
                 </span>
             {% endif %}
