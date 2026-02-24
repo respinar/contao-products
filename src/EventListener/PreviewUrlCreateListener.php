@@ -73,7 +73,7 @@ class PreviewUrlCreateListener
     /**
      * @param int|string $id
      */
-    private function getProductModel($id): ?ProductModel
+    private function getProductModel(int|string|float|bool $id): ?ProductModel
     {
         return $this->framework->getAdapter(ProductModel::class)->findByPk($id);
     }
