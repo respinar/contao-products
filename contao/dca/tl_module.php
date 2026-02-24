@@ -9,7 +9,6 @@
  */
 
 use Contao\System;
-use Contao\BackendUser;
 
 /**
  * Add palettes to tl_module
