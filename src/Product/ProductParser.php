@@ -19,7 +19,6 @@ use Contao\CoreBundle\Routing\ContentUrlGenerator;
 use Contao\FrontendTemplate;
 use Contao\ModuleModel;
 use Contao\StringUtil;
-use Contao\System;
 use Respinar\ProductsBundle\Model\ProductModel;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -37,7 +36,7 @@ final class ProductParser
     /**
      * Parse a product.
      */
-    public function parseProduct(ProductModel $product, ModuleModel|ContentModel $model, bool $addCategory = false): string {
+    public function parseProduct(ProductModel $product, ModuleModel|ContentModel $model): string {
         $template = new FrontendTemplate(
             $model->product_template ?: 'product_short'
         );
