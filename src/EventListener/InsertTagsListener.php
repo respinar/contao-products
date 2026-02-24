@@ -22,7 +22,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 #[AsHook('replaceInsertTags')]
 class InsertTagsListener
 {
-    private const SUPPORTED_TAGS = [
+    private const array SUPPORTED_TAGS = [
         'product_url',
     ];
 
@@ -49,14 +49,12 @@ class InsertTagsListener
         return $this->replaceProductInsertTags(
             $key,
             $elements[1] ?? '',
-            [...$flags, ...\array_slice($elements, 2)],
         );
     }
 
     private function replaceProductInsertTags(
         string $insertTag,
         string $idOrAlias,
-        array $arguments,
     ): string {
         $this->framework->initialize();
 
