@@ -421,7 +421,7 @@ class tl_product extends Backend
     $autoAlias = false;
 
     // Generate alias if there is none
-    if ($varValue == "") {
+    if ($varValue === "") {
       $autoAlias = true;
       $varValue = StringUtil::standardize(
         String::restoreBasicEntities($dc->activeRecord->title),
