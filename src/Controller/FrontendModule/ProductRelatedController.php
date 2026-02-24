@@ -21,20 +21,13 @@ use Contao\CoreBundle\DependencyInjection\Attribute\AsFrontendModule;
 use Contao\ModuleModel;
 use Contao\Template;
 use Contao\Input;
-use Contao\System;
-use Contao\UserModel;
 use Contao\PageModel;
-use Contao\Comments;
 use Contao\StringUtil;
-use Contao\Environment;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 use Respinar\ProductsBundle\Product\ProductParser;
 use Respinar\ProductsBundle\Model\ProductModel;
-use Respinar\ProductsBundle\Model\CatalogModel;
-use Contao\CoreBundle\Exception\PageNotFoundException;
-use Contao\CoreBundle\Routing\ResponseContext\HtmlHeadBag\HtmlHeadBag;
 
 
 #[AsFrontendModule(category: "products")]
