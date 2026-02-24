@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of Contao Products Bundle.
  *
@@ -11,7 +13,6 @@
 use Contao\Backend;
 use Contao\BackendUser;
 use Contao\DC_Table;
-use Contao\Image;
 
 use Respinar\ProductsBundle\Dca\CommentFields;
 
