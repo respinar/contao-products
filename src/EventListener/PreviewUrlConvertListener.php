@@ -25,12 +25,8 @@ class PreviewUrlConvertListener
 {
     // private ContaoFramework $framework;
 
-    public function __construct(
-        private ContaoFramework $framework,
-        private readonly ContentUrlGenerator $contentUrlGenerator,
-    )
+    public function __construct(private ContaoFramework $framework, private readonly ContentUrlGenerator $contentUrlGenerator)
     {
-        $this->framework = $framework;
     }
 
     public function __invoke(PreviewUrlConvertEvent $event): void
