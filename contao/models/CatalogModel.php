@@ -16,7 +16,5 @@ use Contao\Model;
 
 class CatalogModel extends Model
 {
-
-	protected static $strTable = 'tl_product_catalog';
-
+    protected static $strTable = 'tl_product_catalog';
 }
