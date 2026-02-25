@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of Contao Products Bundle.
  *
@@ -9,10 +11,10 @@
  */
 
 use Contao\ArrayUtil;
-use Respinar\ProductsBundle\Model\ProductModel;
 use Respinar\ProductsBundle\Model\CatalogModel;
+use Respinar\ProductsBundle\Model\ProductModel;
 
-/**
+/*
  * Back end modules
  */
 ArrayUtil::arrayInsert($GLOBALS['BE_MOD'], 1, [
@@ -23,13 +25,13 @@ ArrayUtil::arrayInsert($GLOBALS['BE_MOD'], 1, [
     ],
 ]);
 
-/**
+/*
  * Register models
  */
- $GLOBALS['TL_MODELS']['tl_product']         = ProductModel::class;
- $GLOBALS['TL_MODELS']['tl_product_catalog'] = CatalogModel::class;
+$GLOBALS['TL_MODELS']['tl_product'] = ProductModel::class;
+$GLOBALS['TL_MODELS']['tl_product_catalog'] = CatalogModel::class;
 
-/**
+/*
  * Add permissions
  */
 $GLOBALS['TL_PERMISSIONS'][] = 'products';
