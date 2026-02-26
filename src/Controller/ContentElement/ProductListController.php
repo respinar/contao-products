@@ -10,58 +10,51 @@ declare(strict_types=1);
  * @license MIT
  */
 
-
 /**
- * Namespace
+ * Namespace.
  */
+
 namespace Respinar\ProductsBundle\Controller\ContentElement;
 
 use Contao\ContentModel;
-use Contao\StringUtil;
-use Contao\Template;
 use Contao\CoreBundle\Controller\ContentElement\AbstractContentElementController;
 use Contao\CoreBundle\DependencyInjection\Attribute\AsContentElement;
+use Contao\StringUtil;
 use Contao\System;
+use Contao\Template;
+use Respinar\ProductsBundle\Model\ProductModel;
+use Respinar\ProductsBundle\Product\ProductParser;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use Respinar\ProductsBundle\Product\ProductParser;
-use Respinar\ProductsBundle\Model\ProductModel;
-
-
-#[AsContentElement(category: "products")]
+#[AsContentElement(category: 'products')]
 class ProductListController extends AbstractContentElementController
 {
+    public const TYPE = 'product_list';
 
-	public const TYPE = 'product_list';
-
-	public function __construct(
-      private readonly ProductParser $productParser,
-  ) {
-  }
-
-	protected function getResponse(Template $template, ContentModel $model, Request $request): Response
+    public function __construct(private readonly ProductParser $productParser)
     {
+    }
 
-		$objProducts = ProductModel::findMultipleByIds(StringUtil::deserialize($model->products));
+    protected function getResponse(Template $template, ContentModel $model, Request $request): Response
+    {
+        $objProducts = ProductModel::findMultipleByIds(StringUtil::deserialize($model->products));
 
         $model->imgSize = $model->size;
 
-		if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create('')))
-        {
-          $model->imgSize = 'a:3:{i:0;s:3:"100";i:1;s:3:"100";i:2;s:13:"center_center";}';
-		  $model->product_template = 'product_simple';
+        if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create(''))) {
+            $model->imgSize = 'a:3:{i:0;s:3:"100";i:1;s:3:"100";i:2;s:13:"center_center";}';
+            $model->product_template = 'product_simple';
         }
 
-		$arrProducts = [];
+        $arrProducts = [];
 
-		foreach($objProducts as $objProduct) {
-			$arrProducts[] = $this->productParser->parseProduct($objProduct, $model);
-		}
+        foreach ($objProducts as $objProduct) {
+            $arrProducts[] = $this->productParser->parseProduct($objProduct, $model);
+        }
 
-		$template->products = $arrProducts;
+        $template->products = $arrProducts;
 
         return $template->getResponse();
-	}
-
+    }
 }
