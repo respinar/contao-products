@@ -23,9 +23,6 @@ class RespinarProductsBundle extends Bundle
         return \dirname(__DIR__);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function build(ContainerBuilder $container): void
     {
         parent::build($container);
