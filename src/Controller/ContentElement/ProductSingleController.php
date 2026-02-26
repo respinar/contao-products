@@ -10,10 +10,10 @@ declare(strict_types=1);
  * @license MIT
  */
 
-
 /**
- * Namespace
+ * Namespace.
  */
+
 namespace Respinar\ProductsBundle\Controller\ContentElement;
 
 use Contao\ContentModel;
@@ -21,40 +21,33 @@ use Contao\CoreBundle\Controller\ContentElement\AbstractContentElementController
 use Contao\CoreBundle\DependencyInjection\Attribute\AsContentElement;
 use Contao\System;
 use Contao\Template;
+use Respinar\ProductsBundle\Model\ProductModel;
+use Respinar\ProductsBundle\Product\ProductParser;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use Respinar\ProductsBundle\Product\ProductParser;
-use Respinar\ProductsBundle\Model\ProductModel;
-
-
-#[AsContentElement(category: "products")]
+#[AsContentElement(category: 'products')]
 class ProductSingleController extends AbstractContentElementController
 {
+    public const TYPE = 'product_single';
 
-	public const TYPE = 'product_single';
+    public function __construct(private readonly ProductParser $productParser)
+    {
+    }
 
-  public function __construct(
-      private readonly ProductParser $productParser,
-  ) {
-  }
-
-	protected function getResponse(Template $template, ContentModel $model, Request $request): Response
-  {
-		$objProduct = ProductModel::findOneByID($model->product);
-
+    protected function getResponse(Template $template, ContentModel $model, Request $request): Response
+    {
+        $objProduct = ProductModel::findOneByID($model->product);
 
         $model->imgSize = $model->size;
 
-        if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create('')))
-        {
-          $model->imgSize = 'a:3:{i:0;s:3:"100";i:1;s:3:"100";i:2;s:13:"center_center";}';
-          $model->product_template = 'product_simple';
+        if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create(''))) {
+            $model->imgSize = 'a:3:{i:0;s:3:"100";i:1;s:3:"100";i:2;s:13:"center_center";}';
+            $model->product_template = 'product_simple';
         }
 
         $template->product = $this->productParser->parseProduct($objProduct, $model);
 
         return $template->getResponse();
-	}
-
+    }
 }
