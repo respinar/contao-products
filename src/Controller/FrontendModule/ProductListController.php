@@ -10,167 +10,147 @@ declare(strict_types=1);
  * @license MIT
  */
 
-
 /**
- * Namespace
+ * Namespace.
  */
+
 namespace Respinar\ProductsBundle\Controller\FrontendModule;
 
+use Contao\Config;
 use Contao\CoreBundle\Controller\FrontendModule\AbstractFrontendModuleController;
 use Contao\CoreBundle\DependencyInjection\Attribute\AsFrontendModule;
-use Contao\ModuleModel;
-use Contao\Template;
-use Contao\StringUtil;
 use Contao\Input;
-use Contao\Config;
+use Contao\ModuleModel;
 use Contao\Pagination;
+use Contao\StringUtil;
+use Contao\Template;
+use Respinar\ProductsBundle\Model\CatalogModel;
+use Respinar\ProductsBundle\Model\ProductModel;
+use Respinar\ProductsBundle\Product\AccessChecker;
+use Respinar\ProductsBundle\Product\ProductParser;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use Respinar\ProductsBundle\Product\ProductParser;
-use Respinar\ProductsBundle\Model\ProductModel;
-use Respinar\ProductsBundle\Model\CatalogModel;
-use Respinar\ProductsBundle\Product\AccessChecker;
-
-#[AsFrontendModule(category: "products")]
+#[AsFrontendModule(category: 'products')]
 class ProductListController extends AbstractFrontendModuleController
 {
-	public const TYPE = 'products_list';
+    public const TYPE = 'products_list';
 
-	public function __construct(
-      private readonly ProductParser $productParser,
-  ) {
-  }
+    public function __construct(private readonly ProductParser $productParser)
+    {
+    }
 
-  protected function getResponse(Template $template, ModuleModel $model, Request $request): Response
-  {
+    protected function getResponse(Template $template, ModuleModel $model, Request $request): Response
+    {
+        $template->empty = $GLOBALS['TL_LANG']['MSC']['emptyCatalog'];
 
-		$template->empty = $GLOBALS['TL_LANG']['MSC']['emptyCatalog'];
+        $model->product_catalogs = AccessChecker::sortOutProtected(StringUtil::deserialize($model->product_catalogs));
 
-		$model->product_catalogs = AccessChecker::sortOutProtected(StringUtil::deserialize($model->product_catalogs));
+        $objCatalogs = CatalogModel::findMultipleByIds($model->product_catalogs);
 
-		$objCatalogs = CatalogModel::findMultipleByIds($model->product_catalogs);
+        // No news archives available
+        if (empty($objCatalogs)) {
+            return $template->getResponse();
+        }
 
-		// No news archives available
-		if (empty($objCatalogs))
-		{
-			return  $template->getResponse();
-		}
+        $offset = (int) $model->skipFirst;
+        $limit = null;
 
-		$offset = intval($model->skipFirst);
-		$limit = null;
+        // Maximum number of items
+        if ($model->numberOfItems > 0) {
+            $limit = $model->numberOfItems;
+        }
 
-		// Maximum number of items
-		if ($model->numberOfItems > 0)
-		{
-			$limit = $model->numberOfItems;
-		}
+        // Handle featured product
+        if ('featured_product' === $model->product_featured) {
+            $blnFeatured = true;
+        } elseif ('unfeatured_product' === $model->product_featured) {
+            $blnFeatured = false;
+        } else {
+            $blnFeatured = null;
+        }
 
-		// Handle featured product
-		if ($model->product_featured == 'featured_product')
-		{
-			$blnFeatured = true;
-		}
-		elseif ($model->product_featured == 'unfeatured_product')
-		{
-			$blnFeatured = false;
-		}
-		else
-		{
-			$blnFeatured = null;
-		}
+        $template->products = [];
 
-		$template->products = array();
+        $intTotal = ProductModel::countPublishedByPids($model->product_catalogs, $blnFeatured);
 
-		$intTotal = ProductModel::countPublishedByPids($model->product_catalogs, $blnFeatured);
+        if ($intTotal < 1) {
+            return $template->getResponse();
+        }
 
-		if ($intTotal < 1)
-		{
-			return $template->getResponse();
-		}
+        $total = $intTotal - $offset;
 
-		$total = $intTotal - $offset;
+        // Split the results
+        if ($model->perPage > 0 && (!isset($limit) || $model->numberOfItems > $model->perPage)) {
+            // Adjust the overall limit
+            if (isset($limit)) {
+                $total = min($limit, $total);
+            }
 
-		// Split the results
-		if ($model->perPage > 0 && (!isset($limit) || $model->numberOfItems > $model->perPage))
-		{
-			// Adjust the overall limit
-			if (isset($limit))
-			{
-				$total = min($limit, $total);
-			}
+            // Get the current page
+            $id = 'page_n'.$model->id;
+            $page = Input::get($id) ?: 1;
 
-			// Get the current page
-			$id = 'page_n' . $model->id;
-			$page = Input::get($id) ?: 1;
+            // Do not index or cache the page if the page number is outside the range
+            if ($page < 1 || $page > max(ceil($total / $model->perPage), 1)) {
+                global $objPage;
+                $objPage->noSearch = 1;
+                $objPage->cache = 0;
 
-			// Do not index or cache the page if the page number is outside the range
-			if ($page < 1 || $page > max(ceil($total/$model->perPage), 1))
-			{
-				global $objPage;
-				$objPage->noSearch = 1;
-				$objPage->cache = 0;
+                // Send a 404 header
+                header('HTTP/1.1 404 Not Found');
 
-				// Send a 404 header
-				header('HTTP/1.1 404 Not Found');
-				return $template->getResponse();
-			}
+                return $template->getResponse();
+            }
 
-			// Set limit and offset
-			$limit = $model->perPage;
-			$offset += (max($page, 1) - 1) * $model->perPage;
-			$skip = intval($model->skipFirst);
+            // Set limit and offset
+            $limit = $model->perPage;
+            $offset += (max($page, 1) - 1) * $model->perPage;
+            $skip = (int) $model->skipFirst;
 
-			// Overall limit
-			if ($offset + $limit > $total + $skip)
-			{
-				$limit = $total + $skip - $offset;
-			}
+            // Overall limit
+            if ($offset + $limit > $total + $skip) {
+                $limit = $total + $skip - $offset;
+            }
 
-			// Add the pagination menu
-			$objPagination = new Pagination($total, $model->perPage, Config::get('maxPaginationLinks'), $id);
-			$template->pagination = $objPagination->generate("\n  ");
-		}
+            // Add the pagination menu
+            $objPagination = new Pagination($total, $model->perPage, Config::get('maxPaginationLinks'), $id);
+            $template->pagination = $objPagination->generate("\n  ");
+        }
 
-		$arrOptions = array();
-		if ($model->product_sortBy)
-		{
-			switch ($model->product_sortBy)
-			{
-				case 'title_asc':
-					$arrOptions['order'] = "title ASC";
-					break;
-				case 'title_desc':
-					$arrOptions['order'] = "title DESC";
-					break;
-				case 'date_asc':
-					$arrOptions['order'] = "tstamp ASC";
-					break;
-				case 'date_desc':
-					$arrOptions['order'] = "tstamp DESC";
-					break;
-				case 'custom':
-					$arrOptions['order'] = "sorting ASC";
-					break;
-			}
-		}
+        $arrOptions = [];
+        if ($model->product_sortBy) {
+            switch ($model->product_sortBy) {
+                case 'title_asc':
+                    $arrOptions['order'] = 'title ASC';
+                    break;
+                case 'title_desc':
+                    $arrOptions['order'] = 'title DESC';
+                    break;
+                case 'date_asc':
+                    $arrOptions['order'] = 'tstamp ASC';
+                    break;
+                case 'date_desc':
+                    $arrOptions['order'] = 'tstamp DESC';
+                    break;
+                case 'custom':
+                    $arrOptions['order'] = 'sorting ASC';
+                    break;
+            }
+        }
 
-		// Get the items
-		if (isset($limit))
-		{
-			$objProducts = ProductModel::findPublishedByPids($model->product_catalogs, $blnFeatured, $limit, $offset, $arrOptions);
-		}
-		else
-		{
-			$objProducts = ProductModel::findPublishedByPids($model->product_catalogs, $blnFeatured, 0, $offset, $arrOptions);
-		}
+        // Get the items
+        if (isset($limit)) {
+            $objProducts = ProductModel::findPublishedByPids($model->product_catalogs, $blnFeatured, $limit, $offset, $arrOptions);
+        } else {
+            $objProducts = ProductModel::findPublishedByPids($model->product_catalogs, $blnFeatured, 0, $offset, $arrOptions);
+        }
 
-		// Add the Products
-		if ($objProducts !== null)
-		{
-			$template->products = $this->productParser->parseProducts($objProducts, $model);
-		}
+        // Add the Products
+        if (null !== $objProducts) {
+            $template->products = $this->productParser->parseProducts($objProducts, $model);
+        }
 
-    return $template->getResponse();
-	}
+        return $template->getResponse();
+    }
 }
