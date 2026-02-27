@@ -19,7 +19,6 @@ final class CommentFields
 {
     public static function addTo(string $table): void
     {
-
         // Do nothing if the Comments Bundle is not installed.
         if (!self::isCommentsBundleInstalled()) {
             return;
@@ -84,7 +83,8 @@ final class CommentFields
         PaletteManipulator::create()
             ->addLegend('comments_legend', null, PaletteManipulator::POSITION_APPEND, true)
             ->addField('allowComments', 'comments_legend', PaletteManipulator::POSITION_APPEND)
-            ->applyToPalette('default', $table);
+            ->applyToPalette('default', $table)
+        ;
     }
 
     private static function isCommentsBundleInstalled(): bool
