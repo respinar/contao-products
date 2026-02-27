@@ -13,10 +13,9 @@ declare(strict_types=1);
 namespace Respinar\ProductsBundle\EventListener;
 
 use Contao\CoreBundle\Event\PreviewUrlCreateEvent;
-use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
-
 use Contao\CoreBundle\Framework\ContaoFramework;
 use Respinar\ProductsBundle\Model\ProductModel;
+use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -24,6 +23,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class PreviewUrlCreateListener
 {
     private RequestStack $requestStack;
+
     private ContaoFramework $framework;
 
     public function __construct(RequestStack $requestStack, ContaoFramework $framework)
@@ -41,7 +41,7 @@ class PreviewUrlCreateListener
 
         $request = $this->requestStack->getCurrentRequest();
 
-        if (!$request instanceof \Symfony\Component\HttpFoundation\Request) {
+        if (!$request instanceof Request) {
             throw new \RuntimeException('The request stack did not contain a request');
         }
 
@@ -60,7 +60,7 @@ class PreviewUrlCreateListener
     /**
      * @return int|string
      */
-    private function getId(PreviewUrlCreateEvent $event, Request $request): string|int|float|bool|null
+    private function getId(PreviewUrlCreateEvent $event, Request $request): bool|float|int|string|null
     {
         // Overwrite the ID if the news settings are edited
         if ('tl_product' === $request->query->get('table') && 'edit' === $request->query->get('act')) {
@@ -73,8 +73,8 @@ class PreviewUrlCreateListener
     /**
      * @param int|string $id
      */
-    private function getProductModel(int|string|float|bool $id): ?ProductModel
+    private function getProductModel(bool|float|int|string $id): ProductModel|null
     {
-        return $this->framework->getAdapter(ProductModel::class)->findByPk($id);
+        return $this->framework->getAdapter(ProductModel::class)->findById($id);
     }
 }
