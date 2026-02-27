@@ -33,12 +33,8 @@ class InsertTagsListener
     ) {
     }
 
-    public function __invoke(
-        string $tag,
-        bool $useCache,
-        mixed $cacheValue,
-        array $flags,
-    ): string|false {
+    public function __invoke(string $tag, bool $useCache, mixed $cacheValue, array $flags): string|false
+    {
         $elements = explode('::', $tag);
         $key = strtolower($elements[0]);
 
@@ -52,22 +48,21 @@ class InsertTagsListener
         );
     }
 
-    private function replaceProductInsertTags(
-        string $insertTag,
-        string $idOrAlias,
-    ): string {
+    private function replaceProductInsertTags(string $insertTag, string $idOrAlias): string
+    {
         $this->framework->initialize();
 
         $productModel = $this->framework
             ->getAdapter(ProductModel::class)
-            ->findByIdOrAlias($idOrAlias);
+            ->findByIdOrAlias($idOrAlias)
+        ;
 
         if (null === $productModel) {
             return '';
         }
 
         return match ($insertTag) {
-            'product_url' => $this->contentUrlGenerator->generate($productModel,[],UrlGeneratorInterface::ABSOLUTE_PATH) ?: './',            
+            'product_url' => $this->contentUrlGenerator->generate($productModel, [], UrlGeneratorInterface::ABSOLUTE_PATH) ?: './',
 
             default => '',
         };
