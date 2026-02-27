@@ -38,7 +38,8 @@ class InitializeSystemListener
             return;
         }
 
-        //$GLOBALS['TL_JAVASCRIPT'][] = $this->packages->getUrl('main.js', 'respinar_products');
+        // $GLOBALS['TL_JAVASCRIPT'][] = $this->packages->getUrl('main.js',
+        // 'respinar_products');
         $GLOBALS['TL_CSS'][] = $this->packages->getUrl('css/backend.css', 'respinar_products');
     }
 }
