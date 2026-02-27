@@ -14,24 +14,22 @@ namespace Respinar\ProductsBundle\EventListener;
 
 use Contao\CoreBundle\Event\ContaoCoreEvents;
 use Contao\CoreBundle\Event\SitemapEvent;
-use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
-
-use Contao\PageModel;
-use Contao\Database;
 use Contao\CoreBundle\Framework\ContaoFramework;
-use Respinar\ProductsBundle\Model\ProductModel;
+use Contao\Database;
+use Contao\PageModel;
 use Respinar\ProductsBundle\Model\CatalogModel;
+use Respinar\ProductsBundle\Model\ProductModel;
+use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 
 #[AsEventListener(ContaoCoreEvents::SITEMAP)]
 class SitemapListener
 {
-	public function __construct(private readonly ContaoFramework $framework)
+    public function __construct(private readonly ContaoFramework $framework)
     {
     }
 
     public function __invoke(SitemapEvent $event): void
     {
-
         $arrRoot = $this->framework->createInstance(Database::class)->getChildRecords($event->getRootPageIds(), 'tl_page');
 
         // Early return here in the unlikely case that there are no pages
@@ -39,34 +37,33 @@ class SitemapListener
             return;
         }
 
-		$arrPages = [];
+        $arrPages = [];
         $time = time();
 
-		// Get all catalog categories
-		$objCatalogs = $this->framework->getAdapter(CatalogModel::class)->findByProtected('');
-		//CatalogModel::findByProtected('');
+        // Get all catalog categories
+        $objCatalogs = $this->framework->getAdapter(CatalogModel::class)->findByProtected('');
+        // CatalogModel::findByProtected('');
 
-		if (null === $objCatalogs) {
+        if (null === $objCatalogs) {
             return;
         }
 
-		// Walk through each catalog
-		foreach ($objCatalogs as $objCatalog)
-		{
-			// Skip catalog without target page
-			if (!$objCatalog->jumpTo) {
-				continue;
-			}
+        // Walk through each catalog
+        foreach ($objCatalogs as $objCatalog) {
+            // Skip catalog without target page
+            if (!$objCatalog->jumpTo) {
+                continue;
+            }
 
-			// Skip catalog categories outside the root nodes
-            // Changes to non-stick because of vatan.bio
-			if (!\in_array($objCatalog->jumpTo, $arrRoot, false)) {
-				continue;
-			}
+            // Skip catalog categories outside the root nodes Changes to non-stick
+            // because of vatan.bio
+            if (!\in_array($objCatalog->jumpTo, $arrRoot, false)) {
+                continue;
+            }
 
-			$objParent = $this->framework->getAdapter(PageModel::class)->findWithDetails($objCatalog->jumpTo);
+            $objParent = $this->framework->getAdapter(PageModel::class)->findWithDetails($objCatalog->jumpTo);
 
-			// The target page does not exist
+            // The target page does not exist
             if (null === $objParent) {
                 continue;
             }
@@ -86,28 +83,27 @@ class SitemapListener
                 continue;
             }
 
-			// Get the items
+            // Get the items
             $objProducts = $this->framework->getAdapter(ProductModel::class)->findPublishedDefaultByPid($objCatalog->id);
 
-			if (null === $objProducts) {
+            if (null === $objProducts) {
                 continue;
             }
 
-			foreach ($objProducts as $objProduct) {
+            foreach ($objProducts as $objProduct) {
                 $arrPages[] = $objParent->getAbsoluteUrl('/'.($objProduct->alias ?: $objProduct->id));
             }
-		}
+        }
 
-		$sitemap = $event->getDocument();
+        $sitemap = $event->getDocument();
 
-		foreach ($arrPages as $strUrl) {
+        foreach ($arrPages as $strUrl) {
+            $urlSet = $sitemap->childNodes[0];
 
-			$urlSet = $sitemap->childNodes[0];
-
-			$loc = $sitemap->createElement('loc', $strUrl);
-			$urlEl = $sitemap->createElement('url');
-			$urlEl->appendChild($loc);
-			$urlSet->appendChild($urlEl);
+            $loc = $sitemap->createElement('loc', $strUrl);
+            $urlEl = $sitemap->createElement('url');
+            $urlEl->appendChild($loc);
+            $urlSet->appendChild($urlEl);
         }
     }
 }
