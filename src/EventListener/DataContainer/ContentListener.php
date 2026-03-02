@@ -11,9 +11,9 @@ declare(strict_types=1);
  */
 
 namespace Respinar\ProductsBundle\EventListener\DataContainer;
-use Contao\CoreBundle\DependencyInjection\Attribute\AsCallback;
 
 use Contao\Backend;
+use Contao\CoreBundle\DependencyInjection\Attribute\AsCallback;
 
 class ContentListener
 {
