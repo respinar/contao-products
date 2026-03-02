@@ -43,7 +43,7 @@ final class AccessChecker
                 $catalogModel->protected
                 && !$security->isGranted(
                     ContaoCorePermissions::MEMBER_IN_GROUPS,
-                    StringUtil::deserialize($catalogModel->groups, true)
+                    StringUtil::deserialize($catalogModel->groups, true),
                 )
             ) {
                 continue;
