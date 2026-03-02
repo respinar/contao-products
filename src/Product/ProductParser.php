@@ -24,7 +24,6 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class ProductParser
 {
-
     public function __construct(
         private readonly Studio $studio,
         private readonly ContentUrlGenerator $contentUrlGenerator,
@@ -36,9 +35,10 @@ final class ProductParser
     /**
      * Parse a product.
      */
-    public function parseProduct(ProductModel $product, ModuleModel|ContentModel $model): string {
+    public function parseProduct(ProductModel $product, ContentModel|ModuleModel $model): string
+    {
         $template = new FrontendTemplate(
-            $model->product_template ?: 'product_short'
+            $model->product_template ?: 'product_short',
         );
 
         $template->setData($product->row());
@@ -79,7 +79,7 @@ final class ProductParser
 
         $elements = ContentModel::findPublishedByPidAndTable(
             $product->id,
-            'tl_product'
+            'tl_product',
         );
 
         if (null !== $elements) {
@@ -87,16 +87,13 @@ final class ProductParser
 
             while ($elements->next()) {
                 $template->text .= Controller::getContentElement(
-                    $elements->current()
+                    $elements->current(),
                 );
             }
 
-            // $template->link = UrlGenerator::generate(
-            //     $product,
-            //     $addCategory
-            // );
+            // $template->link = UrlGenerator::generate(     $product,     $addCategory );
 
-            $template->link = $this->contentUrlGenerator->generate($product,[],UrlGeneratorInterface::ABSOLUTE_PATH);
+            $template->link = $this->contentUrlGenerator->generate($product, [], UrlGeneratorInterface::ABSOLUTE_PATH);
         }
 
         $template->addImage = false;
@@ -115,16 +112,16 @@ final class ProductParser
                 ) {
                     $size = $model->imgSize;
                 }
-            }            
+            }
 
             $figure = $this->studio
                 ->createFigureBuilder()
                 ->setSize($size)
                 ->from($product->singleSRC)
-                ->build();
-            
+                ->build()
+            ;
+
             $template->figure = $figure;
-            
         }
 
         $template->enclosure = [];
@@ -134,7 +131,7 @@ final class ProductParser
 
             Controller::addEnclosuresToTemplate(
                 $template,
-                $product->row()
+                $product->row(),
             );
         }
 
@@ -149,12 +146,8 @@ final class ProductParser
     /**
      * Parse multiple products.
      */
-    public function parseProducts(
-        object $products,
-        object $model,
-        bool $addCategory = false,
-    ): array {       
-
+    public function parseProducts(object $products, object $model, bool $addCategory = false): array
+    {
         $items = [];
 
         while ($products->next()) {
