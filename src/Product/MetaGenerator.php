@@ -20,17 +20,15 @@ final class MetaGenerator
     /**
      * Return the meta fields of a product.
      */
-    public function generate(
-        object $product,
-    ): array {
-
+    public function generate(object $product): array
+    {
         global $objPage;
 
         $return = [];
 
         $return['datetime'] = date('Y-m-d\TH:i:sP', $product->date);
-        $return['date'] = Date::parse($objPage->datimFormat, $product->date);        
-        
+        $return['date'] = Date::parse($objPage->datimFormat, $product->date);
+
         $price = StringUtil::deserialize($product->price);
 
         if (!empty($price['value'])) {
@@ -41,7 +39,7 @@ final class MetaGenerator
             ];
 
             $return['price_text'] = $GLOBALS['TL_LANG']['MSC']['price_text'];
-        }        
+        }
 
         if (isset($product->availability)) {
             $return['availability'] = [
@@ -57,7 +55,7 @@ final class MetaGenerator
         if (!empty($globalId['value'])) {
             $globalId['name'] = $GLOBALS['TL_LANG']['MSC'][$globalId['unit']];
             $return['global_ID'] = $globalId;
-        }        
+        }
 
         if (isset($product->model)) {
             $return['model'] = $product->model;
