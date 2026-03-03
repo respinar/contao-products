@@ -146,12 +146,12 @@ final class ProductParser
     /**
      * Parse multiple products.
      */
-    public function parseProducts(object $products, object $model, bool $addCategory = false): array
+    public function parseProducts(object $products, object $model): array
     {
         $items = [];
 
         while ($products->next()) {
-            $items[] = self::parseProduct($products->current(), $model, $addCategory);
+            $items[] = self::parseProduct($products->current(), $model);
         }
 
         return $items;
