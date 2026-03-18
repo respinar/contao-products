@@ -100,16 +100,16 @@ $GLOBALS['TL_DCA']['tl_product'] = [
             'relation' => ['type' => 'belongsTo', 'load' => 'lazy'],
         ],
         'sorting' => [
-            'sql' => ['type' => 'integer', 'unsigned' => true, 'autoincrement' => true],
+            'sql' => ['type' => 'integer', 'unsigned' => true, 'default' => 0],
         ],
         'tstamp' => [
-            'sql' => ['type' => 'integer', 'unsigned' => true, 'autoincrement' => true],
+            'sql' => ['type'=>'integer', 'unsigned'=>true, 'default'=>0],
         ],
         'visit' => [
             'sorting' => true,
             'inputType' => 'text',
             'eval' => ['disabled' => true, 'tl_class' => 'w50'],
-            'sql' => ['type' => 'integer', 'unsigned' => true, 'autoincrement' => true],
+            'sql' => ['type' => 'integer', 'unsigned' => true, 'default' => 0],
         ],
         'title' => [
             'search' => true,
@@ -135,7 +135,7 @@ $GLOBALS['TL_DCA']['tl_product'] = [
         // 'treePicker', 	'foreignKey'   => 'tl_product_category.title', 	'eval' =>
         // ['multiple'=>true, 'fieldType'=>'checkbox',
         // 'foreignTable'=>'tl_product_category', 'titleField'=>'title',
-        // 'searchField'=>'title', 'managerHref'=>'table=tl_product_category'), 	'sql'   
+        // 'searchField'=>'title', 'managerHref'=>'table=tl_product_category'), 	'sql'
         // => array('type'=>'blob', 'length'=>AbstractMySQLPlatform::LENGTH_LIMIT_BLOB,
         // 'notnull'=>false) ),
         'brand' => [
@@ -213,7 +213,7 @@ $GLOBALS['TL_DCA']['tl_product'] = [
                 'datepicker' => true,
                 'tl_class' => 'w50 wizard',
             ],
-            'sql' => ['type' => 'integer', 'unsigned' => true, 'autoincrement' => true],
+            'sql' => ['type' => 'integer', 'unsigned' => true, 'default' => 0],
         ],
         'rating_value' => [
             'sorting' => true,
@@ -239,7 +239,7 @@ $GLOBALS['TL_DCA']['tl_product'] = [
                 'datepicker' => true,
                 'tl_class' => 'w50 wizard',
             ],
-            'sql' => ['type' => 'integer', 'unsigned' => true, 'autoincrement' => true],
+            'sql' => ['type' => 'integer', 'unsigned' => true, 'default' => 0],
         ],
         'url' => [
             'search' => true,
