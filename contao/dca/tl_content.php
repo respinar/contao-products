@@ -11,6 +11,7 @@ declare(strict_types=1);
  */
 
 use Contao\Input;
+use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
 
 /*
  * Dynamically add the permission check and parent table
@@ -55,7 +56,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['product'] = [
     'inputType' => 'select',
     'foreignKey' => 'tl_product.title',
     'eval' => ['helpwizard' => true, 'chosen' => true, 'mandatory' => true],
-    'sql' => "varchar(64) NOT NULL default ''",
+    'sql' => ['type' => 'string', 'length' => 64, 'default' => ''],
 ];
 $GLOBALS['TL_DCA']['tl_content']['fields']['products'] = [
     'inputType' => 'select',
@@ -66,7 +67,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['products'] = [
         'multiple' => true,
         'mandatory' => true,
     ],
-    'sql' => 'blob NULL',
+    'sql' => ['type' => 'blob', 'length' => AbstractMySQLPlatform::LENGTH_LIMIT_BLOB, 'notnull' => false],
 ];
 $GLOBALS['TL_DCA']['tl_content']['fields']['product_catalogs'] = [
     'inputType' => 'checkbox',
@@ -77,17 +78,17 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['product_catalogs'] = [
         'multiple' => true,
         'mandatory' => true,
     ],
-    'sql' => 'blob NULL',
+    'sql' => ['type' => 'blob', 'length' => AbstractMySQLPlatform::LENGTH_LIMIT_BLOB, 'notnull' => false],
 ];
 $GLOBALS['TL_DCA']['tl_content']['fields']['product_template'] = [
     'default' => 'product_short',
 
     'inputType' => 'select',
     'eval' => ['tl_class' => 'w50 clr'],
-    'sql' => "varchar(64) NOT NULL default ''",
+    'sql' => ['type' => 'string', 'length' => 64, 'default' => ''],
 ];
 $GLOBALS['TL_DCA']['tl_content']['fields']['product_listClass'] = [
     'inputType' => 'text',
     'eval' => ['maxlength' => 128, 'tl_class' => 'w50'],
-    'sql' => "varchar(255) NOT NULL default ''",
+    'sql' => ['type' => 'string', 'length' => 255, 'default' => ''],
 ];
