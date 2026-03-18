@@ -10,6 +10,8 @@ declare(strict_types=1);
  * @license MIT
  */
 
+use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
+
 /*
  * Extend default palette
  */
@@ -23,7 +25,7 @@ $GLOBALS['TL_DCA']['tl_user_group']['fields']['products'] = [
     'inputType' => 'checkbox',
     'foreignKey' => 'tl_product_catalog.title',
     'eval' => ['multiple' => true],
-    'sql' => 'blob NULL',
+    'sql' => ['type' => 'blob', 'length' => AbstractMySQLPlatform::LENGTH_LIMIT_BLOB, 'notnull' => false],
 ];
 
 $GLOBALS['TL_DCA']['tl_user_group']['fields']['productp'] = [
@@ -32,5 +34,5 @@ $GLOBALS['TL_DCA']['tl_user_group']['fields']['productp'] = [
     'options' => ['create', 'delete'],
     'reference' => &$GLOBALS['TL_LANG']['MSC'],
     'eval' => ['multiple' => true],
-    'sql' => 'blob NULL',
+    'sql' => ['type' => 'blob', 'length' => AbstractMySQLPlatform::LENGTH_LIMIT_BLOB, 'notnull' => false],
 ];
