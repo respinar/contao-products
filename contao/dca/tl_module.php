@@ -11,6 +11,7 @@ declare(strict_types=1);
  */
 
 use Contao\System;
+use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
 
 /*
  * Add palettes to tl_module
@@ -43,7 +44,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_catalogs'] = [
     'inputType' => 'checkbox',
     'foreignKey' => 'tl_product_catalog.title',
     'eval' => ['multiple' => true, 'mandatory' => true],
-    'sql' => 'blob NULL',
+    'sql' => ['type' => 'blob', 'length' => AbstractMySQLPlatform::LENGTH_LIMIT_BLOB, 'notnull' => false],
 ];
 $GLOBALS['TL_DCA']['tl_module']['fields']['product_categories'] = [
     'inputType' => 'treePicker',
@@ -56,7 +57,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_categories'] = [
         'searchField' => 'title',
         'managerHref' => 'table=tl_product_category',
     ],
-    'sql' => 'blob NULL',
+    'sql' => ['type' => 'blob', 'length' => AbstractMySQLPlatform::LENGTH_LIMIT_BLOB, 'notnull' => false],
 ];
 $GLOBALS['TL_DCA']['tl_module']['fields']['product_featured'] = [
     'default' => 'all_product',
@@ -65,7 +66,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_featured'] = [
     'options' => ['all_product', 'featured_product', 'unfeatured_product'],
     'reference' => &$GLOBALS['TL_LANG']['tl_module'],
     'eval' => ['tl_class' => 'w50'],
-    'sql' => "varchar(20) NOT NULL default ''",
+    'sql' => ['type' => 'string', 'length' => 20, 'default' => ''],
 ];
 $GLOBALS['TL_DCA']['tl_module']['fields']['product_sortBy'] = [
     'default' => 'custom',
@@ -74,37 +75,37 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_sortBy'] = [
     'options' => ['custom', 'date_desc', 'date_asc', 'title_asc', 'title_desc'],
     'reference' => &$GLOBALS['TL_LANG']['tl_module'],
     'eval' => ['tl_class' => 'w50'],
-    'sql' => "varchar(16) NOT NULL default ''",
+    'sql' => ['type' => 'string', 'length' => 16, 'default' => ''],
 ];
 $GLOBALS['TL_DCA']['tl_module']['fields']['product_detailModule'] = [
     'inputType' => 'select',
     'reference' => &$GLOBALS['TL_LANG']['tl_module'],
     'eval' => ['includeBlankOption' => true, 'tl_class' => 'w50'],
-    'sql' => "int(10) unsigned NOT NULL default '0'",
+    'sql' => ['type' => 'integer', 'unsigned' => true, 'default' => 0],
 ];
 $GLOBALS['TL_DCA']['tl_module']['fields']['product_template'] = [
     'default' => 'product_short',
 
     'inputType' => 'select',
     'eval' => ['tl_class' => 'w50 clr'],
-    'sql' => "varchar(64) NOT NULL default ''",
+    'sql' => ['type' => 'string', 'length' => 64, 'default' => ''],
 ];
 $GLOBALS['TL_DCA']['tl_module']['fields']['product_listClass'] = [
     'inputType' => 'text',
     'eval' => ['maxlength' => 128, 'tl_class' => 'w50'],
-    'sql' => "varchar(255) NOT NULL default ''",
+    'sql' => ['type' => 'string', 'length' => 255, 'default' => ''],
 ];
 $GLOBALS['TL_DCA']['tl_module']['fields']['product_singleClass'] = [
     'inputType' => 'text',
     'eval' => ['maxlength' => 128, 'tl_class' => 'w50'],
-    'sql' => "varchar(255) NOT NULL default ''",
+    'sql' => ['type' => 'string', 'length' => 255, 'default' => ''],
 ];
 $GLOBALS['TL_DCA']['tl_module']['fields']['product_comHeadline'] = [
     'search' => true,
     'inputType' => 'inputUnit',
     'options' => ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
     'eval' => ['maxlength' => 200, 'tl_class' => 'w50 clr'],
-    'sql' => "varchar(255) NOT NULL default 'a:2:{s:5:\"value\";s:0:\"\";s:4:\"unit\";s:2:\"h2\";}'",
+    'sql' => ['type' => 'string', 'length' => 255, 'default' => 'a:2:{s:5:"value";s:0:"";s:4:"unit";s:2:"h2";}'],
 ];
 
 $bundles = System::getContainer()->getParameter('kernel.bundles');
