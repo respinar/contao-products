@@ -14,6 +14,7 @@ use Contao\Backend;
 use Contao\BackendUser;
 use Contao\DC_Table;
 use Respinar\ProductsBundle\Dca\CommentFields;
+use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
 
 /*
  * Table tl_product_catalog
@@ -62,29 +63,29 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = [
     // Fields
     'fields' => [
         'id' => [
-            'sql' => 'int(10) unsigned NOT NULL auto_increment',
+            'sql' => ['type' => 'integer', 'unsigned' => true, 'autoincrement' => true],
         ],
         'tstamp' => [
-            'sql' => 'int(10) unsigned NOT NULL default 0',
+            'sql' => ['type' => 'integer', 'unsigned' => true, 'default' => 0],
         ],
         'title' => [
             'search' => true,
             'inputType' => 'text',
             'eval' => ['mandatory' => true, 'maxlength' => 128],
-            'sql' => "varchar(255) NOT NULL default ''",
+            'sql' => ['type' => 'string', 'length' => 255, 'default' => ''],
         ],
         'overviewPage' => [
             'inputType' => 'pageTree',
             'foreignKey' => 'tl_page.title',
             'eval' => ['mandatory' => true, 'fieldType' => 'radio'],
-            'sql' => 'int(10) unsigned NOT NULL default 0',
+            'sql' => ['type' => 'integer', 'unsigned' => true, 'default' => 0],
             'relation' => ['type' => 'hasOne', 'load' => 'lazy'],
         ],
         'jumpTo' => [
             'inputType' => 'pageTree',
             'foreignKey' => 'tl_page.title',
             'eval' => ['mandatory' => true, 'fieldType' => 'radio'],
-            'sql' => 'int(10) unsigned NOT NULL default 0',
+            'sql' => ['type' => 'integer', 'unsigned' => true, 'default' => 0],
             'relation' => ['type' => 'hasOne', 'load' => 'lazy'],
         ],
         'protected' => [
@@ -96,7 +97,7 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = [
             'inputType' => 'checkbox',
             'foreignKey' => 'tl_member_group.name',
             'eval' => ['mandatory' => true, 'multiple' => true],
-            'sql' => 'blob NULL',
+            'sql' => ['type' => 'blob', 'length' => AbstractMySQLPlatform::LENGTH_LIMIT_BLOB, 'notnull' => false],
             'relation' => ['type' => 'hasMany', 'load' => 'lazy'],
         ],
     ],
