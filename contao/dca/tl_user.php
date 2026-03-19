@@ -10,36 +10,26 @@ declare(strict_types=1);
  * @license MIT
  */
 
+use Contao\CoreBundle\DataContainer\PaletteManipulator;
 use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
 
 /*
- * Extend default palette
+ * Extend the default palettes
  */
-$GLOBALS['TL_DCA']['tl_user']['palettes']['extend'] = str_replace(
-    'formp;',
-    'formp;{product_legend},products,productp;',
-    $GLOBALS['TL_DCA']['tl_user']['palettes']['extend'],
-);
-$GLOBALS['TL_DCA']['tl_user']['palettes']['custom'] = str_replace(
-    'formp;',
-    'formp;{product_legend},products,productp;',
-    $GLOBALS['TL_DCA']['tl_user']['palettes']['custom'],
-);
+PaletteManipulator::create()
+    ->addLegend('product_legend', 'amg_legend', PaletteManipulator::POSITION_BEFORE)
+    ->addField('products', 'product_legend', PaletteManipulator::POSITION_APPEND)
+    ->applyToPalette('extend', 'tl_user')
+    ->applyToPalette('custom', 'tl_user')
+;
 
 /*
- * Add fields to tl_user_group
+ * Add fields to tl_user
  */
 $GLOBALS['TL_DCA']['tl_user']['fields']['products'] = [
-    'inputType' => 'checkbox',
+    'inputType'  => 'checkbox',
     'foreignKey' => 'tl_product_catalog.title',
-    'eval' => ['multiple' => true],
-    'sql' => ['type' => 'blob', 'length' => AbstractMySQLPlatform::LENGTH_LIMIT_BLOB, 'notnull' => false],
-];
-
-$GLOBALS['TL_DCA']['tl_user']['fields']['productp'] = [
-    'inputType' => 'checkbox',
-    'options' => ['create', 'delete'],
-    'reference' => &$GLOBALS['TL_LANG']['MSC'],
-    'eval' => ['multiple' => true],
-    'sql' => ['type' => 'blob', 'length' => AbstractMySQLPlatform::LENGTH_LIMIT_BLOB, 'notnull' => false],
+    'eval'       => ['multiple' => true],
+    'sql'        => ['type' => 'blob', 'length' => AbstractMySQLPlatform::LENGTH_LIMIT_BLOB, 'notnull' => false],
+    'relation'   => ['type' => 'hasMany', 'load' => 'lazy'],
 ];
