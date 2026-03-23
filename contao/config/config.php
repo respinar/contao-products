@@ -35,4 +35,3 @@ $GLOBALS['TL_MODELS']['tl_product_catalog'] = CatalogModel::class;
  * Add permissions
  */
 $GLOBALS['TL_PERMISSIONS'][] = 'products';
-$GLOBALS['TL_PERMISSIONS'][] = 'productp';
