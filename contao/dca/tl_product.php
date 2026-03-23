@@ -102,7 +102,7 @@ $GLOBALS['TL_DCA']['tl_product'] = [
             'sql' => ['type' => 'integer', 'unsigned' => true, 'default' => 0],
         ],
         'tstamp' => [
-            'sql' => ['type'=>'integer', 'unsigned'=>true, 'default'=>0],
+            'sql' => ['type' => 'integer', 'unsigned' => true, 'default' => 0],
         ],
         'visit' => [
             'sorting' => true,
@@ -134,8 +134,8 @@ $GLOBALS['TL_DCA']['tl_product'] = [
         // 'treePicker', 	'foreignKey'   => 'tl_product_category.title', 	'eval' =>
         // ['multiple'=>true, 'fieldType'=>'checkbox',
         // 'foreignTable'=>'tl_product_category', 'titleField'=>'title',
-        // 'searchField'=>'title', 'managerHref'=>'table=tl_product_category'), 	'sql'
-        // => array('type'=>'blob', 'length'=>AbstractMySQLPlatform::LENGTH_LIMIT_BLOB,
+        // 'searchField'=>'title', 'managerHref'=>'table=tl_product_category'), 	'sql' =>
+        // array('type'=>'blob', 'length'=>AbstractMySQLPlatform::LENGTH_LIMIT_BLOB,
         // 'notnull'=>false) ),
         'brand' => [
             'search' => true,
@@ -228,7 +228,6 @@ $GLOBALS['TL_DCA']['tl_product'] = [
         ],
         'date' => [
             'default' => time(),
-
             'filter' => true,
             'flag' => 8,
             'inputType' => 'text',
@@ -324,7 +323,6 @@ $GLOBALS['TL_DCA']['tl_product'] = [
         ],
         'imageTitle' => [
             'label' => &$GLOBALS['TL_LANG']['tl_content']['imageTitle'],
-
             'search' => true,
             'inputType' => 'text',
             'eval' => ['maxlength' => 255, 'tl_class' => 'w50'],
