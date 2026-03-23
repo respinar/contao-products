@@ -27,9 +27,9 @@ PaletteManipulator::create()
  * Add fields to tl_user
  */
 $GLOBALS['TL_DCA']['tl_user']['fields']['products'] = [
-    'inputType'  => 'checkbox',
+    'inputType' => 'checkbox',
     'foreignKey' => 'tl_product_catalog.title',
-    'eval'       => ['multiple' => true],
-    'sql'        => ['type' => 'blob', 'length' => AbstractMySQLPlatform::LENGTH_LIMIT_BLOB, 'notnull' => false],
-    'relation'   => ['type' => 'hasMany', 'load' => 'lazy'],
+    'eval' => ['multiple' => true],
+    'sql' => ['type' => 'blob', 'length' => AbstractMySQLPlatform::LENGTH_LIMIT_BLOB, 'notnull' => false],
+    'relation' => ['type' => 'hasMany', 'load' => 'lazy'],
 ];
