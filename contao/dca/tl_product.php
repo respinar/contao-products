@@ -11,7 +11,6 @@ declare(strict_types=1);
  */
 
 use Contao\Backend;
-use Contao\BackendUser;
 use Contao\Config;
 use Contao\DataContainer;
 use Contao\DC_Table;
@@ -401,15 +400,6 @@ $GLOBALS['TL_DCA']['tl_product'] = [
  */
 class tl_product extends Backend
 {
-    /**
-     * Import the back end user object.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-        $this->import(BackendUser::class, 'User');
-    }
-
     /**
      * Auto-generate the product alias if it has not been set yet.
      */
