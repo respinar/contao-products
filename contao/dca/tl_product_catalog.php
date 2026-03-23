@@ -10,11 +10,9 @@ declare(strict_types=1);
  * @license MIT
  */
 
-use Contao\Backend;
-use Contao\BackendUser;
 use Contao\DC_Table;
-use Respinar\ProductsBundle\Dca\CommentFields;
 use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
+use Respinar\ProductsBundle\Dca\CommentFields;
 
 /*
  * Table tl_product_catalog
@@ -24,10 +22,10 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = [
     'config' => [
         'dataContainer' => DC_Table::class,
         'ctable' => ['tl_product'],
+        'switchToEdit' => true,
         'enableVersioning' => true,
-        'onload_callback' => [
-            ['tl_product_catalog', 'checkPermission'],
-        ],
+        'markAsCopy' => 'title',
+        'userRoot' => 'products',
         'sql' => [
             'keys' => [
                 'id' => 'primary',
@@ -104,22 +102,3 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = [
 ];
 
 CommentFields::addTo('tl_product_catalog');
-
-class tl_product_catalog extends Backend
-{
-    /**
-     * Import the back end user object.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-        $this->import(BackendUser::class, 'User');
-    }
-
-    /**
-     * Check permissions to edit table tl_product_catalog.
-     */
-    public function checkPermission(): void
-    {
-    }
-}
