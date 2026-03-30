@@ -11,14 +11,15 @@ declare(strict_types=1);
  */
 
 use Contao\Backend;
+use Contao\BackendUser;
 use Contao\Config;
 use Contao\DataContainer;
 use Contao\DC_Table;
+use Contao\Input;
 use Contao\StringUtil;
 use Contao\System;
 use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
-
-System::loadLanguageFile('tl_content');
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /*
  * Table tl_product
@@ -31,6 +32,9 @@ $GLOBALS['TL_DCA']['tl_product'] = [
         'ctable' => ['tl_content'],
         'switchToEdit' => true,
         'enableVersioning' => true,
+        'onload_callback' => [
+            ['tl_product', 'checkPermission'],
+        ],
         'sql' => [
             'keys' => [
                 'id' => 'primary',
@@ -53,7 +57,6 @@ $GLOBALS['TL_DCA']['tl_product'] = [
                 'protected',
             ],
             'panelLayout' => 'filter;sort,search,limit',
-            'child_record_callback' => ['tl_product', 'generateProductsRow'],
         ],
         'operations' => [
             'edit',
@@ -130,13 +133,7 @@ $GLOBALS['TL_DCA']['tl_product'] = [
             'save_callback' => [['tl_product', 'generateAlias']],
             'sql' => ['type' => 'string', 'length' => 255, 'default' => '', 'platformOptions' => ['collation' => 'utf8mb4_bin']],
         ],
-        // 'categories' => array (  	'filter'       => true, 	'inputType'    =>
-        // 'treePicker', 	'foreignKey'   => 'tl_product_category.title', 	'eval' =>
-        // ['multiple'=>true, 'fieldType'=>'checkbox',
-        // 'foreignTable'=>'tl_product_category', 'titleField'=>'title',
-        // 'searchField'=>'title', 'managerHref'=>'table=tl_product_category'), 	'sql' =>
-        // array('type'=>'blob', 'length'=>AbstractMySQLPlatform::LENGTH_LIMIT_BLOB,
-        // 'notnull'=>false) ),
+
         'brand' => [
             'search' => true,
             'sorting' => true,
@@ -409,22 +406,21 @@ class tl_product extends Backend
         if ('' === $varValue) {
             $autoAlias = true;
             $varValue = StringUtil::standardize(
-                String::restoreBasicEntities($dc->activeRecord->title),
+                StringUtil::restoreBasicEntities($dc->activeRecord->title),
             );
         }
 
-        $objAlias = $this->Database
-            ->prepare('SELECT id FROM tl_product WHERE alias=?')
-            ->execute($varValue)
-        ;
+        $connection = System::getContainer()->get('database_connection');
+        $ids = $connection->fetchFirstColumn('SELECT id FROM tl_product WHERE alias = ?', [$varValue]);
+        $numRows = count($ids);
 
         // Check whether the product alias exists
-        if ($objAlias->numRows > 1 && !$autoAlias) {
-            throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
+        if ($numRows > 1 && !$autoAlias) {
+            throw new \RuntimeException(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
         }
 
         // Add ID to alias
-        if ($objAlias->numRows && $autoAlias) {
+        if ($numRows && $autoAlias) {
             $varValue .= '-'.$dc->id;
         }
 
@@ -432,7 +428,8 @@ class tl_product extends Backend
     }
 
     /**
-     * Generate a song row and return it as HTML string.
+     * Generate a product row and return it as HTML string.
+     * @param array $arrRow - the product row data as an associative array.
      */
     public function generateProductsRow(array $arrRow): string
     {
@@ -464,25 +461,44 @@ class tl_product extends Backend
     {
         $arrItems = [];
 
-        $objItems = $this->Database
-            ->prepare('SELECT * FROM tl_product WHERE pid=? ORDER BY date DESC')
-            ->execute($dc->activeRecord->pid)
-        ;
+        $connection = System::getContainer()->get('database_connection');
+        $rows = $connection->fetchAllAssociative('SELECT * FROM tl_product WHERE pid = ? ORDER BY date DESC', [$dc->activeRecord->pid]);
 
-        while ($objItems->next()) {
-            if ($objItems->id !== $dc->activeRecord->id) {
-                $arrItems[$objItems->id] = $objItems->title;
+        foreach ($rows as $objItems) {
+            if ($objItems['id'] !== $dc->activeRecord->id) {
+                $arrItems[$objItems['id']] = $objItems['title'];
 
-                if ($objItems->model) {
-                    $arrItems[$objItems->id] .= ' [model: '.$objItems->model.']';
+                if ($objItems['model']) {
+                    $arrItems[$objItems['id']] .= ' [model: '.$objItems['model'].']';
                 }
 
-                if ($objItems->sku) {
-                    $arrItems[$objItems->id] .= ' (sku: '.$objItems->sku.')';
+                if ($objItems['sku']) {
+                    $arrItems[$objItems['id']] .= ' (sku: '.$objItems['sku'].')';
                 }
             }
         }
 
         return $arrItems;
+    }
+
+    public function checkPermission(): void
+    {
+        $u = BackendUser::getInstance();
+        if ($u->isAdmin) return;
+        $u->products = is_array($u->products) && $u->products ? $u->products : [0];
+        $a = Input::get('act');
+        $i = Input::get('id');
+        switch ($a) {
+            case 'create':
+                if (!in_array(Input::get('pid') ?? $i, $u->products)) throw new AccessDeniedException('Not enough permissions to create products in this catalog.');
+                break;
+            case 'edit': case 'copy': case 'cut': case 'delete': case 'show': case 'toggle':
+                $r = System::getContainer()->get('database_connection')->fetchAssociative('SELECT pid FROM tl_product WHERE id=?', [$i]);
+                if (!$r || !in_array($r['pid'], $u->products)) throw new AccessDeniedException('Not enough permissions to ' . $a . ' product ID ' . $i . '.');
+                break;
+            case 'paste':
+                if (!in_array(Input::get('pid'), $u->products)) throw new AccessDeniedException('Not enough permissions to paste products into this catalog.');
+                break;
+        }
     }
 }
