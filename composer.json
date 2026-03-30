@@ -21,7 +21,7 @@
         "contao/core-bundle":"^5.3"
     },
     "require-dev": {
-        "contao/manager-plugin": "^2.12"
+        "contao/manager-plugin": "^2.13"
     },
     "autoload": {
         "psr-4": {
@@ -41,7 +41,8 @@
         "allow-plugins": {
             "contao-components/installer": false,
             "contao/manager-plugin": false,
-            "contao-community-alliance/composer-plugin": true
+            "contao-community-alliance/composer-plugin": true,
+            "php-http/discovery": true
         }
     },
     "extra": {
