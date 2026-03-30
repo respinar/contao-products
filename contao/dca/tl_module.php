@@ -46,19 +46,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_catalogs'] = [
     'eval' => ['multiple' => true, 'mandatory' => true],
     'sql' => ['type' => 'blob', 'length' => AbstractMySQLPlatform::LENGTH_LIMIT_BLOB, 'notnull' => false],
 ];
-$GLOBALS['TL_DCA']['tl_module']['fields']['product_categories'] = [
-    'inputType' => 'treePicker',
-    'foreignKey' => 'tl_product_category.title',
-    'eval' => [
-        'multiple' => true,
-        'fieldType' => 'checkbox',
-        'foreignTable' => 'tl_product_category',
-        'titleField' => 'title',
-        'searchField' => 'title',
-        'managerHref' => 'table=tl_product_category',
-    ],
-    'sql' => ['type' => 'blob', 'length' => AbstractMySQLPlatform::LENGTH_LIMIT_BLOB, 'notnull' => false],
-];
+
 $GLOBALS['TL_DCA']['tl_module']['fields']['product_featured'] = [
     'default' => 'all_product',
 
