@@ -20,7 +20,6 @@ use Contao\Config;
 use Contao\ContentModel;
 use Contao\CoreBundle\Controller\ContentElement\AbstractContentElementController;
 use Contao\CoreBundle\DependencyInjection\Attribute\AsContentElement;
-use Contao\Input;
 use Contao\Pagination;
 use Contao\StringUtil;
 use Contao\System;
@@ -54,7 +53,7 @@ class ProductCatalogController extends AbstractContentElementController
 
         $objCatalogs = CatalogModel::findMultipleByIds($model->product_catalogs);
 
-        // No news archives available
+        // No catalogs available
         if (empty($objCatalogs)) {
             return $template->getResponse();
         }
@@ -95,18 +94,14 @@ class ProductCatalogController extends AbstractContentElementController
 
             // Get the current page
             $id = 'page_n'.$model->id;
-            $page = Input::get($id) ?: 1;
+            $page = $request->query->get($id, '1') ?: 1;
 
             // Do not index or cache the page if the page number is outside the range
             if ($page < 1 || $page > max(ceil($total / $model->perPage), 1)) {
-                global $objPage;
-                $objPage->noSearch = 1;
-                $objPage->cache = 0;
+                $response = $template->getResponse();
+                $response->setStatusCode(Response::HTTP_NOT_FOUND);
 
-                // Send a 404 header
-                header('HTTP/1.1 404 Not Found');
-
-                return $template->getResponse();
+                return $response;
             }
 
             // Set limit and offset
