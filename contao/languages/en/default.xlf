@@ -5,6 +5,9 @@
       <trans-unit id="MSC.emptyCatalog">
         <source>There is no product!</source>
       </trans-unit>
+      <trans-unit id="MSC.productOverview">
+        <source>Back to the product overview</source>
+      </trans-unit>
       <trans-unit id="MSC.moreDetail">
         <source>%s more details</source>
       </trans-unit>
