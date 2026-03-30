@@ -66,7 +66,7 @@ class ProductModel extends Model
             $arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
         }
 
-        return static::findBy($arrColumns, [is_numeric($varId) ? $varId : 0, $varId], $arrOptions);
+        return static::findOneBy($arrColumns, [is_numeric($varId) ? $varId : 0, $varId], $arrOptions);
     }
 
     /**
