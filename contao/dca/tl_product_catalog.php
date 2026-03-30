@@ -10,9 +10,13 @@ declare(strict_types=1);
  * @license MIT
  */
 
+use Contao\Backend;
+use Contao\BackendUser;
 use Contao\DC_Table;
-use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
+use Contao\Input;
 use Respinar\ProductsBundle\Dca\CommentFields;
+use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /*
  * Table tl_product_catalog
@@ -26,6 +30,9 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = [
         'enableVersioning' => true,
         'markAsCopy' => 'title',
         'userRoot' => 'products',
+        'onload_callback' => [
+            ['tl_product_catalog', 'checkPermission'],
+        ],
         'sql' => [
             'keys' => [
                 'id' => 'primary',
@@ -102,3 +109,57 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = [
 ];
 
 CommentFields::addTo('tl_product_catalog');
+
+class tl_product_catalog extends Backend
+{
+    public function checkPermission(): void
+    {
+        $user = BackendUser::getInstance();
+
+        if ($user->isAdmin) {
+            return;
+        }
+
+        if (empty($user->products) || !is_array($user->products)) {
+            $user->products = [0];
+        }
+
+        $GLOBALS['TL_DCA']['tl_product_catalog']['list']['sorting']['root'] = $user->products;
+
+        $act = Input::get('act');
+        $id = Input::get('id');
+
+        switch ($act) {
+            case 'create':
+            case 'select':
+                if (!is_array($user->productp) || !in_array('create', $user->productp)) {
+                    throw new AccessDeniedException('Not enough permissions to create product catalogs.');
+                }
+                break;
+
+            case 'edit':
+                if (!in_array($id, $user->products) || !is_array($user->productp) || !in_array('edit', $user->productp)) {
+                    throw new AccessDeniedException('Not enough permissions to edit product catalog ID ' . $id . '.');
+                }
+                break;
+
+            case 'copy':
+                if (!in_array($id, $user->products) || !is_array($user->productp) || !in_array('create', $user->productp)) {
+                    throw new AccessDeniedException('Not enough permissions to copy product catalog ID ' . $id . '.');
+                }
+                break;
+
+            case 'delete':
+                if (!in_array($id, $user->products) || !is_array($user->productp) || !in_array('delete', $user->productp)) {
+                    throw new AccessDeniedException('Not enough permissions to delete product catalog ID ' . $id . '.');
+                }
+                break;
+
+            case 'show':
+                if (!in_array($id, $user->products)) {
+                    throw new AccessDeniedException('Not enough permissions to view product catalog ID ' . $id . '.');
+                }
+                break;
+        }
+    }
+}
