@@ -18,7 +18,6 @@ namespace Respinar\ProductsBundle\Controller\FrontendModule;
 
 use Contao\CoreBundle\Controller\FrontendModule\AbstractFrontendModuleController;
 use Contao\CoreBundle\DependencyInjection\Attribute\AsFrontendModule;
-use Contao\Input;
 use Contao\ModuleModel;
 use Contao\PageModel;
 use Contao\StringUtil;
@@ -39,13 +38,15 @@ class ProductRelatedController extends AbstractFrontendModuleController
 
     protected function getResponse(Template $template, ModuleModel $model, Request $request): Response
     {
+        $autoItem = $request->attributes->get('auto_item') ?? $request->query->get('auto_item');
+
         // Return an empty string if "auto_item" is not set to combine list and reader on
         // same page
-        if (null === Input::get('auto_item')) {
+        if (null === $autoItem) {
             return '';
         }
 
-        $objProduct = ProductModel::findPublishedByIdOrAlias(Input::get('auto_item'));
+        $objProduct = ProductModel::findPublishedByIdOrAlias($autoItem);
 
         if (null === $objProduct) {
             return '';
@@ -57,7 +58,7 @@ class ProductRelatedController extends AbstractFrontendModuleController
             $template->referer = PageModel::findById($model->overviewPage)->getFrontendUrl();
         }
 
-        $template->back = $model->customLabel ?: $GLOBALS['TL_LANG']['MSC']['newsOverview'];
+        $template->back = $model->customLabel ?: $GLOBALS['TL_LANG']['MSC']['productOverview'];
         $template->relateds_headline = $GLOBALS['TL_LANG']['MSC']['relateds_headline'];
 
         $relatedIds = StringUtil::deserialize($objProduct->related);
