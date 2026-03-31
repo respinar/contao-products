@@ -14,20 +14,30 @@ namespace Respinar\ProductsBundle\Product;
 
 use Contao\Date;
 use Contao\StringUtil;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 final class MetaGenerator
 {
+    public function __construct(
+        private readonly RequestStack $requestStack,
+    ) {
+    }
+
     /**
      * Return the meta fields of a product.
      */
     public function generate(object $product): array
     {
-        global $objPage;
+        $request = $this->requestStack->getCurrentRequest();
+        $objPage = $request?->attributes->get('pageModel');
 
         $return = [];
 
         $return['datetime'] = date('Y-m-d\TH:i:sP', $product->date);
-        $return['date'] = Date::parse($objPage->datimFormat, $product->date);
+
+        if ($objPage) {
+            $return['date'] = Date::parse($objPage->datimFormat, $product->date);
+        }
 
         $price = StringUtil::deserialize($product->price);
 
