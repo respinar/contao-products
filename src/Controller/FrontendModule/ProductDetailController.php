@@ -21,14 +21,11 @@ use Contao\CoreBundle\Controller\FrontendModule\AbstractFrontendModuleController
 use Contao\CoreBundle\DependencyInjection\Attribute\AsFrontendModule;
 use Contao\CoreBundle\Exception\PageNotFoundException;
 use Contao\CoreBundle\Routing\ResponseContext\HtmlHeadBag\HtmlHeadBag;
-use Contao\Environment;
-use Contao\Input;
 use Contao\ModuleModel;
 use Contao\PageModel;
 use Contao\StringUtil;
 use Contao\System;
 use Contao\Template;
-use Contao\UserModel;
 use Respinar\ProductsBundle\Model\ProductModel;
 use Respinar\ProductsBundle\Product\ProductParser;
 use Symfony\Component\HttpFoundation\Request;
@@ -45,20 +42,20 @@ class ProductDetailController extends AbstractFrontendModuleController
 
     protected function getResponse(Template $template, ModuleModel $model, Request $request): Response
     {
+        $autoItem = $request->attributes->get('auto_item') ?? $request->query->get('auto_item');
+
         // Return an empty string if "auto_item" is not set to combine list and reader on
         // same page
-        if (null === Input::get('auto_item')) {
-            throw new PageNotFoundException('Page not found: '.Environment::get('uri'));
+        if (null === $autoItem) {
+            throw new PageNotFoundException('Page not found: '.$request->getUri());
         }
 
         // $objProduct = ProductModel::findOneByAlias(Input::get('items'));
         $model->product_catalogs = StringUtil::deserialize($model->product_catalogs);
-        $objProduct = ProductModel::findPublishedByParentAndIdOrAlias(Input::get('auto_item'), $model->product_catalogs);
-
-        $objProduct = $objProduct->current();
+        $objProduct = ProductModel::findPublishedByParentAndIdOrAlias($autoItem, $model->product_catalogs);
 
         if (null === $objProduct) {
-            throw new PageNotFoundException('Page not found: '.Environment::get('uri'));
+            throw new PageNotFoundException('Page not found: '.$request->getUri());
         }
 
         $template->referer = PageModel::findById($objProduct->getRelated('pid')->overviewPage)->getFrontendUrl();
@@ -67,11 +64,8 @@ class ProductDetailController extends AbstractFrontendModuleController
             $template->referer = PageModel::findById($model->overviewPage)->getFrontendUrl();
         }
 
-        $template->back = $model->customLabel ?: $GLOBALS['TL_LANG']['MSC']['newsOverview'];
+        $template->back = $model->customLabel ?: $GLOBALS['TL_LANG']['MSC']['productOverview'];
         $template->relateds_headline = $GLOBALS['TL_LANG']['MSC']['relateds_headline'];
-
-        // 	Update the database 	$this->Database->prepare("UPDATE tl_product SET
-        // `visit`=`visit`+1 WHERE id=?") 				   ->execute($objProduct->id);
 
         $responseContext = System::getContainer()->get('contao.routing.response_context_accessor')->getResponseContext();
 
@@ -109,8 +103,6 @@ class ProductDetailController extends AbstractFrontendModuleController
             $template->hlc = $com_headline['unit'];
             $template->hlcText = $com_headline['value'];
 
-            // $template->import(Comments::class, 'Comments');
-
             $objComment = new Comments();
 
             $arrNotifies = [];
@@ -118,14 +110,6 @@ class ProductDetailController extends AbstractFrontendModuleController
             // Notify the system administrator
             if ('notify_author' !== $objCatalog->notify) {
                 $arrNotifies[] = $GLOBALS['TL_ADMIN_EMAIL'];
-            }
-
-            // Notify the author
-            if ('notify_admin' !== $objCatalog->notify) {
-                /** @var UserModel $objAuthor */
-                if (($objAuthor = $objProduct->getRelated('author')) instanceof UserModel && '' !== $objAuthor->email) {
-                    $arrNotifies[] = $objAuthor->email;
-                }
             }
 
             $objConfig = new \stdClass();
@@ -138,7 +122,7 @@ class ProductDetailController extends AbstractFrontendModuleController
             $objConfig->bbcode = $objCatalog->bbcode;
             $objConfig->moderate = $objCatalog->moderate;
 
-            $objComment->addCommentsToTemplate($template, $objConfig, 'tl_products', $objProduct->id, $arrNotifies);
+            $objComment->addCommentsToTemplate($template, $objConfig, 'tl_product', $objProduct->id, $arrNotifies);
         } else {
             $template->allowComments = false;
         }
