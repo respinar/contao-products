@@ -47,6 +47,8 @@ class ProductCatalogController extends AbstractContentElementController
             $model->product_template = 'product_simple';
         }
 
+        $model->imgSize = $model->size;
+
         $template->empty = $GLOBALS['TL_LANG']['MSC']['emptyCatalog'];
 
         $model->product_catalogs = AccessChecker::sortOutProtected(StringUtil::deserialize($model->product_catalogs));
