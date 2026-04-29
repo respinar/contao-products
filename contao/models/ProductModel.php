@@ -101,9 +101,7 @@ class ProductModel extends Model
             $arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
         }
 
-        if (!isset($arrOptions['order'])) {
-            $arrOptions['order'] = "$t.date DESC";
-        }
+        $arrOptions['order'] ??= "$t.date DESC";
 
         $arrOptions['limit'] = $intLimit;
         $arrOptions['offset'] = $intOffset;
@@ -144,9 +142,7 @@ class ProductModel extends Model
             $arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
         }
 
-        if (!isset($arrOptions['order'])) {
-            $arrOptions['order'] = "$t.date DESC";
-        }
+        $arrOptions['order'] ??= "$t.date DESC";
 
         $arrOptions['limit'] = $intLimit;
         $arrOptions['offset'] = $intOffset;
@@ -204,9 +200,7 @@ class ProductModel extends Model
             $arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
         }
 
-        if (!isset($arrOptions['order'])) {
-            $arrOptions['order'] = "$t.date DESC";
-        }
+        $arrOptions['order'] ??= "$t.date DESC";
 
         return static::findBy($arrColumns, $intPid, $arrOptions);
     }
@@ -227,9 +221,7 @@ class ProductModel extends Model
 
         $arrColumns = ["$t.pid=? AND ($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1"];
 
-        if (!isset($arrOptions['order'])) {
-            $arrOptions['order'] = "$t.date DESC";
-        }
+        $arrOptions['order'] ??= "$t.date DESC";
 
         if ($intLimit > 0) {
             $arrOptions['limit'] = $intLimit;
@@ -264,9 +256,7 @@ class ProductModel extends Model
             $arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
         }
 
-        if (!isset($arrOptions['order'])) {
-            $arrOptions['order'] = "$t.date DESC";
-        }
+        $arrOptions['order'] ??= "$t.date DESC";
 
         $arrOptions['limit'] = $intLimit;
         $arrOptions['offset'] = $intOffset;
