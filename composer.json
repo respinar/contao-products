@@ -18,7 +18,7 @@
     },
     "require": {
         "php": "^8.0",
-        "contao/core-bundle":"^5.3"
+        "contao/core-bundle":"^5.7"
     },
     "require-dev": {
         "contao/manager-plugin": "^2.13",
@@ -52,7 +52,7 @@
         "contao-manager-plugin": "Respinar\\ProductsBundle\\ContaoManager\\Plugin"
     },
     "scripts": {
-        "cs-fixer": "@php tools/ecs/vendor/bin/ecs check config/ contao/ src/ templates/ tests/ --config tools/ecs/config.php --fix --ansi",
-        "unit-tests": "@php tools/phpunit/vendor/bin/phpunit -c tools/phpunit/phpunit.xml.dist"
+        "cs-fixer": "@php vendor/bin/ecs check config/ contao/ src/ --config ecs.php --fix --ansi",
+        "cs-check": "@php vendor/bin/ecs check config/ contao/ src/ --config ecs.php --ansi"
     }
 }
