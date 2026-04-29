@@ -13,18 +13,16 @@ declare(strict_types=1);
 namespace Respinar\ProductsBundle;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 
-class RespinarProductsBundle extends Bundle
+class RespinarProductsBundle extends AbstractBundle
 {
-    #[\Override]
-    public function getPath(): string
-    {
-        return \dirname(__DIR__);
-    }
-
-    public function build(ContainerBuilder $container): void
-    {
-        parent::build($container);
+    public function loadExtension(
+        array $config,
+        ContainerConfigurator $containerConfigurator,
+        ContainerBuilder $containerBuilder,
+    ): void {
+        $containerConfigurator->import('../config/services.yaml');
     }
 }
