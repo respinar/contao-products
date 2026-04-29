@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * This file is part of Contao Products Bundle.
  *
- * (c) Hamid Peywasti 2026 <hamid@respinar.com>
+ * (c) Hamid Peywasti
  *
  * @license MIT
  */
