@@ -14,8 +14,8 @@ use Contao\Backend;
 use Contao\BackendUser;
 use Contao\DC_Table;
 use Contao\Input;
-use Respinar\ProductsBundle\Dca\CommentFields;
 use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
+use Respinar\ProductsBundle\Dca\CommentFields;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /*
@@ -132,32 +132,32 @@ class tl_product_catalog extends Backend
         switch ($act) {
             case 'create':
             case 'select':
-                if (!is_array($user->productp) || !in_array('create', $user->productp)) {
+                if (!is_array($user->productp) || !in_array('create', $user->productp, true)) {
                     throw new AccessDeniedException('Not enough permissions to create product catalogs.');
                 }
                 break;
 
             case 'edit':
-                if (!in_array($id, $user->products) || !is_array($user->productp) || !in_array('edit', $user->productp)) {
-                    throw new AccessDeniedException('Not enough permissions to edit product catalog ID ' . $id . '.');
+                if (!in_array($id, $user->products, true) || !is_array($user->productp) || !in_array('edit', $user->productp, true)) {
+                    throw new AccessDeniedException('Not enough permissions to edit product catalog ID '.$id.'.');
                 }
                 break;
 
             case 'copy':
-                if (!in_array($id, $user->products) || !is_array($user->productp) || !in_array('create', $user->productp)) {
-                    throw new AccessDeniedException('Not enough permissions to copy product catalog ID ' . $id . '.');
+                if (!in_array($id, $user->products, true) || !is_array($user->productp) || !in_array('create', $user->productp, true)) {
+                    throw new AccessDeniedException('Not enough permissions to copy product catalog ID '.$id.'.');
                 }
                 break;
 
             case 'delete':
-                if (!in_array($id, $user->products) || !is_array($user->productp) || !in_array('delete', $user->productp)) {
-                    throw new AccessDeniedException('Not enough permissions to delete product catalog ID ' . $id . '.');
+                if (!in_array($id, $user->products, true) || !is_array($user->productp) || !in_array('delete', $user->productp, true)) {
+                    throw new AccessDeniedException('Not enough permissions to delete product catalog ID '.$id.'.');
                 }
                 break;
 
             case 'show':
-                if (!in_array($id, $user->products)) {
-                    throw new AccessDeniedException('Not enough permissions to view product catalog ID ' . $id . '.');
+                if (!in_array($id, $user->products, true)) {
+                    throw new AccessDeniedException('Not enough permissions to view product catalog ID '.$id.'.');
                 }
                 break;
         }
