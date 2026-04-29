@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * This file is part of Contao Products Bundle.
  *
- * (c) Hamid Peywasti 2024 <hamid@respinar.com>
+ * (c) Hamid Peywasti
  *
  * @license MIT
  */
@@ -49,7 +49,6 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_catalogs'] = [
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['product_featured'] = [
     'default' => 'all_product',
-
     'inputType' => 'select',
     'options' => ['all_product', 'featured_product', 'unfeatured_product'],
     'reference' => &$GLOBALS['TL_LANG']['tl_module'],
@@ -58,7 +57,6 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_featured'] = [
 ];
 $GLOBALS['TL_DCA']['tl_module']['fields']['product_sortBy'] = [
     'default' => 'custom',
-
     'inputType' => 'select',
     'options' => ['custom', 'date_desc', 'date_asc', 'title_asc', 'title_desc'],
     'reference' => &$GLOBALS['TL_LANG']['tl_module'],
@@ -73,7 +71,6 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_detailModule'] = [
 ];
 $GLOBALS['TL_DCA']['tl_module']['fields']['product_template'] = [
     'default' => 'product_short',
-
     'inputType' => 'select',
     'eval' => ['tl_class' => 'w50 clr'],
     'sql' => ['type' => 'string', 'length' => 64, 'default' => ''],
