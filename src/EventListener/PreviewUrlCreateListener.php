@@ -22,14 +22,10 @@ use Symfony\Component\HttpFoundation\RequestStack;
 #[AsEventListener('contao.preview_url_create')]
 class PreviewUrlCreateListener
 {
-    private RequestStack $requestStack;
-
-    private ContaoFramework $framework;
-
-    public function __construct(RequestStack $requestStack, ContaoFramework $framework)
-    {
-        $this->requestStack = $requestStack;
-        $this->framework = $framework;
+    public function __construct(
+        private RequestStack $requestStack,
+        private ContaoFramework $framework,
+    ) {
     }
 
     public function __invoke(PreviewUrlCreateEvent $event): void
