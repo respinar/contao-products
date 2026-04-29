@@ -82,7 +82,6 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['product_catalogs'] = [
 ];
 $GLOBALS['TL_DCA']['tl_content']['fields']['product_template'] = [
     'default' => 'product_short',
-
     'inputType' => 'select',
     'eval' => ['tl_class' => 'w50 clr'],
     'sql' => ['type' => 'string', 'length' => 64, 'default' => ''],
