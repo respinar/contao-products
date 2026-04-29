@@ -416,7 +416,7 @@ class tl_product extends Backend
 
         // Check whether the product alias exists
         if ($numRows > 1 && !$autoAlias) {
-            throw new \RuntimeException(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
+            throw new RuntimeException(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
         }
 
         // Add ID to alias
@@ -429,7 +429,8 @@ class tl_product extends Backend
 
     /**
      * Generate a product row and return it as HTML string.
-     * @param array $arrRow - the product row data as an associative array.
+     *
+     * @param array $arrRow - the product row data as an associative array
      */
     public function generateProductsRow(array $arrRow): string
     {
@@ -484,20 +485,29 @@ class tl_product extends Backend
     public function checkPermission(): void
     {
         $u = BackendUser::getInstance();
-        if ($u->isAdmin) return;
+        if ($u->isAdmin) {
+            return;
+        }
         $u->products = is_array($u->products) && $u->products ? $u->products : [0];
         $a = Input::get('act');
         $i = Input::get('id');
+
         switch ($a) {
             case 'create':
-                if (!in_array(Input::get('pid') ?? $i, $u->products)) throw new AccessDeniedException('Not enough permissions to create products in this catalog.');
+                if (!in_array(Input::get('pid') ?? $i, $u->products, true)) {
+                    throw new AccessDeniedException('Not enough permissions to create products in this catalog.');
+                }
                 break;
             case 'edit': case 'copy': case 'cut': case 'delete': case 'show': case 'toggle':
                 $r = System::getContainer()->get('database_connection')->fetchAssociative('SELECT pid FROM tl_product WHERE id=?', [$i]);
-                if (!$r || !in_array($r['pid'], $u->products)) throw new AccessDeniedException('Not enough permissions to ' . $a . ' product ID ' . $i . '.');
+                if (!$r || !in_array($r['pid'], $u->products, true)) {
+                    throw new AccessDeniedException('Not enough permissions to '.$a.' product ID '.$i.'.');
+                }
                 break;
             case 'paste':
-                if (!in_array(Input::get('pid'), $u->products)) throw new AccessDeniedException('Not enough permissions to paste products into this catalog.');
+                if (!in_array(Input::get('pid'), $u->products, true)) {
+                    throw new AccessDeniedException('Not enough permissions to paste products into this catalog.');
+                }
                 break;
         }
     }
