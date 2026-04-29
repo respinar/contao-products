@@ -21,7 +21,9 @@
         "contao/core-bundle":"^5.3"
     },
     "require-dev": {
-        "contao/manager-plugin": "^2.13"
+        "contao/manager-plugin": "^2.13",
+        "contao/easy-coding-standard": "^6.14",
+        "contao/rector": "^1.3"
     },
     "autoload": {
         "psr-4": {
@@ -42,7 +44,8 @@
             "contao-components/installer": false,
             "contao/manager-plugin": false,
             "contao-community-alliance/composer-plugin": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
         }
     },
     "extra": {
