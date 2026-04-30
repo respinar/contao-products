@@ -14,6 +14,7 @@ namespace Respinar\ProductsBundle\Controller\FrontendModule;
 
 use Contao\CoreBundle\Controller\FrontendModule\AbstractFrontendModuleController;
 use Contao\CoreBundle\DependencyInjection\Attribute\AsFrontendModule;
+use Contao\CoreBundle\Routing\ContentUrlGenerator;
 use Contao\CoreBundle\Twig\FragmentTemplate;
 use Contao\ModuleModel;
 use Contao\PageModel;
@@ -28,8 +29,10 @@ class ProductRelatedController extends AbstractFrontendModuleController
 {
     public const TYPE = 'product_related';
 
-    public function __construct(private readonly ProductParser $productParser)
-    {
+    public function __construct(
+        private readonly ProductParser $productParser,
+        private readonly ContentUrlGenerator $contentUrlGenerator,
+    ) {
     }
 
     protected function getResponse(FragmentTemplate $template, ModuleModel $model, Request $request): Response
@@ -48,10 +51,10 @@ class ProductRelatedController extends AbstractFrontendModuleController
             return new Response('');
         }
 
-        $template->referer = PageModel::findById($objProduct->getRelated('pid')->overviewPage)->getFrontendUrl();
+        $template->referer = $this->contentUrlGenerator->generate(PageModel::findById($objProduct->getRelated('pid')->overviewPage));
 
         if ($model->overviewPage) {
-            $template->referer = PageModel::findById($model->overviewPage)->getFrontendUrl();
+            $template->referer = $this->contentUrlGenerator->generate(PageModel::findById($model->overviewPage));
         }
 
         $template->back = $model->customLabel ?: $GLOBALS['TL_LANG']['MSC']['productOverview'];
