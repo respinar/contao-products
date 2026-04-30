@@ -13,8 +13,8 @@ declare(strict_types=1);
 namespace Respinar\ProductsBundle\Model;
 
 use Contao\Model;
+use Contao\Model\Collection;
 use Contao\Model\MetadataTrait;
-use Model\Collection;
 
 class ProductModel extends Model
 {
@@ -28,9 +28,9 @@ class ProductModel extends Model
      * @param mixed $varId      The numeric ID or alias name
      * @param array $arrOptions An optional options array
      *
-     * @return \Model|null The productModel or null if there are no product
+     * @return Collection<self>|self|null
      */
-    public static function findPublishedByIdOrAlias($varId, array $arrOptions = [])
+    public static function findPublishedByIdOrAlias($varId, array $arrOptions = []): Collection|self|null
     {
         $t = static::$strTable;
         $arrColumns = ["($t.id=? OR $t.alias=?)"];
@@ -49,10 +49,8 @@ class ProductModel extends Model
      * @param mixed $varId      The numeric ID or alias name
      * @param array $arrPids    An array of parent IDs
      * @param array $arrOptions An optional options array
-     *
-     * @return \Model|null The productModel or null if there are no product
      */
-    public static function findPublishedByParentAndIdOrAlias($varId, $arrPids, array $arrOptions = [])
+    public static function findPublishedByParentAndIdOrAlias($varId, $arrPids, array $arrOptions = []): self|null
     {
         if (!\is_array($arrPids) || [] === $arrPids) {
             return null;
@@ -72,14 +70,15 @@ class ProductModel extends Model
     /**
      * Find published product items by their parent ID.
      *
+     * @param array $arrIds      An array of product IDs
      * @param bool  $blnFeatured If true, return only featured product, if false, return only unfeatured product
      * @param int   $intLimit    An optional limit
      * @param int   $intOffset   An optional offset
      * @param array $arrOptions  An optional options array
      *
-     * @return Collection|null A collection of models or null if there are no product
+     * @return Collection<self>|self|null
      */
-    public static function findPublishedByIds($arrIds, $blnFeatured = null, $intLimit = 0, $intOffset = 0, array $arrOptions = [])
+    public static function findPublishedByIds($arrIds, $blnFeatured = null, $intLimit = 0, $intOffset = 0, array $arrOptions = []): Collection|self|null
     {
         if (!\is_array($arrIds) || [] === $arrIds) {
             return null;
@@ -118,9 +117,9 @@ class ProductModel extends Model
      * @param int   $intOffset   An optional offset
      * @param array $arrOptions  An optional options array
      *
-     * @return Collection|null A collection of models or null if there are no product
+     * @return Collection<self>|self|null
      */
-    public static function findPublishedByPids($arrPids, $blnFeatured = null, $intLimit = 0, $intOffset = 0, array $arrOptions = [])
+    public static function findPublishedByPids($arrPids, $blnFeatured = null, $intLimit = 0, $intOffset = 0, array $arrOptions = []): Collection|self|null
     {
         if (!\is_array($arrPids) || [] === $arrPids) {
             return null;
@@ -159,7 +158,7 @@ class ProductModel extends Model
      *
      * @return int The number of product items
      */
-    public static function countPublishedByPids($arrPids, $blnFeatured = null, array $arrOptions = [])
+    public static function countPublishedByPids($arrPids, $blnFeatured = null, array $arrOptions = []): int
     {
         if (!\is_array($arrPids) || [] === $arrPids) {
             return 0;
@@ -188,9 +187,9 @@ class ProductModel extends Model
      * @param int   $intPid     The product catalogs ID
      * @param array $arrOptions An optional options array
      *
-     * @return Collection|null A collection of models or null if there are no product
+     * @return Collection<self>|self|null
      */
-    public static function findPublishedDefaultByPid($intPid, array $arrOptions = [])
+    public static function findPublishedDefaultByPid($intPid, array $arrOptions = []): Collection|self|null
     {
         $t = static::$strTable;
         $arrColumns = ["$t.pid=?"];
@@ -212,9 +211,9 @@ class ProductModel extends Model
      * @param int   $intLimit   An optional limit
      * @param array $arrOptions An optional options array
      *
-     * @return Collection|null A collection of models or null if there are no product
+     * @return Collection<self>|self|null
      */
-    public static function findPublishedByPid($intId, $intLimit = 0, array $arrOptions = [])
+    public static function findPublishedByPid($intId, $intLimit = 0, array $arrOptions = []): Collection|self|null
     {
         $time = time();
         $t = static::$strTable;
@@ -240,9 +239,9 @@ class ProductModel extends Model
      * @param int   $intOffset  An optional offset
      * @param array $arrOptions An optional options array
      *
-     * @return Collection|null A collection of models or null if there are no product
+     * @return Collection<self>|self|null
      */
-    public static function findPublishedFromToByPids($intFrom, $intTo, $arrPids, $intLimit = 0, $intOffset = 0, array $arrOptions = [])
+    public static function findPublishedFromToByPids($intFrom, $intTo, $arrPids, $intLimit = 0, $intOffset = 0, array $arrOptions = []): Collection|self|null
     {
         if (!\is_array($arrPids) || [] === $arrPids) {
             return null;
@@ -274,7 +273,7 @@ class ProductModel extends Model
      *
      * @return int The number of product items
      */
-    public static function countPublishedFromToByPids($intFrom, $intTo, $arrPids, array $arrOptions = [])
+    public static function countPublishedFromToByPids($intFrom, $intTo, $arrPids, array $arrOptions = []): int
     {
         if (!\is_array($arrPids) || [] === $arrPids) {
             return null;
