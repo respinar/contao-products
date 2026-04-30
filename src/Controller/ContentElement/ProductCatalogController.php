@@ -10,20 +10,16 @@ declare(strict_types=1);
  * @license MIT
  */
 
-/**
- * Namespace.
- */
-
 namespace Respinar\ProductsBundle\Controller\ContentElement;
 
 use Contao\Config;
 use Contao\ContentModel;
 use Contao\CoreBundle\Controller\ContentElement\AbstractContentElementController;
 use Contao\CoreBundle\DependencyInjection\Attribute\AsContentElement;
+use Contao\CoreBundle\Twig\FragmentTemplate;
 use Contao\Pagination;
 use Contao\StringUtil;
 use Contao\System;
-use Contao\Template;
 use Respinar\ProductsBundle\Model\CatalogModel;
 use Respinar\ProductsBundle\Model\ProductModel;
 use Respinar\ProductsBundle\Product\AccessChecker;
@@ -31,7 +27,7 @@ use Respinar\ProductsBundle\Product\ProductParser;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-#[AsContentElement(category: 'products')]
+#[AsContentElement(category: 'products', template: 'content_element/product_catalog')]
 class ProductCatalogController extends AbstractContentElementController
 {
     public const TYPE = 'product_catalog';
@@ -40,7 +36,7 @@ class ProductCatalogController extends AbstractContentElementController
     {
     }
 
-    protected function getResponse(Template $template, ContentModel $model, Request $request): Response
+    protected function getResponse(FragmentTemplate $template, ContentModel $model, Request $request): Response
     {
         if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create(''))) {
             $model->imgSize = 'a:3:{i:0;s:3:"100";i:1;s:3:"100";i:2;s:13:"center_center";}';
