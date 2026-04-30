@@ -25,6 +25,9 @@
         "contao/easy-coding-standard": "^6.14",
         "contao/rector": "^1.3"
     },
+    "suggest": {
+        "contao/comments-bundle": "Adds comments to the product detail and catalog pages."
+    },
     "autoload": {
         "psr-4": {
             "Respinar\\ProductsBundle\\": "src/"
