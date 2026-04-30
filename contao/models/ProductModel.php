@@ -12,13 +12,13 @@ declare(strict_types=1);
 
 namespace Respinar\ProductsBundle\Model;
 
-use Contao\CoreBundle\File\ModelMetadataTrait;
 use Contao\Model;
+use Contao\Model\MetadataTrait;
 use Model\Collection;
 
 class ProductModel extends Model
 {
-    use ModelMetadataTrait;
+    use MetadataTrait;
 
     protected static $strTable = 'tl_product';
 
