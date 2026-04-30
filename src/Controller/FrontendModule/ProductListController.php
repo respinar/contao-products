@@ -10,19 +10,15 @@ declare(strict_types=1);
  * @license MIT
  */
 
-/**
- * Namespace.
- */
-
 namespace Respinar\ProductsBundle\Controller\FrontendModule;
 
 use Contao\Config;
 use Contao\CoreBundle\Controller\FrontendModule\AbstractFrontendModuleController;
 use Contao\CoreBundle\DependencyInjection\Attribute\AsFrontendModule;
+use Contao\CoreBundle\Twig\FragmentTemplate;
 use Contao\ModuleModel;
 use Contao\Pagination;
 use Contao\StringUtil;
-use Contao\Template;
 use Respinar\ProductsBundle\Model\CatalogModel;
 use Respinar\ProductsBundle\Model\ProductModel;
 use Respinar\ProductsBundle\Product\AccessChecker;
@@ -30,7 +26,7 @@ use Respinar\ProductsBundle\Product\ProductParser;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-#[AsFrontendModule(category: 'products')]
+#[AsFrontendModule(category: 'products', template: 'frontend_module/product_list')]
 class ProductListController extends AbstractFrontendModuleController
 {
     public const TYPE = 'products_list';
@@ -39,7 +35,7 @@ class ProductListController extends AbstractFrontendModuleController
     {
     }
 
-    protected function getResponse(Template $template, ModuleModel $model, Request $request): Response
+    protected function getResponse(FragmentTemplate $template, ModuleModel $model, Request $request): Response
     {
         $template->empty = $GLOBALS['TL_LANG']['MSC']['emptyCatalog'];
 
