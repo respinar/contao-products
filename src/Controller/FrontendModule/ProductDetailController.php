@@ -10,10 +10,6 @@ declare(strict_types=1);
  * @license MIT
  */
 
-/**
- * Namespace.
- */
-
 namespace Respinar\ProductsBundle\Controller\FrontendModule;
 
 use Contao\Comments;
@@ -21,17 +17,17 @@ use Contao\CoreBundle\Controller\FrontendModule\AbstractFrontendModuleController
 use Contao\CoreBundle\DependencyInjection\Attribute\AsFrontendModule;
 use Contao\CoreBundle\Exception\PageNotFoundException;
 use Contao\CoreBundle\Routing\ResponseContext\HtmlHeadBag\HtmlHeadBag;
+use Contao\CoreBundle\Twig\FragmentTemplate;
 use Contao\ModuleModel;
 use Contao\PageModel;
 use Contao\StringUtil;
 use Contao\System;
-use Contao\Template;
 use Respinar\ProductsBundle\Model\ProductModel;
 use Respinar\ProductsBundle\Product\ProductParser;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-#[AsFrontendModule(category: 'products')]
+#[AsFrontendModule(category: 'products', template: 'frontend_module/product_detail')]
 class ProductDetailController extends AbstractFrontendModuleController
 {
     public const TYPE = 'product_detail';
@@ -40,7 +36,7 @@ class ProductDetailController extends AbstractFrontendModuleController
     {
     }
 
-    protected function getResponse(Template $template, ModuleModel $model, Request $request): Response
+    protected function getResponse(FragmentTemplate $template, ModuleModel $model, Request $request): Response
     {
         $autoItem = $request->attributes->get('auto_item') ?? $request->query->get('auto_item');
 
