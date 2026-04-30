@@ -10,23 +10,19 @@ declare(strict_types=1);
  * @license MIT
  */
 
-/**
- * Namespace.
- */
-
 namespace Respinar\ProductsBundle\Controller\ContentElement;
 
 use Contao\ContentModel;
 use Contao\CoreBundle\Controller\ContentElement\AbstractContentElementController;
 use Contao\CoreBundle\DependencyInjection\Attribute\AsContentElement;
+use Contao\CoreBundle\Twig\FragmentTemplate;
 use Contao\System;
-use Contao\Template;
 use Respinar\ProductsBundle\Model\ProductModel;
 use Respinar\ProductsBundle\Product\ProductParser;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-#[AsContentElement(category: 'products')]
+#[AsContentElement(category: 'products', template: 'content_element/product_single')]
 class ProductSingleController extends AbstractContentElementController
 {
     public const TYPE = 'product_single';
@@ -35,7 +31,7 @@ class ProductSingleController extends AbstractContentElementController
     {
     }
 
-    protected function getResponse(Template $template, ContentModel $model, Request $request): Response
+    protected function getResponse(FragmentTemplate $template, ContentModel $model, Request $request): Response
     {
         $objProduct = ProductModel::findOneByID($model->product);
 
