@@ -145,6 +145,8 @@ final class ProductParser
 
     /**
      * Parse multiple products.
+     *
+     * @return array<string>
      */
     public function parseProducts(object $products, ContentModel|ModuleModel $model): array
     {
