@@ -16,6 +16,7 @@ use Contao\Comments;
 use Contao\CoreBundle\Controller\FrontendModule\AbstractFrontendModuleController;
 use Contao\CoreBundle\DependencyInjection\Attribute\AsFrontendModule;
 use Contao\CoreBundle\Exception\PageNotFoundException;
+use Contao\CoreBundle\Routing\ContentUrlGenerator;
 use Contao\CoreBundle\Routing\ResponseContext\HtmlHeadBag\HtmlHeadBag;
 use Contao\CoreBundle\Twig\FragmentTemplate;
 use Contao\ModuleModel;
@@ -32,8 +33,10 @@ class ProductDetailController extends AbstractFrontendModuleController
 {
     public const TYPE = 'product_detail';
 
-    public function __construct(private readonly ProductParser $productParser)
-    {
+    public function __construct(
+        private readonly ProductParser $productParser,
+        private readonly ContentUrlGenerator $contentUrlGenerator,
+    ) {
     }
 
     protected function getResponse(FragmentTemplate $template, ModuleModel $model, Request $request): Response
@@ -54,10 +57,10 @@ class ProductDetailController extends AbstractFrontendModuleController
             throw new PageNotFoundException('Page not found: '.$request->getUri());
         }
 
-        $template->referer = PageModel::findById($objProduct->getRelated('pid')->overviewPage)->getFrontendUrl();
+        $template->referer = $this->contentUrlGenerator->generate(PageModel::findById($objProduct->getRelated('pid')->overviewPage));
 
         if ($model->overviewPage) {
-            $template->referer = PageModel::findById($model->overviewPage)->getFrontendUrl();
+            $template->referer = $this->contentUrlGenerator->generate(PageModel::findById($model->overviewPage));
         }
 
         $template->back = $model->customLabel ?: $GLOBALS['TL_LANG']['MSC']['productOverview'];
