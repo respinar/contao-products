@@ -25,7 +25,7 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['product_list'] = '
 	{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['product_detail'] = '
 	{title_legend},name,headline,type;
-	{catalog_legend},product_catalogs,customLabel;
+	{catalog_legend},product_catalogs,overviewPage,customLabel;
 	{template_legend},customTpl,product_template;
 	{image_legend},imgSize;
 	{protected_legend:hide},protected;
