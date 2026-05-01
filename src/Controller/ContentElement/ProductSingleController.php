@@ -37,7 +37,11 @@ class ProductSingleController extends AbstractContentElementController
 
     protected function getResponse(FragmentTemplate $template, ContentModel $model, Request $request): Response
     {
-        $objProduct = ProductModel::findOneByID($model->product);
+        $objProduct = ProductModel::findPublishedByIdOrAlias($model->product);
+
+        if (null === $objProduct) {
+            return $template->getResponse();
+        }
 
         $model->imgSize = $model->size;
 
