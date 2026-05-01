@@ -18,14 +18,14 @@ use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
  */
 $GLOBALS['TL_DCA']['tl_module']['palettes']['product_list'] = '
 	{title_legend},name,headline,type;
-	{catalog_legend},product_catalogs,product_featured,product_detailModule,product_sortBy,numberOfItems,perPage,skipFirst;
+	{catalog_legend},product_catalogs,product_featured,product_sortBy,numberOfItems,perPage,skipFirst;
 	{template_legend},customTpl,product_listClass,product_template,product_singleClass;
 	{image_legend},imgSize;
 	{protected_legend:hide},protected;
 	{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['product_detail'] = '
 	{title_legend},name,headline,type;
-	{catalog_legend},product_catalogs,overviewPage,customLabel;
+	{catalog_legend},product_catalogs,customLabel;
 	{template_legend},customTpl,product_template;
 	{image_legend},imgSize;
 	{protected_legend:hide},protected;
@@ -60,14 +60,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_sortBy'] = [
     'inputType' => 'select',
     'options' => ['custom', 'date_desc', 'date_asc', 'title_asc', 'title_desc'],
     'reference' => &$GLOBALS['TL_LANG']['tl_module'],
-    'eval' => ['tl_class' => 'w50'],
+    'eval' => ['tl_class' => 'w50 clr'],
     'sql' => ['type' => 'string', 'length' => 16, 'default' => ''],
-];
-$GLOBALS['TL_DCA']['tl_module']['fields']['product_detailModule'] = [
-    'inputType' => 'select',
-    'reference' => &$GLOBALS['TL_LANG']['tl_module'],
-    'eval' => ['includeBlankOption' => true, 'tl_class' => 'w50'],
-    'sql' => ['type' => 'integer', 'unsigned' => true, 'default' => 0],
 ];
 $GLOBALS['TL_DCA']['tl_module']['fields']['product_template'] = [
     'default' => 'product_short',
