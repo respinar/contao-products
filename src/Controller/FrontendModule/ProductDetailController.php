@@ -19,11 +19,11 @@ use Contao\CoreBundle\Exception\PageNotFoundException;
 use Contao\CoreBundle\Routing\ContentUrlGenerator;
 use Contao\CoreBundle\Routing\ResponseContext\HtmlHeadBag\HtmlHeadBag;
 use Contao\CoreBundle\Twig\FragmentTemplate;
+use Contao\Input;
 use Contao\ModuleModel;
 use Contao\PageModel;
 use Contao\StringUtil;
 use Contao\System;
-use Contao\Input;
 use Respinar\ProductsBundle\Model\ProductModel;
 use Respinar\ProductsBundle\Product\ProductParser;
 use Symfony\Component\HttpFoundation\Request;
@@ -60,7 +60,10 @@ class ProductDetailController extends AbstractFrontendModuleController
             throw new PageNotFoundException('Page not found: '.$request->getUri());
         }
 
-        $template->referer = $this->contentUrlGenerator->generate(PageModel::findById($objProduct->getRelated('pid')->overviewPage));
+        $objCatalog = $objProduct->getRelated('pid');
+        if (!$objCatalog) {
+            $template->referer = $this->contentUrlGenerator->generate(PageModel::findById($objCatalog->overviewPage));
+        }
 
         if ($model->overviewPage) {
             $template->referer = $this->contentUrlGenerator->generate(PageModel::findById($model->overviewPage));
