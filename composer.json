@@ -17,7 +17,7 @@
         "source": "https://github.com/respinar/contao-podcast"
     },
     "require": {
-        "php": "^8.0",
+        "php": "^8.3",
         "contao/core-bundle":"^5.7"
     },
     "require-dev": {
