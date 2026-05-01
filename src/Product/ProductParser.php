@@ -85,6 +85,8 @@ final class ProductParser
         if (null !== $elements) {
             $template->hasText = true;
 
+            $template->text = '';
+
             while ($elements->next()) {
                 $template->text .= Controller::getContentElement(
                     $elements->current(),
