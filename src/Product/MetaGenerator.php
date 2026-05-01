@@ -44,7 +44,7 @@ final class MetaGenerator
             $return['price'] = [
                 'value' => $price['value'],
                 'unit' => $price['unit'],
-                'symbol' => $GLOBALS['TL_LANG']['MSC'][$price['unit']],
+                'symbol' => $GLOBALS['TL_LANG']['MSC'][$price['unit']] ?? '',
             ];
 
             $return['price_text'] = $GLOBALS['TL_LANG']['MSC']['price_text'];
@@ -62,7 +62,7 @@ final class MetaGenerator
         $globalId = StringUtil::deserialize($product->global_ID);
 
         if (!empty($globalId['value'])) {
-            $globalId['name'] = $GLOBALS['TL_LANG']['MSC'][$globalId['unit']];
+            $globalId['name'] = $GLOBALS['TL_LANG']['MSC'][$globalId['unit']] ?? '';
             $return['global_ID'] = $globalId;
         }
 
