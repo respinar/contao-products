@@ -23,6 +23,7 @@ use Contao\ModuleModel;
 use Contao\PageModel;
 use Contao\StringUtil;
 use Contao\System;
+use Contao\Input;
 use Respinar\ProductsBundle\Model\ProductModel;
 use Respinar\ProductsBundle\Product\ProductParser;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,7 +42,9 @@ class ProductDetailController extends AbstractFrontendModuleController
 
     protected function getResponse(FragmentTemplate $template, ModuleModel $model, Request $request): Response
     {
-        $autoItem = $request->attributes->get('auto_item') ?? $request->query->get('auto_item');
+        // $autoItem = $request->attributes->get('auto_item');
+
+        $autoItem = Input::get('auto_item');
 
         // Return an empty string if "auto_item" is not set to combine list and reader on
         // same page
@@ -83,8 +86,6 @@ class ProductDetailController extends AbstractFrontendModuleController
                 $htmlHeadBag->setMetaDescription($htmlDecoder->inputEncodedToPlainText($objProduct->description));
             }
         }
-
-        // $objCatalog = CatalogModel::findByIdOrAlias($objProduct->pid);
 
         $template->product = $this->productParser->parseProduct($objProduct, $model);
 
