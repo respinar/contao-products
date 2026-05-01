@@ -29,7 +29,7 @@
         </div>
 
         <div class="offer">
-            {% if meta.price is iterable %}
+            {% if meta.price is defined and meta.price is iterable %}
                 {{ meta.price_text }}:
                 <span>{{ meta.price.value|number_format }}</span>
                 <span>{{ meta.price.symbol }}</span>
