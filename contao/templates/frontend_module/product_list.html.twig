@@ -9,7 +9,9 @@
             {{ products|join|raw }}
         </div>
 
-        {{ pagination|raw }}
+        {% if pagination is defined %}
+            {{ pagination|raw }}
+        {% endif %}
     {% endif %}
 
 {% endblock %}
