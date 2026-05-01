@@ -41,7 +41,7 @@ class ProductUrlInsertTag
 
         $productModel = $this->framework
             ->getAdapter(ProductModel::class)
-            ->findByIdOrAlias($idOrAlias)
+            ->findPublishedByIdOrAlias($idOrAlias)
         ;
 
         if (null === $productModel) {
