@@ -15,7 +15,7 @@
             <div class="featured"></div>
         {% endif %}
 
-        {% if new_product %}
+        {% if new_product is defined and new_product %}
             <div class="new"></div>
         {% endif %}
     </div>
