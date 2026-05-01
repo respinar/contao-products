@@ -40,7 +40,7 @@ class ProductModel extends Model
             $arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
         }
 
-        return static::findBy($arrColumns, [is_numeric($varId) ? $varId : 0, $varId], $arrOptions);
+        return static::findOneBy($arrColumns, [is_numeric($varId) ? $varId : 0, $varId], $arrOptions);
     }
 
     /**
@@ -276,7 +276,7 @@ class ProductModel extends Model
     public static function countPublishedFromToByPids($intFrom, $intTo, $arrPids, array $arrOptions = []): int
     {
         if (!\is_array($arrPids) || [] === $arrPids) {
-            return null;
+            return 0;
         }
 
         $t = static::$strTable;
