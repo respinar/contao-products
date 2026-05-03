@@ -12,11 +12,11 @@
       </trans-unit>
       <trans-unit id="tl_product_catalog.overviewPage.0">
         <source>Overview page</source>
-        <target>Overview page</target>
+        <target>برگه نمای کلی</target>
       </trans-unit>
       <trans-unit id="tl_product_catalog.overviewPage.1">
         <source>Please choose the page to which there will be all products.</source>
-        <target>Please choose the page to which there will be all products.</target>
+        <target>لطفاً برگه‌ای را انتخاب کنید که همه محصولات در آن قرار خواهند گرفت.</target>
       </trans-unit>
       <trans-unit id="tl_product_catalog.jumpTo.0">
         <source>Redirect page</source>
@@ -24,7 +24,7 @@
       </trans-unit>
       <trans-unit id="tl_product_catalog.jumpTo.1">
         <source>Please choose the list page to which visitors will be redirected when clicking a menu.</source>
-        <target>Please choose the list page to which visitors will be redirected when clicking a menu.</target>
+        <target>لطفاً برگه فهرست را انتخاب کنید که بازدیدکنندگان هنگام کلیک بر یک منو به آن هدایت شوند.</target>
       </trans-unit>
       <trans-unit id="tl_product_catalog.protected.0">
         <source>Protect catalog</source>
@@ -80,7 +80,7 @@
       </trans-unit>
       <trans-unit id="tl_product_catalog.language_legend">
         <source>Language settings</source>
-        <target>Language settings</target>
+        <target>تنظیمات زبان</target>
       </trans-unit>
       <trans-unit id="tl_product_catalog.new.0">
         <source>New catalog</source>
@@ -121,6 +121,90 @@
       <trans-unit id="tl_product_catalog.delete.1">
         <source>Delete catalog ID %s</source>
         <target>حذف کاتالوگ کاتالوگ شناسه‌ی %s</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.allowComments.0">
+        <source>Enable comments</source>
+        <target>فعال‌سازی نظرات</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.allowComments.1">
+        <source>Allow visitors to comment products.</source>
+        <target>به بازدیدکنندگان اجازه ثبت نظر درباره محصولات را بدهید.</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.notify.0">
+        <source>Notify</source>
+        <target>اطلاع‌رسانی</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.notify.1">
+        <source>Please choose who to notify when comments are added.</source>
+        <target>لطفاً انتخاب کنید هنگام افزودن نظر، به چه کسی اطلاع‌رسانی شود.</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.sortOrder.0">
+        <source>Sort order</source>
+        <target>ترتیب مرتب‌سازی</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.sortOrder.1">
+        <source>By default, comments are sorted ascending, starting with the oldest one.</source>
+        <target>به‌طور پیش‌فرض، نظرات به ترتیب صعودی و از قدیمی‌ترین شروع می‌شوند.</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.perPage.0">
+        <source>Comments per page</source>
+        <target>تعداد نظر در هر صفحه</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.perPage.1">
+        <source>Number of comments per page. Set to 0 to disable pagination.</source>
+        <target>تعداد نظرات در هر صفحه. برای غیرفعال‌سازی صفحه‌بندی، مقدار 0 را وارد کنید.</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.moderate.0">
+        <source>Moderate comments</source>
+        <target>مدیریت نظرات</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.moderate.1">
+        <source>Approve comments before they are published on the website.</source>
+        <target>قبل از انتشار نظرات در وب‌سایت، آن‌ها را تأیید کنید.</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.bbcode.0">
+        <source>Allow BBCode</source>
+        <target>اجازه استفاده از BBCode</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.bbcode.1">
+        <source>Allow visitors to format their comments with BBCode.</source>
+        <target>به بازدیدکنندگان اجازه دهید نظرات خود را با BBCode قالب‌بندی کنند.</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.requireLogin.0">
+        <source>Require login to comment</source>
+        <target>نیاز به ورود برای ثبت نظر</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.requireLogin.1">
+        <source>Allow only authenticated members to create comments.</source>
+        <target>فقط به اعضای احراز هویت‌شده اجازه ثبت نظر بدهید.</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.disableCaptcha.0">
+        <source>Disable spam protection</source>
+        <target>غیرفعال‌سازی حفاظت از هرزنامه</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.disableCaptcha.1">
+        <source>Use this option only if you have limited comments to authenticated users.</source>
+        <target>این گزینه را فقط در صورتی استفاده کنید که نظرات را به کاربران احراز هویت‌شده محدود کرده‌اید.</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.comments_legend">
+        <source>Comments</source>
+        <target>نظرات</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.notify_admin">
+        <source>System administrator</source>
+        <target>مدیر سیستم</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.notify_author">
+        <source>Author of the products</source>
+        <target>نویسنده محصولات</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.notify_both">
+        <source>Author and system administrator</source>
+        <target>نویسنده و مدیر سیستم</target>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.comments">
+        <source>Show comments of Catalog ID %s</source>
+        <target>نمایش نظرات کاتالوگ شناسه‌ی %s</target>
       </trans-unit>
     </body>
   </file>
