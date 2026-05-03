@@ -10,17 +10,24 @@ declare(strict_types=1);
  * @license MIT
  */
 
-namespace Respinar\ProductsBundle\Dca;
+namespace Respinar\ProductsBundle\EventListener\DataContainer;
 
 use Contao\CoreBundle\DataContainer\PaletteManipulator;
+use Contao\CoreBundle\DependencyInjection\Attribute\AsHook;
 use Contao\System;
 
-final class CommentFields
+#[AsHook('loadDataContainer')]
+class AddCommentFieldsListener
 {
-    public static function addTo(string $table): void
+    private const TABLE = 'tl_product_catalog';
+
+    public function __invoke(string $table): void
     {
-        // Do nothing if the Comments Bundle is not installed.
-        if (!self::isCommentsBundleInstalled()) {
+        if (self::TABLE !== $table) {
+            return;
+        }
+
+        if (!isset(System::getContainer()->getParameter('kernel.bundles')['ContaoCommentsBundle'])) {
             return;
         }
 
@@ -39,7 +46,7 @@ final class CommentFields
             'options' => ['notify_admin', 'notify_author', 'notify_both'],
             'reference' => &$GLOBALS['TL_LANG'][$table],
             'eval' => ['tl_class' => 'w50'],
-            'sql' => ['type' => 'string', 'length' => 32, 'default' => 'notify_admin'],
+            'sql' => "varchar(32) NOT NULL default 'notify_admin'",
         ];
 
         $GLOBALS['TL_DCA'][$table]['fields']['sortOrder'] = [
@@ -47,13 +54,13 @@ final class CommentFields
             'options' => ['ascending', 'descending'],
             'reference' => &$GLOBALS['TL_LANG']['MSC'],
             'eval' => ['tl_class' => 'w50 clr'],
-            'sql' => ['type' => 'string', 'length' => 32, 'default' => 'ascending'],
+            'sql' => "varchar(32) NOT NULL default 'ascending'",
         ];
 
         $GLOBALS['TL_DCA'][$table]['fields']['perPage'] = [
             'inputType' => 'text',
             'eval' => ['rgxp' => 'natural', 'tl_class' => 'w50'],
-            'sql' => ['type' => 'smallint', 'unsigned' => true, 'default' => 0],
+            'sql' => 'smallint(5) unsigned NOT NULL default 0',
         ];
 
         $GLOBALS['TL_DCA'][$table]['fields']['moderate'] = [
@@ -85,12 +92,5 @@ final class CommentFields
             ->addField('allowComments', 'comments_legend', PaletteManipulator::POSITION_APPEND)
             ->applyToPalette('default', $table)
         ;
-    }
-
-    private static function isCommentsBundleInstalled(): bool
-    {
-        $bundles = System::getContainer()->getParameter('kernel.bundles');
-
-        return isset($bundles['ContaoCommentsBundle']);
     }
 }
