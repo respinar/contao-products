@@ -11,8 +11,8 @@ declare(strict_types=1);
  */
 
 use Contao\DC_Table;
+use Contao\DataContainer;
 use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
-use Respinar\ProductsBundle\Dca\CommentFields;
 
 /*
  * Table tl_product_catalog
@@ -34,9 +34,9 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = [
     // List
     'list' => [
         'sorting' => [
-            'mode' => 1,
+            'mode' => DataContainer::MODE_SORTED,
             'fields' => ['title'],
-            'flag' => 1,
+            'flag' => DataContainer::SORT_INITIAL_LETTER_ASC,
             'panelLayout' => 'filter;search,limit',
         ],
         'label' => [
@@ -98,5 +98,3 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = [
         ],
     ],
 ];
-
-CommentFields::addTo('tl_product_catalog');
