@@ -92,6 +92,69 @@
       <trans-unit id="tl_product_catalog.delete.1">
         <source>Delete catalog ID %s</source>
       </trans-unit>
+      <trans-unit id="tl_product_catalog.allowComments.0">
+        <source>Enable comments</source>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.allowComments.1">
+        <source>Allow visitors to comment products.</source>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.notify.0">
+        <source>Notify</source>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.notify.1">
+        <source>Please choose who to notify when comments are added.</source>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.sortOrder.0">
+        <source>Sort order</source>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.sortOrder.1">
+        <source>By default, comments are sorted ascending, starting with the oldest one.</source>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.perPage.0">
+        <source>Comments per page</source>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.perPage.1">
+        <source>Number of comments per page. Set to 0 to disable pagination.</source>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.moderate.0">
+        <source>Moderate comments</source>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.moderate.1">
+        <source>Approve comments before they are published on the website.</source>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.bbcode.0">
+        <source>Allow BBCode</source>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.bbcode.1">
+        <source>Allow visitors to format their comments with BBCode.</source>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.requireLogin.0">
+        <source>Require login to comment</source>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.requireLogin.1">
+        <source>Allow only authenticated members to create comments.</source>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.disableCaptcha.0">
+        <source>Disable spam protection</source>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.disableCaptcha.1">
+        <source>Use this option only if you have limited comments to authenticated users.</source>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.comments_legend">
+        <source>Comments</source>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.notify_admin">
+        <source>System administrator</source>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.notify_author">
+        <source>Author of the products</source>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.notify_both">
+        <source>Author and system administrator</source>
+      </trans-unit>
+      <trans-unit id="tl_product_catalog.comments">
+        <source>Show comments of Catalog ID %s</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
