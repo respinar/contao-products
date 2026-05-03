@@ -19,6 +19,7 @@ use Contao\CoreBundle\Exception\PageNotFoundException;
 use Contao\CoreBundle\Routing\ContentUrlGenerator;
 use Contao\CoreBundle\Routing\ResponseContext\HtmlHeadBag\HtmlHeadBag;
 use Contao\CoreBundle\Twig\FragmentTemplate;
+use Contao\FrontendTemplate;
 use Contao\Input;
 use Contao\ModuleModel;
 use Contao\PageModel;
@@ -125,7 +126,16 @@ class ProductDetailController extends AbstractFrontendModuleController
             $objConfig->bbcode = $objCatalog->bbcode;
             $objConfig->moderate = $objCatalog->moderate;
 
-            $objComment->addCommentsToTemplate($template, $objConfig, 'tl_product', $objProduct->id, $arrNotifies);
+            // Comments::addCommentsToTemplate() requires a legacy FrontendTemplate, so
+            // we let it populate a throw-away FrontendTemplate and copy the rendered
+            // data onto our Twig-based fragment template.
+            $objCommentTemplate = new FrontendTemplate();
+
+            $objComment->addCommentsToTemplate($objCommentTemplate, $objConfig, 'tl_product', $objProduct->id, $arrNotifies);
+
+            // Merge the comment data (comments, pagination, form fields, ...) into the
+            // fragment template, keeping the values already set by this controller.
+            $template->setData(array_replace_recursive($objCommentTemplate->getData(), $template->getData()));
         } else {
             $template->allowComments = false;
         }
