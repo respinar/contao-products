@@ -44,6 +44,32 @@ class ProductModel extends Model
     }
 
     /**
+     * Find a published product by ID or alias within the catalogs of the current page.
+     *
+     * As aliases are only unique per catalog (per language), a bare alias has to be
+     * resolved within the language context of the current page.
+     *
+     * @param mixed $varId      The numeric ID or alias name
+     * @param array $arrOptions An optional options array
+     */
+    public static function findPublishedByIdOrAliasForPage($varId, array $arrOptions = []): self|null
+    {
+        global $objPage;
+
+        if (null === $objPage) {
+            return null;
+        }
+
+        $catalogs = CatalogModel::findBy('jumpTo', $objPage->id);
+
+        if (null === $catalogs) {
+            return null;
+        }
+
+        return static::findPublishedByParentAndIdOrAlias($varId, $catalogs->fetchEach('id'), $arrOptions);
+    }
+
+    /**
      * Find published product items by their parent ID and ID or alias.
      *
      * @param mixed $varId      The numeric ID or alias name
