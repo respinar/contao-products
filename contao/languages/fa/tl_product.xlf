@@ -238,6 +238,10 @@
         <source>Product title</source>
         <target>عنوان محصول</target>
       </trans-unit>
+      <trans-unit id="tl_product.language_legend">
+        <source>Language settings</source>
+        <target>تنظیمات زبان</target>
+      </trans-unit>
       <trans-unit id="tl_product.category_legend">
         <source>Product categories</source>
         <target>Product categories</target>

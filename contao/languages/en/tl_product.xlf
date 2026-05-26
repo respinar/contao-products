@@ -179,6 +179,9 @@
       <trans-unit id="tl_product.title_legend">
         <source>Product title</source>
       </trans-unit>
+      <trans-unit id="tl_product.language_legend">
+        <source>Language settings</source>
+      </trans-unit>
       <trans-unit id="tl_product.category_legend">
         <source>Product categories</source>
       </trans-unit>
