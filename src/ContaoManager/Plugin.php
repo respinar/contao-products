@@ -17,6 +17,7 @@ use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
 use Respinar\ProductsBundle\RespinarProductsBundle;
+use Terminal42\ChangeLanguage\Terminal42ChangeLanguageBundle;
 
 class Plugin implements BundlePluginInterface
 {
@@ -24,7 +25,10 @@ class Plugin implements BundlePluginInterface
     {
         return [
             BundleConfig::create(RespinarProductsBundle::class)
-                ->setLoadAfter([ContaoCoreBundle::class]),
+                ->setLoadAfter([
+                    ContaoCoreBundle::class,
+                    Terminal42ChangeLanguageBundle::class,
+                ]),
         ];
     }
 }
