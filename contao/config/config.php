@@ -35,3 +35,9 @@ $GLOBALS['TL_MODELS']['tl_product_catalog'] = CatalogModel::class;
  * Add permissions
  */
 $GLOBALS['TL_PERMISSIONS'][] = 'products';
+
+/*
+ * Allow the product alias to be used as an auto_item URL parameter so that
+ * ChangeLanguage can translate it (see terminal42/contao-changelanguage).
+ */
+$GLOBALS['TL_AUTO_ITEM'][] = 'items';
