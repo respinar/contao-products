@@ -39,10 +39,15 @@ class ProductUrlInsertTag
             return new InsertTagResult('');
         }
 
-        $productModel = $this->framework
-            ->getAdapter(ProductModel::class)
-            ->findPublishedByIdOrAlias($idOrAlias)
-        ;
+        $adapter = $this->framework->getAdapter(ProductModel::class);
+
+        // IDs are globally unique, aliases are only unique per catalog (per language)
+        // and therefore have to be resolved within the current page
+        if (is_numeric($idOrAlias)) {
+            $productModel = $adapter->findPublishedByIdOrAlias($idOrAlias);
+        } else {
+            $productModel = $adapter->findPublishedByIdOrAliasForPage($idOrAlias);
+        }
 
         if (null === $productModel) {
             return new InsertTagResult('');
