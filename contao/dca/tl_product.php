@@ -38,7 +38,7 @@ $GLOBALS['TL_DCA']['tl_product'] = [
         'sql' => [
             'keys' => [
                 'id' => 'primary',
-                'alias' => 'index',
+                'pid,alias' => 'unique',
                 'pid,start,stop,published' => 'index',
             ],
         ],
@@ -82,7 +82,7 @@ $GLOBALS['TL_DCA']['tl_product'] = [
     // Palettes
     'palettes' => [
         '__selector__' => ['addEnclosure', 'overwriteMeta'],
-        'default' => '{title_legend},title,alias,featured;{meta_legend},pageTitle,date,description;{summary_legend},summary;{offer_legend:hide},price,availability,priceValidUntil;{rating_legend},rating_value,rating_count,visit;{product_legend},brand,model,sku,global_ID;{image_legend},singleSRC,overwriteMeta;{related_legend},related;{link_legend:hide},url,target,titleText,linkTitle;{enclosure_legend:hide},addEnclosure;{expert_legend:hide},cssClass;{publish_legend},published,start,stop',
+        'default' => '{title_legend},title,alias,featured;{language_legend},languageMain;{meta_legend},pageTitle,date,description;{summary_legend},summary;{offer_legend:hide},price,availability,priceValidUntil;{rating_legend},rating_value,rating_count,visit;{product_legend},brand,model,sku,global_ID;{image_legend},singleSRC,overwriteMeta;{related_legend},related;{link_legend:hide},url,target,titleText,linkTitle;{enclosure_legend:hide},addEnclosure;{expert_legend:hide},cssClass;{publish_legend},published,start,stop',
     ],
 
     // Subpalettes
@@ -100,6 +100,19 @@ $GLOBALS['TL_DCA']['tl_product'] = [
             'foreignKey' => 'tl_product_catalog.title',
             'sql' => ['type' => 'integer', 'unsigned' => true, 'default' => 0],
             'relation' => ['type' => 'belongsTo', 'load' => 'lazy'],
+        ],
+        'languageMain' => [
+            'exclude' => true,
+            'inputType' => 'select',
+            'options_callback' => ['tl_product', 'getLanguageMainOptions'],
+            'eval' => [
+                'includeBlankOption' => true,
+                'blankOptionLabel' => &$GLOBALS['TL_LANG']['tl_product']['languageMain'][2],
+                'chosen' => true,
+                'tl_class' => 'w50',
+            ],
+            'sql' => ['type' => 'integer', 'unsigned' => true, 'default' => 0],
+            'relation' => ['type' => 'hasOne', 'table' => 'tl_product', 'field' => 'id', 'load' => 'lazy'],
         ],
         'sorting' => [
             'sql' => ['type' => 'integer', 'unsigned' => true, 'default' => 0],
@@ -126,7 +139,6 @@ $GLOBALS['TL_DCA']['tl_product'] = [
             'eval' => [
                 'mandatory' => true,
                 'rgxp' => 'alias',
-                'unique' => true,
                 'maxlength' => 128,
                 'tl_class' => 'w50 clr',
             ],
@@ -221,7 +233,7 @@ $GLOBALS['TL_DCA']['tl_product'] = [
             'sorting' => true,
             'inputType' => 'text',
             'eval' => ['tl_class' => 'w50'],
-            'sql' => ['type' => 'integer', 'unsigned' => true],
+            'sql' => ['type' => 'integer', 'unsigned' => true, 'default' => 0],
         ],
         'date' => [
             'default' => time(),
@@ -397,6 +409,10 @@ class tl_product extends Backend
 {
     /**
      * Auto-generate the product alias if it has not been set yet.
+     *
+     * The alias only has to be unique within the products that resolve to the
+     * same reader page (jumpTo), so the same product may use the same alias in
+     * another catalog/language with a different reader page.
      */
     public function generateAlias(string $varValue, DataContainer $dc): string
     {
@@ -411,17 +427,31 @@ class tl_product extends Backend
         }
 
         $connection = System::getContainer()->get('database_connection');
-        $ids = $connection->fetchFirstColumn('SELECT id FROM tl_product WHERE alias = ?', [$varValue]);
-        $numRows = count($ids);
 
-        // Check whether the product alias exists
-        if ($numRows > 1 && !$autoAlias) {
+        // The alias must be unique among all products whose catalog points to
+        // the same reader page (jumpTo) as the current product.
+        $jumpTo = (int) $connection->fetchOne(
+            'SELECT jumpTo FROM tl_product_catalog WHERE id = ?',
+            [$dc->activeRecord->pid],
+        );
+
+        $aliasExists = static function (string $alias) use ($connection, $dc, $jumpTo): bool {
+            return 0 < (int) $connection->fetchOne(
+                'SELECT COUNT(*) FROM tl_product WHERE alias = ? AND id != ? AND pid IN (SELECT id FROM tl_product_catalog WHERE jumpTo = ?)',
+                [$alias, $dc->id, $jumpTo],
+            );
+        };
+
+        if ($autoAlias) {
+            // Make sure the generated alias is unique within the same reader page
+            $base = $varValue;
+            $i = 0;
+
+            while ($aliasExists($varValue)) {
+                $varValue = $base.'-'.++$i;
+            }
+        } elseif ($aliasExists($varValue)) {
             throw new RuntimeException(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
-        }
-
-        // Add ID to alias
-        if ($numRows && $autoAlias) {
-            $varValue .= '-'.$dc->id;
         }
 
         return $varValue;
@@ -480,6 +510,63 @@ class tl_product extends Backend
         }
 
         return $arrItems;
+    }
+
+    /**
+     * Get products from the master catalog to link as language main.
+     *
+     * Only offers master products that have not already been assigned to another
+     * product in the same catalog, so each master product can only be translated once
+     * per language.
+     */
+    public function getLanguageMainOptions(DataContainer $dc): array
+    {
+        if (null === $dc->activeRecord) {
+            return [];
+        }
+
+        $connection = System::getContainer()->get('database_connection');
+
+        $catalog = $connection->fetchAssociative('SELECT * FROM tl_product_catalog WHERE id = ?', [$dc->activeRecord->pid]);
+
+        if (false === $catalog) {
+            return [];
+        }
+
+        // Use the master catalog (or the current catalog if it has none)
+        $intMaster = (int) $catalog['master'] ?: (int) $catalog['id'];
+        $intCurrent = (int) $dc->activeRecord->id;
+
+        // Exclude master products that are already used by another product in this catalog
+        $usedIds = $connection->fetchFirstColumn(
+            'SELECT languageMain FROM tl_product WHERE pid = ? AND id != ? AND languageMain != 0',
+            [$dc->activeRecord->pid, $intCurrent],
+        );
+
+        $arrOptions = [];
+        $rows = $connection->fetchAllAssociative('SELECT id, title, model, sku FROM tl_product WHERE pid = ? ORDER BY title', [$intMaster]);
+
+        foreach ($rows as $objItems) {
+            $id = (int) $objItems['id'];
+
+            if ($id === $intCurrent || in_array($id, array_map('intval', $usedIds), true)) {
+                continue;
+            }
+
+            $label = $objItems['title'];
+
+            if ($objItems['model']) {
+                $label .= ' [model: '.$objItems['model'].']';
+            }
+
+            if ($objItems['sku']) {
+                $label .= ' (sku: '.$objItems['sku'].')';
+            }
+
+            $arrOptions[$id] = $label;
+        }
+
+        return $arrOptions;
     }
 
     public function checkPermission(): void
