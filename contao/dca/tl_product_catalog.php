@@ -10,8 +10,10 @@ declare(strict_types=1);
  * @license MIT
  */
 
-use Contao\DC_Table;
+use Contao\Backend;
 use Contao\DataContainer;
+use Contao\DC_Table;
+use Contao\System;
 use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
 
 /*
@@ -48,7 +50,7 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = [
     // Palettes
     'palettes' => [
         '__selector__' => ['protected'],
-        'default' => '{title_legend},title;{redirect_legend},overviewPage,jumpTo;{protected_legend:hide},protected;',
+        'default' => '{title_legend},title;{redirect_legend},overviewPage,jumpTo;{language_legend},master,language;{protected_legend:hide},protected;',
     ],
 
     // Subpalettes
@@ -77,6 +79,24 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = [
             'sql' => ['type' => 'integer', 'unsigned' => true, 'default' => 0],
             'relation' => ['type' => 'hasOne', 'load' => 'lazy'],
         ],
+        'master' => [
+            'exclude' => true,
+            'inputType' => 'select',
+            'options_callback' => ['tl_product_catalog', 'getMasterCatalogs'],
+            'eval' => [
+                'includeBlankOption' => true,
+                'blankOptionLabel' => &$GLOBALS['TL_LANG']['tl_product_catalog']['isMaster'],
+                'tl_class' => 'w50',
+            ],
+            'sql' => ['type' => 'integer', 'unsigned' => true, 'default' => 0],
+            'relation' => ['type' => 'hasOne', 'table' => 'tl_product_catalog', 'field' => 'id', 'load' => 'lazy'],
+        ],
+        'language' => [
+            'exclude' => true,
+            'inputType' => 'text',
+            'eval' => ['maxlength' => 32, 'tl_class' => 'w50'],
+            'sql' => ['type' => 'string', 'length' => 32, 'default' => ''],
+        ],
         'jumpTo' => [
             'inputType' => 'pageTree',
             'foreignKey' => 'tl_page.title',
@@ -98,3 +118,28 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = [
         ],
     ],
 ];
+
+/**
+ * Provide miscellaneous methods that are used by the data configuration array.
+ */
+class tl_product_catalog extends Backend
+{
+    /**
+     * Return all catalogs that can be used as the master catalog.
+     *
+     * @return array<int, string>
+     */
+    public function getMasterCatalogs(DataContainer $dc): array
+    {
+        $options = [];
+
+        $connection = System::getContainer()->get('database_connection');
+        $rows = $connection->fetchAllAssociative('SELECT id, title FROM tl_product_catalog WHERE id!=? ORDER BY title', [$dc->id]);
+
+        foreach ($rows as $row) {
+            $options[$row['id']] = $row['title'];
+        }
+
+        return $options;
+    }
+}
