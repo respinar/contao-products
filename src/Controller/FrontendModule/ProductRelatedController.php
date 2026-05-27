@@ -60,6 +60,8 @@ class ProductRelatedController extends AbstractFrontendModuleController
         $template->back = $model->customLabel ?: $GLOBALS['TL_LANG']['MSC']['productOverview'];
         $template->relateds_headline = $GLOBALS['TL_LANG']['MSC']['relateds_headline'];
 
+        $template->relateds = [];
+
         $relatedIds = StringUtil::deserialize($objProduct->related);
 
         if ($relatedIds) {
