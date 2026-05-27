@@ -5,9 +5,11 @@
   {{ product|raw }}
 
   {# indexer::stop #}
+  {% if referer is defined %}
   <p class="back">
       <a href="{{ referer }}" title="{{ back }}">{{ back }}</a>
   </p>
+  {% endif %}
   {# indexer::continue #}
 
     {% if allowComments|default %}
