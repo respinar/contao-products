@@ -1,34 +1,34 @@
 {% use "@Contao/component/_figure.html.twig" %}
 
-<div class="product_full {{ class }}">
+<div class="product-full {{ class }}">
 
     <h1>{{ title }}</h1>
 
-    <div class="meta">
-        <div class="info">
+    <div class="product-full__meta">
+        <div class="product-full__info">
             <time datetime="{{ meta.datetime }}">{{ meta.date }}</time>
 
             {% if meta.brand is defined %}
-                <span class="brand">{{ meta.brand_text }}: <span>{{ meta.brand }}</span></span>
+                <span class="product-full__brand">{{ meta.brand_text }}: <span>{{ meta.brand }}</span></span>
             {% endif %}
 
             {% if meta.model is defined %}
-                <span class="model">{{ meta.model_text }}: <span>{{ meta.model }}</span></span>
+                <span class="product-full__model">{{ meta.model_text }}: <span>{{ meta.model }}</span></span>
             {% endif %}
 
             {% if meta.sku is defined %}
-                <span class="sku">{{ meta.sku_text }}: <span>{{ meta.sku }}</span></span>
+                <span class="product-full__sku">{{ meta.sku_text }}: <span>{{ meta.sku }}</span></span>
             {% endif %}
 
             {% if meta.global_ID is defined %}
-                <span class="global_ID {{ meta.global_ID.unit }}">
+                <span class="product-full__global-id {{ meta.global_ID.unit }}">
                     {{ meta.global_ID.name }}:
                     <span>{{ meta.global_ID.value }}</span>
                 </span>
             {% endif %}
         </div>
 
-        <div class="offer">
+        <div class="product-full__offer">
             {% if meta.price is defined and meta.price is iterable %}
                 {{ meta.price_text }}:
                 <span>{{ meta.price.value|number_format }}</span>
@@ -36,15 +36,15 @@
             {% endif %}
 
             {% if meta.availability is defined %}
-                <span class="availability {{ meta.availability.class }}">
+                <span class="product-full__availability {{ meta.availability.class }}">
                     ({{ meta.availability.value }})
                 </span>
             {% endif %}
 
             {% if meta.buy is defined %}
-                <span class="buy">
+                <span class="product-full__buy">
                     <a href="{{ url|insert_tag }}"
-                        class="hyperlink_txt"
+                        class="product-full__buy-link"
                         title="{{ linkTitle }}"
                         {% if target %}target="_blank" rel="nofollow"{% endif %}>
                         {{ titleText ?: url|insert_tag }}
@@ -55,7 +55,7 @@
     </div>
 
     {% if hasSummary %}
-        <div class="summary">
+        <div class="product-full__summary">
 
             {{ summary|raw }}
 
@@ -75,18 +75,18 @@
     {% endif %}
 
     {% if hasEnclosure %}
-        <div class="enclosure">
+        <div class="product-full__enclosure">
             {% for enclosure in enclosure %}
                 <p>
                     <img src="{{ enclosure.icon }}"
                          width="18"
                          height="18"
                          alt="{{ enclosure.mime }}"
-                         class="mime_icon">
+                         class="product-full__mime-icon">
 
                     <a href="{{ enclosure.href }}" title="{{ enclosure.title }}">
                         {{ enclosure.link }}
-                        <span class="size">({{ enclosure.filesize }})</span>
+                        <span class="product-full__size">({{ enclosure.filesize }})</span>
                     </a>
                 </p>
             {% endfor %}
