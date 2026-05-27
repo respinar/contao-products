@@ -20,6 +20,7 @@ use Contao\CoreBundle\Twig\FragmentTemplate;
 use Contao\StringUtil;
 use Respinar\ProductsBundle\Model\ProductModel;
 use Respinar\ProductsBundle\Product\ProductParser;
+use Symfony\Component\Asset\Packages;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,6 +34,7 @@ class ProductListController extends AbstractContentElementController
         private readonly ProductParser $productParser,
         private readonly ScopeMatcher $scopeMatcher,
         private readonly RequestStack $requestStack,
+        private readonly Packages $packages,
     ) {
     }
 
