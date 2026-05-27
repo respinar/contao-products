@@ -39,6 +39,8 @@ class ProductListController extends AbstractFrontendModuleController
     {
         $template->empty = $GLOBALS['TL_LANG']['MSC']['emptyCatalog'];
 
+        $template->products = [];
+
         $model->product_catalogs = AccessChecker::sortOutProtected(StringUtil::deserialize($model->product_catalogs));
 
         $objCatalogs = CatalogModel::findMultipleByIds($model->product_catalogs);
@@ -64,8 +66,6 @@ class ProductListController extends AbstractFrontendModuleController
         } else {
             $blnFeatured = null;
         }
-
-        $template->products = [];
 
         $intTotal = ProductModel::countPublishedByPids($model->product_catalogs, $blnFeatured);
 
