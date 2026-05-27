@@ -1,6 +1,6 @@
 {% use "@Contao/component/_figure.html.twig" %}
 
-<div class="product_short {{ class }}">
+<div class="product-short {{ class }}">
 
     {% if figure %}
         {% if link %}<a href="{{ link }}">{% endif %}
@@ -10,51 +10,51 @@
         {% if link %}</a>{% endif %}
     {% endif %}
 
-    <div class="tag_container">
+    <div class="product-short__tags">
         {% if featured %}
-            <div class="featured"></div>
+            <div class="product-short__tag product-short__tag--featured"></div>
         {% endif %}
 
         {% if new_product is defined and new_product %}
-            <div class="new"></div>
+            <div class="product-short__tag product-short__tag--new"></div>
         {% endif %}
     </div>
 
-    <div class="title">
+    <div class="product-short__title">
         {% if link %}<a href="{{ link }}">{% endif %}
 
         {{ title }}
 
         {% if link %}</a>{% endif %}
     </div>
-    
-    <div class="meta">
-        <div class="info">
+
+    <div class="product-short__meta">
+        <div class="product-short__info">
             <time datetime="{{ meta.datetime }}">{{ meta.date }}</time>
 
             {% if meta.brand is defined %}
-                <span class="brand">
+                <span class="product-short__brand">
                     {{ meta.brand_text }}:
                     <span>{{ meta.brand }}</span>
                 </span>
             {% endif %}
 
             {% if meta.model is defined %}
-                <span class="model">
+                <span class="product-short__model">
                     {{ meta.model_text }}:
                     <span>{{ meta.model }}</span>
                 </span>
             {% endif %}
 
             {% if meta.sku is defined %}
-                <span class="sku">
+                <span class="product-short__sku">
                     {{ meta.sku_text }}:
                     <span>{{ meta.sku }}</span>
                 </span>
             {% endif %}
 
             {% if meta.global_ID is defined %}
-                <span class="global_ID {{ meta.global_ID.unit }}">
+                <span class="product-short__global-id {{ meta.global_ID.unit }}">
                     {{ meta.global_ID.name }}:
                     <span>{{ meta.global_ID.value }}</span>
                 </span>
@@ -62,9 +62,9 @@
         </div>
 
         {% if meta.buy is defined %}
-            <div class="buy">
+            <div class="product-short__buy">
                 <a href="{{ url|insert_tag }}"
-                   class="hyperlink_txt"
+                   class="product-short__buy-link"
                    title="{{ linkTitle }}"
                    {% if target %}target="_blank" rel="nofollow"{% endif %}>
                     {{ titleText ?: url|insert_tag }}
