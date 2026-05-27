@@ -2,15 +2,15 @@
 
 {% block content %}
     {% if as_editor_view %}
-        <div class="product_list product_list--backend {{ data.product_listClass }}">
+        <div class="product-list product-list--backend {{ data.product_listClass }}">
             {% for product in products %}
-                <div class="product_list__item">{{ product|raw }}</div>
+                <div class="product-list__item">{{ product|raw }}</div>
             {% endfor %}
         </div>
     {% elseif products is empty %}
-        <p class="empty">{{ empty }}</p>
+        <p class="product-list__empty">{{ empty }}</p>
     {% else %}
-        <div class="product_list {{ data.product_listClass }}">
+        <div class="product-list {{ data.product_listClass }}">
             {{ products|join|raw }}
         </div>
     {% endif %}
