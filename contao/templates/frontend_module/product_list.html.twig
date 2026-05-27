@@ -3,9 +3,9 @@
 {% block content %}
 
     {% if products is empty %}
-        <p class="empty">{{ empty }}</p>
+        <p class="product-list__empty">{{ empty }}</p>
     {% else %}
-        <div class="product_list {{ data.product_listClass }}">
+        <div class="product-list {{ data.product_listClass }}">
             {{ products|join|raw }}
         </div>
 
