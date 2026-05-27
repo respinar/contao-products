@@ -1,7 +1,15 @@
 {% extends "@Contao/content_element/_base.html.twig" %}
 
 {% block content %}
-    <div class="product_list {{ data.product_listClass }}">
-        {{ products|join|raw }}
-    </div>
+    {% if as_editor_view %}
+        <div class="product_list product_list--backend {{ data.product_listClass }}">
+            {% for product in products %}
+                <div class="product_list__item">{{ product|raw }}</div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="product_list {{ data.product_listClass }}">
+            {{ products|join|raw }}
+        </div>
+    {% endif %}
 {% endblock %}
