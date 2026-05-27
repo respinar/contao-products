@@ -3,8 +3,10 @@
 {% block content %}
 
   {% if relateds is not empty %}
-      <div class="relateds_list {{ data.product_listClass }}">
-          {{ relateds|join|raw }}
+      <div class="related-products-list {{ data.product_listClass }}">
+          {% for related in relateds %}
+              <div class="related-products-list__item">{{ related|raw }}</div>
+          {% endfor %}
       </div>
   {% endif %}
 
