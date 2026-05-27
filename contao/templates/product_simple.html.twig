@@ -1,6 +1,6 @@
 {% use "@Contao/component/_figure.html.twig" %}
 
-<div class="product_short {{ class }}">
+<div class="product-simple {{ class }}">
 
     {% if figure %}
         {% if link %}<a href="{{ link }}">{% endif %}
@@ -10,7 +10,7 @@
         {% if link %}</a>{% endif %}
     {% endif %}
 
-    <div class="title">
+    <div class="product-simple__title">
         {{ title }}
     </div>
 
