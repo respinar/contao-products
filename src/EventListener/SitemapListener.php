@@ -12,20 +12,27 @@ declare(strict_types=1);
 
 namespace Respinar\ProductsBundle\EventListener;
 
-use Contao\CoreBundle\Event\ContaoCoreEvents;
 use Contao\CoreBundle\Event\SitemapEvent;
 use Contao\CoreBundle\Framework\ContaoFramework;
+use Contao\CoreBundle\Routing\ContentUrlGenerator;
+use Contao\CoreBundle\Security\ContaoCorePermissions;
 use Contao\Database;
 use Contao\PageModel;
 use Respinar\ProductsBundle\Model\CatalogModel;
 use Respinar\ProductsBundle\Model\ProductModel;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
+use Symfony\Component\Routing\Exception\ExceptionInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-#[AsEventListener(ContaoCoreEvents::SITEMAP)]
+#[AsEventListener]
 class SitemapListener
 {
-    public function __construct(private readonly ContaoFramework $framework)
-    {
+    public function __construct(
+        private readonly ContaoFramework $framework,
+        private readonly Security $security,
+        private readonly ContentUrlGenerator $urlGenerator,
+    ) {
     }
 
     public function __invoke(SitemapEvent $event): void
@@ -40,9 +47,13 @@ class SitemapListener
         $arrPages = [];
         $time = time();
 
-        // Get all catalog categories
-        $objCatalogs = $this->framework->getAdapter(CatalogModel::class)->findByProtected('');
-        // CatalogModel::findByProtected('');
+        if ($isMember = $this->security->isGranted('ROLE_MEMBER')) {
+            // Get all catalogs
+            $objCatalogs = $this->framework->getAdapter(CatalogModel::class)->findAll();
+        } else {
+            // Get all unprotected catalogs
+            $objCatalogs = $this->framework->getAdapter(CatalogModel::class)->findByProtected('');
+        }
 
         if (null === $objCatalogs) {
             return;
@@ -50,21 +61,24 @@ class SitemapListener
 
         // Walk through each catalog
         foreach ($objCatalogs as $objCatalog) {
-            // Skip catalog without target page
+            // Skip catalogs without target page
             if (!$objCatalog->jumpTo) {
                 continue;
             }
 
-            // Skip catalog categories outside the root nodes Changes to non-stick
-            // because of vatan.bio
-            if (!\in_array($objCatalog->jumpTo, $arrRoot, false)) {
+            // Skip catalogs outside the root nodes
+            if (!\in_array($objCatalog->jumpTo, $arrRoot, true)) {
+                continue;
+            }
+
+            if ($isMember && $objCatalog->protected && !$this->security->isGranted(ContaoCorePermissions::MEMBER_IN_GROUPS, $objCatalog->groups)) {
                 continue;
             }
 
             $objParent = $this->framework->getAdapter(PageModel::class)->findWithDetails($objCatalog->jumpTo);
 
             // The target page does not exist
-            if (null === $objParent) {
+            if (!$objParent) {
                 continue;
             }
 
@@ -74,7 +88,7 @@ class SitemapListener
             }
 
             // The target page is protected (see #8416)
-            if ($objParent->protected) {
+            if ($objParent->protected && !$this->security->isGranted(ContaoCorePermissions::MEMBER_IN_GROUPS, $objParent->groups)) {
                 continue;
             }
 
@@ -83,7 +97,7 @@ class SitemapListener
                 continue;
             }
 
-            // Get the items
+            // Get the products
             $objProducts = $this->framework->getAdapter(ProductModel::class)->findPublishedDefaultByPid($objCatalog->id);
 
             if (null === $objProducts) {
@@ -91,19 +105,15 @@ class SitemapListener
             }
 
             foreach ($objProducts as $objProduct) {
-                $arrPages[] = $objParent->getAbsoluteUrl('/'.($objProduct->alias ?: $objProduct->id));
+                try {
+                    $arrPages[] = $this->urlGenerator->generate($objProduct, [], UrlGeneratorInterface::ABSOLUTE_URL);
+                } catch (ExceptionInterface) {
+                }
             }
         }
 
-        $sitemap = $event->getDocument();
-
         foreach ($arrPages as $strUrl) {
-            $urlSet = $sitemap->childNodes[0];
-
-            $loc = $sitemap->createElement('loc', $strUrl);
-            $urlEl = $sitemap->createElement('url');
-            $urlEl->appendChild($loc);
-            $urlSet->appendChild($urlEl);
+            $event->addUrlToDefaultUrlSet($strUrl);
         }
     }
 }
