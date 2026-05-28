@@ -62,12 +62,11 @@ class ProductDetailController extends AbstractFrontendModuleController
         }
 
         $objCatalog = $objProduct->getRelated('pid');
-        if (!$objCatalog) {
-            $template->referer = $this->contentUrlGenerator->generate(PageModel::findById($objCatalog->overviewPage));
-        }
 
         if ($model->overviewPage) {
             $template->referer = $this->contentUrlGenerator->generate(PageModel::findById($model->overviewPage));
+        } elseif ($objCatalog && $objCatalog->overviewPage) {
+            $template->referer = $this->contentUrlGenerator->generate(PageModel::findById($objCatalog->overviewPage));
         }
 
         $template->back = $model->customLabel ?: $GLOBALS['TL_LANG']['MSC']['productOverview'];
