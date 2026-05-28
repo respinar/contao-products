@@ -47,6 +47,10 @@ final class ProductParser
         $template->hasText = false;
         $template->hasEnclosure = false;
 
+        $template->new_product = false;
+        $template->summary = '';
+        $template->text = '';
+
         $class = '';
 
         if ($model->product_singleClass) {
