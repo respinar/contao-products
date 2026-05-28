@@ -33,10 +33,7 @@ final class MetaGenerator
         $return = [];
 
         $return['datetime'] = date('Y-m-d\TH:i:sP', $product->date);
-
-        if ($objPage) {
-            $return['date'] = Date::parse($objPage->datimFormat, $product->date);
-        }
+        $return['date'] = $objPage ? Date::parse($objPage->datimFormat, $product->date) : '';
 
         $price = StringUtil::deserialize($product->price);
 
@@ -50,7 +47,7 @@ final class MetaGenerator
             $return['price_text'] = $GLOBALS['TL_LANG']['MSC']['price_text'];
         }
 
-        if (isset($product->availability)) {
+        if ($product->availability) {
             $return['availability'] = [
                 'class' => $product->availability,
                 'value' => $GLOBALS['TL_LANG']['MSC'][$product->availability],
@@ -66,22 +63,22 @@ final class MetaGenerator
             $return['global_ID'] = $globalId;
         }
 
-        if (isset($product->model)) {
+        if ($product->model) {
             $return['model'] = $product->model;
             $return['model_text'] = $GLOBALS['TL_LANG']['MSC']['model_text'];
         }
 
-        if (isset($product->brand)) {
+        if ($product->brand) {
             $return['brand'] = $product->brand;
             $return['brand_text'] = $GLOBALS['TL_LANG']['MSC']['brand_text'];
         }
 
-        if (isset($product->sku)) {
+        if ($product->sku) {
             $return['sku'] = $product->sku;
             $return['sku_text'] = $GLOBALS['TL_LANG']['MSC']['sku_text'];
         }
 
-        if (isset($product->url)) {
+        if ($product->url) {
             $return['buy'] = $product->url;
         }
 
