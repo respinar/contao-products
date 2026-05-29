@@ -410,9 +410,9 @@ class tl_product extends Backend
     /**
      * Auto-generate the product alias if it has not been set yet.
      *
-     * The alias only has to be unique within the products that resolve to the
-     * same reader page (jumpTo), so the same product may use the same alias in
-     * another catalog/language with a different reader page.
+     * The alias only has to be unique within the products that resolve to the same
+     * reader page (jumpTo), so the same product may use the same alias in another
+     * catalog/language with a different reader page.
      */
     public function generateAlias(string $varValue, DataContainer $dc): string
     {
@@ -428,19 +428,17 @@ class tl_product extends Backend
 
         $connection = System::getContainer()->get('database_connection');
 
-        // The alias must be unique among all products whose catalog points to
-        // the same reader page (jumpTo) as the current product.
+        // The alias must be unique among all products whose catalog points to the same
+        // reader page (jumpTo) as the current product.
         $jumpTo = (int) $connection->fetchOne(
             'SELECT jumpTo FROM tl_product_catalog WHERE id = ?',
             [$dc->activeRecord->pid],
         );
 
-        $aliasExists = static function (string $alias) use ($connection, $dc, $jumpTo): bool {
-            return 0 < (int) $connection->fetchOne(
-                'SELECT COUNT(*) FROM tl_product WHERE alias = ? AND id != ? AND pid IN (SELECT id FROM tl_product_catalog WHERE jumpTo = ?)',
-                [$alias, $dc->id, $jumpTo],
-            );
-        };
+        $aliasExists = static fn (string $alias): bool => 0 < (int) $connection->fetchOne(
+            'SELECT COUNT(*) FROM tl_product WHERE alias = ? AND id != ? AND pid IN (SELECT id FROM tl_product_catalog WHERE jumpTo = ?)',
+            [$alias, $dc->id, $jumpTo],
+        );
 
         if ($autoAlias) {
             // Make sure the generated alias is unique within the same reader page
