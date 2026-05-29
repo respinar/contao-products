@@ -76,8 +76,8 @@ final class ProductParser
 
         $template->meta = $this->meta_generator->generate($product);
 
-        // The link to the product reader page is always available, regardless
-        // of whether the product has any content elements
+        // The link to the product reader page is always available, regardless of whether
+        // the product has any content elements
         $template->link = $this->contentUrlGenerator->generate($product, [], UrlGeneratorInterface::ABSOLUTE_PATH);
 
         if (null !== $product->summary) {
