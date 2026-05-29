@@ -11,7 +11,9 @@
     {% endif %}
 
     <div class="product-simple__title">
-        {{ title }}
+        {% if link %}<a href="{{ link }}">{% endif %}
+          {{ title }}
+        {% if link %}</a>{% endif %}
     </div>
 
 </div>
