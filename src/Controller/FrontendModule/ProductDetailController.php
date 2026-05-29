@@ -125,9 +125,9 @@ class ProductDetailController extends AbstractFrontendModuleController
             $objConfig->bbcode = $objCatalog->bbcode;
             $objConfig->moderate = $objCatalog->moderate;
 
-            // Comments::addCommentsToTemplate() requires a legacy FrontendTemplate, so
-            // we let it populate a throw-away FrontendTemplate and copy the rendered
-            // data onto our Twig-based fragment template.
+            // Comments::addCommentsToTemplate() requires a legacy FrontendTemplate, so we
+            // let it populate a throw-away FrontendTemplate and copy the rendered data onto
+            // our Twig-based fragment template.
             $objCommentTemplate = new FrontendTemplate();
 
             $objComment->addCommentsToTemplate($objCommentTemplate, $objConfig, 'tl_product', $objProduct->id, $arrNotifies);
