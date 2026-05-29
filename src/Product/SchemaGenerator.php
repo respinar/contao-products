@@ -12,9 +12,9 @@ declare(strict_types=1);
 
 namespace Respinar\ProductsBundle\Product;
 
-use Contao\StringUtil;
 use Contao\CoreBundle\Routing\ContentUrlGenerator;
 use Contao\CoreBundle\String\HtmlDecoder;
+use Contao\StringUtil;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class SchemaGenerator
