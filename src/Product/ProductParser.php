@@ -43,6 +43,10 @@ final class ProductParser
 
         $template->setData($product->row());
 
+        $template->model_text = $GLOBALS['TL_LANG']['MSC']['model_text'];
+        $template->brand_text = $GLOBALS['TL_LANG']['MSC']['brand_text'];
+        $template->sku_text = $GLOBALS['TL_LANG']['MSC']['sku_text'];
+
         $template->hasSummary = false;
         $template->hasText = false;
         $template->hasEnclosure = false;
