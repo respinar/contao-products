@@ -63,25 +63,6 @@ final class MetaGenerator
             $return['global_ID'] = $globalId;
         }
 
-        if ($product->model) {
-            $return['model'] = $product->model;
-            $return['model_text'] = $GLOBALS['TL_LANG']['MSC']['model_text'];
-        }
-
-        if ($product->brand) {
-            $return['brand'] = $product->brand;
-            $return['brand_text'] = $GLOBALS['TL_LANG']['MSC']['brand_text'];
-        }
-
-        if ($product->sku) {
-            $return['sku'] = $product->sku;
-            $return['sku_text'] = $GLOBALS['TL_LANG']['MSC']['sku_text'];
-        }
-
-        if ($product->url) {
-            $return['buy'] = $product->url;
-        }
-
         return $return;
     }
 }
