@@ -113,6 +113,9 @@
       <trans-unit id="MSC.relateds_headline">
         <source>Related products</source>
       </trans-unit>
+      <trans-unit id="MSC.productPicker">
+        <source>Products</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

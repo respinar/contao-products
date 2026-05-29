@@ -146,6 +146,10 @@
         <source>Related products</source>
         <target>محصولات مرتبط</target>
       </trans-unit>
+      <trans-unit id="MSC.productPicker">
+        <source>Products</source>
+         <target>محصولات</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
