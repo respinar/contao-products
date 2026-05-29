@@ -8,16 +8,16 @@
         <div class="product-full__info">
             <time datetime="{{ meta.datetime }}">{{ meta.date }}</time>
 
-            {% if meta.brand is defined %}
-                <span class="product-full__brand">{{ meta.brand_text }}: <span>{{ meta.brand }}</span></span>
+            {% if brand %}
+                <span class="product-full__brand">{{ brand_text }}: <span>{{ brand }}</span></span>
             {% endif %}
 
-            {% if meta.model is defined %}
-                <span class="product-full__model">{{ meta.model_text }}: <span>{{ meta.model }}</span></span>
+            {% if model %}
+                <span class="product-full__model">{{ model_text }}: <span>{{ model }}</span></span>
             {% endif %}
 
-            {% if meta.sku is defined %}
-                <span class="product-full__sku">{{ meta.sku_text }}: <span>{{ meta.sku }}</span></span>
+            {% if sku %}
+                <span class="product-full__sku">{{ sku_text }}: <span>{{ sku }}</span></span>
             {% endif %}
 
             {% if meta.global_ID is defined %}
@@ -41,7 +41,7 @@
                 </span>
             {% endif %}
 
-            {% if meta.buy is defined %}
+            {% if url %}
                 <span class="product-full__buy">
                     <a href="{{ url|insert_tag }}"
                         class="product-full__buy-link"
