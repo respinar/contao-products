@@ -547,7 +547,7 @@ class tl_product extends Backend
         foreach ($rows as $objItems) {
             $id = (int) $objItems['id'];
 
-            if ($id === $intCurrent || in_array($id, array_map('intval', $usedIds), true)) {
+            if ($id === $intCurrent || in_array($id, array_map(intval(...), $usedIds), true)) {
                 continue;
             }
 
