@@ -37,7 +37,7 @@ class ChangelanguageNavigationListener
     {
         $current = $this->findCurrent();
 
-        if (null === $current) {
+        if (!$current) {
             return;
         }
 
@@ -92,7 +92,7 @@ class ChangelanguageNavigationListener
             [$mainId, $mainId, $masterId, $masterId, $targetPage->id],
         );
 
-        if (null === $translated) {
+        if (!$translated) {
             $navigationItem->setIsDirectFallback(false);
 
             return;
