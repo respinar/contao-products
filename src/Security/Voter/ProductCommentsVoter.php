@@ -91,6 +91,6 @@ class ProductCommentsVoter implements VoterInterface, CacheableVoterInterface
             return false;
         }
 
-        return \in_array((int) $catalogId, array_map('intval', $products), true);
+        return \in_array((int) $catalogId, array_map(intval(...), $products), true);
     }
 }
