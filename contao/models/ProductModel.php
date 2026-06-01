@@ -83,7 +83,7 @@ class ProductModel extends Model
         }
 
         $t = static::$strTable;
-        $arrColumns = ["($t.id=? OR $t.alias=?) AND $t.pid IN(".implode(',', array_map('intval', $arrPids)).')'];
+        $arrColumns = ["($t.id=? OR $t.alias=?) AND $t.pid IN(".implode(',', array_map(intval(...), $arrPids)).')'];
 
         if (!static::isPreviewMode($arrOptions)) {
             $time = time();
@@ -111,7 +111,7 @@ class ProductModel extends Model
         }
 
         $t = static::$strTable;
-        $arrColumns = ["$t.id IN(".implode(',', array_map('intval', $arrIds)).')'];
+        $arrColumns = ["$t.id IN(".implode(',', array_map(intval(...), $arrIds)).')'];
 
         if (true === $blnFeatured) {
             $arrColumns[] = "$t.featured=1";
@@ -152,7 +152,7 @@ class ProductModel extends Model
         }
 
         $t = static::$strTable;
-        $arrColumns = ["$t.pid IN(".implode(',', array_map('intval', $arrPids)).')'];
+        $arrColumns = ["$t.pid IN(".implode(',', array_map(intval(...), $arrPids)).')'];
 
         if (true === $blnFeatured) {
             $arrColumns[] = "$t.featured=1";
@@ -191,7 +191,7 @@ class ProductModel extends Model
         }
 
         $t = static::$strTable;
-        $arrColumns = ["$t.pid IN(".implode(',', array_map('intval', $arrPids)).')'];
+        $arrColumns = ["$t.pid IN(".implode(',', array_map(intval(...), $arrPids)).')'];
 
         if (true === $blnFeatured) {
             $arrColumns[] = "$t.featured=1";
@@ -274,7 +274,7 @@ class ProductModel extends Model
         }
 
         $t = static::$strTable;
-        $arrColumns = ["$t.date>=? AND $t.date<=? AND $t.pid IN(".implode(',', array_map('intval', $arrPids)).')'];
+        $arrColumns = ["$t.date>=? AND $t.date<=? AND $t.pid IN(".implode(',', array_map(intval(...), $arrPids)).')'];
 
         if (!static::isPreviewMode($arrOptions)) {
             $time = time();
@@ -306,7 +306,7 @@ class ProductModel extends Model
         }
 
         $t = static::$strTable;
-        $arrColumns = ["$t.date>=? AND $t.date<=? AND $t.pid IN(".implode(',', array_map('intval', $arrPids)).')'];
+        $arrColumns = ["$t.date>=? AND $t.date<=? AND $t.pid IN(".implode(',', array_map(intval(...), $arrPids)).')'];
 
         if (!static::isPreviewMode($arrOptions)) {
             $time = time();
