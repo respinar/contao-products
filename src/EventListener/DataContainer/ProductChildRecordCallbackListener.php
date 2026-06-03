@@ -15,6 +15,7 @@ namespace Respinar\ProductsBundle\EventListener\DataContainer;
 use Contao\CoreBundle\DependencyInjection\Attribute\AsCallback;
 use Contao\FilesModel;
 use Contao\Image;
+use Contao\StringUtil;
 
 #[AsCallback(table: 'tl_product', target: 'list.sorting.child_record')]
 class ProductChildRecordCallbackListener
@@ -41,7 +42,7 @@ class ProductChildRecordCallbackListener
         return \sprintf(
             '<div class="tl_content_left">%s%s</div>',
             $featuredImage,
-            htmlspecialchars($row['title'] ?? ''),
+            StringUtil::specialchars((string) ($row['title'] ?? '')),
         );
     }
 }
