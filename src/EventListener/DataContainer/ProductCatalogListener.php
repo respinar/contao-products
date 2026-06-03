@@ -14,18 +14,28 @@ namespace Respinar\ProductsBundle\EventListener\DataContainer;
 
 use Contao\BackendUser;
 use Contao\CoreBundle\DependencyInjection\Attribute\AsCallback;
+use Contao\DataContainer;
 use Contao\Input;
+use Doctrine\DBAL\Connection;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-#[AsCallback(table: 'tl_product_catalog', target: 'config.onload')]
-class ProductCatalogOnLoadListener
+/**
+ * Data container callbacks for the tl_product_catalog table.
+ */
+class ProductCatalogListener
 {
-    public function __construct(private readonly TokenStorageInterface $tokenStorage)
-    {
+    public function __construct(
+        private readonly TokenStorageInterface $tokenStorage,
+        private readonly Connection $connection,
+    ) {
     }
 
-    public function __invoke(): void
+    /**
+     * Check permissions for non-admin users.
+     */
+    #[AsCallback(table: 'tl_product_catalog', target: 'config.onload')]
+    public function checkPermission(): void
     {
         $user = $this->tokenStorage->getToken()?->getUser();
 
@@ -91,5 +101,27 @@ class ProductCatalogOnLoadListener
 
                 break;
         }
+    }
+
+    /**
+     * Return all catalogs that can be used as the master catalog.
+     *
+     * @return array<int, string>
+     */
+    #[AsCallback(table: 'tl_product_catalog', target: 'fields.master.options')]
+    public function getMasterCatalogs(DataContainer $dc): array
+    {
+        $options = [];
+
+        $rows = $this->connection->fetchAllAssociative(
+            'SELECT id, title FROM tl_product_catalog WHERE id != ? ORDER BY title',
+            [$dc->id],
+        );
+
+        foreach ($rows as $row) {
+            $options[$row['id']] = $row['title'];
+        }
+
+        return $options;
     }
 }
