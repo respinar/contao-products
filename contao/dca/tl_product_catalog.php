@@ -10,10 +10,8 @@ declare(strict_types=1);
  * @license MIT
  */
 
-use Contao\Backend;
 use Contao\DataContainer;
 use Contao\DC_Table;
-use Contao\System;
 use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
 
 /*
@@ -82,7 +80,6 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = [
         'master' => [
             'exclude' => true,
             'inputType' => 'select',
-            'options_callback' => ['tl_product_catalog', 'getMasterCatalogs'],
             'eval' => [
                 'includeBlankOption' => true,
                 'blankOptionLabel' => &$GLOBALS['TL_LANG']['tl_product_catalog']['isMaster'],
@@ -118,28 +115,3 @@ $GLOBALS['TL_DCA']['tl_product_catalog'] = [
         ],
     ],
 ];
-
-/**
- * Provide miscellaneous methods that are used by the data configuration array.
- */
-class tl_product_catalog extends Backend
-{
-    /**
-     * Return all catalogs that can be used as the master catalog.
-     *
-     * @return array<int, string>
-     */
-    public function getMasterCatalogs(DataContainer $dc): array
-    {
-        $options = [];
-
-        $connection = System::getContainer()->get('database_connection');
-        $rows = $connection->fetchAllAssociative('SELECT id, title FROM tl_product_catalog WHERE id!=? ORDER BY title', [$dc->id]);
-
-        foreach ($rows as $row) {
-            $options[$row['id']] = $row['title'];
-        }
-
-        return $options;
-    }
-}
