@@ -14,12 +14,16 @@ namespace Respinar\ProductsBundle\EventListener\DataContainer;
 
 use Contao\CoreBundle\DataContainer\PaletteManipulator;
 use Contao\CoreBundle\DependencyInjection\Attribute\AsHook;
-use Contao\System;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 #[AsHook('loadDataContainer')]
 class AddCommentFieldsListener
 {
     private const TABLE = 'tl_product_catalog';
+
+    public function __construct(private readonly ParameterBagInterface $parameterBag)
+    {
+    }
 
     public function __invoke(string $table): void
     {
@@ -27,7 +31,9 @@ class AddCommentFieldsListener
             return;
         }
 
-        if (!isset(System::getContainer()->getParameter('kernel.bundles')['ContaoCommentsBundle'])) {
+        $bundles = $this->parameterBag->get('kernel.bundles');
+
+        if (!isset($bundles['ContaoCommentsBundle'])) {
             return;
         }
 
