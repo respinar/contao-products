@@ -11,7 +11,7 @@ use Contao\PageModel;
 use Respinar\ProductsBundle\Model\CatalogModel;
 use Respinar\ProductsBundle\Model\ProductModel;
 
-class ProductResolver implements ContentUrlResolverInterface
+final class ProductResolver implements ContentUrlResolverInterface
 {
     public function __construct(private readonly ContaoFramework $framework)
     {
