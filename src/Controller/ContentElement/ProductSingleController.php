@@ -39,7 +39,7 @@ class ProductSingleController extends AbstractContentElementController
     {
         $objProduct = ProductModel::findPublishedByIdOrAlias($model->product);
 
-        if (null === $objProduct) {
+        if (!$objProduct) {
             return $template->getResponse();
         }
 
