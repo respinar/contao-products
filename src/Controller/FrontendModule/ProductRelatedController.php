@@ -51,10 +51,12 @@ class ProductRelatedController extends AbstractFrontendModuleController
             return new Response('');
         }
 
-        $template->referer = $this->contentUrlGenerator->generate(PageModel::findById($objProduct->getRelated('pid')->overviewPage));
+        $objCatalog = $objProduct->getRelated('pid');
 
         if ($model->overviewPage) {
             $template->referer = $this->contentUrlGenerator->generate(PageModel::findById($model->overviewPage));
+        } elseif ($objCatalog?->overviewPage) {
+            $template->referer = $this->contentUrlGenerator->generate(PageModel::findById($objCatalog->overviewPage));
         }
 
         $template->back = $model->customLabel ?: $GLOBALS['TL_LANG']['MSC']['productOverview'];
