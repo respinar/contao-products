@@ -30,7 +30,6 @@ class PreviewUrlCreateListener
 
     public function __invoke(PreviewUrlCreateEvent $event): void
     {
-        // Do something
         if (!$this->framework->isInitialized() || 'products' !== $event->getKey()) {
             return;
         }
@@ -58,7 +57,7 @@ class PreviewUrlCreateListener
      */
     private function getId(PreviewUrlCreateEvent $event, Request $request): bool|float|int|string|null
     {
-        // Overwrite the ID if the news settings are edited
+        // Overwrite the ID if the product is edited
         if ('tl_product' === $request->query->get('table') && 'edit' === $request->query->get('act')) {
             return $request->query->get('id');
         }
