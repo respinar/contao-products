@@ -14,15 +14,23 @@ namespace Respinar\ProductsBundle\Product;
 
 use Contao\CoreBundle\Security\ContaoCorePermissions;
 use Contao\StringUtil;
-use Contao\System;
 use Respinar\ProductsBundle\Model\CatalogModel;
+use Symfony\Bundle\SecurityBundle\Security;
 
 final class AccessChecker
 {
+    public function __construct(private readonly Security $security)
+    {
+    }
+
     /**
      * Sort out protected catalogs.
+     *
+     * @param array<int> $catalogs
+     *
+     * @return array<int>
      */
-    public static function sortOutProtected(array $catalogs): array
+    public function sortOutProtected(array $catalogs): array
     {
         if ([] === $catalogs) {
             return $catalogs;
@@ -34,14 +42,12 @@ final class AccessChecker
             return [];
         }
 
-        $security = System::getContainer()->get('security.helper');
-
         $allowedCatalogs = [];
 
         while ($catalogModel->next()) {
             if (
                 $catalogModel->protected
-                && !$security->isGranted(
+                && !$this->security->isGranted(
                     ContaoCorePermissions::MEMBER_IN_GROUPS,
                     StringUtil::deserialize($catalogModel->groups, true),
                 )
