@@ -145,9 +145,6 @@ final class ProductParser
             );
         }
 
-        $template->featured_text = 'Featured';
-        $template->new_text = 'New';
-
         $template->schemaOrgData = $this->schema_generator->generate($product);
 
         return $template->parse();
