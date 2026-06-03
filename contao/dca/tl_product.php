@@ -10,16 +10,10 @@ declare(strict_types=1);
  * @license MIT
  */
 
-use Contao\Backend;
-use Contao\BackendUser;
 use Contao\Config;
 use Contao\DataContainer;
 use Contao\DC_Table;
-use Contao\Input;
-use Contao\StringUtil;
-use Contao\System;
 use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /*
  * Table tl_product
@@ -32,9 +26,6 @@ $GLOBALS['TL_DCA']['tl_product'] = [
         'ctable' => ['tl_content'],
         'switchToEdit' => true,
         'enableVersioning' => true,
-        'onload_callback' => [
-            ['tl_product', 'checkPermission'],
-        ],
         'sql' => [
             'keys' => [
                 'id' => 'primary',
@@ -104,7 +95,6 @@ $GLOBALS['TL_DCA']['tl_product'] = [
         'languageMain' => [
             'exclude' => true,
             'inputType' => 'select',
-            'options_callback' => ['tl_product', 'getLanguageMainOptions'],
             'eval' => [
                 'includeBlankOption' => true,
                 'blankOptionLabel' => &$GLOBALS['TL_LANG']['tl_product']['languageMain'][2],
@@ -142,7 +132,6 @@ $GLOBALS['TL_DCA']['tl_product'] = [
                 'maxlength' => 128,
                 'tl_class' => 'w50 clr',
             ],
-            'save_callback' => [['tl_product', 'generateAlias']],
             'sql' => ['type' => 'string', 'length' => 255, 'default' => '', 'platformOptions' => ['collation' => 'utf8mb4_bin']],
         ],
 
@@ -357,7 +346,6 @@ $GLOBALS['TL_DCA']['tl_product'] = [
         'related' => [
             'exclude' => false,
             'inputType' => 'checkbox',
-            'options_callback' => ['tl_product', 'getProducts'],
             'eval' => ['includeBlankOption' => true, 'multiple' => true],
             'sql' => ['type' => 'blob', 'length' => AbstractMySQLPlatform::LENGTH_LIMIT_BLOB, 'notnull' => false],
         ],
@@ -401,199 +389,3 @@ $GLOBALS['TL_DCA']['tl_product'] = [
         ],
     ],
 ];
-
-/**
- * Provide miscellaneous methods that are used by the data configuration array.
- */
-class tl_product extends Backend
-{
-    /**
-     * Auto-generate the product alias if it has not been set yet.
-     *
-     * The alias only has to be unique within the products that resolve to the same
-     * reader page (jumpTo), so the same product may use the same alias in another
-     * catalog/language with a different reader page.
-     */
-    public function generateAlias(string $varValue, DataContainer $dc): string
-    {
-        $autoAlias = false;
-
-        // Generate alias if there is none
-        if ('' === $varValue) {
-            $autoAlias = true;
-            $varValue = StringUtil::standardize(
-                StringUtil::restoreBasicEntities($dc->activeRecord->title),
-            );
-        }
-
-        $connection = System::getContainer()->get('database_connection');
-
-        // The alias must be unique among all products whose catalog points to the same
-        // reader page (jumpTo) as the current product.
-        $jumpTo = (int) $connection->fetchOne(
-            'SELECT jumpTo FROM tl_product_catalog WHERE id = ?',
-            [$dc->activeRecord->pid],
-        );
-
-        $aliasExists = static fn (string $alias): bool => 0 < (int) $connection->fetchOne(
-            'SELECT COUNT(*) FROM tl_product WHERE alias = ? AND id != ? AND pid IN (SELECT id FROM tl_product_catalog WHERE jumpTo = ?)',
-            [$alias, $dc->id, $jumpTo],
-        );
-
-        if ($autoAlias) {
-            // Make sure the generated alias is unique within the same reader page
-            $base = $varValue;
-            $i = 0;
-
-            while ($aliasExists($varValue)) {
-                $varValue = $base.'-'.++$i;
-            }
-        } elseif ($aliasExists($varValue)) {
-            throw new RuntimeException(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
-        }
-
-        return $varValue;
-    }
-
-    /**
-     * Generate a product row and return it as HTML string.
-     *
-     * @param array $arrRow - the product row data as an associative array
-     */
-    public function generateProductsRow(array $arrRow): string
-    {
-        // $objImage = FilesModel::findByPk($arrRow['singleSRC']); if ($objImage !==
-        // null) { 	$strImage = Image::getHtml(Image::get($objImage->path, '60', '60',
-        // 'center_center')); } return '<div><div style="float:left;
-        // margin-right:10px;">'.$strImage.'</div><p><strong>'.
-        // $arrRow['title'].'</strong></p><p> Brand: '.$arrRow['brand'] .' &emsp; Model:
-        // '. $arrRow['model']. ' &emsp; SKU: '. $arrRow['sku'] . ' &emsp; Visit: '.
-        // $arrRow['visit'] .'</p></div>';
-
-        return '<div><p><strong>'.
-          $arrRow['title'].
-          '</strong></p><p> Brand: '.
-          $arrRow['brand'].
-          ' &emsp; Model: '.
-          $arrRow['model'].
-          ' &emsp; SKU: '.
-          $arrRow['sku'].
-          ' &emsp; Visit: '.
-          $arrRow['visit'].
-          '</p></div>';
-    }
-
-    /**
-     * Get records from the master category.
-     */
-    public function getProducts(DataContainer $dc): array
-    {
-        $arrItems = [];
-
-        $connection = System::getContainer()->get('database_connection');
-        $rows = $connection->fetchAllAssociative('SELECT * FROM tl_product WHERE pid = ? ORDER BY date DESC', [$dc->activeRecord->pid]);
-
-        foreach ($rows as $objItems) {
-            if ($objItems['id'] !== $dc->activeRecord->id) {
-                $arrItems[$objItems['id']] = $objItems['title'];
-
-                if ($objItems['model']) {
-                    $arrItems[$objItems['id']] .= ' [model: '.$objItems['model'].']';
-                }
-
-                if ($objItems['sku']) {
-                    $arrItems[$objItems['id']] .= ' (sku: '.$objItems['sku'].')';
-                }
-            }
-        }
-
-        return $arrItems;
-    }
-
-    /**
-     * Get products from the master catalog to link as language main.
-     *
-     * Only offers master products that have not already been assigned to another
-     * product in the same catalog, so each master product can only be translated once
-     * per language.
-     */
-    public function getLanguageMainOptions(DataContainer $dc): array
-    {
-        if (null === $dc->activeRecord) {
-            return [];
-        }
-
-        $connection = System::getContainer()->get('database_connection');
-
-        $catalog = $connection->fetchAssociative('SELECT * FROM tl_product_catalog WHERE id = ?', [$dc->activeRecord->pid]);
-
-        if (false === $catalog) {
-            return [];
-        }
-
-        // Use the master catalog (or the current catalog if it has none)
-        $intMaster = (int) $catalog['master'] ?: (int) $catalog['id'];
-        $intCurrent = (int) $dc->activeRecord->id;
-
-        // Exclude master products that are already used by another product in this catalog
-        $usedIds = $connection->fetchFirstColumn(
-            'SELECT languageMain FROM tl_product WHERE pid = ? AND id != ? AND languageMain != 0',
-            [$dc->activeRecord->pid, $intCurrent],
-        );
-
-        $arrOptions = [];
-        $rows = $connection->fetchAllAssociative('SELECT id, title, model, sku FROM tl_product WHERE pid = ? ORDER BY title', [$intMaster]);
-
-        foreach ($rows as $objItems) {
-            $id = (int) $objItems['id'];
-
-            if ($id === $intCurrent || in_array($id, array_map(intval(...), $usedIds), true)) {
-                continue;
-            }
-
-            $label = $objItems['title'];
-
-            if ($objItems['model']) {
-                $label .= ' [model: '.$objItems['model'].']';
-            }
-
-            if ($objItems['sku']) {
-                $label .= ' (sku: '.$objItems['sku'].')';
-            }
-
-            $arrOptions[$id] = $label;
-        }
-
-        return $arrOptions;
-    }
-
-    public function checkPermission(): void
-    {
-        $u = BackendUser::getInstance();
-        if ($u->isAdmin) {
-            return;
-        }
-        $u->products = is_array($u->products) && $u->products ? $u->products : [0];
-        $a = Input::get('act');
-        $i = Input::get('id');
-
-        switch ($a) {
-            case 'create':
-                if (!in_array(Input::get('pid') ?? $i, $u->products, true)) {
-                    throw new AccessDeniedException('Not enough permissions to create products in this catalog.');
-                }
-                break;
-            case 'edit': case 'copy': case 'cut': case 'delete': case 'show': case 'toggle':
-                $r = System::getContainer()->get('database_connection')->fetchAssociative('SELECT pid FROM tl_product WHERE id=?', [$i]);
-                if (!$r || !in_array($r['pid'], $u->products, true)) {
-                    throw new AccessDeniedException('Not enough permissions to '.$a.' product ID '.$i.'.');
-                }
-                break;
-            case 'paste':
-                if (!in_array(Input::get('pid'), $u->products, true)) {
-                    throw new AccessDeniedException('Not enough permissions to paste products into this catalog.');
-                }
-                break;
-        }
-    }
-}
