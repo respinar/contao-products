@@ -159,24 +159,11 @@ class ChangelanguageNavigationListener
 
     private function getAutoItem(): string
     {
-        $strKey = $this->getUrlKey();
-
-        if (
-            !isset($GLOBALS['TL_CONFIG']['useAutoItem'])
-            || (
-                $GLOBALS['TL_CONFIG']['useAutoItem']
-                && isset($GLOBALS['TL_AUTO_ITEM'])
-                && \in_array($strKey, $GLOBALS['TL_AUTO_ITEM'], true)
-            )
-        ) {
-            $strKey = 'auto_item';
-        }
-
-        return (string) Input::get($strKey, false, true);
+        return (string) Input::get('auto_item', false, true);
     }
 
     private function getUrlKey(): string
     {
-        return isset($GLOBALS['TL_CONFIG']['useAutoItem']) ? 'items' : 'auto_item';
+        return 'auto_item';
     }
 }
