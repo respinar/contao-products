@@ -31,8 +31,10 @@ class ProductListController extends AbstractFrontendModuleController
 {
     public const TYPE = 'products_list';
 
-    public function __construct(private readonly ProductParser $productParser)
-    {
+    public function __construct(
+        private readonly ProductParser $productParser,
+        private readonly AccessChecker $accessChecker,
+    ) {
     }
 
     protected function getResponse(FragmentTemplate $template, ModuleModel $model, Request $request): Response
@@ -41,7 +43,7 @@ class ProductListController extends AbstractFrontendModuleController
 
         $template->products = [];
 
-        $model->product_catalogs = AccessChecker::sortOutProtected(StringUtil::deserialize($model->product_catalogs));
+        $model->product_catalogs = $this->accessChecker->sortOutProtected(StringUtil::deserialize($model->product_catalogs));
 
         $objCatalogs = CatalogModel::findMultipleByIds($model->product_catalogs);
 
@@ -84,7 +86,7 @@ class ProductListController extends AbstractFrontendModuleController
 
             // Get the current page
             $id = 'page_n'.$model->id;
-            $page = $request->query->get($id, '1');
+            $page = (int) ($request->query->get($id, '1') ?: 1);
 
             // Do not index or cache the page if the page number is outside the range
             if ($page < 1 || $page > max(ceil($total / $model->perPage), 1)) {
