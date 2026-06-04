@@ -10,6 +10,7 @@ A simple and flexible products extension for [Contao CMS](https://contao.org) 5.
 - **Content elements** – Product List, Product Catalog, and Single Product
 - **Twig templates** – Fully customizable templates for lists and detail views
 - **Comments support** – Optionally integrate with `contao/comments-bundle`
+- **Multilingual support** – Optionally integrate with `terminal42/contao-changelanguage`
 - **Access control** – Catalog-level protection with member group restrictions
 
 ## Requirements
@@ -36,6 +37,18 @@ vendor/bin/contao-console cache:clear
 2. **Add products** to the catalog.
 3. **Create a frontend module** (e.g., *Product List*) and assign it to a page layout, or insert a *Product List* content element into an article.
 4. **Customize templates** by copying Twig templates from `contao/templates/` to your theme.
+
+## Optional integrations
+
+Both integrations are optional and detected automatically – the related settings only appear in the back end when the bundle is installed:
+
+- **`terminal42/contao-changelanguage`** – Adds *Master* and *Language* settings to each catalog so products can be maintained per language, and translates product URLs when switching languages. Install it with:
+
+    ```bash
+    composer require terminal42/contao-changelanguage
+    ```
+
+- **`contao/comments-bundle`** – Adds a *Comments* section to each catalog.
 
 ## Templates
 
