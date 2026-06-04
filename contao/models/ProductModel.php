@@ -23,14 +23,14 @@ class ProductModel extends Model
     protected static $strTable = 'tl_product';
 
     /**
-     * Find published product items by their parent ID and ID or alias.
+     * Find a published product by its ID or alias.
      *
      * @param mixed $varId      The numeric ID or alias name
      * @param array $arrOptions An optional options array
      *
-     * @return Collection<self>|self|null
+     * @return self|null
      */
-    public static function findPublishedByIdOrAlias($varId, array $arrOptions = []): Collection|self|null
+    public static function findPublishedByIdOrAlias($varId, array $arrOptions = []): self|null
     {
         $t = static::$strTable;
         $arrColumns = ["($t.id=? OR $t.alias=?)"];
@@ -41,6 +41,69 @@ class ProductModel extends Model
         }
 
         return static::findOneBy($arrColumns, [is_numeric($varId) ? $varId : 0, $varId], $arrOptions);
+    }
+
+    /**
+     * Find all published products by alias.
+     *
+     * As aliases are only unique per catalog (per language), the same alias may
+     * exist in several catalogs, so this can return multiple products.
+     *
+     * @param mixed $varAlias   The alias name
+     * @param array $arrOptions An optional options array
+     *
+     * @return Collection<self>|null
+     */
+    public static function findPublishedByAlias($varAlias, array $arrOptions = []): Collection|null
+    {
+        $t = static::$strTable;
+        $arrColumns = ["$t.alias=?"];
+
+        if (!static::isPreviewMode($arrOptions)) {
+            $time = time();
+            $arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+        }
+
+        return static::findBy($arrColumns, $varAlias, $arrOptions);
+    }
+
+    /**
+     * Find a published product by alias within the language of the current page.
+     *
+     * Aliases are only unique per catalog (per language), so the same alias may
+     * exist in several catalogs. If there is only one match, it is returned
+     * regardless of the language. Otherwise, the language of the current root
+     * page decides which product (and thus which URL) matches.
+     *
+     * @param mixed $varAlias   The alias name
+     * @param array $arrOptions An optional options array
+     */
+    public static function findPublishedByAliasForLanguage($varAlias, array $arrOptions = []): self|null
+    {
+        $products = static::findPublishedByAlias($varAlias, $arrOptions);
+
+        // A single match is unambiguous
+        if (!$products || 1 === $products->count()) {
+            return $products?->first();
+        }
+
+        global $objPage;
+
+        if (null === $objPage) {
+            return null;
+        }
+
+        $language = (string) $objPage->rootLanguage;
+
+        foreach ($products as $product) {
+            $catalog = $product->getRelated('pid');
+
+            if ($catalog && $catalog->language === $language) {
+                return $product;
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -94,7 +157,7 @@ class ProductModel extends Model
     }
 
     /**
-     * Find published product items by their parent ID.
+     * Find published product items by their IDs.
      *
      * @param array $arrIds      An array of product IDs
      * @param bool  $blnFeatured If true, return only featured product, if false, return only unfeatured product
