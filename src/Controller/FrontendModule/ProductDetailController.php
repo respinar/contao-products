@@ -18,15 +18,17 @@ use Contao\CoreBundle\DependencyInjection\Attribute\AsFrontendModule;
 use Contao\CoreBundle\Exception\PageNotFoundException;
 use Contao\CoreBundle\Routing\ContentUrlGenerator;
 use Contao\CoreBundle\Routing\ResponseContext\HtmlHeadBag\HtmlHeadBag;
+use Contao\CoreBundle\Routing\ResponseContext\ResponseContextAccessor;
+use Contao\CoreBundle\String\HtmlDecoder;
 use Contao\CoreBundle\Twig\FragmentTemplate;
 use Contao\FrontendTemplate;
 use Contao\Input;
 use Contao\ModuleModel;
 use Contao\PageModel;
 use Contao\StringUtil;
-use Contao\System;
 use Respinar\ProductsBundle\Model\ProductModel;
 use Respinar\ProductsBundle\Product\ProductParser;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -38,22 +40,21 @@ class ProductDetailController extends AbstractFrontendModuleController
     public function __construct(
         private readonly ProductParser $productParser,
         private readonly ContentUrlGenerator $contentUrlGenerator,
+        private readonly ResponseContextAccessor $responseContextAccessor,
+        private readonly HtmlDecoder $htmlDecoder,
+        private readonly ParameterBagInterface $parameterBag,
     ) {
     }
 
     protected function getResponse(FragmentTemplate $template, ModuleModel $model, Request $request): Response
     {
-        // $autoItem = $request->attributes->get('auto_item');
-
         $autoItem = Input::get('auto_item');
 
-        // Return an empty string if "auto_item" is not set to combine list and reader on
-        // same page
+        // The reader always requires an "auto_item" parameter to resolve a product
         if (null === $autoItem) {
             throw new PageNotFoundException('Page not found: '.$request->getUri());
         }
 
-        // $objProduct = ProductModel::findOneByAlias(Input::get('items'));
         $model->product_catalogs = StringUtil::deserialize($model->product_catalogs);
         $objProduct = ProductModel::findPublishedByParentAndIdOrAlias($autoItem, $model->product_catalogs);
 
@@ -65,19 +66,18 @@ class ProductDetailController extends AbstractFrontendModuleController
 
         if ($model->overviewPage) {
             $template->referer = $this->contentUrlGenerator->generate(PageModel::findById($model->overviewPage));
-        } elseif ($objCatalog && $objCatalog->overviewPage) {
+        } elseif ($objCatalog?->overviewPage) {
             $template->referer = $this->contentUrlGenerator->generate(PageModel::findById($objCatalog->overviewPage));
         }
 
         $template->back = $model->customLabel ?: $GLOBALS['TL_LANG']['MSC']['productOverview'];
         $template->relateds_headline = $GLOBALS['TL_LANG']['MSC']['relateds_headline'];
 
-        $responseContext = System::getContainer()->get('contao.routing.response_context_accessor')->getResponseContext();
+        $responseContext = $this->responseContextAccessor->getResponseContext();
 
-        if ($responseContext && $responseContext->has(HtmlHeadBag::class)) {
+        if ($responseContext?->has(HtmlHeadBag::class)) {
             /** @var HtmlHeadBag $htmlHeadBag */
             $htmlHeadBag = $responseContext->get(HtmlHeadBag::class);
-            $htmlDecoder = System::getContainer()->get('contao.string.html_decoder');
 
             if ($objProduct->pageTitle) {
                 $htmlHeadBag->setTitle($objProduct->pageTitle); // Already stored decoded
@@ -86,25 +86,21 @@ class ProductDetailController extends AbstractFrontendModuleController
             }
 
             if ($objProduct->description) {
-                $htmlHeadBag->setMetaDescription($htmlDecoder->inputEncodedToPlainText($objProduct->description));
+                $htmlHeadBag->setMetaDescription($this->htmlDecoder->inputEncodedToPlainText($objProduct->description));
             }
         }
 
         $template->product = $this->productParser->parseProduct($objProduct, $model);
 
         // Comments
-        $bundles = System::getContainer()->getParameter('kernel.bundles');
-        $objCatalog = $objProduct->getRelated('pid');
+        $bundles = $this->parameterBag->get('kernel.bundles');
 
-        if (isset($bundles['ContaoCommentsBundle']) && $objCatalog->allowComments) {
+        if (isset($bundles['ContaoCommentsBundle']) && $objCatalog?->allowComments) {
             $template->allowComments = true;
 
-            // Adjust the comments headline level intHl = min((int) str_replace('h', '',
-            // $model->hl), 5); template->hlc = 'h' . ($intHl + 1);
-
-            $com_headline = StringUtil::deserialize($model->product_comHeadline);
-            $template->hlc = $com_headline['unit'];
-            $template->hlcText = $com_headline['value'];
+            $comHeadline = StringUtil::deserialize($model->product_comHeadline, true);
+            $template->hlc = $comHeadline['unit'] ?? 'h2';
+            $template->hlcText = $comHeadline['value'] ?? '';
 
             $objComment = new Comments();
 
