@@ -35,6 +35,7 @@ class ProductCatalogController extends AbstractContentElementController
 
     public function __construct(
         private readonly ProductParser $productParser,
+        private readonly AccessChecker $accessChecker,
         private readonly ScopeMatcher $scopeMatcher,
         private readonly RequestStack $requestStack,
     ) {
@@ -53,7 +54,7 @@ class ProductCatalogController extends AbstractContentElementController
 
         $template->products = [];
 
-        $model->product_catalogs = AccessChecker::sortOutProtected(StringUtil::deserialize($model->product_catalogs));
+        $model->product_catalogs = $this->accessChecker->sortOutProtected(StringUtil::deserialize($model->product_catalogs));
 
         $objCatalogs = CatalogModel::findMultipleByIds($model->product_catalogs);
 
@@ -96,7 +97,7 @@ class ProductCatalogController extends AbstractContentElementController
 
             // Get the current page
             $id = 'page_n'.$model->id;
-            $page = $request->query->get($id, '1') ?: 1;
+            $page = (int) ($request->query->get($id, '1') ?: 1);
 
             // Do not index or cache the page if the page number is outside the range
             if ($page < 1 || $page > max(ceil($total / $model->perPage), 1)) {
