@@ -41,13 +41,13 @@ class ProductUrlInsertTag
 
         $adapter = $this->framework->getAdapter(ProductModel::class);
 
-        // IDs are globally unique and can be resolved directly. Aliases are only
-        // unique per catalog (per language), so they are resolved against the
-        // language of the current root page.
+        // IDs are globally unique and can be resolved directly. Aliases are only unique
+        // per website (root page of the catalog's reader page), so they are resolved
+        // against the root page of the current page.
         if (is_numeric($idOrAlias)) {
             $productModel = $adapter->findPublishedByIdOrAlias($idOrAlias);
         } else {
-            $productModel = $adapter->findPublishedByAliasForLanguage($idOrAlias);
+            $productModel = $adapter->findPublishedByAliasForRootPage($idOrAlias);
         }
 
         if (null === $productModel) {
