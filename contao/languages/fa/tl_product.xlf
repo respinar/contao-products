@@ -354,6 +354,10 @@
         <source>Type</source>
         <target>نوع</target>
       </trans-unit>
+      <trans-unit id="ERR.aliasUsedOnWebsite">
+        <source>The alias "%s" is already used by the product "%s" in the catalog "%s" on this website!</source>
+        <target>نام مستعار «%s» هم‌اکنون توسط محصول «%s» در کاتالوگ «%s» در همین وب‌سایت استفاده شده است!</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

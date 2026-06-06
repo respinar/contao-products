@@ -266,6 +266,9 @@
       <trans-unit id="tl_product.type.other">
         <source>Type</source>
       </trans-unit>
+      <trans-unit id="ERR.aliasUsedOnWebsite">
+        <source>The alias "%s" is already used by the product "%s" in the catalog "%s" on this website!</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
