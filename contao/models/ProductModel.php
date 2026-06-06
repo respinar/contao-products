@@ -84,7 +84,7 @@ class ProductModel extends Model
 
         // A single match is unambiguous
         if (!$products || 1 === $products->count()) {
-            return $products?->first();
+            return $products?->getModels()[0] ?? null;
         }
 
         global $objPage;
