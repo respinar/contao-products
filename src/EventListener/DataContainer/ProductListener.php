@@ -18,6 +18,7 @@ use Contao\DataContainer;
 use Contao\Input;
 use Contao\StringUtil;
 use Doctrine\DBAL\Connection;
+use Respinar\ProductsBundle\Product\AliasUniquenessValidator;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -29,6 +30,7 @@ class ProductListener
     public function __construct(
         private readonly Connection $connection,
         private readonly Security $security,
+        private readonly AliasUniquenessValidator $aliasUniqueness,
     ) {
     }
 
@@ -85,9 +87,9 @@ class ProductListener
     /**
      * Auto-generate the product alias if it has not been set yet.
      *
-     * The alias only has to be unique within the products that resolve to the same
-     * reader page (jumpTo), so the same product may use the same alias in another
-     * catalog/language with a different reader page.
+     * The alias only has to be unique on the website (root page of the reader page)
+     * the product belongs to, so the same alias may be used by the translations on
+     * other websites.
      */
     #[AsCallback(table: 'tl_product', target: 'fields.alias.save')]
     public function generateAlias(string $varValue, DataContainer $dc): string
@@ -102,34 +104,36 @@ class ProductListener
             );
         }
 
-        // The alias must be unique among all products whose catalog points to the same
-        // reader page (jumpTo) as the current product.
-        $jumpTo = (int) $this->connection->fetchOne(
-            'SELECT jumpTo FROM tl_product_catalog WHERE id = ?',
-            [$dc->activeRecord->pid],
+        // The alias must be unique among all products whose catalog points to a reader
+        // page (jumpTo) under the same root page as the current product
+        $catalogIds = $this->aliasUniqueness->getCatalogIdsForRootPage(
+            (int) $this->connection->fetchOne(
+                'SELECT jumpTo FROM tl_product_catalog WHERE id = ?',
+                [(int) $dc->activeRecord->pid],
+            ),
         );
 
-        $aliasExists = fn (string $alias): bool => 0 < (int) $this->connection->fetchOne(
-            'SELECT COUNT(*) FROM tl_product WHERE alias = ? AND id != ? AND pid IN (SELECT id FROM tl_product_catalog WHERE jumpTo = ?)',
-            [$alias, $dc->id, $jumpTo],
+        $findConflicts = fn (string $alias): array => $this->aliasUniqueness->findProductsByAliases(
+            [$alias],
+            $catalogIds,
+            (int) $dc->id,
         );
 
         if ($autoAlias) {
-            // Make sure the generated alias is unique within the same reader page
+            // Make sure the generated alias is unique on the same website
             $base = $varValue;
             $i = 0;
 
-            while ($aliasExists($varValue)) {
+            while ([] !== $findConflicts($varValue)) {
                 $varValue = $base.'-'.++$i;
             }
-        } elseif ($aliasExists($varValue)) {
-            throw new RuntimeException(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
+        } elseif ([] !== $conflicts = $findConflicts($varValue)) {
+            throw new \RuntimeException(\sprintf($GLOBALS['TL_LANG']['ERR']['aliasUsedOnWebsite'], $varValue, $conflicts[0]['title'], $conflicts[0]['catalogTitle']));
         }
 
         return $varValue;
     }
 
-    /**
     /**
      * Get products from the parent catalog to link as related products.
      *
