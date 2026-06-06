@@ -17,6 +17,7 @@ use Contao\CoreBundle\DependencyInjection\Attribute\AsCallback;
 use Contao\DataContainer;
 use Contao\Input;
 use Doctrine\DBAL\Connection;
+use Respinar\ProductsBundle\Product\AliasUniquenessValidator;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -28,6 +29,7 @@ class ProductCatalogListener
     public function __construct(
         private readonly TokenStorageInterface $tokenStorage,
         private readonly Connection $connection,
+        private readonly AliasUniquenessValidator $aliasUniqueness,
     ) {
     }
 
@@ -123,5 +125,54 @@ class ProductCatalogListener
         }
 
         return $options;
+    }
+
+    /**
+     * Validate that changing the reader page does not create duplicate product
+     * aliases on the website (root page) of the new reader page.
+     */
+    #[AsCallback(table: 'tl_product_catalog', target: 'fields.jumpTo.save')]
+    public function validateJumpTo(string $varValue, DataContainer $dc): string
+    {
+        $jumpTo = (int) $varValue;
+
+        // Nothing to validate without a reader page, on a new catalog or without products
+        if ($jumpTo <= 0 || null === $dc->activeRecord) {
+            return $varValue;
+        }
+
+        $products = $this->connection->fetchAllAssociative(
+            'SELECT alias FROM tl_product WHERE pid = ?',
+            [(int) $dc->id],
+        );
+
+        if ([] === $products) {
+            return $varValue;
+        }
+
+        // The products of the current catalog are excluded, they cannot conflict with
+        // each other because the alias is unique per catalog in the database
+        $conflicts = $this->aliasUniqueness->findProductsByAliases(
+            array_column($products, 'alias'),
+            $this->aliasUniqueness->getCatalogIdsForRootPage($jumpTo),
+            0,
+            (int) $dc->id,
+        );
+
+        if ([] === $conflicts) {
+            return $varValue;
+        }
+
+        $labels = [];
+
+        foreach (\array_slice($conflicts, 0, 10) as $conflict) {
+            $labels[] = \sprintf('"%s" (%s)', $conflict['alias'], $conflict['catalogTitle']);
+        }
+
+        if (\count($conflicts) > 10) {
+            $labels[] = '…';
+        }
+
+        throw new \RuntimeException(\sprintf($GLOBALS['TL_LANG']['ERR']['jumpToAliasConflict'], implode(', ', $labels)));
     }
 }
