@@ -35,7 +35,7 @@ final class ProductParser
     /**
      * Parse a product.
      */
-    public function parseProduct(ProductModel $product, ContentModel|ModuleModel $model): string
+    public function parseProduct(ProductModel $product, ContentModel|ModuleModel $model, bool $fullRender = true): string
     {
         $template = new FrontendTemplate(
             $model->product_template ?: 'product_short',
@@ -84,28 +84,6 @@ final class ProductParser
         // the product has any content elements
         $template->link = $this->contentUrlGenerator->generate($product, [], UrlGeneratorInterface::ABSOLUTE_PATH);
 
-        if (null !== $product->summary) {
-            $template->hasSummary = true;
-            $template->summary = StringUtil::encodeEmail($product->summary);
-        }
-
-        $elements = ContentModel::findPublishedByPidAndTable(
-            $product->id,
-            'tl_product',
-        );
-
-        if (null !== $elements) {
-            $template->hasText = true;
-
-            $template->text = '';
-
-            while ($elements->next()) {
-                $template->text .= Controller::getContentElement(
-                    $elements->current(),
-                );
-            }
-        }
-
         $template->figure = false;
 
         if ($product->singleSRC) {
@@ -134,18 +112,42 @@ final class ProductParser
             $template->figure = $figure;
         }
 
-        $template->enclosure = [];
+        if ($fullRender) {
+            if (null !== $product->summary) {
+                $template->hasSummary = true;
+                $template->summary = StringUtil::encodeEmail($product->summary);
+            }
 
-        if ($product->addEnclosure) {
-            $template->hasEnclosure = true;
-
-            Controller::addEnclosuresToTemplate(
-                $template,
-                $product->row(),
+            $elements = ContentModel::findPublishedByPidAndTable(
+                $product->id,
+                'tl_product',
             );
-        }
 
-        $template->schemaOrgData = $this->schema_generator->generate($product);
+            if (null !== $elements) {
+                $template->hasText = true;
+
+                $template->text = '';
+
+                while ($elements->next()) {
+                    $template->text .= Controller::getContentElement(
+                        $elements->current(),
+                    );
+                }
+            }
+
+            $template->enclosure = [];
+
+            if ($product->addEnclosure) {
+                $template->hasEnclosure = true;
+
+                Controller::addEnclosuresToTemplate(
+                    $template,
+                    $product->row(),
+                );
+            }
+
+            $template->schemaOrgData = $this->schema_generator->generate($product);
+        }
 
         return $template->parse();
     }
@@ -160,7 +162,7 @@ final class ProductParser
         $items = [];
 
         while ($products->next()) {
-            $items[] = self::parseProduct($products->current(), $model);
+            $items[] = $this->parseProduct($products->current(), $model, false);
         }
 
         return $items;
