@@ -206,6 +206,10 @@
         <source>Show comments of Catalog ID %s</source>
         <target>نمایش نظرات کاتالوگ شناسه‌ی %s</target>
       </trans-unit>
+      <trans-unit id="ERR.jumpToAliasConflict">
+        <source>The reader page cannot be changed, because the following product aliases already exist on the target website: %s</source>
+        <target>صفحه ریدایرکت قابل تغییر نیست، زیرا نام‌های مستعار زیر در وب‌سایت مقصد تکراری هستند: %s</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

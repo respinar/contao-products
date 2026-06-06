@@ -155,6 +155,9 @@
       <trans-unit id="tl_product_catalog.comments">
         <source>Show comments of Catalog ID %s</source>
       </trans-unit>
+      <trans-unit id="ERR.jumpToAliasConflict">
+        <source>The reader page cannot be changed, because the following product aliases already exist on the target website: %s</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
