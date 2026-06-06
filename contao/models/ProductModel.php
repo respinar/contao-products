@@ -15,6 +15,7 @@ namespace Respinar\ProductsBundle\Model;
 use Contao\Model;
 use Contao\Model\Collection;
 use Contao\Model\MetadataTrait;
+use Contao\PageModel;
 
 class ProductModel extends Model
 {
@@ -27,8 +28,6 @@ class ProductModel extends Model
      *
      * @param mixed $varId      The numeric ID or alias name
      * @param array $arrOptions An optional options array
-     *
-     * @return self|null
      */
     public static function findPublishedByIdOrAlias($varId, array $arrOptions = []): self|null
     {
@@ -46,8 +45,9 @@ class ProductModel extends Model
     /**
      * Find all published products by alias.
      *
-     * As aliases are only unique per catalog (per language), the same alias may
-     * exist in several catalogs, so this can return multiple products.
+     * As aliases are only unique per website (root page of the catalog's reader
+     * page), the same alias may exist in several catalogs, so this can return
+     * multiple products.
      *
      * @param mixed $varAlias   The alias name
      * @param array $arrOptions An optional options array
@@ -68,17 +68,17 @@ class ProductModel extends Model
     }
 
     /**
-     * Find a published product by alias within the language of the current page.
+     * Find a published product by alias within the current website.
      *
-     * Aliases are only unique per catalog (per language), so the same alias may
-     * exist in several catalogs. If there is only one match, it is returned
-     * regardless of the language. Otherwise, the language of the current root
+     * Aliases are only unique per website (root page of the catalog's reader page),
+     * so the same alias may exist in several catalogs. If there is only one match, it
+     * is returned regardless of the website. Otherwise, the root page of the current
      * page decides which product (and thus which URL) matches.
      *
      * @param mixed $varAlias   The alias name
      * @param array $arrOptions An optional options array
      */
-    public static function findPublishedByAliasForLanguage($varAlias, array $arrOptions = []): self|null
+    public static function findPublishedByAliasForRootPage($varAlias, array $arrOptions = []): self|null
     {
         $products = static::findPublishedByAlias($varAlias, $arrOptions);
 
@@ -93,13 +93,15 @@ class ProductModel extends Model
             return null;
         }
 
-        $language = (string) $objPage->rootLanguage;
-
         foreach ($products as $product) {
             $catalog = $product->getRelated('pid');
 
-            if ($catalog && $catalog->language === $language) {
-                return $product;
+            if ($catalog && (int) $catalog->jumpTo > 0) {
+                $page = PageModel::findById($catalog->jumpTo);
+
+                if ($page && (int) $page->loadDetails()->rootId === (int) $objPage->rootId) {
+                    return $product;
+                }
             }
         }
 
@@ -109,8 +111,9 @@ class ProductModel extends Model
     /**
      * Find a published product by ID or alias within the catalogs of the current page.
      *
-     * As aliases are only unique per catalog (per language), a bare alias has to be
-     * resolved within the language context of the current page.
+     * As aliases are only unique per website (root page of the catalog's reader
+     * page), a bare alias has to be resolved within the language context of the
+     * current page.
      *
      * @param mixed $varId      The numeric ID or alias name
      * @param array $arrOptions An optional options array
