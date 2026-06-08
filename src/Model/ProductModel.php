@@ -15,7 +15,6 @@ namespace Respinar\ProductsBundle\Model;
 use Contao\Model;
 use Contao\Model\Collection;
 use Contao\Model\MetadataTrait;
-use Contao\PageModel;
 
 class ProductModel extends Model
 {
@@ -68,44 +67,57 @@ class ProductModel extends Model
     }
 
     /**
+     * Find a published product by alias and root page.
+     *
+     * @param mixed $varAlias      The alias name
+     * @param mixed $intRootPageId The root page ID
+     * @param array $arrOptions    An optional options array
+     */
+    public static function findPublishedByAliasAndRootPage($varAlias, $intRootPageId, array $arrOptions = []): self|null
+    {
+        $t = static::$strTable;
+        $arrColumns = ["$t.alias=? AND $t.rootPageId=?"];
+
+        if (!static::isPreviewMode($arrOptions)) {
+            $time = time();
+            $arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+        }
+
+        return static::findOneBy($arrColumns, [$varAlias, (int) $intRootPageId], $arrOptions);
+    }
+
+    /**
      * Find a published product by alias within the current website.
      *
      * Aliases are only unique per website (root page of the catalog's reader page),
-     * so the same alias may exist in several catalogs. If there is only one match, it
-     * is returned regardless of the website. Otherwise, the root page of the current
-     * page decides which product (and thus which URL) matches.
+     * so the same alias may exist in several catalogs. The stored rootPageId of the
+     * product (the root page of its catalog's reader page) decides which product (and
+     * thus which URL) matches. If no product matches the current website, a single
+     * unambiguous match is still returned regardless of the website.
      *
      * @param mixed $varAlias   The alias name
      * @param array $arrOptions An optional options array
      */
     public static function findPublishedByAliasForRootPage($varAlias, array $arrOptions = []): self|null
     {
-        $products = static::findPublishedByAlias($varAlias, $arrOptions);
-
-        // A single match is unambiguous
-        if (!$products || 1 === $products->count()) {
-            return $products?->getModels()[0] ?? null;
-        }
-
         global $objPage;
 
-        if (null === $objPage) {
-            return null;
-        }
+        if (null !== $objPage) {
+            $product = static::findPublishedByAliasAndRootPage($varAlias, (int) $objPage->rootId, $arrOptions);
 
-        foreach ($products as $product) {
-            $catalog = $product->getRelated('pid');
-
-            if ($catalog && (int) $catalog->jumpTo > 0) {
-                $page = PageModel::findById($catalog->jumpTo);
-
-                if ($page && (int) $page->loadDetails()->rootId === (int) $objPage->rootId) {
-                    return $product;
-                }
+            if (null !== $product) {
+                return $product;
             }
         }
 
-        return null;
+        // A single match is unambiguous
+        $products = static::findPublishedByAlias($varAlias, $arrOptions);
+
+        if (!$products || 1 !== $products->count()) {
+            return null;
+        }
+
+        return $products->getModels()[0];
     }
 
     /**
