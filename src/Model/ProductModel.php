@@ -22,6 +22,23 @@ class ProductModel extends Model
 
     protected static $strTable = 'tl_product';
 
+
+    /**
+     * Find a published product by its ID (globally unique).
+     */
+    public static function findPublishedById(int $id, array $arrOptions = []): self|null
+    {
+        $t = static::$strTable;
+        $arrColumns = ["$t.id=?"];
+
+        if (!static::isPreviewMode($arrOptions)) {
+            $time = time();
+            $arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+        }
+
+        return static::findOneBy($arrColumns, [$id], $arrOptions);
+    }
+
     /**
      * Find a published product by its ID or alias.
      *
@@ -51,9 +68,9 @@ class ProductModel extends Model
      * @param mixed $varAlias   The alias name
      * @param array $arrOptions An optional options array
      *
-     * @return Collection<self>|null
+     * @return self|null
      */
-    public static function findPublishedByAlias($varAlias, array $arrOptions = []): Collection|null
+    public static function findPublishedByAlias($varAlias, array $arrOptions = []): self|null
     {
         $t = static::$strTable;
         $arrColumns = ["$t.alias=?"];
@@ -63,7 +80,7 @@ class ProductModel extends Model
             $arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
         }
 
-        return static::findBy($arrColumns, $varAlias, $arrOptions);
+        return static::findOneBy($arrColumns, $varAlias, $arrOptions);
     }
 
     /**
@@ -84,67 +101,6 @@ class ProductModel extends Model
         }
 
         return static::findOneBy($arrColumns, [$varAlias, (int) $intRootPageId], $arrOptions);
-    }
-
-    /**
-     * Find a published product by alias within the current website.
-     *
-     * Aliases are only unique per website (root page of the catalog's reader page),
-     * so the same alias may exist in several catalogs. The stored rootPageId of the
-     * product (the root page of its catalog's reader page) decides which product (and
-     * thus which URL) matches. If no product matches the current website, a single
-     * unambiguous match is still returned regardless of the website.
-     *
-     * @param mixed $varAlias   The alias name
-     * @param array $arrOptions An optional options array
-     */
-    public static function findPublishedByAliasForRootPage($varAlias, array $arrOptions = []): self|null
-    {
-        global $objPage;
-
-        if (null !== $objPage) {
-            $product = static::findPublishedByAliasAndRootPage($varAlias, (int) $objPage->rootId, $arrOptions);
-
-            if (null !== $product) {
-                return $product;
-            }
-        }
-
-        // A single match is unambiguous
-        $products = static::findPublishedByAlias($varAlias, $arrOptions);
-
-        if (!$products || 1 !== $products->count()) {
-            return null;
-        }
-
-        return $products->getModels()[0];
-    }
-
-    /**
-     * Find a published product by ID or alias within the catalogs of the current page.
-     *
-     * As aliases are only unique per website (root page of the catalog's reader
-     * page), a bare alias has to be resolved within the language context of the
-     * current page.
-     *
-     * @param mixed $varId      The numeric ID or alias name
-     * @param array $arrOptions An optional options array
-     */
-    public static function findPublishedByIdOrAliasForPage($varId, array $arrOptions = []): self|null
-    {
-        global $objPage;
-
-        if (null === $objPage) {
-            return null;
-        }
-
-        $catalogs = CatalogModel::findBy('jumpTo', $objPage->id);
-
-        if (null === $catalogs) {
-            return null;
-        }
-
-        return static::findPublishedByParentAndIdOrAlias($varId, $catalogs->fetchEach('id'), $arrOptions);
     }
 
     /**
@@ -311,13 +267,13 @@ class ProductModel extends Model
     /**
      * Find published product items by their parent ID.
      *
-     * @param int   $intId      The product catalogs ID
+     * @param int   $intPid      The product catalogs ID
      * @param int   $intLimit   An optional limit
      * @param array $arrOptions An optional options array
      *
      * @return Collection<self>|self|null
      */
-    public static function findPublishedByPid($intId, $intLimit = 0, array $arrOptions = []): Collection|self|null
+    public static function findPublishedByPid($intPid, $intLimit = 0, array $arrOptions = []): Collection|self|null
     {
         $time = time();
         $t = static::$strTable;
@@ -330,67 +286,6 @@ class ProductModel extends Model
             $arrOptions['limit'] = $intLimit;
         }
 
-        return static::findBy($arrColumns, $intId, $arrOptions);
-    }
-
-    /**
-     * Find all published product items of a certain period of time by their parent ID.
-     *
-     * @param int   $intFrom    The start date as Unix timestamp
-     * @param int   $intTo      The end date as Unix timestamp
-     * @param array $arrPids    An array of product catalogs IDs
-     * @param int   $intLimit   An optional limit
-     * @param int   $intOffset  An optional offset
-     * @param array $arrOptions An optional options array
-     *
-     * @return Collection<self>|self|null
-     */
-    public static function findPublishedFromToByPids($intFrom, $intTo, $arrPids, $intLimit = 0, $intOffset = 0, array $arrOptions = []): Collection|self|null
-    {
-        if (!\is_array($arrPids) || [] === $arrPids) {
-            return null;
-        }
-
-        $t = static::$strTable;
-        $arrColumns = ["$t.date>=? AND $t.date<=? AND $t.pid IN(".implode(',', array_map(intval(...), $arrPids)).')'];
-
-        if (!static::isPreviewMode($arrOptions)) {
-            $time = time();
-            $arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
-        }
-
-        $arrOptions['order'] ??= "$t.date DESC";
-
-        $arrOptions['limit'] = $intLimit;
-        $arrOptions['offset'] = $intOffset;
-
-        return static::findBy($arrColumns, [$intFrom, $intTo], $arrOptions);
-    }
-
-    /**
-     * Count all published product items of a certain period of time by their parent ID.
-     *
-     * @param int   $intFrom    The start date as Unix timestamp
-     * @param int   $intTo      The end date as Unix timestamp
-     * @param array $arrPids    An array of product catalogs IDs
-     * @param array $arrOptions An optional options array
-     *
-     * @return int The number of product items
-     */
-    public static function countPublishedFromToByPids($intFrom, $intTo, $arrPids, array $arrOptions = []): int
-    {
-        if (!\is_array($arrPids) || [] === $arrPids) {
-            return 0;
-        }
-
-        $t = static::$strTable;
-        $arrColumns = ["$t.date>=? AND $t.date<=? AND $t.pid IN(".implode(',', array_map(intval(...), $arrPids)).')'];
-
-        if (!static::isPreviewMode($arrOptions)) {
-            $time = time();
-            $arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
-        }
-
-        return static::countBy($arrColumns, [$intFrom, $intTo], $arrOptions);
+        return static::findBy($arrColumns, $intPid, $arrOptions);
     }
 }
