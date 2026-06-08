@@ -135,6 +135,35 @@ class ProductListener
     }
 
     /**
+     * Store the root page of the catalog's reader page (jumpTo) on the product, so
+     * products can be found by alias and website without walking the page tree.
+     */
+    #[AsCallback(table: 'tl_product', target: 'config.onsubmit')]
+    public function updateRootPage(DataContainer $dc): void
+    {
+        $row = $this->connection->fetchAssociative(
+            'SELECT c.jumpTo FROM tl_product p JOIN tl_product_catalog c ON c.id = p.pid WHERE p.id = ?',
+            [(int) $dc->id],
+        );
+
+        if (false === $row) {
+            return;
+        }
+
+        $rootPageId = 0;
+        $jumpTo = (int) $row['jumpTo'];
+
+        if ($jumpTo > 0) {
+            $rootPageId = $this->aliasUniqueness->getRootPageId($jumpTo) ?? 0;
+        }
+
+        $this->connection->executeStatement(
+            'UPDATE tl_product SET rootPageId = :rootPageId WHERE id = :id AND rootPageId != :rootPageId',
+            ['rootPageId' => $rootPageId, 'id' => (int) $dc->id],
+        );
+    }
+
+    /**
      * Get products from the parent catalog to link as related products.
      *
      * @return array<int, string>
