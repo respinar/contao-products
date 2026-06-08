@@ -45,7 +45,9 @@ class ProductRelatedController extends AbstractFrontendModuleController
             return new Response('');
         }
 
-        $objProduct = ProductModel::findPublishedByIdOrAliasForPage($autoItem);
+        global $objPage;
+
+        $objProduct = ProductModel::findPublishedByAliasAndRootPage($autoItem, (int) $objPage->rootId);
 
         if (!$objProduct) {
             return new Response('');
