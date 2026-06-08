@@ -51,6 +51,9 @@ used by the translations of a product on other websites (e.g. with ChangeLanguag
 - If existing data contains duplicate aliases on the same website, `contao:migrate`
   reports them. The affected products have to be renamed manually, because changing
   aliases automatically would break existing URLs.
+- Each product stores the root page of its catalog's redirect page (`rootPageId`),
+  so aliases are resolved with a single indexed query. `contao:migrate` fills in
+  the value for existing products.
 
 ## Insert tag
 
