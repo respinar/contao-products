@@ -45,9 +45,11 @@ class ProductUrlInsertTag
         // per website (root page of the catalog's reader page), so they are resolved
         // against the root page of the current page.
         if (is_numeric($idOrAlias)) {
-            $productModel = $adapter->findPublishedByIdOrAlias($idOrAlias);
+            $productModel = $adapter->findPublishedById((int) $idOrAlias);
         } else {
-            $productModel = $adapter->findPublishedByAliasForRootPage($idOrAlias);
+            global $objPage;
+
+            $productModel = $adapter->findPublishedByAliasAndRootPage($idOrAlias, (int) $objPage->rootId);
         }
 
         if (null === $productModel) {
