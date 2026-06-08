@@ -234,6 +234,14 @@
         <source>Choose related products in this catalog to this product.</source>
         <target>Choose related products in this catalog to this product.</target>
       </trans-unit>
+      <trans-unit id="tl_product.rootPageId.0">
+        <source>Website root page</source>
+        <target>برگه ریشه‌ی وب‌سایت</target>
+      </trans-unit>
+      <trans-unit id="tl_product.rootPageId.1">
+        <source>The root page of the catalog's redirect page, which is used to find the product by alias on the current website. It is set automatically when saving a product or catalog.</source>
+        <target>برگه ریشه‌ی برگه بازگردانی کاتالوگ، که برای یافتن محصول بر اساس نام مستعار در وب‌سایت فعلی استفاده می‌شود. این مقدار به‌طور خودکار هنگام ذخیره‌ی محصول یا کاتالوگ تنظیم می‌شود.</target>
+      </trans-unit>
       <trans-unit id="tl_product.title_legend">
         <source>Product title</source>
         <target>عنوان محصول</target>
