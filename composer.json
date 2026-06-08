@@ -32,16 +32,7 @@
     "autoload": {
         "psr-4": {
             "Respinar\\ProductsBundle\\": "src/"
-        },
-        "classmap": [
-            "contao/"
-        ],
-        "exclude-from-classmap": [
-            "contao/config/",
-            "contao/dca/",
-            "contao/languages/",
-            "contao/templates/"
-        ]
+        }
     },
     "config": {
         "allow-plugins": {
