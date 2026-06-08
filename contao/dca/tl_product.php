@@ -31,6 +31,7 @@ $GLOBALS['TL_DCA']['tl_product'] = [
                 'id' => 'primary',
                 'pid,alias' => 'unique',
                 'pid,start,stop,published' => 'index',
+                'alias,rootPageId' => 'index',
             ],
         ],
     ],
@@ -91,6 +92,10 @@ $GLOBALS['TL_DCA']['tl_product'] = [
             'foreignKey' => 'tl_product_catalog.title',
             'sql' => ['type' => 'integer', 'unsigned' => true, 'default' => 0],
             'relation' => ['type' => 'belongsTo', 'load' => 'lazy'],
+        ],
+        // The root page of the catalog's reader page (jumpTo), maintained automatically
+        'rootPageId' => [
+            'sql' => ['type' => 'integer', 'unsigned' => true, 'default' => 0],
         ],
         'languageMain' => [
             'exclude' => true,
