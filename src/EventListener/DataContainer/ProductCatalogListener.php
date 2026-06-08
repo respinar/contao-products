@@ -175,4 +175,33 @@ class ProductCatalogListener
 
         throw new \RuntimeException(\sprintf($GLOBALS['TL_LANG']['ERR']['jumpToAliasConflict'], implode(', ', $labels)));
     }
+
+    /**
+     * Store the root page of the reader page (jumpTo) on the products of the catalog,
+     * so products can be found by alias and website without walking the page tree.
+     */
+    #[AsCallback(table: 'tl_product_catalog', target: 'config.onsubmit')]
+    public function updateProductRootPages(DataContainer $dc): void
+    {
+        $catalogId = (int) $dc->id;
+
+        if ($catalogId <= 0) {
+            return;
+        }
+
+        $rootPageId = 0;
+        $jumpTo = (int) $this->connection->fetchOne(
+            'SELECT jumpTo FROM tl_product_catalog WHERE id = ?',
+            [$catalogId],
+        );
+
+        if ($jumpTo > 0) {
+            $rootPageId = $this->aliasUniqueness->getRootPageId($jumpTo) ?? 0;
+        }
+
+        $this->connection->executeStatement(
+            'UPDATE tl_product SET rootPageId = :rootPageId WHERE pid = :catalogId AND rootPageId != :rootPageId',
+            ['rootPageId' => $rootPageId, 'catalogId' => $catalogId],
+        );
+    }
 }
