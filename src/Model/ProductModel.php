@@ -59,11 +59,12 @@ class ProductModel extends Model
     }
 
     /**
-     * Find all published products by alias.
+     * Find a published product by alias.
      *
      * As aliases are only unique per website (root page of the catalog's reader
-     * page), the same alias may exist in several catalogs, so this can return
-     * multiple products.
+     * page), the same alias may exist in several catalogs, in which case the
+     * first match is returned. Use findPublishedByAliasAndRootPage() to resolve
+     * an alias within the current website.
      *
      * @param mixed $varAlias   The alias name
      * @param array $arrOptions An optional options array
