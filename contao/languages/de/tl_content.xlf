@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="vendor/respinar/contao-products/contao/languages/en/tl_content.php" source-language="en" target-language="de">
+    <body>
+      <trans-unit id="tl_content.product.0">
+        <source>Product</source>
+        <target>Produkt</target>
+      </trans-unit>
+      <trans-unit id="tl_content.product.1">
+        <source>Please select one product.</source>
+        <target>Bitte wählen Sie ein Produkt aus.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.products.0">
+        <source>Products</source>
+        <target>Produkte</target>
+      </trans-unit>
+      <trans-unit id="tl_content.products.1">
+        <source>Please select one or more products.</source>
+        <target>Bitte wählen Sie ein oder mehrere Produkte aus.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.product_catalogs.0">
+        <source>Catalogs</source>
+        <target>Kataloge</target>
+      </trans-unit>
+      <trans-unit id="tl_content.product_catalogs.1">
+        <source>Please select one or more catalogs.</source>
+        <target>Bitte wählen Sie einen oder mehrere Kataloge aus.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.product_template.0">
+        <source>Product template</source>
+        <target>Produkttemplate</target>
+      </trans-unit>
+      <trans-unit id="tl_content.product_template.1">
+        <source>Please select template for single product.</source>
+        <target>Bitte wählen Sie das Template für ein einzelnes Produkt aus.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.product_listClass.0">
+        <source>Product list class</source>
+        <target>CSS-Klasse der Produktliste</target>
+      </trans-unit>
+      <trans-unit id="tl_content.product_listClass.1">
+        <source>Please enter a css class for products list.</source>
+        <target>Bitte geben Sie eine CSS-Klasse für die Produktliste ein.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.product_legend">
+        <source>Catalogs and Products</source>
+        <target>Kataloge und Produkte</target>
+      </trans-unit>
+      <trans-unit id="tl_module.all_product">
+        <source>All products</source>
+        <target>Alle Produkte</target>
+      </trans-unit>
+      <trans-unit id="tl_module.featured_product">
+        <source>Featured products</source>
+        <target>Hervorgehobene Produkte</target>
+      </trans-unit>
+      <trans-unit id="tl_module.unfeatured_product">
+        <source>Unfeatured products</source>
+        <target>Nicht hervorgehobene Produkte</target>
+      </trans-unit>
+      <trans-unit id="tl_module.custom">
+        <source>Custom order</source>
+        <target>Individuelle Reihenfolge</target>
+      </trans-unit>
+      <trans-unit id="tl_module.title_asc">
+        <source>Title (A-Z)</source>
+        <target>Titel (A-Z)</target>
+      </trans-unit>
+      <trans-unit id="tl_module.title_desc">
+        <source>Title (Z-A)</source>
+        <target>Titel (Z-A)</target>
+      </trans-unit>
+      <trans-unit id="tl_module.date_asc">
+        <source>Date (Older)</source>
+        <target>Datum (ältere zuerst)</target>
+      </trans-unit>
+      <trans-unit id="tl_module.date_desc">
+        <source>Date (Newer)</source>
+        <target>Datum (neuere zuerst)</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

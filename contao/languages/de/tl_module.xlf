@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="vendor/respinar/contao-products/contao/languages/en/tl_module.php" source-language="en" target-language="de">
+    <body>
+      <trans-unit id="tl_module.product_catalogs.0">
+        <source>Product catelogs</source>
+        <target>Produktkataloge</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_catalogs.1">
+        <source>Please select one or more catalogs.</source>
+        <target>Bitte wählen Sie einen oder mehrere Kataloge aus.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_categories.0">
+        <source>Product categories</source>
+        <target>Produktkategorien</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_categories.1">
+        <source>Please select one or more categories.</source>
+        <target>Bitte wählen Sie eine oder mehrere Kategorien aus.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_featured.0">
+        <source>Featured product</source>
+        <target>Hervorgehobene Produkte</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_featured.1">
+        <source>Here you can choose how featured products are handled.</source>
+        <target>Hier können Sie festlegen, wie hervorgehobene Produkte behandelt werden.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_detailModule.0">
+        <source>Product detail module</source>
+        <target>Produktdetail-Modul</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_detailModule.1">
+        <source>Automatically switch to the product module if an item has been selected.</source>
+        <target>Wechselt automatisch zum Produktmodul, wenn ein Produkt ausgewählt wurde.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_sortBy.0">
+        <source>Sort by</source>
+        <target>Sortieren nach</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_sortBy.1">
+        <source>Here you can select the sorting fields.</source>
+        <target>Hier können Sie die Sortierfelder auswählen.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_template.0">
+        <source>Product template</source>
+        <target>Produkttemplate</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_template.1">
+        <source>Here you can select the product template.</source>
+        <target>Hier können Sie das Produkttemplate auswählen.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_singleClass.0">
+        <source>Single product class</source>
+        <target>CSS-Klasse einzelner Produkte</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_singleClass.1">
+        <source>Here you can set one or more classes for products.</source>
+        <target>Hier können Sie eine oder mehrere Klassen für Produkte festlegen.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_listClass.0">
+        <source>Product list class</source>
+        <target>CSS-Klasse der Produktliste</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_listClass.1">
+        <source>Here you can set one or more classes for products list.</source>
+        <target>Hier können Sie eine oder mehrere Klassen für die Produktliste festlegen.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.related_show.0">
+        <source>Show related product</source>
+        <target>Ähnliche Produkte anzeigen</target>
+      </trans-unit>
+      <trans-unit id="tl_module.related_show.1">
+        <source>Here you can set one or more classes for types.</source>
+        <target>Hier können Sie eine oder mehrere Klassen für Typen festlegen.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.related_template.0">
+        <source>Related product template</source>
+        <target>Template für ähnliche Produkte</target>
+      </trans-unit>
+      <trans-unit id="tl_module.related_template.1">
+        <source>Here you can select the related product template.</source>
+        <target>Hier können Sie das Template für ähnliche Produkte auswählen.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.related_Class.0">
+        <source>Related product CSS class</source>
+        <target>CSS-Klasse ähnlicher Produkte</target>
+      </trans-unit>
+      <trans-unit id="tl_module.related_Class.1">
+        <source>Here you can set one or more classes for related products.</source>
+        <target>Hier können Sie eine oder mehrere Klassen für ähnliche Produkte festlegen.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.related_imgSize.0">
+        <source>Related product image width and height</source>
+        <target>Breite und Höhe der Bilder ähnlicher Produkte</target>
+      </trans-unit>
+      <trans-unit id="tl_module.related_imgSize.1">
+        <source>Here you can set the image dimensions and the resize mode.</source>
+        <target>Hier können Sie die Bildabmessungen und den Skalierungsmodus festlegen.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.catalog_legend">
+        <source>Catalog</source>
+        <target>Katalog</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_legend">
+        <source>Product setting</source>
+        <target>Produkteinstellungen</target>
+      </trans-unit>
+      <trans-unit id="tl_module.related_legend">
+        <source>Related products settings</source>
+        <target>Einstellungen für ähnliche Produkte</target>
+      </trans-unit>
+      <trans-unit id="tl_module.protected_legend">
+        <source>Access protection</source>
+        <target>Zugriffsschutz</target>
+      </trans-unit>
+      <trans-unit id="tl_module.all_product">
+        <source>All products</source>
+        <target>Alle Produkte</target>
+      </trans-unit>
+      <trans-unit id="tl_module.featured_product">
+        <source>Featured products</source>
+        <target>Hervorgehobene Produkte</target>
+      </trans-unit>
+      <trans-unit id="tl_module.unfeatured_product">
+        <source>Unfeatured products</source>
+        <target>Nicht hervorgehobene Produkte</target>
+      </trans-unit>
+      <trans-unit id="tl_module.custom">
+        <source>Custom order</source>
+        <target>Individuelle Reihenfolge</target>
+      </trans-unit>
+      <trans-unit id="tl_module.title_asc">
+        <source>Title (A-Z)</source>
+        <target>Titel (A-Z)</target>
+      </trans-unit>
+      <trans-unit id="tl_module.title_desc">
+        <source>Title (Z-A)</source>
+        <target>Titel (Z-A)</target>
+      </trans-unit>
+      <trans-unit id="tl_module.date_asc">
+        <source>Date (Older)</source>
+        <target>Datum (ältere zuerst)</target>
+      </trans-unit>
+      <trans-unit id="tl_module.date_desc">
+        <source>Date (Newer)</source>
+        <target>Datum (neuere zuerst)</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

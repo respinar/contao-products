@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="vendor/respinar/contao-products/contao/languages/en/modules.php" source-language="en" target-language="de">
+    <body>
+      <trans-unit id="MOD.products.0">
+        <source>Products</source>
+        <target>Produkte</target>
+      </trans-unit>
+      <trans-unit id="MOD.products.1">
+        <source>Catalog and products management</source>
+        <target>Verwaltung von Katalogen und Produkten</target>
+      </trans-unit>
+      <trans-unit id="MOD.prices.0">
+        <source>Prices</source>
+        <target>Preise</target>
+      </trans-unit>
+      <trans-unit id="MOD.prices.1">
+        <source>Price management</source>
+        <target>Preisverwaltung</target>
+      </trans-unit>
+      <trans-unit id="FMD.products">
+        <source>Products</source>
+        <target>Produkte</target>
+      </trans-unit>
+      <trans-unit id="FMD.product_list.0">
+        <source>Product list</source>
+        <target>Produktliste</target>
+      </trans-unit>
+      <trans-unit id="FMD.product_list.1">
+        <source>Product list</source>
+        <target>Produktliste</target>
+      </trans-unit>
+      <trans-unit id="FMD.product_detail.0">
+        <source>Product detail</source>
+        <target>Produktdetails</target>
+      </trans-unit>
+      <trans-unit id="FMD.product_detail.1">
+        <source>Product detail</source>
+        <target>Produktdetails</target>
+      </trans-unit>
+      <trans-unit id="FMD.product.0">
+        <source>Product</source>
+        <target>Produkt</target>
+      </trans-unit>
+      <trans-unit id="CTE.products.0">
+        <source>Products</source>
+        <target>Produkte</target>
+      </trans-unit>
+      <trans-unit id="CTE.product_single.0">
+        <source>Single Product</source>
+        <target>Einzelnes Produkt</target>
+      </trans-unit>
+      <trans-unit id="CTE.product_single.1">
+        <source>Show only one product.</source>
+        <target>Zeigt nur ein einzelnes Produkt an.</target>
+      </trans-unit>
+      <trans-unit id="CTE.product_list.0">
+        <source>Products List</source>
+        <target>Produktliste</target>
+      </trans-unit>
+      <trans-unit id="CTE.product_list.1">
+        <source>Show a list of products.</source>
+        <target>Zeigt eine Liste von Produkten an.</target>
+      </trans-unit>
+       <trans-unit id="CTE.product_catalog.0">
+        <source>Catalog</source>
+        <target>Katalog</target>
+      </trans-unit>
+      <trans-unit id="CTE.product_catalog.1">
+        <source>Displays a list of products in a catalog</source>
+        <target>Zeigt eine Liste von Produkten eines Katalogs an.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

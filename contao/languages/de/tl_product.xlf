@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="vendor/respinar/contao-products/contao/languages/en/tl_product.php" source-language="en" target-language="de">
+    <body>
+      <trans-unit id="tl_product.title.0">
+        <source>Product title</source>
+        <target>Produkttitel</target>
+      </trans-unit>
+      <trans-unit id="tl_product.title.1">
+        <source>Please enter the product title.</source>
+        <target>Bitte geben Sie den Produkttitel ein.</target>
+      </trans-unit>
+      <trans-unit id="tl_product.alias.0">
+        <source>Product alias</source>
+        <target>Produkt-Alias</target>
+      </trans-unit>
+      <trans-unit id="tl_product.alias.1">
+        <source>Please enter the product alias.</source>
+        <target>Bitte geben Sie den Alias des Produkts ein.</target>
+      </trans-unit>
+      <trans-unit id="tl_product.categories.0">
+        <source>Categories</source>
+        <target>Kategorien</target>
+      </trans-unit>
+      <trans-unit id="tl_product.categories.1">
+        <source>Here you can select one or more product categories.</source>
+        <target>Hier können Sie eine oder mehrere Produktkategorien auswählen.</target>
+      </trans-unit>
+      <trans-unit id="tl_product.price.0">
+        <source>Price</source>
+        <target>Preis</target>
+      </trans-unit>
+      <trans-unit id="tl_product.price.1">
+        <source>Please enter the price and select Curreny.</source>
+        <target>Bitte geben Sie den Preis ein und wählen Sie die Währung.</target>
+      </trans-unit>
+      <trans-unit id="tl_product.availability.0">
+        <source>Product availability</source>
+        <target>Produktverfügbarkeit</target>
+      </trans-unit>
+      <trans-unit id="tl_product.availability.1">
+        <source>Please select availability.</source>
+        <target>Bitte wählen Sie die Verfügbarkeit.</target>
+      </trans-unit>
+      <trans-unit id="tl_product.priceValidUntil.0">
+        <source>Price valid until</source>
+        <target>Preis gültig bis</target>
+      </trans-unit>
+      <trans-unit id="tl_product.priceValidUntil.1">
+        <source>Please enter the date according to the global date format.</source>
+        <target>Bitte geben Sie das Datum im globalen Datumsformat ein.</target>
+      </trans-unit>
+      <trans-unit id="tl_product.rating_value.0">
+        <source>Rating value</source>
+        <target>Bewertungswert</target>
+      </trans-unit>
+      <trans-unit id="tl_product.rating_count.0">
+        <source>Rating count</source>
+        <target>Anzahl der Bewertungen</target>
+      </trans-unit>
+      <trans-unit id="tl_product.brand.0">
+        <source>Brand</source>
+        <target>Marke</target>
+      </trans-unit>
+      <trans-unit id="tl_product.brand.1">
+        <source>Please enter the product brand.</source>
+        <target>Bitte geben Sie die Marke des Produkts ein.</target>
+      </trans-unit>
+      <trans-unit id="tl_product.model.0">
+        <source>Model</source>
+        <target>Modell</target>
+      </trans-unit>
+      <trans-unit id="tl_product.model.1">
+        <source>Please enter the product model.</source>
+        <target>Bitte geben Sie das Modell des Produkts ein.</target>
+      </trans-unit>
+      <trans-unit id="tl_product.global_ID.0">
+        <source>Global ID (EAN/UPC)</source>
+        <target>Globale ID (EAN/UPC)</target>
+      </trans-unit>
+      <trans-unit id="tl_product.global_ID.1">
+        <source>Please enter the product global ID such as EAN/UPC.</source>
+        <target>Bitte geben Sie die globale ID des Produkts ein, z. B. EAN/UPC.</target>
+      </trans-unit>
+      <trans-unit id="tl_product.sku.0">
+        <source>SKU</source>
+        <target>SKU</target>
+      </trans-unit>
+      <trans-unit id="tl_product.sku.1">
+        <source>Please enter the product SKU (Stock Keeping Unit).</source>
+        <target>Bitte geben Sie die SKU (Stock Keeping Unit) des Produkts ein.</target>
+      </trans-unit>
+      <trans-unit id="tl_product.date.0">
+        <source>Date</source>
+        <target>Datum</target>
+      </trans-unit>
+      <trans-unit id="tl_product.date.1">
+        <source>Please enter the date according to the global date format.</source>
+        <target>Bitte geben Sie das Datum im globalen Datumsformat ein.</target>
+      </trans-unit>
+      <trans-unit id="tl_product.url.0">
+        <source>Link target</source>
+        <target>Link-Adresse</target>
+      </trans-unit>
+      <trans-unit id="tl_product.url.1">
+        <source>Please enter a web address (http://…), an e-mail address (mailto:…) or an insert tag.</source>
+        <target>Bitte geben Sie eine Webadresse (http://…), eine E-Mail-Adresse (mailto:…) oder ein Insert-Tag ein.</target>
+      </trans-unit>
+      <trans-unit id="tl_product.target.0">
+        <source>Open in new window</source>
+        <target>In neuem Fenster öffnen</target>
+      </trans-unit>
+      <trans-unit id="tl_product.target.1">
+        <source>Open the link in a new browser window.</source>
+        <target>Öffnet den Link in einem neuen Browserfenster.</target>
+      </trans-unit>
+      <trans-unit id="tl_product.titleText.0">
+        <source>Link text</source>
+        <target>Link-Text</target>
+      </trans-unit>
+      <trans-unit id="tl_product.titleText.1">
+        <source>The link text will be displayed instead of the target URL.</source>
+        <target>Der Link-Text wird anstelle der Ziel-URL angezeigt.</target>
+      </trans-unit>
+      <trans-unit id="tl_product.linkTitle.0">
+        <source>Link title</source>
+        <target>Link-Titel</target>
+      </trans-unit>
+      <trans-unit id="tl_product.linkTitle.1">
+        <source>The link title is added as title attribute in the HTML markup.</source>
+        <target>Der Link-Titel wird als Title-Attribut in das HTML-Markup eingefügt.</target>
+      </trans-unit>
+      <trans-unit id="tl_product.summary.0">
+        <source>Product summary</source>
+        <target>Produktzusammenfassung</target>
+      </trans-unit>
+      <trans-unit id="tl_product.summary.1">
+        <source>Here you can add a product summary.</source>
+        <target>Hier können Sie eine Zusammenfassung des Produkts hinzufügen.</target>
+      </trans-unit>
+      <trans-unit id="tl_product.pageTitle.0">
+        <source>Meta title</source>
+        <target>Meta-Titel</target>
+      </trans-unit>
+      <trans-unit id="tl_product.pageTitle.1">
+        <source>Here you can add a custom meta title to overwrite the default page title.</source>
+        <target>Hier können Sie einen eigenen Meta-Titel eingeben, um den Standard-Seitentitel zu überschreiben.</target>
+      </trans-unit>
+      <trans-unit id="tl_product.description.0">
+        <source>Meta description</source>
+        <target>Meta-Beschreibung</target>
+      </trans-unit>
+      <trans-unit id="tl_product.description.1">
+        <source>Here you can add a custom meta description to overwrite the default page description.</source>
+        <target>Hier können Sie eine eigene Meta-Beschreibung eingeben, um die Standard-Beschreibung der Seite zu überschreiben.</target>
+      </trans-unit>
+      <trans-unit id="tl_product.singleSRC.0">
+        <source>Source file</source>
+        <target>Quelldatei</target>
+      </trans-unit>
+      <trans-unit id="tl_product.singleSRC.1">
+        <source>Please select an image.</source>
+        <target>Bitte wählen Sie ein Bild aus.</target>
+      </trans-unit>
+      <trans-unit id="tl_product.alt.0">
+        <source>Alternate text</source>
+        <target>Alternativer Text</target>
+      </trans-unit>
+      <trans-unit id="tl_product.alt.1">
+        <source>Here you can enter an alternate text for the image (alt attribute).</source>
+        <target>Hier können Sie einen alternativen Text für das Bild eingeben (Alt-Attribut).</target>
+      </trans-unit>
+      <trans-unit id="tl_product.addEnclosure.0">
+        <source>Add enclosures</source>
+        <target>Anhänge hinzufügen</target>
+      </trans-unit>
+      <trans-unit id="tl_product.addEnclosure.1">
+        <source>Add one or more downloadable files to the product item.</source>
+        <target>Fügt dem Produkt eine oder mehrere herunterladbare Dateien hinzu.</target>
+      </trans-unit>
+      <trans-unit id="tl_product.enclosure.0">
+        <source>Enclosures</source>
+        <target>Anhänge</target>
+      </trans-unit>
+      <trans-unit id="tl_product.enclosure.1">
+        <source>Please choose the files you want to attach.</source>
+        <target>Bitte wählen Sie die Dateien aus, die angehängt werden sollen.</target>
+      </trans-unit>
+      <trans-unit id="tl_product.published.0">
+        <source>Publish product</source>
+        <target>Produkt veröffentlichen</target>
+      </trans-unit>
+      <trans-unit id="tl_product.published.1">
+        <source>Make the product item publicly visible on the website.</source>
+        <target>Macht das Produkt auf der Webseite öffentlich sichtbar.</target>
+      </trans-unit>
+      <trans-unit id="tl_product.featured.0">
+        <source>Feature product</source>
+        <target>Produkt hervorheben</target>
+      </trans-unit>
+      <trans-unit id="tl_product.featured.1">
+        <source>Show the product item in a featured list.</source>
+        <target>Zeigt das Produkt in einer Liste hervorgehobener Produkte.</target>
+      </trans-unit>
+      <trans-unit id="tl_product.start.0">
+        <source>Show from</source>
+        <target>Anzeigen ab</target>
+      </trans-unit>
+      <trans-unit id="tl_product.start.1">
+        <source>Do not show the product item on the website before this day.</source>
+        <target>Zeigt das Produkt erst ab diesem Tag auf der Webseite an.</target>
+      </trans-unit>
+      <trans-unit id="tl_product.stop.0">
+        <source>Show until</source>
+        <target>Anzeigen bis</target>
+      </trans-unit>
+      <trans-unit id="tl_product.stop.1">
+        <source>Do not show the product item on the website on and after this day.</source>
+        <target>Zeigt das Produkt ab diesem Tag nicht mehr auf der Webseite an.</target>
+      </trans-unit>
+      <trans-unit id="tl_product.languageMain.0">
+        <source>Master product</source>
+        <target>Hauptprodukt</target>
+      </trans-unit>
+      <trans-unit id="tl_product.languageMain.1">
+        <source>Choose the product in the master catalog equaling this product.</source>
+        <target>Wählen Sie das diesem Produkt entsprechende Produkt im Hauptkatalog.</target>
+      </trans-unit>
+      <trans-unit id="tl_product.related.0">
+        <source>Related products</source>
+        <target>Ähnliche Produkte</target>
+      </trans-unit>
+      <trans-unit id="tl_product.related.1">
+        <source>Choose related products in this catalog to this product.</source>
+        <target>Wählen Sie in diesem Katalog ähnliche Produkte für dieses Produkt aus.</target>
+      </trans-unit>
+      <trans-unit id="tl_product.rootPageId.0">
+        <source>Website root page</source>
+        <target>Startpunkt der Webseite</target>
+      </trans-unit>
+      <trans-unit id="tl_product.rootPageId.1">
+        <source>The root page of the catalog's reader page, which is used to find the product by alias on the current website. It is set automatically when saving a product or catalog.</source>
+        <target>Der Startpunkt der Leserseite des Katalogs, über den das Produkt über seinen Alias auf der aktuellen Webseite gefunden wird. Er wird beim Speichern eines Produkts oder Katalogs automatisch gesetzt.</target>
+      </trans-unit>
+      <trans-unit id="tl_product.title_legend">
+        <source>Product title</source>
+        <target>Produkttitel</target>
+      </trans-unit>
+      <trans-unit id="tl_product.language_legend">
+        <source>Language settings</source>
+        <target>Spracheinstellungen</target>
+      </trans-unit>
+      <trans-unit id="tl_product.category_legend">
+        <source>Product categories</source>
+        <target>Produktkategorien</target>
+      </trans-unit>
+      <trans-unit id="tl_product.product_legend">
+        <source>Product</source>
+        <target>Produkt</target>
+      </trans-unit>
+      <trans-unit id="tl_product.meta_legend">
+        <source>Meta and SEO</source>
+        <target>Meta und SEO</target>
+      </trans-unit>
+      <trans-unit id="tl_product.offer_legend">
+        <source>Offer</source>
+        <target>Angebot</target>
+      </trans-unit>
+      <trans-unit id="tl_product.link_legend">
+        <source>External link</source>
+        <target>Externer Link</target>
+      </trans-unit>
+      <trans-unit id="tl_product.enclosure_legend">
+        <source>Enclosures</source>
+        <target>Anhänge</target>
+      </trans-unit>
+      <trans-unit id="tl_product.image_legend">
+        <source>Image settings</source>
+        <target>Bildeinstellungen</target>
+      </trans-unit>
+      <trans-unit id="tl_product.related_legend">
+        <source>Related products</source>
+        <target>Ähnliche Produkte</target>
+      </trans-unit>
+      <trans-unit id="tl_product.protected_legend">
+        <source>Access protection</source>
+        <target>Zugriffsschutz</target>
+      </trans-unit>
+      <trans-unit id="tl_product.publish_legend">
+        <source>Publish setting</source>
+        <target>Veröffentlichungseinstellungen</target>
+      </trans-unit>
+      <trans-unit id="tl_product.rating_legend">
+        <source>Rating</source>
+        <target>Bewertung</target>
+      </trans-unit>
+      <trans-unit id="tl_product.summary_legend">
+        <source>Summary</source>
+        <target>Zusammenfassung</target>
+      </trans-unit>
+      <trans-unit id="tl_product.new.0">
+        <source>Add Product</source>
+        <target>Produkt hinzufügen</target>
+      </trans-unit>
+      <trans-unit id="tl_product.new.1">
+        <source>Add a new product</source>
+        <target>Ein neues Produkt hinzufügen</target>
+      </trans-unit>
+      <trans-unit id="tl_product.show.0">
+        <source>Product details</source>
+        <target>Produktdetails</target>
+      </trans-unit>
+      <trans-unit id="tl_product.show.1">
+        <source>Show the details of product ID %s</source>
+        <target>Details des Produkts ID %s anzeigen</target>
+      </trans-unit>
+      <trans-unit id="tl_product.edit.0">
+        <source>Edit product</source>
+        <target>Produkt bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="tl_product.edit.1">
+        <source>Edit product ID %s</source>
+        <target>Produkt ID %s bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="tl_product.cut.0">
+        <source>Move product</source>
+        <target>Produkt verschieben</target>
+      </trans-unit>
+      <trans-unit id="tl_product.cut.1">
+        <source>Move product ID %s</source>
+        <target>Produkt ID %s verschieben</target>
+      </trans-unit>
+      <trans-unit id="tl_product.copy.0">
+        <source>Duplicate product</source>
+        <target>Produkt duplizieren</target>
+      </trans-unit>
+      <trans-unit id="tl_product.copy.1">
+        <source>Duplicate product ID %s</source>
+        <target>Produkt ID %s duplizieren</target>
+      </trans-unit>
+      <trans-unit id="tl_product.delete.0">
+        <source>Delete product</source>
+        <target>Produkt löschen</target>
+      </trans-unit>
+      <trans-unit id="tl_product.delete.1">
+        <source>Delete product ID %s</source>
+        <target>Produkt ID %s löschen</target>
+      </trans-unit>
+      <trans-unit id="tl_product.sameDay">
+        <source>Same day</source>
+        <target>Gleicher Tag</target>
+      </trans-unit>
+      <trans-unit id="tl_product.otherDay">
+        <source>Other days</source>
+        <target>Andere Tage</target>
+      </trans-unit>
+      <trans-unit id="tl_product.type.default">
+        <source>Main product</source>
+        <target>Hauptprodukt</target>
+      </trans-unit>
+      <trans-unit id="tl_product.type.other">
+        <source>Type</source>
+        <target>Typ</target>
+      </trans-unit>
+      <trans-unit id="ERR.aliasUsedOnWebsite">
+        <source>The alias "%s" is already used by the product "%s" in the catalog "%s" on this website!</source>
+        <target>Der Alias „%s" wird bereits vom Produkt „%s" im Katalog „%s" auf dieser Webseite verwendet!</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
