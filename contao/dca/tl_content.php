@@ -81,7 +81,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['product_catalogs'] = [
     'sql' => ['type' => 'blob', 'length' => AbstractMySQLPlatform::LENGTH_LIMIT_BLOB, 'notnull' => false],
 ];
 $GLOBALS['TL_DCA']['tl_content']['fields']['product_template'] = [
-    'default' => 'product_short',
+    'default' => 'product_card',
     'inputType' => 'select',
     'eval' => ['tl_class' => 'w50 clr'],
     'sql' => ['type' => 'string', 'length' => 64, 'default' => ''],

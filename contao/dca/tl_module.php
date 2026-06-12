@@ -64,7 +64,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_sortBy'] = [
     'sql' => ['type' => 'string', 'length' => 16, 'default' => ''],
 ];
 $GLOBALS['TL_DCA']['tl_module']['fields']['product_template'] = [
-    'default' => 'product_short',
+    'default' => 'product_card',
     'inputType' => 'select',
     'eval' => ['tl_class' => 'w50 clr'],
     'sql' => ['type' => 'string', 'length' => 64, 'default' => ''],
