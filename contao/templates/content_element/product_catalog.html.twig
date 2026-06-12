@@ -1,15 +1,15 @@
 {% extends "@Contao/content_element/_base.html.twig" %}
 
 {% block content %}
-    {% if as_editor_view %}
+    {% if products is empty %}
+      <p class="product-list__empty">{{ empty }}</p>
+    {% elseif as_editor_view %}
         <div class="product-list product-list--backend {{ data.product_listClass }}">
             {% for product in products %}
                 <div class="product-list__item">{{ product|raw }}</div>
             {% endfor %}
         </div>
-    {% elseif products is empty %}
-        <p class="product-list__empty">{{ empty }}</p>
-    {% else %}
+    {% elseif %}
         <div class="product-list {{ data.product_listClass }}">
             {{ products|join|raw }}
         </div>
