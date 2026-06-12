@@ -33,15 +33,22 @@ final class SchemaGenerator
      */
     public function generate(object $product): array
     {
+        $productUrl = $this->contentUrlGenerator->generate(
+            $product,
+            [],
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
+
         $jsonLd = [
             '@context' => 'https://schema.org',
             '@type' => 'Product',
-            '@id' => $this->contentUrlGenerator->generate($product, [], UrlGeneratorInterface::ABSOLUTE_URL).'#/schema/product/'.$product->id,
+            '@id' => $productUrl.'#/schema/product/'.$product->id,
             'name' => $this->htmlDecoder->inputEncodedToPlainText((string) $product->title),
+            'url' => $productUrl,
         ];
 
         if ($product->description) {
-            $jsonLd['description'] = $product->description;
+            $jsonLd['description'] = $this->htmlDecoder->inputEncodedToPlainText((string) $product->description);
         }
 
         if ($product->sku) {
@@ -76,20 +83,20 @@ final class SchemaGenerator
         $price = StringUtil::deserialize($product->price);
 
         if (isset($price['unit'], $price['value']) && '' !== $price['value']) {
-            $jsonLd['offers'] = [
+            $offer = [
                 '@type' => 'Offer',
+                'url' => !empty($product->url) ? $product->url : $productUrl,
                 'priceCurrency' => $price['unit'],
-                'price' => $price['value'],
-                'priceValidUntil' => date('Y-m-d\TH:i:sP', (int) $product->priceValidUntil),
+                'price' => (float) $price['value'],
                 'availability' => 'https://schema.org/'.$product->availability,
+                'itemCondition' => 'https://schema.org/NewCondition',
             ];
 
-            if ($product->brand) {
-                $jsonLd['offers']['seller'] = [
-                    '@type' => 'Organization',
-                    'name' => $product->brand,
-                ];
+            if (!empty($product->priceValidUntil)) {
+                $offer['priceValidUntil'] = date('Y-m-d', (int) $product->priceValidUntil);
             }
+
+            $jsonLd['offers'] = $offer;
         }
 
         return $jsonLd;
