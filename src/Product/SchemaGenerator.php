@@ -14,7 +14,10 @@ namespace Respinar\ProductsBundle\Product;
 
 use Contao\CoreBundle\Routing\ContentUrlGenerator;
 use Contao\CoreBundle\String\HtmlDecoder;
+use Contao\Environment;
+use Contao\FilesModel;
 use Contao\StringUtil;
+use Contao\System;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class SchemaGenerator
@@ -66,6 +69,10 @@ final class SchemaGenerator
             ];
         }
 
+        if ($image = $this->generateImageObject($product->singleSRC ?? null)) {
+            $jsonLd['image'] = $image;
+        }
+
         $price = StringUtil::deserialize($product->price);
 
         if (isset($price['unit'], $price['value']) && '' !== $price['value']) {
@@ -86,5 +93,73 @@ final class SchemaGenerator
         }
 
         return $jsonLd;
+    }
+
+    /**
+     * Build a schema.org ImageObject from a Contao file UUID (singleSRC).
+     */
+    private function generateImageObject(mixed $uuid): ?array
+    {
+        if (!$uuid || ($file = FilesModel::findByUuid($uuid)) === null) {
+            return null;
+        }
+
+        $projectDir = System::getContainer()->getParameter('kernel.project_dir');
+        $absolutePath = $projectDir.'/'.$file->path;
+
+        if (!is_file($absolutePath)) {
+            return null;
+        }
+
+        $url = Environment::get('url').'/'.System::urlEncode($file->path);
+
+        $imageObject = [
+            '@type' => 'ImageObject',
+            '@id' => $url.'#/schema/image/'.$file->id,
+            'url' => $url,
+            'contentUrl' => $url,
+        ];
+
+        $size = @getimagesize($absolutePath);
+        if (\is_array($size) && isset($size[0], $size[1])) {
+            $imageObject['width'] = $size[0];
+            $imageObject['height'] = $size[1];
+        }
+
+        if ($file->extension) {
+            $mime = match (strtolower($file->extension)) {
+                'jpg', 'jpeg' => 'image/jpeg',
+                'png' => 'image/png',
+                'gif' => 'image/gif',
+                'webp' => 'image/webp',
+                'svg' => 'image/svg+xml',
+                'avif' => 'image/avif',
+                default => null,
+            };
+
+            if ($mime) {
+                $imageObject['encodingFormat'] = $mime;
+            }
+        }
+
+        $meta = StringUtil::deserialize($file->meta, true);
+        $lang = $GLOBALS['TL_LANGUAGE'] ?? array_key_first($meta) ?? null;
+        $metaEntry = ($lang && isset($meta[$lang])) ? $meta[$lang] : (reset($meta) ?: []);
+
+        if (!empty($metaEntry['title'])) {
+            $imageObject['name'] = $metaEntry['title'];
+        }
+        if (!empty($metaEntry['caption'])) {
+            $imageObject['caption'] = $metaEntry['caption'];
+        }
+        if (!empty($metaEntry['alt'])) {
+            $imageObject['description'] = $metaEntry['alt'];
+        }
+
+        if (!empty($file->license)) {
+            $imageObject['license'] = $file->license;
+        }
+
+        return $imageObject;
     }
 }
