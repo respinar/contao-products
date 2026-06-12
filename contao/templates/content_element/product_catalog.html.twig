@@ -9,7 +9,7 @@
                 <div class="product-list__item">{{ product|raw }}</div>
             {% endfor %}
         </div>
-    {% elseif %}
+    {% else %}
         <div class="product-list {{ data.product_listClass }}">
             {{ products|join|raw }}
         </div>
