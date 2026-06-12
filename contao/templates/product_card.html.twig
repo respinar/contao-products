@@ -1,0 +1,87 @@
+{% use "@Contao/component/_figure.html.twig" %}
+
+<div class="product-card {{ class }}">
+
+    {% block figure %}
+        {% if figure %}
+            {% if link %}<a href="{{ link }}">{% endif %}
+            {% with {figure: figure} %}
+                {{ block('figure_component') }}
+            {% endwith %}
+            {% if link %}</a>{% endif %}
+        {% endif %}
+    {% endblock %}
+
+    {% block tags %}
+        <div class="product-card__tags">
+            {% if featured %}
+                <div class="product-card__tag product-card__tag--featured"></div>
+            {% endif %}
+
+            {% if new_product is defined and new_product %}
+                <div class="product-card__tag product-card__tag--new"></div>
+            {% endif %}
+        </div>
+    {% endblock %}
+
+    {% block title %}
+        <div class="product-card__title">
+            {% if link %}<a href="{{ link }}">{% endif %}
+
+            {{ title }}
+
+            {% if link %}</a>{% endif %}
+        </div>
+    {% endblock %}
+
+    {% block meta %}
+        <div class="product-card__meta">
+            {% block info %}
+                <div class="product-card__info">
+                    <time datetime="{{ meta.datetime }}">{{ meta.date }}</time>
+
+                    {% if brand %}
+                        <span class="product-card__brand">
+                            {{ brand_text }}:
+                            <span>{{ brand }}</span>
+                        </span>
+                    {% endif %}
+
+                    {% if model %}
+                        <span class="product-card__model">
+                            {{ model_text }}:
+                            <span>{{ model }}</span>
+                        </span>
+                    {% endif %}
+
+                    {% if sku %}
+                        <span class="product-card__sku">
+                            {{ sku_text }}:
+                            <span>{{ sku }}</span>
+                        </span>
+                    {% endif %}
+
+                    {% if meta.global_ID is defined %}
+                        <span class="product-card__global-id {{ meta.global_ID.unit }}">
+                            {{ meta.global_ID.name }}:
+                            <span>{{ meta.global_ID.value }}</span>
+                        </span>
+                    {% endif %}
+                </div>
+            {% endblock %}
+
+            {% block buy %}
+                {% if url %}
+                    <div class="product-card__buy">
+                        <a href="{{ url|insert_tag }}"
+                           class="product-card__buy-link"
+                           title="{{ linkTitle }}"
+                           {% if target %}target="_blank" rel="noopener"{% endif %}>
+                            {{ titleText ?: url|insert_tag }}
+                        </a>
+                    </div>
+                {% endif %}
+            {% endblock %}
+        </div>
+    {% endblock %}
+</div>
