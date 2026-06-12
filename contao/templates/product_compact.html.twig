@@ -1,0 +1,23 @@
+{% use "@Contao/component/_figure.html.twig" %}
+
+<div class="product-compact {{ class }}">
+
+    {% block figure %}
+        {% if figure %}
+            {% if link %}<a href="{{ link }}">{% endif %}
+            {% with {figure: figure} %}
+                {{ block('figure_component') }}
+            {% endwith %}
+            {% if link %}</a>{% endif %}
+        {% endif %}
+    {% endblock %}
+
+    {% block title %}
+        <div class="product-compact__title">
+            {% if link %}<a href="{{ link }}">{% endif %}
+              {{ title }}
+            {% if link %}</a>{% endif %}
+        </div>
+    {% endblock %}
+
+</div>
