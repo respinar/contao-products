@@ -85,8 +85,18 @@ Both integrations are optional and detected automatically – the related settin
 | `frontend_module/product_detail.html.twig` | Single product detail view |
 | `frontend_module/product_related.html.twig` | Related products list |
 | `product_full.html.twig` | Full product output |
-| `product_short.html.twig` | Short product output |
-| `product_simple.html.twig` | Simple product output |
+| `product_card.html.twig` | Card product output |
+| `product_compact.html.twig` | Compact product output |
+
+Each template is divided into named blocks (`figure`, `tags`, `title`, `meta`, `info`, `offer`, `summary`, `text`, `enclosures`, …) so you can override individual sections without copying the whole template:
+
+```twig
+{% extends "@Contao/product_card.html.twig" %}
+
+{% block buy %}
+    {# your custom buy link #}
+{% endblock %}
+```
 
 ## License
 
