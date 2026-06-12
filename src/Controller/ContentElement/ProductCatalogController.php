@@ -45,7 +45,7 @@ class ProductCatalogController extends AbstractContentElementController
     {
         if ($this->scopeMatcher->isBackendRequest($this->requestStack->getCurrentRequest() ?? Request::create(''))) {
             $model->imgSize = 'a:3:{i:0;s:3:"100";i:1;s:3:"100";i:2;s:13:"center_center";}';
-            $model->product_template = 'product_simple';
+            $model->product_template = 'product_compact';
         }
 
         $model->imgSize = $model->size;

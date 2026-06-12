@@ -38,7 +38,7 @@ final class ProductParser
     public function parseProduct(ProductModel $product, ContentModel|ModuleModel $model, bool $fullRender = true): string
     {
         $template = new FrontendTemplate(
-            $model->product_template ?: 'product_short',
+            $model->product_template ?: 'product_compact',
         );
 
         $template->setData($product->row());
