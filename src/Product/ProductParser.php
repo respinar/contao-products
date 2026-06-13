@@ -162,8 +162,8 @@ final class ProductParser
     {
         $items = [];
 
-        while ($products->next()) {
-            $items[] = $this->parseProduct($products->current(), $model, false);
+        foreach ($products as $product) {
+            $items[] = $this->parseProduct($product, $model, false);
         }
 
         return $items;
