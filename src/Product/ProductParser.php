@@ -81,7 +81,7 @@ final class ProductParser
         $template->meta = $this->meta_generator->generate($product);
 
         $template->link = '';
-        if ($product->summary || $product->hasContent()) {
+        if ($product->hasDetailUrl()) {
             $template->link = $this->contentUrlGenerator->generate($product, [], UrlGeneratorInterface::ABSOLUTE_PATH);
         }
 

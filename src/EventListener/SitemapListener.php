@@ -105,7 +105,7 @@ class SitemapListener
             }
 
             foreach ($objProducts as $objProduct) {
-                if (!$objProduct->summary && !$objProduct->hasContent()) {
+                if (!$objProduct->hasDetailUrl()) {
                     continue;
                 }
                 try {

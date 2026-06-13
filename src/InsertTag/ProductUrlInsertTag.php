@@ -60,7 +60,7 @@ class ProductUrlInsertTag
             return new InsertTagResult('');
         }
 
-        if (!$productModel->summary && !$productModel->hasContent()) {
+        if (!$productModel->hasDetailUrl()) {
             return new InsertTagResult('');
         }
 
