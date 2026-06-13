@@ -52,9 +52,7 @@ class ProductListController extends AbstractContentElementController
         $arrProducts = [];
 
         if (null !== $objProducts) {
-            foreach ($objProducts as $objProduct) {
-                $arrProducts[] = $this->productParser->parseProduct($objProduct, $model);
-            }
+            $arrProducts = $this->productParser->parseProducts($objProducts, $model);
         }
 
         $template->products = $arrProducts;
