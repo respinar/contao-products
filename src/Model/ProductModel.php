@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace Respinar\ProductsBundle\Model;
 
 use Contao\ContentModel;
+use Contao\Database;
 use Contao\Model;
 use Contao\Model\Collection;
 use Contao\Model\MetadataTrait;
@@ -166,6 +167,34 @@ class ProductModel extends Model
 
         $arrOptions['limit'] = $intLimit;
         $arrOptions['offset'] = $intOffset;
+
+        return static::findBy($arrColumns, null, $arrOptions);
+    }
+
+    /**
+     * Find published products by their IDs, keeping the order of the IDs.
+     *
+     * @param array $arrIds     An array of product IDs
+     * @param array $arrOptions An optional options array
+     *
+     * @return Collection<self>|self|null
+     */
+    public static function findPublishedMultipleByIds(array $arrIds, array $arrOptions = []): Collection|self|null
+    {
+        if (!\is_array($arrIds) || [] === $arrIds) {
+            return null;
+        }
+
+        $t = static::$strTable;
+        $arrColumns = ["$t.id IN(".implode(',', array_map(intval(...), $arrIds)).')'];
+
+        if (!static::isPreviewMode($arrOptions)) {
+            $time = time();
+            $arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+        }
+
+        // Preserve the order of the given IDs (like findMultipleByIds does)
+        $arrOptions['order'] ??= Database::getInstance()->findInSet("$t.id", $arrIds);
 
         return static::findBy($arrColumns, null, $arrOptions);
     }
