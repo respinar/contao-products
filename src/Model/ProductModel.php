@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace Respinar\ProductsBundle\Model;
 
+use Contao\ContentModel;
 use Contao\Model;
 use Contao\Model\Collection;
 use Contao\Model\MetadataTrait;
@@ -288,5 +289,14 @@ class ProductModel extends Model
         }
 
         return static::findBy($arrColumns, $intPid, $arrOptions);
+    }
+
+    public function hasContent(): bool
+    {
+        return null !== ContentModel::findBy(
+            ['pid=?', 'ptable=?', 'invisible=?'],
+            [$this->id, self::getTable(), ''],
+            ['limit' => 1],
+        );
     }
 }
