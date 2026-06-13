@@ -40,7 +40,7 @@ class ProductListController extends AbstractContentElementController
 
     protected function getResponse(FragmentTemplate $template, ContentModel $model, Request $request): Response
     {
-        $objProducts = ProductModel::findMultipleByIds(StringUtil::deserialize($model->products));
+        $objProducts = ProductModel::findPublishedMultipleByIds(StringUtil::deserialize($model->products, true));
 
         $model->imgSize = $model->size;
 
