@@ -105,6 +105,9 @@ class SitemapListener
             }
 
             foreach ($objProducts as $objProduct) {
+                if (!$objProduct->summary && !$objProduct->hasContent()) {
+                    continue;
+                }
                 try {
                     $arrPages[] = $this->urlGenerator->generate($objProduct, [], UrlGeneratorInterface::ABSOLUTE_URL);
                 } catch (ExceptionInterface) {
