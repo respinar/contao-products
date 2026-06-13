@@ -60,6 +60,10 @@ class ProductUrlInsertTag
             return new InsertTagResult('');
         }
 
+        if (!$productModel->summary && !$productModel->hasContent()) {
+            return new InsertTagResult('');
+        }
+
         $url = $this->contentUrlGenerator->generate(
             $productModel,
             [],
