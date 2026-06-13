@@ -111,4 +111,4 @@
 
 </div>
 
-{% do add_schema_org(schemaOrgData) %}
+{% if schemaOrgData %}{% do add_schema_org(schemaOrgData) %}{% endif %}
