@@ -18,6 +18,7 @@ use Contao\Environment;
 use Contao\FilesModel;
 use Contao\StringUtil;
 use Contao\System;
+use Respinar\ProductsBundle\Model\ProductModel;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class SchemaGenerator
@@ -31,8 +32,12 @@ final class SchemaGenerator
     /**
      * Return the schema.org data from a product.
      */
-    public function generate(object $product): array
+    public function generate(ProductModel $product): array
     {
+        if (!$product->hasDetailUrl()) {
+            return [];
+        }
+
         $productUrl = $this->contentUrlGenerator->generate(
             $product,
             [],
