@@ -299,4 +299,12 @@ class ProductModel extends Model
             ['limit' => 1],
         );
     }
+
+    /**
+     * A product only gets a detail URL if it has a summary or content elements.
+     */
+    public function hasDetailUrl(): bool
+    {
+        return (bool) $this->summary || $this->hasContent();
+    }
 }
