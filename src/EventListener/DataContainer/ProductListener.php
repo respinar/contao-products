@@ -20,6 +20,7 @@ use Contao\StringUtil;
 use Doctrine\DBAL\Connection;
 use Respinar\ProductsBundle\Product\AliasUniquenessValidator;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
@@ -31,6 +32,7 @@ class ProductListener
         private readonly Connection $connection,
         private readonly Security $security,
         private readonly AliasUniquenessValidator $aliasUniqueness,
+        private readonly ParameterBagInterface $parameterBag,
     ) {
     }
 
@@ -81,6 +83,51 @@ class ProductListener
                 }
 
                 break;
+        }
+    }
+
+    /**
+     * Hide the languageMain field in master catalogs.
+     *
+     * A master catalog (master = 0) holds the original products, so linking one to a
+     * "master product" is meaningless. The field is only relevant for translated
+     * products in slave catalogs.
+     */
+    #[AsCallback(table: 'tl_product', target: 'config.onload')]
+    public function hideLanguageMainInMasterCatalog(DataContainer $dc): void
+    {
+        // The master column only exists when the ChangeLanguage bundle is installed
+        $bundles = $this->parameterBag->get('kernel.bundles');
+
+        if (!isset($bundles['Terminal42ChangeLanguageBundle'])) {
+            return;
+        }
+
+        if ('create' === Input::get('act')) {
+            $catalogId = (int) (Input::get('pid') ?: Input::get('id'));
+        } else {
+            $catalogId = (int) $this->connection->fetchOne(
+                'SELECT pid FROM tl_product WHERE id = ?',
+                [(int) $dc->id],
+            );
+        }
+
+        if ($catalogId <= 0) {
+            return;
+        }
+
+        $master = (int) $this->connection->fetchOne(
+            'SELECT master FROM tl_product_catalog WHERE id = ?',
+            [$catalogId],
+        );
+
+        // A master catalog has master = 0
+        if (0 === $master) {
+            $GLOBALS['TL_DCA']['tl_product']['palettes']['default'] = str_replace(
+                '{language_legend},languageMain;',
+                '',
+                $GLOBALS['TL_DCA']['tl_product']['palettes']['default'],
+            );
         }
     }
 
