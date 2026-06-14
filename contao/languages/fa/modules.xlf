@@ -2,6 +2,14 @@
 <xliff version="1.1">
   <file datatype="php" original="vendor/respinar/contao-products/contao/languages/en/modules.php" source-language="en" target-language="fa">
     <body>
+      <trans-unit id="MOD.products.0">
+        <source>Products</source>
+        <target>محصولات</target>
+      </trans-unit>
+      <trans-unit id="MOD.products.1">
+        <source>Catalog and products management</source>
+        <target>مدیریت کاتالوگ و محصولات</target>
+      </trans-unit>
       <trans-unit id="MOD.prices.0">
         <source>Prices</source>
         <target>قیمت‌ها</target>
@@ -34,9 +42,33 @@
         <source>Product</source>
         <target>Product</target>
       </trans-unit>
-      <trans-unit id="CTE.product.0">
-        <source>Product</source>
-        <target>Product</target>
+      <trans-unit id="CTE.products.0">
+        <source>Products</source>
+        <target>محصولات</target>
+      </trans-unit>
+      <trans-unit id="CTE.product_single.0">
+        <source>Single Product</source>
+        <target>محصول تکی</target>
+      </trans-unit>
+      <trans-unit id="CTE.product_single.1">
+        <source>Show only one product.</source>
+        <target>نمایش فقط یک محصول.</target>
+      </trans-unit>
+      <trans-unit id="CTE.product_list.0">
+        <source>Products List</source>
+        <target>فهرست محصولات</target>
+      </trans-unit>
+      <trans-unit id="CTE.product_list.1">
+        <source>Show a list of products.</source>
+        <target>نمایش فهرستی از محصولات.</target>
+      </trans-unit>
+      <trans-unit id="CTE.product_catalog.0">
+        <source>Catalog</source>
+        <target>کاتالوگ</target>
+      </trans-unit>
+      <trans-unit id="CTE.product_catalog.1">
+        <source>Displays a list of products in a catalog</source>
+        <target>نمایش فهرستی از محصولات در یک کاتالوگ</target>
       </trans-unit>
     </body>
   </file>

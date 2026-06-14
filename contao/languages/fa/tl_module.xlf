@@ -42,6 +42,14 @@
         <source>Here you can select the sorting fields.</source>
         <target>Here you can select the sorting fields.</target>
       </trans-unit>
+      <trans-unit id="tl_module.product_relatedLimit.0">
+        <source>Number of related products</source>
+        <target>تعداد محصولات مرتبط</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_relatedLimit.1">
+        <source>Here you can set the maximum number of related products to show.</source>
+        <target>حداکثر تعداد محصولات مرتبط برای نمایش را تنظیم کنید.</target>
+      </trans-unit>
       <trans-unit id="tl_module.product_template.0">
         <source>Product template</source>
         <target>قالب محصول</target>
@@ -50,21 +58,21 @@
         <source>Here you can select the product template.</source>
         <target>اینجا می‌توانید قالب محصول را انتخاب نمایید.</target>
       </trans-unit>
-      <trans-unit id="tl_module.product_Class.0">
-        <source>Product CSS class</source>
-        <target>کلاس سی‌اس‌اس محصول</target>
+      <trans-unit id="tl_module.product_singleClass.0">
+        <source>Single product class</source>
+        <target>کلاس محصول تکی</target>
       </trans-unit>
-      <trans-unit id="tl_module.product_Class.1">
+      <trans-unit id="tl_module.product_singleClass.1">
         <source>Here you can set one or more classes for products.</source>
-        <target>اینجا می‌توانید یک یا چند کلاس به محصولات تنظیم کنید.</target>
+        <target>اینجا می‌توانید یک یا چند کلاس برای محصولات تنظیم کنید.</target>
       </trans-unit>
-      <trans-unit id="tl_module.product_list_Class.0">
+      <trans-unit id="tl_module.product_listClass.0">
         <source>Product list class</source>
-        <target>Product list class</target>
+        <target>کلاس فهرست محصولات</target>
       </trans-unit>
-      <trans-unit id="tl_module.product_list_Class.1">
+      <trans-unit id="tl_module.product_listClass.1">
         <source>Here you can set one or more classes for products list.</source>
-        <target>Here you can set one or more classes for products list.</target>
+        <target>اینجا می‌توانید یک یا چند کلاس برای فهرست محصولات تنظیم کنید.</target>
       </trans-unit>
       <trans-unit id="tl_module.related_show.0">
         <source>Show related product</source>

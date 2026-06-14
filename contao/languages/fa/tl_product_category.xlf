@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="vendor/respinar/contao-products/contao/languages/en/tl_product_category.php" source-language="en" target-language="fa">
+    <body>
+      <trans-unit id="tl_product_category.title.0">
+        <source>Category Title</source>
+        <target>عنوان دسته</target>
+      </trans-unit>
+      <trans-unit id="tl_product_category.title.1">
+        <source>Please enter the category title.</source>
+        <target>لطفاً عنوان دسته را وارد کنید.</target>
+      </trans-unit>
+      <trans-unit id="tl_product_category.jumpTo.0">
+        <source>Redirect page</source>
+        <target>صفحه انتقال</target>
+      </trans-unit>
+      <trans-unit id="tl_product_category.jumpTo.1">
+        <source>Please choose the list page to which visitors will be redirected when clicking a menu.</source>
+        <target>لطفاً صفحه فهرست را انتخاب کنید که بازدیدکنندگان هنگام کلیک روی منو به آن منتقل می‌شوند.</target>
+      </trans-unit>
+      <trans-unit id="tl_product_category.protected.0">
+        <source>Protect category</source>
+        <target>محافظت از دسته</target>
+      </trans-unit>
+      <trans-unit id="tl_product_category.protected.1">
+        <source>Show category items to certain member groups only.</source>
+        <target>فقط به گروه‌های خاصی از اعضا نمایش داده شود.</target>
+      </trans-unit>
+      <trans-unit id="tl_product_category.groups.0">
+        <source>Allowed member groups</source>
+        <target>گروه‌های مجاز اعضا</target>
+      </trans-unit>
+      <trans-unit id="tl_product_category.groups.1">
+        <source>These groups will be able to see the menu items in this category.</source>
+        <target>این گروه‌ها قادر به دیدن آیتم‌های منو در این دسته خواهند بود.</target>
+      </trans-unit>
+      <trans-unit id="tl_product_category.categories.0">
+        <source>Categories</source>
+        <target>دسته‌ها</target>
+      </trans-unit>
+      <trans-unit id="tl_product_category.title_legend">
+        <source>Category Title</source>
+        <target>عنوان دسته</target>
+      </trans-unit>
+      <trans-unit id="tl_product_category.redirect_legend">
+        <source>Redirect</source>
+        <target>انتقال</target>
+      </trans-unit>
+      <trans-unit id="tl_product_category.protected_legend">
+        <source>Access protection</source>
+        <target>حفاظت دسترسی</target>
+      </trans-unit>
+      <trans-unit id="tl_product_category.new.0">
+        <source>New category</source>
+        <target>دسته جدید</target>
+      </trans-unit>
+      <trans-unit id="tl_product_category.new.1">
+        <source>Create a new category</source>
+        <target>ایجاد یک دسته جدید</target>
+      </trans-unit>
+      <trans-unit id="tl_product_category.show.0">
+        <source>Category details</source>
+        <target>جزئیات دسته</target>
+      </trans-unit>
+      <trans-unit id="tl_product_category.show.1">
+        <source>Show the details of category ID %s</source>
+        <target>نمایش جزئیات دسته با شناسه %s</target>
+      </trans-unit>
+      <trans-unit id="tl_product_category.edit.0">
+        <source>Edit category</source>
+        <target>ویرایش دسته</target>
+      </trans-unit>
+      <trans-unit id="tl_product_category.edit.1">
+        <source>Edit category ID %s</source>
+        <target>ویرایش دسته با شناسه %s</target>
+      </trans-unit>
+      <trans-unit id="tl_product_category.copy.0">
+        <source>Duplicate category</source>
+        <target>کپی دسته</target>
+      </trans-unit>
+      <trans-unit id="tl_product_category.copy.1">
+        <source>Duplicate category ID %s</source>
+        <target>کپی دسته با شناسه %s</target>
+      </trans-unit>
+      <trans-unit id="tl_product_category.delete.0">
+        <source>Delete category</source>
+        <target>حذف دسته</target>
+      </trans-unit>
+      <trans-unit id="tl_product_category.delete.1">
+        <source>Delete category ID %s</source>
+        <target>حذف دسته با شناسه %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -6,6 +6,10 @@
         <source>There is no product!</source>
         <target>محصولی وجود ندارد!</target>
       </trans-unit>
+      <trans-unit id="MSC.productOverview">
+        <source>Back to the product overview</source>
+        <target>بازگشت به نمای کلی محصولات</target>
+      </trans-unit>
       <trans-unit id="MSC.moreDetail">
         <source>%s more details</source>
         <target>جزئیات بیشتر %s</target>
