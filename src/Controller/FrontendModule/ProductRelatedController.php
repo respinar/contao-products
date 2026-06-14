@@ -71,7 +71,34 @@ class ProductRelatedController extends AbstractFrontendModuleController
         $relatedIds = StringUtil::deserialize($objProduct->related);
 
         if ($relatedIds) {
-            $objRelated = ProductModel::findPublishedByIds($relatedIds);
+            $arrOptions = [];
+
+            if ($model->product_sortBy) {
+                switch ($model->product_sortBy) {
+                    case 'title_asc':
+                        $arrOptions['order'] = 'title ASC';
+                        break;
+                    case 'title_desc':
+                        $arrOptions['order'] = 'title DESC';
+                        break;
+                    case 'date_asc':
+                        $arrOptions['order'] = 'tstamp ASC';
+                        break;
+                    case 'date_desc':
+                        $arrOptions['order'] = 'tstamp DESC';
+                        break;
+                    case 'custom':
+                        $arrOptions['order'] = 'sorting ASC';
+                        break;
+                }
+            }
+
+            $limit = (int) $model->product_relatedLimit;
+            if ($limit > 0) {
+                $arrOptions['limit'] = $limit;
+            }
+
+            $objRelated = ProductModel::findPublishedMultipleByIds($relatedIds, $arrOptions);
 
             if (null !== $objRelated) {
                 $template->relateds = $this->productParser->parseProducts($objRelated, $model);
