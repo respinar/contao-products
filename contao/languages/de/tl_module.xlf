@@ -42,6 +42,14 @@
         <source>Here you can select the sorting fields.</source>
         <target>Hier können Sie die Sortierfelder auswählen.</target>
       </trans-unit>
+      <trans-unit id="tl_module.product_relatedLimit.0">
+        <source>Number of related products</source>
+        <target>Anzahl der verwandten Produkte</target>
+      </trans-unit>
+      <trans-unit id="tl_module.product_relatedLimit.1">
+        <source>Here you can set the maximum number of related products to show.</source>
+        <target>Hier können Sie die maximale Anzahl anzuzeigender verwandter Produkte festlegen.</target>
+      </trans-unit>
       <trans-unit id="tl_module.product_template.0">
         <source>Product template</source>
         <target>Produkttemplate</target>
