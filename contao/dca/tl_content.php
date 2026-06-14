@@ -36,14 +36,14 @@ $GLOBALS['TL_DCA']['tl_content']['palettes']['product_single'] = '
 	{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['product_list'] = '
 	{type_legend},type,headline;
-	{product_legend},products;
+	{product_legend},products,product_sortBy;
 	{template_legend},customTpl,product_listClass,product_template;
 	{image_legend},size;
 	{protected_legend:hide},protected;
 	{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['product_catalog'] = '
 	{type_legend},type,headline;
-	{product_legend},product_catalogs;
+	{product_legend},product_catalogs,product_sortBy;
 	{template_legend},customTpl,product_listClass,product_template;
 	{image_legend},size;
 	{protected_legend:hide},protected;
@@ -79,6 +79,14 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['product_catalogs'] = [
         'mandatory' => true,
     ],
     'sql' => ['type' => 'blob', 'length' => AbstractMySQLPlatform::LENGTH_LIMIT_BLOB, 'notnull' => false],
+];
+$GLOBALS['TL_DCA']['tl_content']['fields']['product_sortBy'] = [
+    'default' => 'custom',
+    'inputType' => 'select',
+    'options' => ['custom', 'date_desc', 'date_asc', 'title_asc', 'title_desc'],
+    'reference' => &$GLOBALS['TL_LANG']['tl_content'],
+    'eval' => ['tl_class' => 'w50 clr'],
+    'sql' => ['type' => 'string', 'length' => 16, 'default' => ''],
 ];
 $GLOBALS['TL_DCA']['tl_content']['fields']['product_template'] = [
     'default' => 'product_card',
