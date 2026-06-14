@@ -40,7 +40,29 @@ class ProductListController extends AbstractContentElementController
 
     protected function getResponse(FragmentTemplate $template, ContentModel $model, Request $request): Response
     {
-        $objProducts = ProductModel::findPublishedMultipleByIds(StringUtil::deserialize($model->products, true));
+        $arrOptions = [];
+
+        if ($model->product_sortBy) {
+            switch ($model->product_sortBy) {
+                case 'title_asc':
+                    $arrOptions['order'] = 'title ASC';
+                    break;
+                case 'title_desc':
+                    $arrOptions['order'] = 'title DESC';
+                    break;
+                case 'date_asc':
+                    $arrOptions['order'] = 'tstamp ASC';
+                    break;
+                case 'date_desc':
+                    $arrOptions['order'] = 'tstamp DESC';
+                    break;
+                case 'custom':
+                    $arrOptions['order'] = 'sorting ASC';
+                    break;
+            }
+        }
+
+        $objProducts = ProductModel::findPublishedMultipleByIds(StringUtil::deserialize($model->products, true), $arrOptions);
 
         $model->imgSize = $model->size;
 
