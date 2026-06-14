@@ -32,6 +32,12 @@
       <trans-unit id="tl_module.product_sortBy.1">
         <source>Here you can select the sorting fields.</source>
       </trans-unit>
+      <trans-unit id="tl_module.product_relatedLimit.0">
+        <source>Number of related products</source>
+      </trans-unit>
+      <trans-unit id="tl_module.product_relatedLimit.1">
+        <source>Here you can set the maximum number of related products to show.</source>
+      </trans-unit>
       <trans-unit id="tl_module.product_template.0">
         <source>Product template</source>
       </trans-unit>

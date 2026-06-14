@@ -20,12 +20,18 @@
       <trans-unit id="tl_content.product_catalogs.1">
         <source>Please select one or more catalogs.</source>
       </trans-unit>
+      <trans-unit id="tl_content.product_sortBy.0">
+        <source>Sort by</source>
+      </trans-unit>
+      <trans-unit id="tl_content.product_sortBy.1">
+        <source>Here you can select the sorting fields.</source>
+      </trans-unit>
       <trans-unit id="tl_content.product_template.0">
         <source>Product template</source>
       </trans-unit>
       <trans-unit id="tl_content.product_template.1">
         <source>Please select template for single product.</source>
-      </trans-unit>      
+      </trans-unit>
       <trans-unit id="tl_content.product_listClass.0">
         <source>Product list class</source>
       </trans-unit>
@@ -35,28 +41,28 @@
       <trans-unit id="tl_content.product_legend">
         <source>Catalogs and Products</source>
       </trans-unit>
-      <trans-unit id="tl_module.all_product">
+      <trans-unit id="tl_content.all_product">
         <source>All products</source>
       </trans-unit>
-      <trans-unit id="tl_module.featured_product">
+      <trans-unit id="tl_content.featured_product">
         <source>Featured products</source>
       </trans-unit>
-      <trans-unit id="tl_module.unfeatured_product">
+      <trans-unit id="tl_content.unfeatured_product">
         <source>Unfeatured products</source>
       </trans-unit>
-      <trans-unit id="tl_module.custom">
+      <trans-unit id="tl_content.custom">
         <source>Custom order</source>
       </trans-unit>
-      <trans-unit id="tl_module.title_asc">
+      <trans-unit id="tl_content.title_asc">
         <source>Title (A-Z)</source>
       </trans-unit>
-      <trans-unit id="tl_module.title_desc">
+      <trans-unit id="tl_content.title_desc">
         <source>Title (Z-A)</source>
       </trans-unit>
-      <trans-unit id="tl_module.date_asc">
+      <trans-unit id="tl_content.date_asc">
         <source>Date (Older)</source>
       </trans-unit>
-      <trans-unit id="tl_module.date_desc">
+      <trans-unit id="tl_content.date_desc">
         <source>Date (Newer)</source>
       </trans-unit>
     </body>
