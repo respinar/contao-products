@@ -32,6 +32,7 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['product_detail'] = '
 	{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['product_related'] = '
 	{title_legend},name,headline,type;
+	{related_legend},product_sortBy,product_relatedLimit;
 	{template_legend},customTpl,product_listClass,product_template;
 	{image_legend},imgSize;
 	{protected_legend:hide},protected;
@@ -86,6 +87,13 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_comHeadline'] = [
     'eval' => ['maxlength' => 200, 'tl_class' => 'w50 clr'],
     'sql' => ['type' => 'string', 'length' => 255, 'default' => 'a:2:{s:5:"value";s:0:"";s:4:"unit";s:2:"h2";}'],
 ];
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_relatedLimit'] = [
+    'default' => 4,
+    'inputType' => 'text',
+    'eval' => ['maxlength' => 6, 'tl_class' => 'w50'],
+    'sql' => ['type' => 'integer', 'unsigned' => true, 'default' => 4],
+];
+
 
 $bundles = System::getContainer()->getParameter('kernel.bundles');
 
