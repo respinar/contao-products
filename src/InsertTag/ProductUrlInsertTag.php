@@ -49,8 +49,8 @@ class ProductUrlInsertTag
         } else {
             global $objPage;
 
-            // Insert tags can be replaced outside a page context (e.g. newsletters),
-            // where an alias cannot be resolved to a website
+            // Insert tags can be replaced outside a page context (e.g. newsletters), where
+            // an alias cannot be resolved to a website
             $productModel = null !== $objPage
                 ? $adapter->findPublishedByAliasAndRootPage($idOrAlias, (int) $objPage->rootId)
                 : null;
