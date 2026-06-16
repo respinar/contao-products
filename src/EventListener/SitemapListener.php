@@ -108,6 +108,7 @@ class SitemapListener
                 if (!$objProduct->hasDetailUrl()) {
                     continue;
                 }
+
                 try {
                     $arrPages[] = $this->urlGenerator->generate($objProduct, [], UrlGeneratorInterface::ABSOLUTE_URL);
                 } catch (ExceptionInterface) {
