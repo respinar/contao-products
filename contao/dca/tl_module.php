@@ -94,7 +94,6 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_relatedLimit'] = [
     'sql' => ['type' => 'integer', 'unsigned' => true, 'default' => 4],
 ];
 
-
 $bundles = System::getContainer()->getParameter('kernel.bundles');
 
 // Add the comments template drop-down menu
