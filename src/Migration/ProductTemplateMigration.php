@@ -28,9 +28,8 @@ class ProductTemplateMigration extends AbstractMigration
         'product_short' => 'product_card',
     ];
 
-    public function __construct(
-        private readonly Connection $connection,
-    ) {
+    public function __construct(private readonly Connection $connection)
+    {
     }
 
     public function shouldRun(): bool
