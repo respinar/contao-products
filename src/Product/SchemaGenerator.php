@@ -41,7 +41,7 @@ final class SchemaGenerator
         $productUrl = $this->contentUrlGenerator->generate(
             $product,
             [],
-            UrlGeneratorInterface::ABSOLUTE_URL
+            UrlGeneratorInterface::ABSOLUTE_URL,
         );
 
         $jsonLd = [
@@ -110,7 +110,7 @@ final class SchemaGenerator
     /**
      * Build a schema.org ImageObject from a Contao file UUID (singleSRC).
      */
-    private function generateImageObject(mixed $uuid): ?array
+    private function generateImageObject(mixed $uuid): array|null
     {
         if (!$uuid || ($file = FilesModel::findByUuid($uuid)) === null) {
             return null;
@@ -156,7 +156,7 @@ final class SchemaGenerator
 
         $meta = StringUtil::deserialize($file->meta, true);
         $lang = $GLOBALS['TL_LANGUAGE'] ?? array_key_first($meta) ?? null;
-        $metaEntry = ($lang && isset($meta[$lang])) ? $meta[$lang] : (reset($meta) ?: []);
+        $metaEntry = $lang && isset($meta[$lang]) ? $meta[$lang] : (reset($meta) ?: []);
 
         if (!empty($metaEntry['title'])) {
             $imageObject['name'] = $metaEntry['title'];
