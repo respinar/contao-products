@@ -24,7 +24,6 @@ class ProductModel extends Model
 
     protected static $strTable = 'tl_product';
 
-
     /**
      * Find a published product by its ID (globally unique).
      */
@@ -64,14 +63,12 @@ class ProductModel extends Model
      * Find a published product by alias.
      *
      * As aliases are only unique per website (root page of the catalog's reader
-     * page), the same alias may exist in several catalogs, in which case the
-     * first match is returned. Use findPublishedByAliasAndRootPage() to resolve
-     * an alias within the current website.
+     * page), the same alias may exist in several catalogs, in which case the first
+     * match is returned. Use findPublishedByAliasAndRootPage() to resolve an alias
+     * within the current website.
      *
      * @param mixed $varAlias   The alias name
      * @param array $arrOptions An optional options array
-     *
-     * @return self|null
      */
     public static function findPublishedByAlias($varAlias, array $arrOptions = []): self|null
     {
@@ -298,7 +295,7 @@ class ProductModel extends Model
     /**
      * Find published product items by their parent ID.
      *
-     * @param int   $intPid      The product catalogs ID
+     * @param int   $intPid     The product catalogs ID
      * @param int   $intLimit   An optional limit
      * @param array $arrOptions An optional options array
      *
