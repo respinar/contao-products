@@ -18,9 +18,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 final class MetaGenerator
 {
-    public function __construct(
-        private readonly RequestStack $requestStack,
-    ) {
+    public function __construct(private readonly RequestStack $requestStack)
+    {
     }
 
     /**
